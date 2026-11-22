@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SUBSTITUA https://SEU-DOMINIO.com.br pelo domínio final antes do deploy -->
+<urlset
+  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+>
+  <url>
+    <loc>https://SEU-DOMINIO.com.br/</loc>
+    <lastmod>2026-11-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://SEU-DOMINIO.com.br/foto-fairtex.PNG</image:loc>
+      <image:title>Ronny Lopes — Bicampeão Sul-Americano de Muay Thai em Brasília</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://SEU-DOMINIO.com.br/foto-df-ringue.PNG</image:loc>
+      <image:title>Ronny Lopes representando o Distrito Federal no Muay Thai</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://SEU-DOMINIO.com.br/foto-chute.PNG</image:loc>
+      <image:title>Chute médio de Muay Thai no ringue — Ronny Lopes</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://SEU-DOMINIO.com.br/foto-paos.PNG</image:loc>
+      <image:title>Aula particular 1-on-1 de Muay Thai nos paos em Brasília</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://SEU-DOMINIO.com.br/foto-sparring.PNG</image:loc>
+      <image:title>Treino técnico e defesa de chute com Ronny Lopes</image:title>
+    </image:image>
+  </url>
+</urlset>
