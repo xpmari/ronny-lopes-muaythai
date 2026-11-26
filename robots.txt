@@ -1,5 +1,5 @@
 User-agent: *
 Allow: /
 
-# SUBSTITUA https://SEU-DOMINIO.com.br pelo domínio final antes do deploy
-Sitemap: https://SEU-DOMINIO.com.br/sitemap.xml
+# SUBSTITUA https://ronny-lopes-muaythai.marianamello0406.workers.dev pelo domínio final antes do deploy
+Sitemap: https://ronny-lopes-muaythai.marianamello0406.workers.dev/sitemap.xml
