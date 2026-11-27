@@ -54,7 +54,7 @@
         "image": "https://ronny-lopes-muaythai.marianamello0406.workers.dev/foto-mundial-wma-tailandia.jpg",
         "sport": ["Muay Thai", "Boxe", "Jiu-Jitsu Brasileiro", "MMA"],
         "sameAs": [
-          "https://www.instagram.com/ronnnylopesthai/"
+          "https://instagram.com/ronnylopesthai"
         ],
         "address": {
           "@type": "PostalAddress",
@@ -143,7 +143,7 @@
         "url": "https://ronny-lopes-muaythai.marianamello0406.workers.dev/",
         "image": "https://ronny-lopes-muaythai.marianamello0406.workers.dev/foto-mundial-wma-tailandia.jpg",
         "sameAs": [
-          "https://www.instagram.com/ronnnylopesthai/"
+          "https://instagram.com/ronnylopesthai"
         ],
         "knowsAbout": [
           "Muay Thai",
@@ -2440,70 +2440,95 @@
       background: rgba(255, 61, 0, 0.2);
     }
 
-    /* ================= DUAL-ROW MARQUEE (@shadcnspace / 21st.dev) ================= */
+    /* ================= DEPOIMENTOS REAIS (GRID 3 COLUNAS) ================= */
     .marquee-section {
       background-color: var(--bg-obsidian);
       border-bottom: 1px solid var(--border-hairline);
       padding: clamp(64px, 8vw, 104px) 0;
-      overflow: hidden;
     }
 
-    .marquee-rows {
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-      mask-image: linear-gradient(90deg, transparent 0%, #000 10%, #000 90%, transparent 100%);
-      -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 10%, #000 90%, transparent 100%);
-    }
-
-    .marquee-row {
-      display: flex;
-      width: max-content;
-      gap: 18px;
-    }
-
-    .marquee-row.row-left {
-      animation: marqueeScrollLeft 42s linear infinite;
-    }
-
-    .marquee-row.row-right {
-      animation: marqueeScrollRight 46s linear infinite;
-    }
-
-    .marquee-rows:hover .marquee-row {
-      animation-play-state: paused;
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+      align-items: stretch;
     }
 
     .review-card {
-      width: 360px;
-      flex-shrink: 0;
-      padding: 22px 24px;
+      width: 100%;
+      height: 100%;
+      padding: 28px 26px;
       border-radius: 14px;
-      background: linear-gradient(180deg, rgba(22, 22, 28, 0.85) 0%, rgba(12, 12, 16, 0.92) 100%);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+      background: linear-gradient(180deg, rgba(22, 22, 28, 0.88) 0%, rgba(11, 11, 15, 0.96) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      box-shadow:
+        0 22px 48px -28px rgba(0, 0, 0, 0.92),
+        inset 0 1px 0 rgba(255, 255, 255, 0.06);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      gap: 16px;
-      transition: border-color 0.28s ease, transform 0.28s ease;
+      gap: 24px;
+      transition: border-color 0.28s ease, transform 0.28s var(--ease-out), box-shadow 0.28s ease;
     }
 
     .review-card:hover {
       border-color: rgba(255, 61, 0, 0.36);
-      transform: translateY(-2px);
+      transform: translateY(-3px);
+      box-shadow:
+        0 26px 54px -26px rgba(0, 0, 0, 0.95),
+        0 0 28px -16px rgba(255, 61, 0, 0.35),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+
+    .review-card-body {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .review-card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .review-stars {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      color: var(--accent-ember);
+    }
+
+    .review-ig-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 9999px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: rgba(235, 235, 242, 0.68);
+      white-space: nowrap;
     }
 
     .review-quote {
-      font-size: 13.5px;
-      line-height: 1.62;
-      color: rgba(245, 245, 247, 0.88);
+      font-size: 15px;
+      line-height: 1.68;
+      color: rgba(245, 245, 247, 0.9);
+      text-wrap: pretty;
     }
 
     .review-author {
       display: flex;
       align-items: center;
       gap: 12px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(255, 255, 255, 0.07);
     }
 
     .review-avatar {
@@ -2517,23 +2542,25 @@
       font-size: 11px;
       font-weight: 600;
       color: #ffffff;
-      background: linear-gradient(135deg, var(--accent-ember) 0%, var(--accent-deep) 100%);
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: linear-gradient(135deg, rgba(255, 61, 0, 0.88) 0%, var(--accent-deep) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.18);
       flex-shrink: 0;
     }
 
     .review-name {
       display: block;
-      font-size: 13px;
+      font-size: 13.5px;
       font-weight: 600;
       color: var(--text-primary);
+      letter-spacing: -0.01em;
     }
 
     .review-role {
       display: block;
+      margin-top: 2px;
       font-family: var(--font-mono);
       font-size: 10.5px;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.05em;
       color: var(--text-muted);
     }
 
@@ -3467,7 +3494,8 @@
         min-height: 420px;
       }
 
-      .programs-grid {
+      .programs-grid,
+      .testimonials-grid {
         grid-template-columns: 1fr;
         max-width: 640px;
         margin: 0 auto;
@@ -3788,7 +3816,7 @@
       }
 
       .review-card {
-        width: 300px;
+        padding: 24px 20px;
       }
 
       .circular-gallery-viewport {
@@ -3949,7 +3977,7 @@
             decoding="async"
           />
           <div class="hud-bottom-panel">
-            <a href="https://www.instagram.com/ronnnylopesthai/" target="_blank" rel="noopener" class="hud-fighter-name">@ronnnylopesthai ↗</a>
+            <a href="https://instagram.com/ronnylopesthai" target="_blank" rel="noopener" class="hud-fighter-name">@ronnylopesthai ↗</a>
             <span class="hud-minimal-tag">WMA TAILÂNDIA '10</span>
           </div>
         </div>
@@ -4474,193 +4502,103 @@
             Hoje, toda essa vivência de combate real vira didática nas aulas particulares em Brasília — com treinos pensados para quem busca técnica limpa, condicionamento e evolução real, do iniciante absoluto ao avançado.
           </p>
         </div>
-        <a href="https://www.instagram.com/ronnnylopesthai/" target="_blank" rel="noopener" class="ig-pill">
-          Instagram • @ronnnylopesthai ↗
+        <a href="https://instagram.com/ronnylopesthai" target="_blank" rel="noopener" class="ig-pill">
+          Instagram • @ronnylopesthai ↗
         </a>
       </div>
     </div>
   </section>
 
-  <!-- DUAL-ROW MARQUEE DE EVOLUÇÃO DOS ALUNOS (@shadcnspace / 21st.dev) -->
-  <section class="marquee-section" aria-label="Relatos e perfis de alunos">
+  <!-- DEPOIMENTOS REAIS DO INSTAGRAM (GRID 3 COLUNAS) -->
+  <section class="marquee-section" id="depoimentos" aria-labelledby="depoimentosHeading">
     <div class="container">
-      <div class="section-header reveal" style="margin-bottom: 40px;">
+      <div class="section-header reveal" style="margin-bottom: 44px;">
         <div>
-          <p class="eyebrow" style="margin-bottom: 14px;">Quem Treina no 1-on-1</p>
-          <h2 class="section-title-mix blur-fade">
-            <span class="serif">Evolução</span> <span class="sans">Visível por Round.</span>
+          <p class="eyebrow" style="margin-bottom: 14px;">DEPOIMENTOS</p>
+          <h2 id="depoimentosHeading" class="programs-heading blur-fade">
+            QUEM TREINA COM O <span class="accent-ember">RONNY</span>.
           </h2>
         </div>
         <p class="section-header-copy">
-          Do primeiro contato com as luvas e o tatame ao ajuste fino em Muay Thai, Boxe, Jiu-Jitsu e MMA.
+          Comentários reais de alunos que acompanham o trabalho do Ronny no tatame.
         </p>
       </div>
-    </div>
 
-    <div class="marquee-rows">
-      <div class="marquee-row row-left">
-        <article class="review-card">
-          <p class="review-quote">“Nunca tinha vestido uma luva. Em um mês de Boxe e Muay Thai 1-on-1 já entendia esquiva, rotação de quadril e saía com a mente zerada do trabalho.”</p>
+      <div class="testimonials-grid">
+        <article class="review-card reveal">
+          <div class="review-card-body">
+            <div class="review-card-top">
+              <div class="review-stars" aria-label="Avaliação 5 estrelas">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.92 6.26L22 9.27l-5.12 4.73L18.18 21 12 17.52 5.82 21l1.3-7-5.12-4.73 7.08-1.01L12 2z"/></svg>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.92 6.26L22 9.27l-5.12 4.73L18.18 21 12 17.52 5.82 21l1.3-7-5.12-4.73 7.08-1.01L12 2z"/></svg>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.92 6.26L22 9.27l-5.12 4.73L18.18 21 12 17.52 5.82 21l1.3-7-5.12-4.73 7.08-1.01L12 2z"/></svg>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.92 6.26L22 9.27l-5.12 4.73L18.18 21 12 17.52 5.82 21l1.3-7-5.12-4.73 7.08-1.01L12 2z"/></svg>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.92 6.26L22 9.27l-5.12 4.73L18.18 21 12 17.52 5.82 21l1.3-7-5.12-4.73 7.08-1.01L12 2z"/></svg>
+              </div>
+              <span class="review-ig-badge">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                <span>Via Instagram</span>
+              </span>
+            </div>
+            <p class="review-quote">“Grande professor e amigo, que realiza um excelente trabalho com muita dedicação e compromisso. Juntos há quase 10 anos.”</p>
+          </div>
           <div class="review-author">
-            <span class="review-avatar">RM</span>
+            <span class="review-avatar" aria-hidden="true">LG</span>
             <div>
-              <span class="review-name">Rafael M.</span>
-              <span class="review-role">Boxe &amp; Muay Thai • Asa Sul, DF</span>
+              <span class="review-name">@lgcoronel</span>
+              <span class="review-role">Aluno há quase 10 anos • Via Instagram</span>
             </div>
           </div>
         </article>
-        <article class="review-card">
-          <p class="review-quote">“Sempre quis aprender Jiu-Jitsu, mas tinha receio de me machucar em turma cheia. Ter aula particular direto com um faixa-preta campeão fez toda a diferença.”</p>
-          <div class="review-author">
-            <span class="review-avatar">LC</span>
-            <div>
-              <span class="review-name">Lucas C.</span>
-              <span class="review-role">Jiu-Jitsu 1-on-1 • Sudoeste, DF</span>
-            </div>
-          </div>
-        </article>
-        <article class="review-card">
-          <p class="review-quote">“Fazemos Dupla Executiva no condomínio às 7h da manhã misturando Boxe na manopla e Muay Thai. Pontualidade britânica e zero enrolação.”</p>
-          <div class="review-author">
-            <span class="review-avatar">FA</span>
-            <div>
-              <span class="review-name">Fernanda &amp; André</span>
-              <span class="review-role">Dupla Executiva • Lago Sul, DF</span>
-            </div>
-          </div>
-        </article>
-        <article class="review-card">
-          <p class="review-quote">“O trabalho de paos e visão de luta dele é outro nível. Você sente na prática a bagagem de quem foi Campeão Mundial na Tailândia.”</p>
-          <div class="review-author">
-            <span class="review-avatar">GV</span>
-            <div>
-              <span class="review-name">Gabriel V.</span>
-              <span class="review-role">Muay Thai Avançado • Asa Norte, DF</span>
-            </div>
-          </div>
-        </article>
-        <!-- Duplicado para loop infinito suave -->
-        <article class="review-card" aria-hidden="true">
-          <p class="review-quote">“Nunca tinha vestido uma luva. Em um mês de Boxe e Muay Thai 1-on-1 já entendia esquiva, rotação de quadril e saía com a mente zerada do trabalho.”</p>
-          <div class="review-author">
-            <span class="review-avatar">RM</span>
-            <div>
-              <span class="review-name">Rafael M.</span>
-              <span class="review-role">Boxe &amp; Muay Thai • Asa Sul, DF</span>
-            </div>
-          </div>
-        </article>
-        <article class="review-card" aria-hidden="true">
-          <p class="review-quote">“Sempre quis aprender Jiu-Jitsu, mas tinha receio de me machucar em turma cheia. Ter aula particular direto com um faixa-preta campeão fez toda a diferença.”</p>
-          <div class="review-author">
-            <span class="review-avatar">LC</span>
-            <div>
-              <span class="review-name">Lucas C.</span>
-              <span class="review-role">Jiu-Jitsu 1-on-1 • Sudoeste, DF</span>
-            </div>
-          </div>
-        </article>
-        <article class="review-card" aria-hidden="true">
-          <p class="review-quote">“Fazemos Dupla Executiva no condomínio às 7h da manhã misturando Boxe na manopla e Muay Thai. Pontualidade britânica e zero enrolação.”</p>
-          <div class="review-author">
-            <span class="review-avatar">FA</span>
-            <div>
-              <span class="review-name">Fernanda &amp; André</span>
-              <span class="review-role">Dupla Executiva • Lago Sul, DF</span>
-            </div>
-          </div>
-        </article>
-        <article class="review-card" aria-hidden="true">
-          <p class="review-quote">“O trabalho de paos e visão de luta dele é outro nível. Você sente na prática a bagagem de quem foi Campeão Mundial na Tailândia.”</p>
-          <div class="review-author">
-            <span class="review-avatar">GV</span>
-            <div>
-              <span class="review-name">Gabriel V.</span>
-              <span class="review-role">Muay Thai Avançado • Asa Norte, DF</span>
-            </div>
-          </div>
-        </article>
-      </div>
 
-      <div class="marquee-row row-right">
-        <article class="review-card">
-          <p class="review-quote">“Queria condicionamento forte focando em Boxe e movimentação sem sobrecarregar o joelho. O ajuste biomecânico que o Ronny faz muda tudo.”</p>
+        <article class="review-card reveal">
+          <div class="review-card-body">
+            <div class="review-card-top">
+              <div class="review-stars" aria-label="Avaliação 5 estrelas">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.92 6.26L22 9.27l-5.12 4.73L18.18 21 12 17.52 5.82 21l1.3-7-5.12-4.73 7.08-1.01L12 2z"/></svg>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.92 6.26L22 9.27l-5.12 4.73L18.18 21 12 17.52 5.82 21l1.3-7-5.12-4.73 7.08-1.01L12 2z"/></svg>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.92 6.26L22 9.27l-5.12 4.73L18.18 21 12 17.52 5.82 21l1.3-7-5.12-4.73 7.08-1.01L12 2z"/></svg>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.92 6.26L22 9.27l-5.12 4.73L18.18 21 12 17.52 5.82 21l1.3-7-5.12-4.73 7.08-1.01L12 2z"/></svg>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.92 6.26L22 9.27l-5.12 4.73L18.18 21 12 17.52 5.82 21l1.3-7-5.12-4.73 7.08-1.01L12 2z"/></svg>
+              </div>
+              <span class="review-ig-badge">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                <span>Via Instagram</span>
+              </span>
+            </div>
+            <p class="review-quote">“Sempre foi e segue sendo referência. Orgulho em ter sido um dos seus primeiros alunos. Abraço, irmão.”</p>
+          </div>
           <div class="review-author">
-            <span class="review-avatar">MP</span>
+            <span class="review-avatar" aria-hidden="true">JB</span>
             <div>
-              <span class="review-name">Mariana P.</span>
-              <span class="review-role">Boxe &amp; Condicionamento • Noroeste, DF</span>
+              <span class="review-name">@jassananf_bjj</span>
+              <span class="review-role">Aluno • Via Instagram</span>
             </div>
           </div>
         </article>
-        <article class="review-card">
-          <p class="review-quote">“Poder integrar trocação em pé, entradas de queda e Jiu-Jitsu com um único professor que lutou MMA de verdade não tem preço.”</p>
-          <div class="review-author">
-            <span class="review-avatar">DS</span>
-            <div>
-              <span class="review-name">Daniel S.</span>
-              <span class="review-role">MMA &amp; Grappling • Águas Claras, DF</span>
+
+        <article class="review-card reveal">
+          <div class="review-card-body">
+            <div class="review-card-top">
+              <div class="review-stars" aria-label="Avaliação 5 estrelas">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.92 6.26L22 9.27l-5.12 4.73L18.18 21 12 17.52 5.82 21l1.3-7-5.12-4.73 7.08-1.01L12 2z"/></svg>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.92 6.26L22 9.27l-5.12 4.73L18.18 21 12 17.52 5.82 21l1.3-7-5.12-4.73 7.08-1.01L12 2z"/></svg>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.92 6.26L22 9.27l-5.12 4.73L18.18 21 12 17.52 5.82 21l1.3-7-5.12-4.73 7.08-1.01L12 2z"/></svg>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.92 6.26L22 9.27l-5.12 4.73L18.18 21 12 17.52 5.82 21l1.3-7-5.12-4.73 7.08-1.01L12 2z"/></svg>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.92 6.26L22 9.27l-5.12 4.73L18.18 21 12 17.52 5.82 21l1.3-7-5.12-4.73 7.08-1.01L12 2z"/></svg>
+              </div>
+              <span class="review-ig-badge">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                <span>Via Instagram</span>
+              </span>
             </div>
+            <p class="review-quote">“Admiro como professor e como pessoa. Cara bacana demais. Forte abraço, meu querido amigo.”</p>
           </div>
-        </article>
-        <article class="review-card">
-          <p class="review-quote">“Didática limpa, respeito total ao meu ritmo inicial e evolução constante a cada semana. Melhor investimento de saúde que fiz no ano.”</p>
           <div class="review-author">
-            <span class="review-avatar">BT</span>
+            <span class="review-avatar" aria-hidden="true">MS</span>
             <div>
-              <span class="review-name">Bruno T.</span>
-              <span class="review-role">Particular 1-on-1 • Lago Norte, DF</span>
-            </div>
-          </div>
-        </article>
-        <article class="review-card">
-          <p class="review-quote">“No Jiu-Jitsu particular destravei detalhes de passagem e defesa de guarda que eu deixava passar há anos. Didática cirúrgica de faixa-preta.”</p>
-          <div class="review-author">
-            <span class="review-avatar">PH</span>
-            <div>
-              <span class="review-name">Pedro H.</span>
-              <span class="review-role">Jiu-Jitsu &amp; Muay Thai • Sudoeste, DF</span>
-            </div>
-          </div>
-        </article>
-        <!-- Duplicado para loop infinito suave -->
-        <article class="review-card" aria-hidden="true">
-          <p class="review-quote">“Queria condicionamento forte focando em Boxe e movimentação sem sobrecarregar o joelho. O ajuste biomecânico que o Ronny faz muda tudo.”</p>
-          <div class="review-author">
-            <span class="review-avatar">MP</span>
-            <div>
-              <span class="review-name">Mariana P.</span>
-              <span class="review-role">Boxe &amp; Condicionamento • Noroeste, DF</span>
-            </div>
-          </div>
-        </article>
-        <article class="review-card" aria-hidden="true">
-          <p class="review-quote">“Poder integrar trocação em pé, entradas de queda e Jiu-Jitsu com um único professor que lutou MMA de verdade não tem preço.”</p>
-          <div class="review-author">
-            <span class="review-avatar">DS</span>
-            <div>
-              <span class="review-name">Daniel S.</span>
-              <span class="review-role">MMA &amp; Grappling • Águas Claras, DF</span>
-            </div>
-          </div>
-        </article>
-        <article class="review-card" aria-hidden="true">
-          <p class="review-quote">“Didática limpa, respeito total ao meu ritmo inicial e evolução constante a cada semana. Melhor investimento de saúde que fiz no ano.”</p>
-          <div class="review-author">
-            <span class="review-avatar">BT</span>
-            <div>
-              <span class="review-name">Bruno T.</span>
-              <span class="review-role">Particular 1-on-1 • Lago Norte, DF</span>
-            </div>
-          </div>
-        </article>
-        <article class="review-card" aria-hidden="true">
-          <p class="review-quote">“No Jiu-Jitsu particular destravei detalhes de passagem e defesa de guarda que eu deixava passar há anos. Didática cirúrgica de faixa-preta.”</p>
-          <div class="review-author">
-            <span class="review-avatar">PH</span>
-            <div>
-              <span class="review-name">Pedro H.</span>
-              <span class="review-role">Jiu-Jitsu &amp; Muay Thai • Sudoeste, DF</span>
+              <span class="review-name">@miltonschelb</span>
+              <span class="review-role">Aluno • Via Instagram</span>
             </div>
           </div>
         </article>
@@ -4758,7 +4696,7 @@
             <span>Eventual valor de deslocamento conforme a distância é tratado diretamente comigo</span>
             <div style="display: flex; flex-wrap: wrap; gap: 14px; margin-top: 2px;">
               <a href="https://wa.me/5561981833245?text=Ol%C3%A1%2C%20Ronny!%20Vim%20pelo%20site%20e%20gostaria%20de%20saber%20mais%20sobre%20as%20aulas%20particulares." target="_blank" rel="noopener" style="color: var(--accent-ember); font-weight: 500;">WhatsApp: (61) 98183-3245 ↗</a>
-              <a href="https://www.instagram.com/ronnnylopesthai/" target="_blank" rel="noopener" style="color: rgba(245,245,245,0.88); font-weight: 500;">Instagram: @ronnnylopesthai ↗</a>
+              <a href="https://instagram.com/ronnylopesthai" target="_blank" rel="noopener" style="color: rgba(245,245,245,0.88); font-weight: 500;">Instagram: @ronnylopesthai ↗</a>
             </div>
           </div>
         </div>
@@ -4846,7 +4784,7 @@
     <div class="container footer-inner">
       <span>© 2026 Ronny Lopes • Muay Thai, Boxe, Jiu-Jitsu &amp; MMA — Brasília, DF.</span>
       <div class="footer-links">
-        <a href="https://www.instagram.com/ronnnylopesthai/" target="_blank" rel="noopener">@ronnnylopesthai</a>
+        <a href="https://instagram.com/ronnylopesthai" target="_blank" rel="noopener">@ronnylopesthai</a>
         <a href="https://wa.me/5561981833245?text=Ol%C3%A1%2C%20Ronny!%20Vim%20pelo%20site%20e%20gostaria%20de%20saber%20mais%20sobre%20as%20aulas%20particulares." target="_blank" rel="noopener">WhatsApp</a>
         <a href="#abordagem">Modalidades</a>
       </div>
