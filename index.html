@@ -232,6 +232,9 @@
       --zoom-in-scale-from: 0.92;
       --zoom-in-duration: 550ms;
       --zoom-in-ease: cubic-bezier(0.22, 1, 0.36, 1);
+      --split-duration: 600ms;
+      --split-stagger: 70ms;
+      --split-ease: cubic-bezier(0.22, 1, 0.36, 1);
       --nav-height: 84px;
     }
 
@@ -3877,6 +3880,67 @@
       opacity: 1;
     }
 
+    /* ================= SPLIT TEXT REVEAL (PALAVRAS RESPONSIVAS + ACESSÍVEIS) ================= */
+    [data-split-state] {
+      position: relative;
+    }
+
+    split-sr {
+      position: absolute !important;
+      width: 1px !important;
+      height: 1px !important;
+      padding: 0 !important;
+      margin: -1px !important;
+      overflow: hidden !important;
+      clip: rect(0, 0, 0, 0) !important;
+      clip-path: inset(50%) !important;
+      white-space: nowrap !important;
+      border: 0 !important;
+      user-select: none !important;
+      -webkit-user-select: none !important;
+      pointer-events: none !important;
+    }
+
+    split-visual {
+      display: inline;
+    }
+
+    split-mask {
+      display: inline-block;
+      overflow: hidden;
+      vertical-align: bottom;
+      padding: 0.08em 0.08em 0.18em 0.04em;
+      margin: -0.08em -0.08em -0.18em -0.04em;
+    }
+
+    split-word {
+      display: inline-block;
+    }
+
+    [data-split-state="pending"] split-word {
+      opacity: 0;
+      transform: translateY(100%);
+      transition: none;
+    }
+
+    [data-split-state="pending"]:focus-within split-word {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    [data-split-state="entering"] split-word {
+      opacity: 1;
+      transform: translateY(0);
+      transition:
+        transform var(--split-duration, 600ms) var(--split-ease, cubic-bezier(0.22, 1, 0.36, 1)) calc(var(--split-i, 0) * var(--split-stagger, 70ms)),
+        opacity var(--split-duration, 600ms) var(--split-ease, cubic-bezier(0.22, 1, 0.36, 1)) calc(var(--split-i, 0) * var(--split-stagger, 70ms));
+    }
+
+    [data-split-state="done"] split-word {
+      opacity: 1;
+      transform: none;
+    }
+
     @media (prefers-reduced-motion: reduce) {
       html {
         scroll-behavior: auto;
@@ -3898,7 +3962,8 @@
       .blur-fade,
       .reveal,
       [data-zoom-state],
-      .programs .spotlight-card[data-zoom-state] {
+      .programs .spotlight-card[data-zoom-state],
+      [data-split-state] split-word {
         opacity: 1 !important;
         filter: none !important;
         transform: none !important;
@@ -4065,7 +4130,7 @@
       <div>
         <div class="timeline-head">
           <p class="eyebrow">Nossa Abordagem</p>
-          <h2 class="timeline-head-title">Progressão em <span>3 Estágios.</span></h2>
+          <h2 class="timeline-head-title" data-split-reveal>Progressão em <span>3 Estágios.</span></h2>
         </div>
 
         <ul class="beam-timeline" id="beamTimeline">
@@ -4096,7 +4161,7 @@
     <div class="approach-diagram reveal" id="modalidades">
       <div class="diagram-header">
         <span class="eyebrow">Interaja com as 4 modalidades</span>
-        <h2 class="diagram-title blur-fade">4 Artes, 1 Método</h2>
+        <h2 class="diagram-title" data-split-reveal>4 Artes, 1 Método</h2>
       </div>
 
       <div class="orbit-box" id="orbitBox" aria-label="Diagrama interativo das 4 modalidades: Muay Thai, Boxe, Jiu-Jitsu e MMA">
@@ -4122,7 +4187,7 @@
       <div class="section-header reveal">
         <div>
           <p class="eyebrow" style="margin-bottom: 14px;">FORMATOS DE AULA</p>
-          <h2 class="programs-heading blur-fade">
+          <h2 class="programs-heading" data-split-reveal>
             TREINE <span class="accent-ember">SOZINHO, EM DUPLA</span> OU COM SEU GRUPO.
           </h2>
         </div>
@@ -4253,7 +4318,7 @@
       <div class="section-header reveal">
         <div>
           <p class="eyebrow" style="margin-bottom: 14px;">AULAS NA PRÁTICA</p>
-          <h2 id="videosHeading" class="programs-heading blur-fade">
+          <h2 id="videosHeading" class="programs-heading" data-split-reveal>
             TREINO REAL, <span class="accent-ember">EM MOVIMENTO</span>.
           </h2>
         </div>
@@ -4407,7 +4472,7 @@
       <div class="section-header reveal">
         <div>
           <p class="eyebrow" style="margin-bottom: 14px;">Registro Real</p>
-          <h2 class="section-title-mix blur-fade">
+          <h2 class="section-title-mix" data-split-reveal>
             <span class="serif">Do Combate</span> <span class="sans">ao Seu Treino.</span>
           </h2>
         </div>
@@ -4668,7 +4733,7 @@
     <div class="coach-quote-col reveal">
       <div class="coach-story">
         <p class="eyebrow coach-eyebrow">QUEM É RONNY LOPES</p>
-        <h3 class="coach-story-title blur-fade">
+        <h3 class="coach-story-title" data-split-reveal>
           Dos ringues da Tailândia para o seu treino em Brasília.
         </h3>
         <div class="coach-story-body">
@@ -4692,7 +4757,7 @@
       <div class="section-header reveal" style="margin-bottom: 44px;">
         <div>
           <p class="eyebrow" style="margin-bottom: 14px;">DEPOIMENTOS</p>
-          <h2 id="depoimentosHeading" class="programs-heading blur-fade">
+          <h2 id="depoimentosHeading" class="programs-heading" data-split-reveal>
             QUEM TREINA COM O <span class="accent-ember">RONNY</span>.
           </h2>
         </div>
@@ -5029,7 +5094,7 @@
     <div class="container faq-layout">
       <div class="reveal">
         <p class="eyebrow" style="margin-bottom: 14px;">Antes da Primeira Sessão</p>
-        <h2 id="duvidasHeading" class="section-title-mix blur-fade">
+        <h2 id="duvidasHeading" class="section-title-mix" data-split-reveal>
           <span class="serif">Dúvidas</span> <span class="sans">Diretas.</span>
         </h2>
       </div>
@@ -5101,7 +5166,7 @@
         <div class="booking-visual">
           <div>
             <span class="eyebrow">SESSÃO EXPERIMENTAL — 60 MIN</span>
-            <h2 id="agendarHeading" class="booking-heading blur-fade">
+            <h2 id="agendarHeading" class="booking-heading" data-split-reveal>
               Agende sua avaliação <span>em Brasília.</span>
             </h2>
             <p class="booking-copy">
@@ -6507,6 +6572,313 @@
     }
 
     window.__destroyZoomInReveal = initZoomInReveal();
+
+    // 9c. Split Text Reveal acessível por palavras (translateY(100%) -> 0, opacity 0 -> 1, 600ms, 70ms stagger)
+    function initSplitTextReveal({
+      selector = '[data-split-reveal]',
+      threshold = 0.2,
+      durationMs = 600,
+      staggerMs = 70
+    } = {}) {
+      const targets = Array.from(document.querySelectorAll(selector));
+      if (!targets.length || !('IntersectionObserver' in window) || reducedMotionMql.matches) {
+        return () => {};
+      }
+
+      const INLINE_TAGS = new Set(['SPAN', 'EM', 'STRONG', 'B', 'I', 'MARK', 'SMALL', 'SUP', 'SUB']);
+      const controller = new AbortController();
+      const { signal } = controller;
+      const timers = new Set();
+      const rafs = new Set();
+      const mutationObservers = new Set();
+      const originalMarkup = new Map();
+      const wordCounts = new Map();
+      let observer = null;
+
+      const stripDuplicateIds = (root) => {
+        if (root.nodeType === Node.ELEMENT_NODE && root.hasAttribute('id')) {
+          root.removeAttribute('id');
+        }
+        if (root.querySelectorAll) {
+          root.querySelectorAll('[id]').forEach((n) => n.removeAttribute('id'));
+        }
+      };
+
+      const collectAtoms = (node, wrapperStack, atoms) => {
+        node.childNodes.forEach((child) => {
+          if (child.nodeType === Node.TEXT_NODE) {
+            const parts = (child.nodeValue || '').split(/(\s+)/);
+            parts.forEach((part) => {
+              if (!part) return;
+              if (/^\s+$/.test(part)) {
+                atoms.push({ type: 'space' });
+              } else {
+                atoms.push({ type: 'chunk', text: part, wrappers: wrapperStack.slice() });
+              }
+            });
+          } else if (child.nodeType === Node.ELEMENT_NODE) {
+            if (child.tagName === 'BR') {
+              atoms.push({ type: 'br' });
+            } else {
+              wrapperStack.push({
+                tag: INLINE_TAGS.has(child.tagName) ? child.tagName : 'SPAN',
+                className: child.className || '',
+                styleCss: child.getAttribute('style') || ''
+              });
+              collectAtoms(child, wrapperStack, atoms);
+              wrapperStack.pop();
+            }
+          }
+        });
+      };
+
+      const buildVisualFragment = (sourceRoot, wordCounter, trimStart = true, trimEnd = true) => {
+        const rawAtoms = [];
+        collectAtoms(sourceRoot, [], rawAtoms);
+
+        // Colapsa espaços consecutivos e agrupa pedaços adjacentes sem espaço (ex.: <span>RONNY</span>.)
+        const normalized = [];
+        rawAtoms.forEach((atom) => {
+          if (atom.type === 'space') {
+            if (!normalized.length && trimStart) return;
+            const prev = normalized[normalized.length - 1];
+            if (prev && (prev.type === 'space' || prev.type === 'br')) return;
+            normalized.push(atom);
+          } else if (atom.type === 'br') {
+            const prev = normalized[normalized.length - 1];
+            if (prev && prev.type === 'space') normalized.pop();
+            normalized.push(atom);
+          } else {
+            const prev = normalized[normalized.length - 1];
+            if (prev && prev.type === 'word') {
+              prev.chunks.push(atom);
+            } else {
+              normalized.push({ type: 'word', chunks: [atom] });
+            }
+          }
+        });
+
+        if (trimEnd && normalized.length && normalized[normalized.length - 1].type === 'space') {
+          normalized.pop();
+        }
+
+        const frag = document.createDocumentFragment();
+        normalized.forEach((item) => {
+          if (item.type === 'space') {
+            frag.appendChild(document.createTextNode(' '));
+          } else if (item.type === 'br') {
+            frag.appendChild(document.createElement('br'));
+          } else if (item.type === 'word') {
+            const mask = document.createElement('split-mask');
+            const word = document.createElement('split-word');
+            word.style.setProperty('--split-i', String(wordCounter.value++));
+
+            item.chunks.forEach((chunk) => {
+              let node = document.createTextNode(chunk.text);
+              for (let i = chunk.wrappers.length - 1; i >= 0; i--) {
+                const w = chunk.wrappers[i];
+                const wrapEl = document.createElement(w.tag);
+                if (w.className) wrapEl.className = w.className;
+                if (w.styleCss) wrapEl.setAttribute('style', w.styleCss);
+                wrapEl.appendChild(node);
+                node = wrapEl;
+              }
+              word.appendChild(node);
+            });
+
+            mask.appendChild(word);
+            frag.appendChild(mask);
+          }
+        });
+
+        return frag;
+      };
+
+      const createAccessibleSplitPair = (nodes, wordCounter, trimStart, trimEnd) => {
+        const srEl = document.createElement('split-sr');
+        nodes.forEach((n) => {
+          const clone = n.cloneNode(true);
+          stripDuplicateIds(clone);
+          srEl.appendChild(clone);
+        });
+
+        const baseOffset = wordCounter.value;
+        const visEl = document.createElement('split-visual');
+        visEl.setAttribute('aria-hidden', 'true');
+        visEl.setAttribute('translate', 'no');
+        visEl.appendChild(buildVisualFragment(srEl, wordCounter, trimStart, trimEnd));
+
+        if ('MutationObserver' in window) {
+          const mo = new MutationObserver(() => {
+            if (signal.aborted) return;
+            const localCounter = { value: baseOffset };
+            visEl.textContent = '';
+            visEl.appendChild(buildVisualFragment(srEl, localCounter, trimStart, trimEnd));
+          });
+          mo.observe(srEl, { childList: true, characterData: true, subtree: true });
+          mutationObservers.add(mo);
+        }
+
+        const pairFrag = document.createDocumentFragment();
+        pairFrag.appendChild(srEl);
+        pairFrag.appendChild(visEl);
+        return pairFrag;
+      };
+
+      const segmentHeading = (el) => {
+        originalMarkup.set(el, el.innerHTML);
+        const wordCounter = { value: 0 };
+        const hasLinks = Boolean(el.querySelector('a[href]'));
+        const outFrag = document.createDocumentFragment();
+
+        if (!hasLinks) {
+          const sourceNodes = Array.from(el.childNodes);
+          outFrag.appendChild(createAccessibleSplitPair(sourceNodes, wordCounter, true, true));
+        } else {
+          // Mantém links <a href> reais fora de aria-hidden (foco de teclado, clique e leitor de tela preservados)
+          const topChildren = Array.from(el.childNodes);
+          let buffer = [];
+          let isStart = true;
+
+          const flushBuffer = (isEnd) => {
+            if (!buffer.length) return;
+            const textCheck = buffer.map((n) => n.textContent || '').join('');
+            if (!textCheck.trim()) {
+              if (!isStart && !isEnd) outFrag.appendChild(document.createTextNode(' '));
+              buffer = [];
+              return;
+            }
+            outFrag.appendChild(createAccessibleSplitPair(buffer, wordCounter, isStart, isEnd));
+            buffer = [];
+            isStart = false;
+          };
+
+          topChildren.forEach((node) => {
+            if (node.nodeType === Node.ELEMENT_NODE && node.tagName === 'A' && node.hasAttribute('href')) {
+              flushBuffer(false);
+              const linkClone = node.cloneNode(false);
+              stripDuplicateIds(linkClone);
+              linkClone.appendChild(
+                createAccessibleSplitPair(Array.from(node.childNodes), wordCounter, true, true)
+              );
+              outFrag.appendChild(linkClone);
+              isStart = false;
+            } else {
+              buffer.push(node);
+            }
+          });
+          flushBuffer(true);
+        }
+
+        el.textContent = '';
+        el.appendChild(outFrag);
+        wordCounts.set(el, wordCounter.value);
+      };
+
+      const settleHeading = (el) => {
+        el.dataset.splitState = 'done';
+      };
+
+      const triggerSplitReveal = (el, immediate = false) => {
+        if (signal.aborted) return;
+        const state = el.dataset.splitState;
+        if (state === 'entering' || state === 'done') return;
+        if (observer) observer.unobserve(el);
+
+        if (immediate) {
+          settleHeading(el);
+          return;
+        }
+
+        el.dataset.splitState = 'entering';
+        const words = el.querySelectorAll('split-word');
+        const lastWord = words[words.length - 1] || null;
+        const totalMs = durationMs + Math.max(0, (wordCounts.get(el) || words.length || 1) - 1) * staggerMs;
+
+        let finished = false;
+        const finish = () => {
+          if (finished) return;
+          finished = true;
+          clearTimeout(fallbackTimer);
+          timers.delete(fallbackTimer);
+          if (lastWord) lastWord.removeEventListener('transitionend', onLastWordEnd);
+          settleHeading(el);
+        };
+
+        const onLastWordEnd = (e) => {
+          if (e.target !== lastWord) return;
+          if (e.propertyName !== 'transform' && e.propertyName !== 'opacity') return;
+          finish();
+        };
+
+        if (lastWord) {
+          lastWord.addEventListener('transitionend', onLastWordEnd, { signal });
+        }
+        const fallbackTimer = window.setTimeout(finish, totalMs + 90);
+        timers.add(fallbackTimer);
+      };
+
+      targets.forEach((el) => {
+        if (!(el.textContent || '').trim()) return;
+        segmentHeading(el);
+        el.dataset.splitState = 'pending';
+        el.addEventListener('focusin', () => triggerSplitReveal(el, true), { signal });
+      });
+
+      observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const el = entry.target;
+          if (el.dataset.splitState !== 'pending') return;
+          if (entry.intersectionRatio < threshold) return;
+
+          observer.unobserve(el);
+          const rafId = requestAnimationFrame(() => {
+            rafs.delete(rafId);
+            triggerSplitReveal(el, false);
+          });
+          rafs.add(rafId);
+        });
+      }, { threshold });
+
+      targets.forEach((el) => {
+        if (el.dataset.splitState === 'pending') observer.observe(el);
+      });
+
+      reducedMotionMql.addEventListener('change', (e) => {
+        if (!e.matches) return;
+        if (observer) observer.disconnect();
+        rafs.forEach((id) => cancelAnimationFrame(id));
+        rafs.clear();
+        timers.forEach((id) => clearTimeout(id));
+        timers.clear();
+        targets.forEach((el) => {
+          if (el.dataset.splitState) settleHeading(el);
+        });
+      }, { signal });
+
+      return function destroySplitTextReveal() {
+        controller.abort();
+        if (observer) {
+          observer.disconnect();
+          observer = null;
+        }
+        mutationObservers.forEach((mo) => mo.disconnect());
+        mutationObservers.clear();
+        rafs.forEach((id) => cancelAnimationFrame(id));
+        rafs.clear();
+        timers.forEach((id) => clearTimeout(id));
+        timers.clear();
+        originalMarkup.forEach((html, el) => {
+          el.innerHTML = html;
+          delete el.dataset.splitState;
+        });
+        originalMarkup.clear();
+        wordCounts.clear();
+      };
+    }
+
+    window.__destroySplitTextReveal = initSplitTextReveal();
 
     const statsObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
