@@ -763,6 +763,10 @@
       opacity: 1;
     }
 
+    body.clean-shot-mode .cascade-upload-badge {
+      display: none !important;
+    }
+
     /* Caixa de seleção com cursores de texto "| ... |" (inspirada na referência Pinterest) */
     .selection-quote-box {
       position: relative;
@@ -1780,27 +1784,6 @@
 
         <div class="slide-viewport">
           <article class="ig-slide" data-slide-idx="4" id="slide-05">
-            <!-- ÍCONES FLUTUANTES DO INSTAGRAM AO LADO DAS DOBRAS DO CELULAR -->
-            <div class="ig-floating-icons" aria-hidden="true">
-              <!-- Home -->
-              <div class="ig-icon-bubble">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1V9.5z"/></svg>
-              </div>
-              <!-- Reels -->
-              <div class="ig-icon-bubble">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="4"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="3" x2="12" y2="9"/><line x1="15" y1="3" x2="18" y2="9"/><polygon points="10 12.5 15.5 15.5 10 18.5 10 12.5" fill="currentColor"/></svg>
-              </div>
-              <!-- Direct com badge 1 em laranja vibrante -->
-              <div class="ig-icon-bubble !border-[#FF3D00]/45">
-                <span class="ig-notif-dot">1</span>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-              </div>
-              <!-- Perfil -->
-              <div class="ig-icon-bubble">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="10" r="3"/><path d="M6.8 18.2c1.3-2 3.1-3 5.2-3s3.9 1 5.2 3"/></svg>
-              </div>
-            </div>
-
             <!-- PALCO 3D: IPHONE EM PERSPECTIVA + LANDING PAGE ESCORRENDO EM ONDAS -->
             <div class="cascade-stage" id="cascadeStage" title="Clique ou arraste um print vertical longo da versão mobile para preencher todas as dobras 3D">
               <div class="cascade-upload-badge">+ Clique p/ usar seu print mobile longo</div>
@@ -1856,68 +1839,35 @@
               <div class="page-counter"><strong>05</strong>/06</div>
             </div>
 
-            <div class="slide-layer mt-8 mb-auto max-w-[540px]">
+            <div class="slide-layer my-auto pt-10 max-w-[495px]">
               <span class="font-mono text-xs tracking-[0.22em] uppercase text-zinc-400 block mb-5">
                 BY MS WEB DESIGNER
               </span>
 
-              <!-- Bloco tipográfico com linha arquitetônica em "L" + seta -->
-              <div class="relative pl-7">
-                <!-- Linha vertical + curva em L apontando p/ DO INSTAGRAM -->
-                <div style="position:absolute; left:2px; top:12px; width:155px; height:272px; border-left:1.5px solid rgba(245,245,247,0.42); border-bottom:1.5px solid rgba(245,245,247,0.42); pointer-events:none;">
-                  <span style="position:absolute; right:-7px; bottom:-10px; color:#FF3D00; font-size:18px; font-weight:700;">›</span>
+              <h2 class="slide-h2" style="font-size: 72px; line-height: 1.06; max-width: 485px;">
+                Personalizado <span class="serif-accent" style="font-size: 1.18em;">do zero</span> pra você.
+              </h2>
+
+              <p class="mt-7 text-[23.5px] leading-[1.45] text-zinc-200 font-normal max-w-[465px]">
+                Com a sua cara, sua história e o profissionalismo que te destaca.
+              </p>
+
+              <div class="mt-12 pt-8 border-t border-white/10 grid grid-cols-2 gap-3 max-w-[475px]">
+                <div class="px-4 py-3.5 rounded-xl bg-white/[0.035] border border-white/[0.09] flex items-center gap-2.5 font-mono text-[11px] font-semibold uppercase tracking-[0.11em] text-zinc-200">
+                  <span class="w-1.5 h-1.5 rounded-full bg-[#FF3D00] shrink-0"></span>
+                  <span>MOBILE FIRST</span>
                 </div>
-
-                <div class="text-[31px] font-light tracking-[0.06em] uppercase text-zinc-200 leading-[1.12]">
-                  FEITO PRA<br />QUEM
+                <div class="px-4 py-3.5 rounded-xl bg-white/[0.035] border border-white/[0.09] flex items-center gap-2.5 font-mono text-[11px] font-semibold uppercase tracking-[0.11em] text-zinc-200">
+                  <span class="w-1.5 h-1.5 rounded-full bg-[#FF3D00] shrink-0"></span>
+                  <span>CARREGAMENTO RÁPIDO</span>
                 </div>
-
-                <div class="-mt-3 leading-[0.88]">
-                  <span class="serif-accent" style="font-size: 122px;">Chega</span>
-                  <span class="recoleta-title-card block text-[76px] text-white tracking-[-0.03em] -mt-2">
-                    direto
-                  </span>
+                <div class="px-4 py-3.5 rounded-xl bg-white/[0.035] border border-white/[0.09] flex items-center gap-2.5 font-mono text-[11px] font-semibold uppercase tracking-[0.11em] text-zinc-200">
+                  <span class="w-1.5 h-1.5 rounded-full bg-[#FF3D00] shrink-0"></span>
+                  <span>LEITURA FÁCIL</span>
                 </div>
-
-                <div class="mt-5 pl-[144px] text-[28px] tracking-[0.05em] uppercase text-zinc-200">
-                  DO <strong class="font-extrabold text-white">INSTAGRAM</strong>
-                </div>
-              </div>
-
-              <!-- Frase destacada com cursores de seleção de texto "| ... |" -->
-              <div class="mt-12">
-                <div class="selection-quote-box">
-                  <span class="selection-cursor-left" aria-hidden="true"></span>
-                  <p class="text-[24px] leading-[1.35] text-zinc-100 font-normal">
-                    Carregamento rápido, <strong class="font-bold text-white">galeria interativa</strong> e botão de agendamento sempre acessível.
-                  </p>
-                  <span class="selection-cursor-right" aria-hidden="true"></span>
-                </div>
-              </div>
-
-              <!-- Sub-label + Textura micro-tipográfica + Índice editorial com traços -->
-              <div class="mt-9">
-                <div class="text-xs font-bold uppercase tracking-[0.18em] text-[#FF3D00] mb-4">
-                  DESIGN E WEB DE ALTA PERFORMANCE
-                </div>
-
-                <p class="ghost-micro-texture max-w-[490px] mb-5">
-                  Feito pra quem chega direto do Instagram • Carregamento rápido, galeria interativa e agendamento acessível • Presença premium que transforma visitantes do perfil em alunos reais no WhatsApp • Design sob medida MS Web Designer • Feito pra quem chega direto do Instagram • Experiência mobile impecável do primeiro toque ao agendamento.
-                </p>
-
-                <div class="space-y-2 font-mono text-[11px] uppercase tracking-[0.12em] text-zinc-400">
-                  <div class="flex items-center gap-3">
-                    <span class="text-zinc-200">MOBILE FIRST</span>
-                    <span class="flex-1 h-px bg-white/15"></span>
-                    <span>GALERIA 3D</span>
-                    <span class="w-8 h-px bg-[#FF3D00]/60"></span>
-                  </div>
-                  <div class="flex items-center gap-3">
-                    <span class="w-10 h-px bg-white/15"></span>
-                    <span>PERFORMANCE</span>
-                    <span class="flex-1 h-px bg-white/15"></span>
-                    <span class="text-zinc-200">WHATSAPP DIRETO</span>
-                  </div>
+                <div class="px-4 py-3.5 rounded-xl bg-white/[0.035] border border-white/[0.09] flex items-center gap-2.5 font-mono text-[11px] font-semibold uppercase tracking-[0.11em] text-zinc-200">
+                  <span class="w-1.5 h-1.5 rounded-full bg-[#FF3D00] shrink-0"></span>
+                  <span>WHATSAPP DIRETO</span>
                 </div>
               </div>
             </div>
