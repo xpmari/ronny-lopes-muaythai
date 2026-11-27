@@ -683,42 +683,294 @@
       pointer-events: none;
     }
 
-    .phone-frame {
-      width: 286px;
-      height: 608px;
-      border-radius: 42px;
-      padding: 11px;
-      background: linear-gradient(160deg, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.05) 45%, rgba(255, 61, 0, 0.20) 100%);
-      box-shadow:
-        0 34px 74px -18px rgba(0, 0, 0, 0.94),
-        inset 0 1px 0 rgba(255, 255, 255, 0.24);
-      display: flex;
-      flex-direction: column;
-      flex-shrink: 0;
+    /* =====================================================================
+       EFEITO IPHONE 3D + LANDING PAGE DESDOBRANDO EM CASCATA ONDULADA
+       (Inspirado na referência editorial Pinterest)
+       ===================================================================== */
+    .cascade-stage {
+      position: absolute;
+      right: 54px;
+      top: 56px;
+      width: 400px;
+      height: 1180px;
+      perspective: 1550px;
+      perspective-origin: 38% 36%;
+      z-index: 5;
+      cursor: pointer;
     }
 
-    .phone-inner {
-      flex: 1;
-      border-radius: 32px;
-      background: #08080A;
-      overflow: hidden;
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      border: 1px solid rgba(255, 255, 255, 0.07);
-    }
-
-    .phone-island {
+    .cascade-rig {
       position: absolute;
       top: 12px;
+      right: 16px;
+      width: 296px;
+      transform-style: preserve-3d;
+      transform: rotateY(-25deg) rotateX(7deg) rotateZ(-2.5deg);
+    }
+
+    /* Chassi 3D do iPhone aberto na base para a tela escorrer para fora */
+    .cascade-phone-shell {
+      position: relative;
+      width: 296px;
+      height: 422px;
+      padding: 11px 11px 0 11px;
+      border-radius: 44px 44px 12px 12px;
+      background: linear-gradient(155deg, #34343C 0%, #151519 42%, #0B0B0E 100%);
+      border: 1.5px solid rgba(255, 255, 255, 0.22);
+      border-bottom: none;
+      box-shadow:
+        -24px 30px 60px -12px rgba(0, 0, 0, 0.92),
+        inset 0 2px 2px rgba(255, 255, 255, 0.28);
+      transform-style: preserve-3d;
+    }
+
+    /* Lateral direita extrudada em 3D (espessura metálica real do iPhone + botão lateral) */
+    .cascade-phone-edge {
+      position: absolute;
+      top: 28px;
+      right: -15px;
+      width: 15px;
+      height: 388px;
+      background: linear-gradient(180deg, #2C2C34 0%, #484854 26%, #1B1B21 62%, #34343E 100%);
+      transform-origin: left center;
+      transform: rotateY(88deg);
+      border-radius: 0 6px 6px 0;
+      box-shadow: inset -2px 0 4px rgba(0, 0, 0, 0.7);
+    }
+
+    .cascade-phone-edge::after {
+      content: "";
+      position: absolute;
+      top: 108px;
+      left: 4px;
+      width: 6px;
+      height: 62px;
+      border-radius: 999px;
+      background: #141418;
+      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.25);
+    }
+
+    .cascade-island {
+      position: absolute;
+      top: 22px;
       left: 50%;
       transform: translateX(-50%);
-      width: 82px;
-      height: 22px;
+      width: 84px;
+      height: 23px;
       border-radius: 9999px;
       background: #000000;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      z-index: 5;
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      z-index: 12;
+      pointer-events: none;
+    }
+
+    /* Dobradiças 3D (sem overflow:hidden para preservar preserve-3d!) */
+    .ribbon-joint {
+      position: relative;
+      width: 274px;
+      transform-style: preserve-3d;
+      transform-origin: 50% 0%;
+    }
+
+    /* Cada face recorta sua fatia exata da página de 1220px de altura */
+    .ribbon-face {
+      position: relative;
+      width: 274px;
+      overflow: hidden;
+      background: #0B0A0C;
+      border-left: 1px solid rgba(255, 255, 255, 0.13);
+      border-right: 1px solid rgba(255, 255, 255, 0.13);
+      backface-visibility: hidden;
+    }
+
+    .ribbon-face-0 {
+      height: 411px;
+      border-radius: 34px 34px 0 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .ribbon-face-1 { height: 175px; }
+    .ribbon-face-2 { height: 175px; }
+    .ribbon-face-3 { height: 185px; }
+    .ribbon-face-4 {
+      height: 274px;
+      border-radius: 0 0 28px 28px;
+      border-bottom: 1.5px solid rgba(255, 61, 0, 0.45);
+      box-shadow: -28px 46px 68px rgba(0, 0, 0, 0.95);
+    }
+
+    .ribbon-scroll-inner {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 274px;
+      height: 1220px;
+      pointer-events: none;
+    }
+
+    /* Sombreamento volumétrico realista das ondas/dobras do pergaminho 3D */
+    .ribbon-shade {
+      position: absolute;
+      inset: 0;
+      z-index: 6;
+      pointer-events: none;
+    }
+
+    .shade-0 {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.06) 0%, transparent 25%, transparent 82%, rgba(0, 0, 0, 0.38) 100%);
+    }
+    .shade-1 {
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.56) 0%, rgba(0, 0, 0, 0.14) 48%, rgba(255, 255, 255, 0.08) 100%);
+    }
+    .shade-2 {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.14) 0%, rgba(0, 0, 0, 0.12) 45%, rgba(0, 0, 0, 0.64) 100%);
+    }
+    .shade-3 {
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.58) 0%, rgba(255, 255, 255, 0.10) 52%, rgba(0, 0, 0, 0.34) 100%);
+    }
+    .shade-4 {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.12) 0%, rgba(0, 0, 0, 0.04) 45%, rgba(0, 0, 0, 0.44) 100%);
+    }
+
+    /* Imagem opcional enviada pelo usuário mapeada continuamente pelas 5 dobras */
+    .tall-print-img {
+      position: absolute;
+      inset: 0;
+      width: 274px;
+      height: 1220px;
+      object-fit: cover;
+      object-position: top center;
+      display: none;
+      z-index: 4;
+    }
+
+    .cascade-stage.has-tall-image .tall-print-img {
+      display: block;
+    }
+
+    /* Dica discreta no hover p/ trocar o print longo */
+    .cascade-upload-badge {
+      position: absolute;
+      top: 16px;
+      left: -18px;
+      z-index: 20;
+      padding: 6px 13px;
+      border-radius: 9999px;
+      background: rgba(12, 12, 16, 0.90);
+      border: 1px solid rgba(255, 61, 0, 0.50);
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      color: #F5F5F7;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      pointer-events: none;
+    }
+
+    .cascade-stage:hover .cascade-upload-badge {
+      opacity: 1;
+    }
+
+    /* Caixa de seleção com cursores de texto "| ... |" (inspirada na referência Pinterest) */
+    .selection-quote-box {
+      position: relative;
+      display: inline-block;
+      background: rgba(255, 61, 0, 0.09);
+      border-top: 1px solid rgba(255, 61, 0, 0.20);
+      border-bottom: 1px solid rgba(255, 61, 0, 0.20);
+      padding: 16px 24px;
+    }
+
+    .selection-cursor-left,
+    .selection-cursor-right {
+      position: absolute;
+      width: 2px;
+      height: 46px;
+      background: #FF3D00;
+    }
+
+    .selection-cursor-left {
+      left: -1px;
+      top: -6px;
+    }
+
+    .selection-cursor-left::before {
+      content: "";
+      position: absolute;
+      top: -5px;
+      left: -3px;
+      width: 8px;
+      height: 8px;
+      border-radius: 9999px;
+      background: #FF3D00;
+    }
+
+    .selection-cursor-right {
+      right: -1px;
+      bottom: -6px;
+    }
+
+    .selection-cursor-right::after {
+      content: "";
+      position: absolute;
+      bottom: -5px;
+      left: -3px;
+      width: 8px;
+      height: 8px;
+      border-radius: 9999px;
+      background: #FF3D00;
+    }
+
+    /* Ícones flutuantes do Instagram ao lado das dobras do celular */
+    .ig-floating-icons {
+      position: absolute;
+      left: 598px;
+      top: 590px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      z-index: 6;
+      pointer-events: none;
+    }
+
+    .ig-icon-bubble {
+      position: relative;
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      background: rgba(18, 18, 22, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(12px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #F5F5F7;
+      box-shadow: 0 12px 26px -8px rgba(0, 0, 0, 0.85);
+    }
+
+    .ig-notif-dot {
+      position: absolute;
+      top: -6px;
+      right: -6px;
+      width: 22px;
+      height: 22px;
+      border-radius: 9999px;
+      background: #FF3D00;
+      color: #FFFFFF;
+      font-size: 11px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 14px rgba(255, 61, 0, 0.85);
+    }
+
+    /* Bloco de textura micro-tipográfica fantasma */
+    .ghost-micro-texture {
+      font-size: 10.5px;
+      line-height: 1.55;
+      color: rgba(245, 245, 247, 0.11);
+      letter-spacing: 0.01em;
+      user-select: none;
       pointer-events: none;
     }
 
@@ -1122,37 +1374,6 @@
         <span>CONVERSÃO →</span>
       </div>
 
-      <!-- 3) IPHONE 01 + IPHONE 02: o 1º celular começa 52px dentro do Slide 04 (x=4268) e entra no Slide 05! -->
-      <div class="phone-frame cross-interactive" style="position:absolute; left:4268px; top:458px; transform: rotate(-2.5deg);">
-        <div class="phone-inner">
-          <div class="phone-island"></div>
-          <div class="screenshot-slot pt-8" data-slot="slide5-mobile-1">
-            <img class="slot-preview" alt="Print mobile da galeria de lutas" />
-            <div class="slot-placeholder-ui px-5 flex flex-col items-center gap-3">
-              <span class="w-11 h-11 rounded-2xl border border-white/15 bg-white/[0.04] flex items-center justify-center text-[#FF3D00] font-mono text-sm">01</span>
-              <p class="font-mono text-[11px] uppercase tracking-[0.18em] text-[#FF3D00]">MOBILE PRINT 01</p>
-              <p class="text-base font-bold text-zinc-200 leading-snug">Galeria de Lutas &amp; Vídeos</p>
-              <p class="text-xs text-zinc-500">Clique p/ encaixar print</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="phone-frame cross-interactive" style="position:absolute; left:4578px; top:502px; transform: rotate(2deg);">
-        <div class="phone-inner">
-          <div class="phone-island"></div>
-          <div class="screenshot-slot pt-8" data-slot="slide5-mobile-2">
-            <img class="slot-preview" alt="Print mobile dos depoimentos" />
-            <div class="slot-placeholder-ui px-5 flex flex-col items-center gap-3">
-              <span class="w-11 h-11 rounded-2xl border border-white/15 bg-white/[0.04] flex items-center justify-center text-[#FF3D00] font-mono text-sm">02</span>
-              <p class="font-mono text-[11px] uppercase tracking-[0.18em] text-[#FF3D00]">MOBILE PRINT 02</p>
-              <p class="text-base font-bold text-zinc-200 leading-snug">Depoimentos de Alunos</p>
-              <p class="text-xs text-zinc-500">Clique p/ encaixar print</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
       <!-- Pílula conectora na costura 04 <-> 05 (x = 4320) -->
       <div class="seam-connector-pill" style="left: 4320px; top: 402px;">
         <span class="w-2 h-2 rounded-full bg-[#FF3D00]"></span>
@@ -1163,6 +1384,125 @@
       <div class="seam-connector-pill" style="left: 5400px; top: 704px;">
         <span class="w-2 h-2 rounded-full bg-[#FF3D00]"></span>
         <span>SEU PRÓXIMO SITE →</span>
+      </div>
+    </div>
+  </template>
+
+  <!-- CONTEÚDO LONG-SCROLL MOBILE (274px x 1220px) QUE ESCORRE PELAS 5 DOBRAS 3D DO IPHONE -->
+  <template id="miniScrollPageTemplate">
+    <div class="ribbon-scroll-inner">
+      <img class="tall-print-img" alt="Print completo mobile do site Ronny Lopes" />
+
+      <!-- Miniatura vetorial/editorial da Landing Page Ronny Lopes caso nenhum print longo seja enviado -->
+      <div class="w-[274px] h-[1220px] bg-[#070709] text-white flex flex-col justify-between select-none">
+        <!-- DOBRA 0 (0..411px): HERO MOBILE RONNY LOPES -->
+        <div class="h-[411px] px-4 pt-11 pb-4 flex flex-col justify-between relative overflow-hidden" style="background: radial-gradient(ellipse 90% 60% at 65% 28%, rgba(255,61,0,0.34) 0%, rgba(120,12,18,0.22) 45%, #070709 82%);">
+          <!-- Mini Navbar -->
+          <div class="px-3 py-1.5 rounded-full bg-white/[0.06] border border-white/10 flex items-center justify-between text-[9px]">
+            <span class="font-serif italic text-[12px] text-white flex items-center gap-1.5">
+              <i class="w-1.5 h-1.5 rounded-full bg-[#FF3D00] inline-block"></i>Ronny Lopes.
+            </span>
+            <span class="px-2 py-0.5 rounded-full bg-[#FF3D00]/25 border border-[#FF3D00]/50 text-[7.5px] font-bold uppercase">Menu</span>
+          </div>
+
+          <!-- Silhueta / Retrato editorial estilizado -->
+          <div class="my-auto pt-4">
+            <span class="inline-block px-2 py-0.5 rounded-full bg-white/[0.06] border border-white/10 font-mono text-[7.5px] uppercase tracking-widest text-[#FF7547] mb-2">
+              Campeão Mundial • Tailândia
+            </span>
+            <div class="leading-[0.92]">
+              <div style="font-family: var(--font-contrast-serif); font-style: italic;" class="text-[44px] text-white">Ronny</div>
+              <div class="text-[36px] font-extrabold tracking-tight text-white">LOPES<span class="text-[#FF3D00]">.</span></div>
+            </div>
+            <p class="text-[10px] text-zinc-300 leading-snug mt-2">
+              Personal Fight de Muay Thai, Boxe, Jiu-Jitsu e MMA em Brasília.
+            </p>
+            <div class="mt-3 inline-flex items-center gap-2 px-3.5 py-2 rounded-full bg-gradient-to-r from-[#FF3D00] to-[#FF6A33] text-[9px] font-bold uppercase tracking-wider text-white shadow-[0_8px_20px_rgba(255,61,0,0.55)]">
+              <span>Agendar Sessão</span>
+              <span>→</span>
+            </div>
+          </div>
+
+          <div class="pt-2 border-t border-white/10 flex items-center justify-between font-mono text-[7.5px] uppercase tracking-widest text-zinc-400">
+            <span>Muay Thai • Boxe</span>
+            <span class="text-[#FF3D00]">★ 5.0</span>
+            <span>BJJ • MMA</span>
+          </div>
+        </div>
+
+        <!-- DOBRA 1 (411..586px): GRID 2x2 MODALIDADES (igual às fotos 2x2 da referência!) -->
+        <div class="h-[175px] px-3.5 py-3 bg-[#0C0B0E] border-t border-white/10 grid grid-cols-2 gap-2">
+          <div class="rounded-xl p-2.5 flex flex-col justify-end relative overflow-hidden border border-white/10" style="background: linear-gradient(160deg, rgba(255,61,0,0.28), #121015);">
+            <span class="font-mono text-[7px] text-[#FF7547] uppercase">01 • Arte</span>
+            <span class="recoleta-title-card text-[13px] text-white leading-tight">Muay Thai</span>
+          </div>
+          <div class="rounded-xl p-2.5 flex flex-col justify-end relative overflow-hidden border border-white/10" style="background: linear-gradient(160deg, rgba(180,22,24,0.28), #121015);">
+            <span class="font-mono text-[7px] text-zinc-400 uppercase">02 • Nobre Arte</span>
+            <span class="recoleta-title-card text-[13px] text-white leading-tight">Boxe Técnico</span>
+          </div>
+          <div class="rounded-xl p-2.5 flex flex-col justify-end relative overflow-hidden border border-white/10" style="background: linear-gradient(160deg, rgba(255,255,255,0.08), #101014);">
+            <span class="font-mono text-[7px] text-zinc-400 uppercase">03 • Faixa-Preta</span>
+            <span class="recoleta-title-card text-[13px] text-white leading-tight">Jiu-Jitsu</span>
+          </div>
+          <div class="rounded-xl p-2.5 flex flex-col justify-end relative overflow-hidden border border-[#FF3D00]/35" style="background: linear-gradient(160deg, rgba(255,61,0,0.22), #101014);">
+            <span class="font-mono text-[7px] text-[#FF3D00] uppercase">04 • Octógono</span>
+            <span class="recoleta-title-card text-[13px] text-white leading-tight">MMA Pro</span>
+          </div>
+        </div>
+
+        <!-- DOBRA 2 (586..761px): GALERIA DE LUTAS & FORMATOS -->
+        <div class="h-[175px] px-3.5 py-3 bg-[#09080B] border-t border-white/10 grid grid-cols-2 gap-2.5">
+          <div class="rounded-xl p-3 border border-white/10 flex flex-col justify-between" style="background: radial-gradient(circle at 70% 25%, rgba(255,61,0,0.26), #121116);">
+            <span class="px-2 py-0.5 rounded-full bg-black/50 border border-white/10 font-mono text-[6.5px] uppercase text-zinc-300 w-max">Bangkok • TH</span>
+            <div>
+              <div style="font-family: var(--font-contrast-serif); font-style: italic;" class="text-[18px] text-[#FF7547] leading-none">Campeão</div>
+              <div class="text-[10px] font-bold text-white mt-0.5">Mundial WMA</div>
+            </div>
+          </div>
+          <div class="rounded-xl p-3 border border-white/10 flex flex-col justify-between" style="background: radial-gradient(circle at 30% 25%, rgba(190,20,24,0.26), #121116);">
+            <span class="px-2 py-0.5 rounded-full bg-black/50 border border-white/10 font-mono text-[6.5px] uppercase text-zinc-300 w-max">1-on-1 • Dupla</span>
+            <div>
+              <div style="font-family: var(--font-contrast-serif); font-style: italic;" class="text-[18px] text-white leading-none">Personal</div>
+              <div class="text-[10px] font-bold text-[#FF3D00] mt-0.5"> Sob Medida</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- DOBRA 3 (761..946px): SEÇÃO ESCURA DE CONVERSÃO (igual "LANDING PAGE / ORÇAMENTO" da referência!) -->
+        <div class="h-[185px] px-5 py-4 border-t border-white/10 flex flex-col items-center justify-center text-center" style="background: linear-gradient(180deg, #170C0A 0%, #0D090A 100%);">
+          <span class="font-mono text-[7px] uppercase tracking-[0.22em] text-[#FF3D00]">Formatos de Aula</span>
+          <div style="font-family: var(--font-contrast-serif); font-style: italic;" class="text-[26px] text-white leading-tight mt-0.5">
+            Sessão Particular
+          </div>
+          <p class="text-[9px] text-zinc-300 leading-relaxed mt-1 max-w-[210px]">
+            Do absoluto zero ao avançado com segurança, técnica e equipamentos inclusos.
+          </p>
+          <div class="mt-3 px-5 py-1.5 rounded-full bg-[#F5F5F7] text-[#0A0A0A] text-[8.5px] font-extrabold uppercase tracking-widest">
+            Escolher Formato
+          </div>
+        </div>
+
+        <!-- DOBRA 4 (946..1220px): CAUDA ISOMÉTRICA NO CHÃO + FOOTER BAR -->
+        <div class="h-[274px] flex flex-col justify-between border-t border-white/10" style="background: linear-gradient(180deg, #121115 0%, #0A0A0D 80%);">
+          <div class="px-5 pt-5 text-center flex-1 flex flex-col items-center justify-center">
+            <div class="text-[#FF3D00] text-[10px] tracking-widest mb-1">★★★★★</div>
+            <div class="recoleta-title-card text-[17px] text-white leading-snug">
+              Pronto pra evoluir de verdade no <span style="font-family: var(--font-contrast-serif); font-style: italic;" class="text-[#FF3D00] text-[21px]">tatame?</span>
+            </div>
+            <p class="text-[8.5px] text-zinc-400 mt-1.5 max-w-[205px]">
+              Agende direto no WhatsApp e alinhe local e horário em Brasília.
+            </p>
+            <div class="mt-3 px-5 py-2 rounded-full bg-[#FF3D00] text-white text-[8.5px] font-bold uppercase tracking-wider shadow-[0_6px_18px_rgba(255,61,0,0.6)]">
+              Chamar no WhatsApp →
+            </div>
+          </div>
+
+          <div class="px-4 py-3 bg-[#FF3D00]/20 border-t border-[#FF3D00]/40 flex items-center justify-between text-[7.5px] font-mono uppercase tracking-wider text-zinc-200">
+            <span>@ronnylopesthai</span>
+            <span>•</span>
+            <span>Brasília, DF</span>
+          </div>
+        </div>
       </div>
     </div>
   </template>
@@ -1591,8 +1931,75 @@
 
         <div class="slide-viewport">
           <article class="ig-slide" data-slide-idx="4" id="slide-05">
-            <!-- TOPO -->
-            <div class="slide-layer flex items-center justify-between">
+            <!-- ÍCONES FLUTUANTES DO INSTAGRAM AO LADO DAS DOBRAS DO CELULAR -->
+            <div class="ig-floating-icons" aria-hidden="true">
+              <!-- Home -->
+              <div class="ig-icon-bubble">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1V9.5z"/></svg>
+              </div>
+              <!-- Reels -->
+              <div class="ig-icon-bubble">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="4"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="3" x2="12" y2="9"/><line x1="15" y1="3" x2="18" y2="9"/><polygon points="10 12.5 15.5 15.5 10 18.5 10 12.5" fill="currentColor"/></svg>
+              </div>
+              <!-- Direct com badge 1 em laranja vibrante -->
+              <div class="ig-icon-bubble !border-[#FF3D00]/45">
+                <span class="ig-notif-dot">1</span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+              </div>
+              <!-- Perfil -->
+              <div class="ig-icon-bubble">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="10" r="3"/><path d="M6.8 18.2c1.3-2 3.1-3 5.2-3s3.9 1 5.2 3"/></svg>
+              </div>
+            </div>
+
+            <!-- PALCO 3D: IPHONE EM PERSPECTIVA + LANDING PAGE ESCORRENDO EM ONDAS -->
+            <div class="cascade-stage" id="cascadeStage" title="Clique ou arraste um print vertical longo da versão mobile para preencher todas as dobras 3D">
+              <div class="cascade-upload-badge">+ Clique p/ usar seu print mobile longo</div>
+
+              <div class="cascade-rig">
+                <!-- Chassi superior do iPhone 3D -->
+                <div class="cascade-phone-shell">
+                  <div class="cascade-phone-edge"></div>
+                  <div class="cascade-island"></div>
+
+                  <!-- DOBRA 0 (dentro da tela do iPhone: 0..411px) -->
+                  <div class="ribbon-face ribbon-face-0" data-ribbon-offset="0">
+                    <div class="ribbon-shade shade-0"></div>
+                  </div>
+
+                  <!-- DOBRA 1 (sai da base do celular curvando p/ trás: 411..586px) -->
+                  <div class="ribbon-joint" style="transform: rotateX(-30deg);">
+                    <div class="ribbon-face ribbon-face-1" data-ribbon-offset="-411">
+                      <div class="ribbon-shade shade-1"></div>
+                    </div>
+
+                    <!-- DOBRA 2 (curva p/ frente: 586..761px) -->
+                    <div class="ribbon-joint" style="transform: rotateX(56deg);">
+                      <div class="ribbon-face ribbon-face-2" data-ribbon-offset="-586">
+                        <div class="ribbon-shade shade-2"></div>
+                      </div>
+
+                      <!-- DOBRA 3 (vale intermediário: 761..946px) -->
+                      <div class="ribbon-joint" style="transform: rotateX(-44deg);">
+                        <div class="ribbon-face ribbon-face-3" data-ribbon-offset="-761">
+                          <div class="ribbon-shade shade-3"></div>
+                        </div>
+
+                        <!-- DOBRA 4 (cauda isométrica escorrendo p/ frente no chão: 946..1220px) -->
+                        <div class="ribbon-joint" style="transform: rotateX(68deg) rotateZ(-4deg);">
+                          <div class="ribbon-face ribbon-face-4" data-ribbon-offset="-946">
+                            <div class="ribbon-shade shade-4"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- COLUNA ESQUERDA EDITORIAL (INSPIRADA NA REFERÊNCIA PINTEREST) -->
+            <div class="slide-layer flex items-center gap-4">
               <div class="pill-badge">
                 <span class="pill-dot"></span>
                 <span>MOBILE-FIRST &amp; PROVA REAL</span>
@@ -1600,35 +2007,67 @@
               <div class="page-counter"><strong>05</strong>/06</div>
             </div>
 
-            <!-- TÍTULO COM TARJA LARANJA INCLINADA -->
-            <div class="slide-layer mt-6">
-              <h2 class="slide-h2" style="font-size: 61px; max-width: 900px;">
-                Feito pra quem chega <span class="tape-ember"><span class="serif-accent">direto do Instagram.</span></span>
-              </h2>
-            </div>
+            <div class="slide-layer mt-8 mb-auto max-w-[540px]">
+              <span class="font-mono text-xs tracking-[0.22em] uppercase text-zinc-400 block mb-5">
+                BY MS WEB DESIGNER
+              </span>
 
-            <!-- CONTEÚDO: espaço esquerdo p/ os 2 celulares panorâmicos + legenda lateral à direita -->
-            <div class="slide-layer my-6 flex-1 flex items-center justify-end min-h-0">
-              <div class="w-[410px] flex flex-col gap-5 mr-4">
-                <div class="glass-card p-8">
-                  <span class="text-xs font-bold uppercase tracking-[0.18em] text-[#FF3D00] block mb-4">NAVEGAÇÃO NO POLEGAR</span>
-                  <p class="recoleta-title-card text-[26px] leading-[1.32] text-white">
-                    Carregamento rápido, galeria interativa e botão de agendamento sempre acessível.
-                  </p>
+              <!-- Bloco tipográfico com linha arquitetônica em "L" + seta -->
+              <div class="relative pl-7">
+                <!-- Linha vertical + curva em L apontando p/ DO INSTAGRAM -->
+                <div style="position:absolute; left:2px; top:12px; width:155px; height:272px; border-left:1.5px solid rgba(245,245,247,0.42); border-bottom:1.5px solid rgba(245,245,247,0.42); pointer-events:none;">
+                  <span style="position:absolute; right:-7px; bottom:-10px; color:#FF3D00; font-size:18px; font-weight:700;">›</span>
                 </div>
 
-                <div class="glass-card px-7 py-6 space-y-3.5">
-                  <div class="flex items-center gap-3 text-[15.5px] text-zinc-200">
-                    <span class="w-2 h-2 rounded-full bg-[#FF3D00]"></span>
-                    <span>Pensado para quem clica direto da bio</span>
+                <div class="text-[31px] font-light tracking-[0.06em] uppercase text-zinc-200 leading-[1.12]">
+                  FEITO PRA<br />QUEM
+                </div>
+
+                <div class="-mt-3 leading-[0.88]">
+                  <span class="serif-accent" style="font-size: 122px;">Chega</span>
+                  <span class="recoleta-title-card block text-[76px] text-white tracking-[-0.03em] -mt-2">
+                    direto
+                  </span>
+                </div>
+
+                <div class="mt-5 pl-[144px] text-[28px] tracking-[0.05em] uppercase text-zinc-200">
+                  DO <strong class="font-extrabold text-white">INSTAGRAM</strong>
+                </div>
+              </div>
+
+              <!-- Frase destacada com cursores de seleção de texto "| ... |" -->
+              <div class="mt-12">
+                <div class="selection-quote-box">
+                  <span class="selection-cursor-left" aria-hidden="true"></span>
+                  <p class="text-[24px] leading-[1.35] text-zinc-100 font-normal">
+                    Carregamento rápido, <strong class="font-bold text-white">galeria interativa</strong> e botão de agendamento sempre acessível.
+                  </p>
+                  <span class="selection-cursor-right" aria-hidden="true"></span>
+                </div>
+              </div>
+
+              <!-- Sub-label + Textura micro-tipográfica + Índice editorial com traços -->
+              <div class="mt-9">
+                <div class="text-xs font-bold uppercase tracking-[0.18em] text-[#FF3D00] mb-4">
+                  DESIGN E WEB DE ALTA PERFORMANCE
+                </div>
+
+                <p class="ghost-micro-texture max-w-[490px] mb-5">
+                  Feito pra quem chega direto do Instagram • Carregamento rápido, galeria interativa e agendamento acessível • Presença premium que transforma visitantes do perfil em alunos reais no WhatsApp • Design sob medida MS Web Designer • Feito pra quem chega direto do Instagram • Experiência mobile impecável do primeiro toque ao agendamento.
+                </p>
+
+                <div class="space-y-2 font-mono text-[11px] uppercase tracking-[0.12em] text-zinc-400">
+                  <div class="flex items-center gap-3">
+                    <span class="text-zinc-200">MOBILE FIRST</span>
+                    <span class="flex-1 h-px bg-white/15"></span>
+                    <span>GALERIA 3D</span>
+                    <span class="w-8 h-px bg-[#FF3D00]/60"></span>
                   </div>
-                  <div class="flex items-center gap-3 text-[15.5px] text-zinc-200">
-                    <span class="w-2 h-2 rounded-full bg-[#FF3D00]"></span>
-                    <span>Galeria 3D + vídeos reais sem travar</span>
-                  </div>
-                  <div class="flex items-center gap-3 text-[15.5px] text-zinc-200">
-                    <span class="w-2 h-2 rounded-full bg-[#FF3D00]"></span>
-                    <span>CTA pro WhatsApp sempre ao alcance</span>
+                  <div class="flex items-center gap-3">
+                    <span class="w-10 h-px bg-white/15"></span>
+                    <span>PERFORMANCE</span>
+                    <span class="flex-1 h-px bg-white/15"></span>
+                    <span class="text-zinc-200">WHATSAPP DIRETO</span>
                   </div>
                 </div>
               </div>
@@ -1751,6 +2190,17 @@
         const fgClone = fgTpl.content.firstElementChild.cloneNode(true);
         fgClone.style.transform = `translate3d(${offsetPx}px, 0, 0)`;
         slide.appendChild(fgClone);
+      });
+
+      // 1b. Injeta a página mobile long-scroll contínua nas 5 dobras 3D do iPhone (Slide 05)
+      const miniScrollTpl = document.getElementById('miniScrollPageTemplate');
+      const cascadeStage = document.getElementById('cascadeStage');
+      const ribbonFaces = Array.from(document.querySelectorAll('.ribbon-face[data-ribbon-offset]'));
+      ribbonFaces.forEach((face) => {
+        const yOff = Number(face.dataset.ribbonOffset || 0);
+        const pageClone = miniScrollTpl.content.firstElementChild.cloneNode(true);
+        pageClone.style.transform = `translate3d(0, ${yOff}px, 0)`;
+        face.insertBefore(pageClone, face.firstChild);
       });
 
       const carouselOuter = document.getElementById('carouselOuter');
@@ -1906,8 +2356,26 @@
         }
       });
 
+      // Sincroniza print longo nas 5 dobras 3D do iPhone (Slide 05)
+      function syncCascadeTallPrint(dataUrl) {
+        if (!cascadeStage) return;
+        const imgs = Array.from(cascadeStage.querySelectorAll('img.tall-print-img'));
+        imgs.forEach((img) => {
+          if (dataUrl) {
+            img.src = dataUrl;
+          } else {
+            img.removeAttribute('src');
+          }
+        });
+        cascadeStage.classList.toggle('has-tall-image', Boolean(dataUrl));
+      }
+
       // Sincroniza imagens enviadas em TODAS as fatias do panorama (para cruzar o corte perfeitamente!)
       function syncSlotDataUrl(slotKey, dataUrl) {
+        if (slotKey === 'cascade-tall') {
+          syncCascadeTallPrint(dataUrl);
+          return;
+        }
         allSlots
           .filter((el) => el.dataset.slot === slotKey)
           .forEach((el) => {
@@ -1929,6 +2397,28 @@
         const reader = new FileReader();
         reader.onload = (ev) => syncSlotDataUrl(slotKey, ev.target.result);
         reader.readAsDataURL(file);
+      }
+
+      if (cascadeStage) {
+        cascadeStage.addEventListener('click', (e) => {
+          if (dragMoved) {
+            e.preventDefault();
+            return;
+          }
+          activeSlotKey = 'cascade-tall';
+          fileInput.value = '';
+          fileInput.click();
+        });
+
+        cascadeStage.addEventListener('dragover', (e) => {
+          e.preventDefault();
+        });
+
+        cascadeStage.addEventListener('drop', (e) => {
+          e.preventDefault();
+          const file = e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0];
+          applyFileToSlotKey('cascade-tall', file);
+        });
       }
 
       allSlots.forEach((slot) => {
@@ -1965,7 +2455,7 @@
       });
 
       btnResetSlots.addEventListener('click', () => {
-        ['slide1-hero', 'slide3-ui', 'slide5-mobile-1', 'slide5-mobile-2'].forEach((k) => syncSlotDataUrl(k, null));
+        ['slide1-hero', 'slide3-ui', 'cascade-tall'].forEach((k) => syncSlotDataUrl(k, null));
       });
 
       btnLoadRecoleta.addEventListener('click', () => {
