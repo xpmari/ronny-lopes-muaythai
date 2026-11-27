@@ -3474,72 +3474,482 @@
       }
     }
 
-    /* ================= FOOTER ================= */
-    footer {
-      position: relative;
-      border-top: none;
-      padding: 56px 0 max(56px, env(safe-area-inset-bottom));
-      background-color: var(--bg-void);
+    /* ================= 21ST.DEV: SCROLL PROGRESS BAR (@bundui / @designali-in) ================= */
+    .scroll-progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      z-index: 140;
+      pointer-events: none;
+      background: linear-gradient(90deg, var(--accent-crimson) 0%, var(--accent-ember) 60%, #ffb38a 100%);
+      box-shadow: 0 0 14px rgba(255, 61, 0, 0.72);
+      transform-origin: 0% 50%;
+      transform: scaleX(var(--scroll-progress, 0));
     }
 
-    footer::before {
+    /* ================= 21ST.DEV: TEXT SHIMMER WAVE (@ibelick) ================= */
+    @keyframes textShimmerSweep {
+      0% { background-position: 130% 50%; }
+      100% { background-position: -30% 50%; }
+    }
+
+    .shimmer-text {
+      background-image: linear-gradient(
+        105deg,
+        rgba(245, 245, 247, 0.86) 0%,
+        rgba(245, 245, 247, 0.86) 38%,
+        #ffffff 47%,
+        #ffb38a 51%,
+        rgba(245, 245, 247, 0.86) 62%,
+        rgba(245, 245, 247, 0.86) 100%
+      );
+      background-size: 240% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: textShimmerSweep 5.2s ease-in-out infinite;
+    }
+
+    /* ================= 21ST.DEV: MAGNETIC + HOVER GLOW BUTTON (@ham7a311 / @jahed) ================= */
+    [data-magnetic] {
+      --mag-tx: 0px;
+      --mag-ty: 0px;
+      --mag-mx: 50%;
+      --mag-my: 50%;
+      translate: var(--mag-tx) var(--mag-ty);
+      transition:
+        translate 0.36s cubic-bezier(0.22, 1.35, 0.36, 1),
+        border-color 0.28s var(--ease-out),
+        background-color 0.28s var(--ease-out),
+        box-shadow 0.32s var(--ease-out),
+        transform 0.24s var(--ease-spring);
+    }
+
+    /* ================= 21ST.DEV: SPOTLIGHT COMPARISON MATRIX (@dhxwhy / @mohammadshehadeh / @kevingirelli) ================= */
+    .compare-section {
+      position: relative;
+      padding: clamp(68px, 8.5vw, 114px) 0;
+      background:
+        radial-gradient(ellipse 60% 42% at 76% 24%, rgba(255, 61, 0, 0.08) 0%, transparent 70%),
+        var(--bg-void);
+      border-bottom: 1px solid var(--border-hairline);
+    }
+
+    .compare-toolbar {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px;
+      border-radius: 9999px;
+      background: rgba(14, 14, 18, 0.92);
+      border: 1px solid rgba(255, 255, 255, 0.11);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    }
+
+    .compare-filter-btn {
+      padding: 8px 15px;
+      border-radius: 9999px;
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      background: transparent;
+      border: 1px solid transparent;
+      transition: color 0.24s ease, background-color 0.26s var(--ease-out), border-color 0.26s ease, box-shadow 0.26s ease;
+    }
+
+    .compare-filter-btn:hover {
+      color: #ffffff;
+    }
+
+    .compare-filter-btn.is-active {
+      color: #ffffff;
+      background: linear-gradient(180deg, rgba(255, 61, 0, 0.22) 0%, rgba(184, 15, 15, 0.14) 100%);
+      border-color: rgba(255, 61, 0, 0.48);
+      box-shadow: 0 0 18px -6px rgba(255, 61, 0, 0.55);
+    }
+
+    .compare-matrix {
+      position: relative;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      background: linear-gradient(180deg, #0E0E13 0%, #08080B 100%);
+      overflow: hidden;
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.07),
+        0 28px 64px -32px rgba(0, 0, 0, 0.96);
+      --cmp-mx: -500px;
+      --cmp-my: -500px;
+      --cmp-spot: 0;
+    }
+
+    .compare-matrix::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      opacity: var(--cmp-spot, 0);
+      transition: opacity 0.35s ease;
+      background: radial-gradient(
+        480px circle at var(--cmp-mx) var(--cmp-my),
+        rgba(255, 61, 0, 0.11) 0%,
+        rgba(184, 15, 15, 0.04) 38%,
+        transparent 70%
+      );
+    }
+
+    .compare-head,
+    .compare-row {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 0.95fr 1.02fr 1.18fr;
+      align-items: stretch;
+    }
+
+    .compare-head {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+      background: rgba(255, 255, 255, 0.018);
+    }
+
+    .compare-col-title {
+      padding: 20px 24px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .compare-col-title.is-ronny {
+      color: #ffffff;
+      background: linear-gradient(180deg, rgba(255, 61, 0, 0.15) 0%, rgba(255, 61, 0, 0.05) 100%);
+      border-left: 1px solid rgba(255, 61, 0, 0.30);
+    }
+
+    .compare-ronny-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 3px 9px;
+      border-radius: 999px;
+      font-size: 9.5px;
+      background: rgba(255, 61, 0, 0.18);
+      border: 1px solid rgba(255, 61, 0, 0.45);
+      color: #ffd7c4;
+    }
+
+    .compare-row {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+      transition: background-color 0.24s ease, opacity 0.28s ease;
+    }
+
+    .compare-row:last-child {
+      border-bottom: none;
+    }
+
+    .compare-row:hover {
+      background-color: rgba(255, 255, 255, 0.022);
+    }
+
+    .compare-row.is-hidden-row {
+      display: none;
+    }
+
+    .compare-cell {
+      padding: 20px 24px;
+      display: flex;
+      align-items: flex-start;
+      gap: 11px;
+      font-size: 13.8px;
+      line-height: 1.54;
+    }
+
+    .compare-cell-label {
+      font-family: var(--font-sans);
+      font-weight: 600;
+      color: var(--text-primary);
+      align-items: center;
+    }
+
+    .compare-cell-common {
+      color: rgba(180, 180, 190, 0.76);
+      border-left: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .compare-cell-ronny {
+      color: rgba(248, 248, 250, 0.95);
+      font-weight: 500;
+      background: linear-gradient(90deg, rgba(255, 61, 0, 0.08) 0%, rgba(255, 61, 0, 0.03) 100%);
+      border-left: 1px solid rgba(255, 61, 0, 0.28);
+    }
+
+    .cmp-mark {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      margin-top: 1px;
+    }
+
+    .cmp-mark.is-no {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.11);
+      color: rgba(180, 180, 190, 0.65);
+    }
+
+    .cmp-mark.is-yes {
+      background: rgba(255, 61, 0, 0.18);
+      border: 1px solid rgba(255, 61, 0, 0.52);
+      color: #ff7a47;
+      box-shadow: 0 0 12px rgba(255, 61, 0, 0.35);
+    }
+
+    .compare-mobile-tag {
+      display: none;
+      font-family: var(--font-mono);
+      font-size: 9.5px;
+      font-weight: 600;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    @media (max-width: 860px) {
+      .compare-head {
+        display: none;
+      }
+
+      .compare-row {
+        grid-template-columns: 1fr;
+        padding: 18px 18px 20px;
+        gap: 10px;
+      }
+
+      .compare-cell {
+        padding: 0;
+      }
+
+      .compare-cell-label {
+        font-size: 15px;
+        margin-bottom: 2px;
+      }
+
+      .compare-cell-common,
+      .compare-cell-ronny {
+        padding: 12px 14px;
+        border-radius: 12px;
+      }
+
+      .compare-cell-common {
+        background: rgba(255, 255, 255, 0.025);
+        border: 1px solid rgba(255, 255, 255, 0.07);
+      }
+
+      .compare-cell-ronny {
+        background: linear-gradient(180deg, rgba(255, 61, 0, 0.11) 0%, rgba(255, 61, 0, 0.04) 100%);
+        border: 1px solid rgba(255, 61, 0, 0.32);
+      }
+
+      .compare-mobile-tag {
+        display: block;
+        color: var(--text-muted);
+      }
+
+      .compare-cell-ronny .compare-mobile-tag {
+        color: #ff8a5b;
+      }
+    }
+
+    /* ================= 21ST.DEV: CINEMATIC MOTION WORDMARK FOOTER (@jahed) ================= */
+    footer.motion-footer {
+      position: relative;
+      overflow: hidden;
+      padding: clamp(64px, 8vw, 96px) 0 max(36px, env(safe-area-inset-bottom));
+      background:
+        radial-gradient(ellipse 70% 55% at 50% 105%, rgba(255, 61, 0, 0.14) 0%, rgba(184, 15, 15, 0.06) 42%, transparent 72%),
+        var(--bg-void);
+    }
+
+    footer.motion-footer::before {
       content: "";
       position: absolute;
       top: 0;
       left: 0;
       right: 0;
       height: 1px;
-      background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.15) 50%, transparent 100%);
+      background: linear-gradient(90deg, transparent 0%, rgba(255, 61, 0, 0.42) 50%, transparent 100%);
       pointer-events: none;
     }
 
-    .footer-inner {
+    .footer-grid-pattern {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+      background-size: 22px 22px;
+      mask-image: radial-gradient(ellipse 80% 70% at 50% 85%, #000 0%, transparent 78%);
+      -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 85%, #000 0%, transparent 78%);
+      opacity: 0.45;
+    }
+
+    .footer-top-grid {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1.35fr 0.85fr 0.85fr;
+      gap: 40px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .footer-brand-tagline {
+      margin-top: 14px;
+      max-width: 380px;
+      font-size: 14px;
+      line-height: 1.65;
+      color: var(--text-secondary);
+      text-wrap: pretty;
+    }
+
+    .footer-pill-row {
+      margin-top: 22px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .footer-glass-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      border-radius: 9999px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(245, 245, 247, 0.92);
+      background: rgba(255, 255, 255, 0.035);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.13);
+    }
+
+    .footer-glass-pill:hover,
+    .footer-glass-pill:focus-visible {
+      border-color: rgba(255, 61, 0, 0.62);
+      background: rgba(255, 61, 0, 0.12);
+      color: #ffffff;
+      box-shadow: 0 10px 26px -10px rgba(255, 61, 0, 0.5);
+    }
+
+    .footer-col-heading {
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent-ember-bright);
+      margin-bottom: 16px;
+    }
+
+    .footer-nav-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer-nav-list a,
+    .footer-nav-list span {
+      font-size: 13.5px;
+      color: var(--text-secondary);
+      transition: color 0.22s ease, transform 0.22s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .footer-nav-list a:hover,
+    .footer-nav-list a:focus-visible {
+      color: #ffffff;
+      transform: translateX(3px);
+    }
+
+    .footer-wordmark-wrap {
+      position: relative;
+      z-index: 2;
+      overflow: hidden;
+      padding: clamp(22px, 3.5vw, 38px) 0 14px;
+      text-align: center;
+      user-select: none;
+    }
+
+    .footer-wordmark {
+      font-family: var(--font-sans);
+      font-weight: 800;
+      font-size: clamp(44px, 11.4vw, 154px);
+      line-height: 0.88;
+      letter-spacing: -0.055em;
+      text-transform: uppercase;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.20) 0%, rgba(255, 255, 255, 0.04) 76%, rgba(255, 61, 0, 0.10) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      transform: translateY(var(--footer-wm-y, 18px));
+      transition: transform 0.5s var(--ease-out);
+    }
+
+    .footer-wordmark .wm-serif {
+      font-family: var(--font-serif);
+      font-weight: 400;
+      font-style: italic;
+      letter-spacing: -0.02em;
+      margin-right: 0.08em;
+    }
+
+    .footer-wordmark .wm-dot {
+      color: var(--accent-ember);
+      -webkit-text-fill-color: var(--accent-ember);
+    }
+
+    .footer-bottom-bar {
+      position: relative;
+      z-index: 2;
+      padding-top: 18px;
+      border-top: 1px solid rgba(255, 255, 255, 0.07);
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
-      gap: 20px 28px;
-      font-size: 12.5px;
+      gap: 12px 24px;
+      font-size: 12px;
       color: var(--text-muted);
     }
 
-    .footer-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px 30px;
-    }
-
-    .footer-links a {
-      position: relative;
-      display: inline-flex;
-      align-items: center;
-      min-height: 36px;
-      padding: 4px 0;
-      color: var(--text-secondary);
-      transition: color 0.25s ease;
-    }
-
-    .footer-links a::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 4px;
-      height: 1px;
-      background: linear-gradient(90deg, var(--accent-ember) 0%, rgba(255, 255, 255, 0.65) 100%);
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.32s var(--ease-out);
-    }
-
-    .footer-links a:hover,
-    .footer-links a:focus-visible {
-      color: var(--text-primary);
-    }
-
-    .footer-links a:hover::after,
-    .footer-links a:focus-visible::after {
-      transform: scaleX(1);
+    @media (max-width: 860px) {
+      .footer-top-grid {
+        grid-template-columns: 1fr;
+        gap: 28px;
+        padding-bottom: 34px;
+      }
     }
 
     .reveal {
@@ -4078,6 +4488,7 @@
       .orbit-tracer,
       .orbit-tracer::before,
       .orbit-motion-trail,
+      .shimmer-text,
       .booking-card::before,
       .spotlight-card.is-featured::after,
       .glow-btn::before,
@@ -4085,6 +4496,21 @@
       .ticker-track,
       .marquee-row {
         animation: none !important;
+        transition: none !important;
+      }
+
+      .shimmer-text {
+        background-image: none !important;
+        color: rgba(245, 245, 247, 0.92) !important;
+      }
+
+      [data-magnetic] {
+        translate: none !important;
+        transition: none !important;
+      }
+
+      .footer-wordmark {
+        transform: none !important;
         transition: none !important;
       }
 
@@ -4117,6 +4543,7 @@
   </style>
 </head>
 <body>
+  <div class="scroll-progress-bar" id="scrollProgressBar" aria-hidden="true"></div>
   <a href="#conteudo-principal" class="skip-link">Pular para o conteúdo</a>
   <div class="film-grain" aria-hidden="true"></div>
 
@@ -4131,6 +4558,7 @@
       <div class="nav-tubelight" id="navTubelight" aria-hidden="true"></div>
       <a href="#filosofia">Filosofia</a>
       <a href="#metodo">Método</a>
+      <a href="#diferenciais">Diferenciais</a>
       <a href="#formatos">Sessões</a>
       <a href="#galeria">Na Prática</a>
       <a href="#trajetoria">Trajetória</a>
@@ -4138,7 +4566,7 @@
     </nav>
 
     <div class="nav-cta-wrap">
-      <a href="#agendar" class="glow-btn glow-btn-sm">
+      <a href="#agendar" class="glow-btn glow-btn-sm" data-magnetic>
         <span>Agendar Sessão</span>
         <span class="glow-btn-arrow" aria-hidden="true">→</span>
       </a>
@@ -4171,7 +4599,7 @@
       <div class="hero-copy">
         <div class="hero-status-pill blur-fade blur-delay-1">
           <span class="status-live-dot" aria-hidden="true"></span>
-          <span>Campeão Mundial W.M.A (Tailândia) • Faixa-Preta BJJ</span>
+          <span class="shimmer-text">Campeão Mundial W.M.A (Tailândia) • Faixa-Preta BJJ</span>
         </div>
 
         <div class="hero-title" aria-label="Ronny Lopes">
@@ -4189,11 +4617,11 @@
         </p>
 
         <div class="hero-actions blur-fade blur-delay-4">
-          <a href="#agendar" class="glow-btn glow-btn-hero">
+          <a href="#agendar" class="glow-btn glow-btn-hero" data-magnetic>
             <span>Agendar Avaliação</span>
             <span class="glow-btn-arrow" aria-hidden="true">→</span>
           </a>
-          <a href="#modalidades" class="btn-hero-ghost">
+          <a href="#modalidades" class="btn-hero-ghost" data-magnetic>
             <span>Ver Modalidades</span>
           </a>
         </div>
@@ -4317,6 +4745,144 @@
         <button type="button" class="orbit-node node-top-right" data-pillar="boxe" aria-pressed="false">Boxe</button>
         <button type="button" class="orbit-node node-bottom-left" data-pillar="jiujitsu" aria-pressed="false">Jiu-Jitsu</button>
         <button type="button" class="orbit-node node-bottom-right" data-pillar="mma" aria-pressed="false">MMA</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 21ST.DEV: SPOTLIGHT COMPARISON MATRIX (@dhxwhy / @mohammadshehadeh / @kevingirelli) -->
+  <section class="compare-section" id="diferenciais" aria-labelledby="diferenciaisHeading">
+    <div class="container">
+      <div class="section-header reveal">
+        <div>
+          <p class="eyebrow" style="margin-bottom: 14px;">COMPARATIVO DIRETO</p>
+          <h2 id="diferenciaisHeading" class="programs-heading" data-split-reveal>
+            POR QUE TREINAR NO <span class="accent-ember">PERSONAL FIGHT</span>?
+          </h2>
+        </div>
+        <div class="compare-toolbar" role="group" aria-label="Filtrar critérios do comparativo">
+          <button type="button" class="compare-filter-btn is-active" data-cmp-filter="all" aria-pressed="true">Todos (6)</button>
+          <button type="button" class="compare-filter-btn" data-cmp-filter="iniciante" aria-pressed="false">Foco Iniciantes</button>
+          <button type="button" class="compare-filter-btn" data-cmp-filter="rotina" aria-pressed="false">Rotina &amp; Local</button>
+        </div>
+      </div>
+
+      <div class="compare-matrix" id="compareMatrix" data-zoom-in>
+        <div class="compare-head" aria-hidden="true">
+          <div class="compare-col-title">Critério</div>
+          <div class="compare-col-title">Academia / Turma Comum</div>
+          <div class="compare-col-title is-ronny">
+            <span>Personal Ronny Lopes</span>
+            <span class="compare-ronny-pill">1-ON-1 &amp; DUPLA</span>
+          </div>
+        </div>
+
+        <div class="compare-row" data-cmp-tags="iniciante rotina">
+          <div class="compare-cell compare-cell-label">Atenção técnica por aula</div>
+          <div class="compare-cell compare-cell-common">
+            <span class="cmp-mark is-no" aria-hidden="true">×</span>
+            <div>
+              <span class="compare-mobile-tag">Turma Comum</span>
+              <span>1 professor dividindo atenção com 20 a 35 alunos ao mesmo tempo.</span>
+            </div>
+          </div>
+          <div class="compare-cell compare-cell-ronny">
+            <span class="cmp-mark is-yes" aria-hidden="true">✓</span>
+            <div>
+              <span class="compare-mobile-tag">Personal Ronny Lopes</span>
+              <span>Olhar 100% em você a cada golpe, postura e transição de solo.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="compare-row" data-cmp-tags="rotina">
+          <div class="compare-cell compare-cell-label">Local e deslocamento</div>
+          <div class="compare-cell compare-cell-common">
+            <span class="cmp-mark is-no" aria-hidden="true">×</span>
+            <div>
+              <span class="compare-mobile-tag">Turma Comum</span>
+              <span>Trânsito diário até a academia e perda de tempo com estacionamento.</span>
+            </div>
+          </div>
+          <div class="compare-cell compare-cell-ronny">
+            <span class="cmp-mark is-yes" aria-hidden="true">✓</span>
+            <div>
+              <span class="compare-mobile-tag">Personal Ronny Lopes</span>
+              <span>Me desloco até o espaço da sua preferência em Brasília – DF.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="compare-row" data-cmp-tags="rotina">
+          <div class="compare-cell compare-cell-label">Horários e flexibilidade</div>
+          <div class="compare-cell compare-cell-common">
+            <span class="cmp-mark is-no" aria-hidden="true">×</span>
+            <div>
+              <span class="compare-mobile-tag">Turma Comum</span>
+              <span>Grade fixa; atrasou 15 minutos no trabalho, perdeu o treino do dia.</span>
+            </div>
+          </div>
+          <div class="compare-cell compare-cell-ronny">
+            <span class="cmp-mark is-yes" aria-hidden="true">✓</span>
+            <div>
+              <span class="compare-mobile-tag">Personal Ronny Lopes</span>
+              <span>Agenda alinhada direto comigo de segunda a sábado conforme sua rotina.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="compare-row" data-cmp-tags="iniciante">
+          <div class="compare-cell compare-cell-label">Ritmo para quem começa do zero</div>
+          <div class="compare-cell compare-cell-common">
+            <span class="cmp-mark is-no" aria-hidden="true">×</span>
+            <div>
+              <span class="compare-mobile-tag">Turma Comum</span>
+              <span>Iniciantes misturados em treinos avançados sem base de guarda ou queda.</span>
+            </div>
+          </div>
+          <div class="compare-cell compare-cell-ronny">
+            <span class="cmp-mark is-yes" aria-hidden="true">✓</span>
+            <div>
+              <span class="compare-mobile-tag">Personal Ronny Lopes</span>
+              <span>Progressão sob medida no seu ritmo, construindo confiança desde a aula 1.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="compare-row" data-cmp-tags="iniciante">
+          <div class="compare-cell compare-cell-label">Segurança e controle de contato</div>
+          <div class="compare-cell compare-cell-common">
+            <span class="cmp-mark is-no" aria-hidden="true">×</span>
+            <div>
+              <span class="compare-mobile-tag">Turma Comum</span>
+              <span>Duplas aleatórias e risco de contato excessivo sem supervisão próxima.</span>
+            </div>
+          </div>
+          <div class="compare-cell compare-cell-ronny">
+            <span class="cmp-mark is-yes" aria-hidden="true">✓</span>
+            <div>
+              <span class="compare-mobile-tag">Personal Ronny Lopes</span>
+              <span>Sem sparring pesado obrigatório: foco em manopla, paos e técnica limpa.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="compare-row" data-cmp-tags="iniciante rotina">
+          <div class="compare-cell compare-cell-label">Equipamentos de treino</div>
+          <div class="compare-cell compare-cell-common">
+            <span class="cmp-mark is-no" aria-hidden="true">×</span>
+            <div>
+              <span class="compare-mobile-tag">Turma Comum</span>
+              <span>Exige compra imediata de kit completo ou uso de material coletivo desgastado.</span>
+            </div>
+          </div>
+          <div class="compare-cell compare-cell-ronny">
+            <span class="cmp-mark is-yes" aria-hidden="true">✓</span>
+            <div>
+              <span class="compare-mobile-tag">Personal Ronny Lopes</span>
+              <span>Luvas, aparadores e paos higienizados levados até você para treinar.</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -5343,6 +5909,7 @@
               target="_blank"
               rel="noopener"
               class="glow-btn glow-btn-hero booking-wa-btn"
+              data-magnetic
             >
               <svg class="booking-wa-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
@@ -5357,6 +5924,7 @@
               target="_blank"
               rel="noopener"
               class="booking-ig-btn"
+              data-magnetic
             >
               <span>Acompanhar no Instagram (@ronnylopesthai)</span>
               <span aria-hidden="true">↗</span>
@@ -5372,14 +5940,81 @@
   </section>
   </main>
 
-  <!-- FOOTER -->
-  <footer>
-    <div class="container footer-inner">
-      <span>© 2026 Ronny Lopes — Personal Fight • Muay Thai, Boxe, Jiu-Jitsu &amp; MMA — Brasília, DF.</span>
-      <div class="footer-links">
-        <a href="https://instagram.com/ronnylopesthai" target="_blank" rel="noopener">@ronnylopesthai</a>
-        <a href="https://wa.me/5561981833245?text=Ol%C3%A1%20Ronny!%20Vi%20seu%20site%20e%20gostaria%20de%20saber%20mais%20sobre%20as%20aulas%20particulares." target="_blank" rel="noopener">WhatsApp</a>
-        <a href="#modalidades">Modalidades</a>
+  <!-- 21ST.DEV: CINEMATIC MOTION WORDMARK FOOTER (@jahed) -->
+  <footer class="motion-footer" id="siteFooter">
+    <div class="footer-grid-pattern" aria-hidden="true"></div>
+    <div class="container">
+      <div class="footer-top-grid">
+        <div>
+          <a href="#" class="brand-mark">
+            <i class="brand-dot" aria-hidden="true"></i>
+            Ronny Lopes<span>.</span>
+          </a>
+          <p class="footer-brand-tagline">
+            Personal Fight de Muay Thai, Boxe, Jiu-Jitsu e MMA em Brasília – DF. Campeão Mundial W.M.A na Tailândia e Faixa-Preta de Jiu-Jitsu.
+          </p>
+          <div class="footer-pill-row">
+            <a
+              href="https://wa.me/5561981833245?text=Ol%C3%A1%20Ronny!%20Vi%20seu%20site%20e%20gostaria%20de%20saber%20mais%20sobre%20as%20aulas%20particulares."
+              target="_blank"
+              rel="noopener"
+              class="footer-glass-pill"
+              data-magnetic
+            >
+              <span>WhatsApp Direto</span>
+              <span aria-hidden="true">↗</span>
+            </a>
+            <a
+              href="https://instagram.com/ronnylopesthai"
+              target="_blank"
+              rel="noopener"
+              class="footer-glass-pill"
+              data-magnetic
+            >
+              <span>@ronnylopesthai</span>
+              <span aria-hidden="true">↗</span>
+            </a>
+            <a href="#" class="footer-glass-pill" data-magnetic aria-label="Voltar ao topo da página">
+              <span>Topo</span>
+              <span aria-hidden="true">↑</span>
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <p class="footer-col-heading">Navegação</p>
+          <ul class="footer-nav-list">
+            <li><a href="#filosofia">Filosofia de Treino</a></li>
+            <li><a href="#metodo">Método em 3 Estágios</a></li>
+            <li><a href="#diferenciais">Comparativo Personal</a></li>
+            <li><a href="#formatos">Formatos de Aula</a></li>
+            <li><a href="#videos">Aulas na Prática</a></li>
+            <li><a href="#galeria">Galeria de Combate</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <p class="footer-col-heading">Modalidades &amp; Local</p>
+          <ul class="footer-nav-list">
+            <li><a href="#modalidades">Muay Thai Tradicional</a></li>
+            <li><a href="#modalidades">Boxe Técnico &amp; Manopla</a></li>
+            <li><a href="#modalidades">Jiu-Jitsu (Gi &amp; No-Gi)</a></li>
+            <li><a href="#modalidades">MMA Completo</a></li>
+            <li><span>Brasília – Distrito Federal</span></li>
+            <li><span>Segunda a Sábado • Equipamentos Inclusos</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-wordmark-wrap" aria-hidden="true">
+        <div class="footer-wordmark" id="footerWordmark">
+          <span class="wm-serif">Ronny</span>LOPES<span class="wm-dot">.</span>
+        </div>
+      </div>
+
+      <div class="footer-bottom-bar">
+        <span>© 2026 Ronny Lopes — Personal Fight • Muay Thai, Boxe, Jiu-Jitsu &amp; MMA — Brasília, DF.</span>
+        <span>Atendimento particular no local da sua preferência.</span>
       </div>
     </div>
   </footer>
@@ -6919,7 +7554,7 @@
 
     // 9b. Zoom de Entrada discreto (scale 0.92 -> 1, opacity 0 -> 1, 550ms, threshold 20%, stagger <= 240ms)
     function initZoomInReveal({
-      selector = '.programs-grid .spotlight-card, .booking-card',
+      selector = '.programs-grid .spotlight-card, .booking-card, [data-zoom-in]',
       threshold = 0.2,
       durationMs = 550,
       staggerStepMs = 90,
@@ -7406,6 +8041,87 @@
         }
       });
     });
+
+    // 11. 21st.dev Suite: Scroll Progress Bar + Magnetic Buttons + Spotlight Comparison + Motion Footer
+    (function init21stExtras() {
+      const progressBar = document.getElementById('scrollProgressBar');
+      const footerEl = document.getElementById('siteFooter');
+      const footerWm = document.getElementById('footerWordmark');
+      const compareMatrix = document.getElementById('compareMatrix');
+      const compareBtns = Array.from(document.querySelectorAll('[data-cmp-filter]'));
+      const compareRows = compareMatrix ? Array.from(compareMatrix.querySelectorAll('.compare-row')) : [];
+
+      const updateScrollExtras = () => {
+        if (progressBar) {
+          const doc = document.documentElement;
+          const maxScroll = Math.max(1, doc.scrollHeight - window.innerHeight);
+          const ratio = Math.max(0, Math.min(1, window.scrollY / maxScroll));
+          progressBar.style.setProperty('--scroll-progress', ratio.toFixed(4));
+        }
+
+        if (footerEl && footerWm && !reducedMotionMql.matches) {
+          const rect = footerEl.getBoundingClientRect();
+          const vh = window.innerHeight || 1;
+          const enterRatio = Math.max(0, Math.min(1, (vh - rect.top) / Math.max(rect.height, 1)));
+          const yOffset = (1 - enterRatio) * 26;
+          footerWm.style.setProperty('--footer-wm-y', `${yOffset.toFixed(1)}px`);
+        }
+      };
+
+      window.addEventListener('scroll', updateScrollExtras, { passive: true });
+      smoothScroll.onScroll(updateScrollExtras);
+      window.addEventListener('resize', updateScrollExtras, { passive: true });
+      requestAnimationFrame(updateScrollExtras);
+
+      // Magnetic Buttons (@ham7a311 / 21st.dev) — somente ponteiro fino e sem reduced-motion
+      if (hasFinePointer) {
+        document.querySelectorAll('[data-magnetic]').forEach((el) => {
+          el.addEventListener('mousemove', (e) => {
+            if (reducedMotionMql.matches) return;
+            const rect = el.getBoundingClientRect();
+            const nx = (e.clientX - (rect.left + rect.width / 2)) / Math.max(rect.width / 2, 1);
+            const ny = (e.clientY - (rect.top + rect.height / 2)) / Math.max(rect.height / 2, 1);
+            el.style.setProperty('--mag-tx', `${(nx * 5.5).toFixed(2)}px`);
+            el.style.setProperty('--mag-ty', `${(ny * 4.5).toFixed(2)}px`);
+          });
+
+          el.addEventListener('mouseleave', () => {
+            el.style.setProperty('--mag-tx', '0px');
+            el.style.setProperty('--mag-ty', '0px');
+          });
+        });
+      }
+
+      // Spotlight Comparison Matrix (@dhxwhy + @kevingirelli / 21st.dev)
+      if (compareMatrix && hasFinePointer) {
+        compareMatrix.addEventListener('mousemove', (e) => {
+          const rect = compareMatrix.getBoundingClientRect();
+          compareMatrix.style.setProperty('--cmp-mx', `${(e.clientX - rect.left).toFixed(1)}px`);
+          compareMatrix.style.setProperty('--cmp-my', `${(e.clientY - rect.top).toFixed(1)}px`);
+          compareMatrix.style.setProperty('--cmp-spot', '1');
+        });
+        compareMatrix.addEventListener('mouseleave', () => {
+          compareMatrix.style.setProperty('--cmp-spot', '0');
+        });
+      }
+
+      compareBtns.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const filter = btn.dataset.cmpFilter || 'all';
+          compareBtns.forEach((b) => {
+            const active = b === btn;
+            b.classList.toggle('is-active', active);
+            b.setAttribute('aria-pressed', String(active));
+          });
+
+          compareRows.forEach((row) => {
+            const tags = (row.dataset.cmpTags || '').split(/\s+/);
+            const show = filter === 'all' || tags.includes(filter);
+            row.classList.toggle('is-hidden-row', !show);
+          });
+        });
+      });
+    })();
   </script>
 </body>
 </html>
