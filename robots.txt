@@ -1,6 +1,4 @@
 User-agent: *
 Allow: /
 
-# No deploy com domínio próprio final, substitua pela linha:
-# Sitemap: https://[INSERIR-DOMINIO-FINAL]/sitemap.xml
-Sitemap: https://ronny-lopes-muaythai.marianamello0406.workers.dev/sitemap.xml
+Sitemap: https://ronnylopes.com.br/sitemap.xml
