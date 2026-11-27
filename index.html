@@ -1519,8 +1519,8 @@
 
     .orbit-box {
       position: relative;
-      width: min(400px, 84vw);
-      height: min(400px, 84vw);
+      width: min(464px, 90vw);
+      height: min(464px, 90vw);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -1530,7 +1530,7 @@
     .orbit-box::before {
       content: "";
       position: absolute;
-      inset: 58px;
+      inset: 52px;
       border-radius: 50%;
       background: radial-gradient(circle at 50% 50%, rgba(255, 61, 0, 0.16) 0%, rgba(184, 15, 15, 0.06) 45%, transparent 72%);
       pointer-events: none;
@@ -1540,7 +1540,7 @@
     .orbit-box::after {
       content: "";
       position: absolute;
-      inset: 22px;
+      inset: 18px;
       border-radius: 50%;
       padding: 1.5px;
       background: conic-gradient(
@@ -1567,7 +1567,7 @@
 
     .orbit-ring {
       position: absolute;
-      inset: 22px;
+      inset: 18px;
       border-radius: 50%;
       border: 1px solid rgba(255, 255, 255, 0.10);
       animation: spinSlow 52s linear infinite;
@@ -1575,7 +1575,7 @@
 
     .orbit-ring-inner {
       position: absolute;
-      inset: 74px;
+      inset: 56px;
       border-radius: 50%;
       border: 1px dashed rgba(255, 61, 0, 0.30);
       animation: spinSlow 36s linear infinite reverse;
@@ -1584,23 +1584,24 @@
     .orbit-center {
       position: relative;
       z-index: 2;
-      max-width: 196px;
-      padding: 0 8px;
+      max-width: 278px;
+      padding: 0 12px;
       text-align: center;
     }
 
-    .orbit-center span {
+    .orbit-center .orbit-eyebrow {
       display: block;
-      font-size: 10.5px;
+      font-size: 10px;
       font-weight: 500;
       letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--text-muted);
-      margin-bottom: 6px;
+      margin-bottom: 5px;
     }
 
-    .orbit-center strong {
+    .orbit-center .orbit-modality-title {
       display: block;
+      font-family: var(--font-sans);
       font-size: 16px;
       font-weight: 600;
       letter-spacing: 0.14em;
@@ -1611,20 +1612,35 @@
     }
 
     .orbit-center p {
-      font-size: 12.5px;
-      line-height: 1.55;
+      font-size: 12.6px;
+      line-height: 1.54;
       color: var(--text-secondary);
+      text-wrap: pretty;
       transition: opacity 0.36s var(--ease-out), transform 0.4s var(--ease-out);
     }
 
-    .orbit-center.exiting strong,
-    .orbit-center.exiting p {
+    .orbit-center .orbit-focus {
+      margin-top: 10px;
+      padding-top: 8px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      line-height: 1.45;
+      letter-spacing: 0.04em;
+      color: rgba(180, 180, 190, 0.80);
+      transition: opacity 0.38s var(--ease-out), transform 0.42s var(--ease-out);
+    }
+
+    .orbit-center.exiting .orbit-modality-title,
+    .orbit-center.exiting p,
+    .orbit-center.exiting .orbit-focus {
       opacity: 0;
       transform: translateY(-8px);
     }
 
-    .orbit-center.entering strong,
-    .orbit-center.entering p {
+    .orbit-center.entering .orbit-modality-title,
+    .orbit-center.entering p,
+    .orbit-center.entering .orbit-focus {
       opacity: 0;
       transform: translateY(10px);
       transition: none;
@@ -3594,23 +3610,38 @@
       }
 
       .orbit-box {
-        width: min(350px, 100%);
-        height: clamp(328px, 92vw, 368px);
+        width: min(364px, 100%);
+        height: clamp(376px, 98vw, 404px);
       }
 
       .orbit-ring,
       .orbit-box::after {
-        inset: 34px 18px;
+        inset: 32px 8px;
       }
 
       .orbit-ring-inner {
-        inset: 68px 48px;
+        inset: 56px 22px;
       }
 
-      .node-top-left { top: 4px; left: 0; }
-      .node-top-right { top: 4px; right: 0; }
-      .node-bottom-left { bottom: 4px; left: 0; }
-      .node-bottom-right { bottom: 4px; right: 0; }
+      .orbit-center {
+        max-width: 248px;
+      }
+
+      .orbit-center p {
+        font-size: 12px;
+        line-height: 1.48;
+      }
+
+      .orbit-center .orbit-focus {
+        font-size: 9.5px;
+        margin-top: 8px;
+        padding-top: 7px;
+      }
+
+      .node-top-left { top: 2px; left: 0; }
+      .node-top-right { top: 2px; right: 0; }
+      .node-bottom-left { bottom: 2px; left: 0; }
+      .node-bottom-right { bottom: 2px; right: 0; }
 
       .programs,
       .action-gallery,
@@ -4030,16 +4061,17 @@
     <div class="approach-diagram reveal">
       <div class="diagram-header">
         <span class="eyebrow">Interaja com as 4 modalidades</span>
-        <h3 class="diagram-title blur-fade">4 Artes, 1 Método</h3>
+        <h2 class="diagram-title blur-fade">4 Artes, 1 Método</h2>
       </div>
 
       <div class="orbit-box" id="orbitBox" aria-label="Diagrama interativo das 4 modalidades: Muay Thai, Boxe, Jiu-Jitsu e MMA">
         <div class="orbit-ring"></div>
         <div class="orbit-ring-inner"></div>
         <div class="orbit-center" id="orbitCenter" aria-live="polite">
-          <span>Modalidade</span>
-          <strong id="orbitTitle">Muay Thai</strong>
-          <p id="orbitDesc">Arte das 8 armas lapidada na Tailândia (Campeão Mundial W.M.A): paos, chutes e clinche.</p>
+          <span class="orbit-eyebrow">Modalidade</span>
+          <h3 class="orbit-modality-title" id="orbitTitle">Muay Thai</h3>
+          <p id="orbitDesc">Treino completo de alta intensidade usando punhos, cotovelos, joelhos e canelas. Excelente para condicionamento físico, alívio de estresse e técnica afiada em pé.</p>
+          <div class="orbit-focus" id="orbitFocus">Foco: Condicionamento • Força • Defesa pessoal</div>
         </div>
         <button type="button" class="orbit-node node-top-left active" data-pillar="muaythai" aria-pressed="true">Muay Thai</button>
         <button type="button" class="orbit-node node-top-right" data-pillar="boxe" aria-pressed="false">Boxe</button>
@@ -5767,27 +5799,31 @@
     const pillarData = {
       muaythai: {
         title: 'Muay Thai',
-        desc: 'Arte das 8 armas lapidada na Tailândia (Campeão Mundial W.M.A): paos, chutes e clinche.',
+        desc: 'Treino completo de alta intensidade usando punhos, cotovelos, joelhos e canelas. Excelente para condicionamento físico, alívio de estresse e técnica afiada em pé.',
+        focus: 'Foco: Condicionamento • Força • Defesa pessoal',
         angle: '-45deg',
         formValue: 'Muay Thai'
       },
       boxe: {
         title: 'Boxe',
-        desc: 'Jogo de pernas, esquivas, pêndulo, manopla de foco e precisão cirúrgica de mãos.',
+        desc: 'Agilidade, esquiva, movimentação de pernas e precisão nos golpes. Ideal para quem quer melhorar reflexo, coordenação motora e gasto calórico em treinos dinâmicos.',
+        focus: 'Foco: Reflexo • Cardio • Técnica de punhos',
         angle: '45deg',
         formValue: 'Boxe'
       },
-      mma: {
-        title: 'MMA',
-        desc: 'Integração real entre trocação, entradas de queda, controle na grade e domínio no solo.',
-        angle: '135deg',
-        formValue: 'MMA (Completo)'
-      },
       jiujitsu: {
         title: 'Jiu-Jitsu',
-        desc: 'Didática de Faixa-Preta Campeão Brasiliense: alavancas, guarda, passagens e finalizações.',
+        desc: 'Luta de chão baseada em alavancas, controle e finalizações — onde a técnica vence a força bruta. Perfeito para defesa pessoal real e raciocínio rápido sob pressão.',
+        focus: 'Foco: Defesa pessoal • Estratégia • Controle',
         angle: '225deg',
         formValue: 'Jiu-Jitsu'
+      },
+      mma: {
+        title: 'MMA',
+        desc: 'A integração entre a trocação em pé, quedas e luta de chão. Para quem busca um treino desafiador, completo e com a dinâmica real do combate moderno.',
+        focus: 'Foco: Jogo completo • Performance • Versatilidade',
+        angle: '135deg',
+        formValue: 'MMA (Completo)'
       }
     };
 
@@ -5795,6 +5831,7 @@
     const orbitCenter = document.getElementById('orbitCenter');
     const orbitTitle = document.getElementById('orbitTitle');
     const orbitDesc = document.getElementById('orbitDesc');
+    const orbitFocus = document.getElementById('orbitFocus');
     let orbitTimer = null;
     let orbitRaf = null;
 
@@ -5825,6 +5862,7 @@
         if (prefersReducedMotion) {
           orbitTitle.textContent = data.title;
           orbitDesc.textContent = data.desc;
+          if (orbitFocus) orbitFocus.textContent = data.focus;
           return;
         }
 
@@ -5833,6 +5871,7 @@
         orbitTimer = setTimeout(() => {
           orbitTitle.textContent = data.title;
           orbitDesc.textContent = data.desc;
+          if (orbitFocus) orbitFocus.textContent = data.focus;
           orbitCenter.classList.remove('exiting');
           orbitCenter.classList.add('entering');
           orbitRaf = requestAnimationFrame(() => {
