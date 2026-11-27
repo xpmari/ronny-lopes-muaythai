@@ -1,0 +1,1441 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Carrossel Instagram 4:5 (1080×1350) — Estudo de Caso Ronny Lopes | MS Web Designer</title>
+  <meta name="description" content="Carrossel de portfólio em 6 slides (1080x1350px) apresentando o estudo de caso da landing page Ronny Lopes — Personal Fight por MS Web Designer." />
+  <meta name="robots" content="noindex, nofollow" />
+
+  <!-- Google Fonts: Instrument Serif (itálico editorial) + Plus Jakarta Sans (geométrica moderna) + JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    :root {
+      --bg-canvas: #050506;
+      --bg-slide: #0A0A0A;
+      --bg-elevated: #111114;
+      --ember: #FF3D00;
+      --ember-soft: rgba(255, 61, 0, 0.16);
+      --text-main: #F5F5F7;
+      --text-muted: #A1A1AA;
+      --text-dim: #71717A;
+      --glass-bg: rgba(255, 255, 255, 0.03);
+      --glass-border: rgba(255, 255, 255, 0.09);
+      --glass-border-strong: rgba(255, 255, 255, 0.16);
+      --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --font-serif: 'Instrument Serif', Georgia, 'Times New Roman', serif;
+      --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+      --slide-scale: 1;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background-color: var(--bg-canvas);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Barra superior de ferramentas do estúdio (não aparece no modo print limpo) */
+    .studio-toolbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(10, 10, 12, 0.84);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .toolbar-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      height: 34px;
+      padding: 0 13px;
+      border-radius: 9999px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #D4D4D8;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      cursor: pointer;
+      transition: all 0.18s ease;
+      white-space: nowrap;
+    }
+
+    .toolbar-pill:hover {
+      color: #FFFFFF;
+      border-color: rgba(255, 255, 255, 0.22);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .toolbar-pill.active {
+      color: #FFFFFF;
+      background: rgba(255, 61, 0, 0.18);
+      border-color: rgba(255, 61, 0, 0.55);
+      box-shadow: 0 0 20px -4px rgba(255, 61, 0, 0.45);
+    }
+
+    /* Empilhamento vertical dos slides */
+    .carousel-stack {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 56px;
+      padding: 48px 24px 96px;
+    }
+
+    /* Wrapper que ajusta escala em telas menores sem alterar os 1080x1350 internos */
+    .slide-stage {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .slide-viewport {
+      width: calc(1080px * var(--slide-scale));
+      height: calc(1350px * var(--slide-scale));
+      position: relative;
+      border-radius: 4px;
+      box-shadow:
+        0 30px 90px -20px rgba(0, 0, 0, 0.92),
+        0 0 0 1px rgba(255, 255, 255, 0.07);
+      overflow: hidden;
+      background: var(--bg-slide);
+    }
+
+    /* SLIDE EXATO 4:5 — 1080px x 1350px */
+    .ig-slide {
+      width: 1080px;
+      height: 1350px;
+      transform: scale(var(--slide-scale));
+      transform-origin: top left;
+      position: relative;
+      overflow: hidden;
+      background-color: var(--bg-slide);
+      color: var(--text-main);
+      padding: 70px 76px 64px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      isolation: isolate;
+    }
+
+    /* Textura sutil de Film Grain de agência em cada slide */
+    .ig-slide::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      opacity: 0.042;
+      mix-blend-mode: overlay;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 220 220' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    /* Vinheta interna muito sutil */
+    .ig-slide::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      box-shadow: inset 0 0 140px rgba(0, 0, 0, 0.55);
+    }
+
+    .slide-layer {
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Brilhos atmosféricos sutis (#FF3D00 + carmesim profundo) */
+    .ambient-orb {
+      position: absolute;
+      border-radius: 9999px;
+      pointer-events: none;
+      z-index: 0;
+      filter: blur(110px);
+    }
+
+    /* Tipografia Editorial Mix */
+    .slide-h2 {
+      font-family: var(--font-sans);
+      font-weight: 800;
+      letter-spacing: -0.035em;
+      line-height: 1.04;
+      color: #F7F7F8;
+      margin: 0;
+    }
+
+    .serif-accent {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      color: var(--ember);
+      padding-right: 0.04em;
+    }
+
+    .serif-light {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      color: #FFFFFF;
+    }
+
+    /* Pill Badges & Indicadores */
+    .pill-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 20px;
+      border-radius: 9999px;
+      background: rgba(255, 255, 255, 0.035);
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #E4E4E7;
+    }
+
+    .pill-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 9999px;
+      background: var(--ember);
+      box-shadow: 0 0 12px var(--ember);
+    }
+
+    .page-counter {
+      font-family: var(--font-mono);
+      font-size: 15px;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      color: rgba(245, 245, 247, 0.46);
+      padding: 8px 16px;
+      border-radius: 9999px;
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .page-counter strong {
+      color: #F5F5F7;
+      font-weight: 600;
+    }
+
+    /* Glassmorphism Cards */
+    .glass-card {
+      background: linear-gradient(165deg, rgba(255, 255, 255, 0.045) 0%, rgba(255, 255, 255, 0.018) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-radius: 24px;
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.08),
+        0 20px 50px -24px rgba(0, 0, 0, 0.85);
+    }
+
+    .glass-card-ember {
+      background:
+        radial-gradient(120% 120% at 0% 0%, rgba(255, 61, 0, 0.14) 0%, rgba(255, 61, 0, 0.03) 48%, rgba(16, 16, 20, 0.72) 100%);
+      border: 1px solid rgba(255, 61, 0, 0.30);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-radius: 24px;
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.10),
+        0 24px 60px -24px rgba(255, 61, 0, 0.25);
+    }
+
+    /* Placeholders interativos de Mockup (Desktop & Mobile) */
+    .mockup-shell {
+      background: linear-gradient(180deg, rgba(24, 24, 28, 0.92) 0%, rgba(11, 11, 14, 0.96) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.13);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.12),
+        0 32px 72px -20px rgba(0, 0, 0, 0.92),
+        0 0 60px -25px rgba(255, 61, 0, 0.22);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .browser-bar {
+      height: 40px;
+      padding: 0 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+      background: rgba(255, 255, 255, 0.025);
+      flex-shrink: 0;
+    }
+
+    .browser-dots {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .browser-dots span {
+      width: 9px;
+      height: 9px;
+      border-radius: 9999px;
+      background: rgba(255, 255, 255, 0.16);
+    }
+
+    .browser-dots span:first-child {
+      background: rgba(255, 61, 0, 0.70);
+    }
+
+    .browser-url {
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+      letter-spacing: 0.04em;
+      color: rgba(245, 245, 247, 0.44);
+      padding: 4px 16px;
+      border-radius: 9999px;
+      background: rgba(0, 0, 0, 0.36);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .screenshot-slot {
+      position: relative;
+      flex: 1;
+      width: 100%;
+      cursor: pointer;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background:
+        radial-gradient(ellipse 75% 65% at 50% 45%, rgba(255, 61, 0, 0.08) 0%, rgba(10, 10, 12, 0.2) 62%, rgba(8, 8, 10, 0.92) 100%),
+        repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.018) 0px, rgba(255, 255, 255, 0.018) 1px, transparent 1px, transparent 36px),
+        repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.018) 0px, rgba(255, 255, 255, 0.018) 1px, transparent 1px, transparent 36px);
+      transition: border-color 0.2s ease, background-color 0.2s ease;
+    }
+
+    .screenshot-slot:hover .slot-hint {
+      border-color: rgba(255, 61, 0, 0.55);
+      background: rgba(255, 61, 0, 0.12);
+      color: #FFFFFF;
+    }
+
+    .screenshot-slot img.slot-preview {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      display: none;
+      z-index: 3;
+    }
+
+    .screenshot-slot.has-image img.slot-preview {
+      display: block;
+    }
+
+    .screenshot-slot.has-image .slot-placeholder-ui {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* Moldura iPhone minimalista (Slide 5) */
+    .phone-frame {
+      width: 286px;
+      height: 604px;
+      border-radius: 42px;
+      padding: 11px;
+      background: linear-gradient(160deg, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0.04) 45%, rgba(255, 61, 0, 0.16) 100%);
+      box-shadow:
+        0 32px 70px -18px rgba(0, 0, 0, 0.92),
+        inset 0 1px 0 rgba(255, 255, 255, 0.22);
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+    }
+
+    .phone-inner {
+      flex: 1;
+      border-radius: 32px;
+      background: #08080A;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .phone-island {
+      position: absolute;
+      top: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 82px;
+      height: 22px;
+      border-radius: 9999px;
+      background: #000000;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      z-index: 5;
+      pointer-events: none;
+    }
+
+    /* Botão Pill Glow Laranja (Slide 6 + mini UI Slide 3) */
+    .ember-cta-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 18px;
+      padding: 24px 42px;
+      border-radius: 9999px;
+      background:
+        linear-gradient(135deg, rgba(255, 61, 0, 0.28) 0%, rgba(255, 106, 51, 0.16) 50%, rgba(16, 12, 12, 0.94) 100%);
+      border: 1px solid rgba(255, 115, 64, 0.55);
+      box-shadow:
+        0 0 0 1px rgba(255, 61, 0, 0.20),
+        0 22px 58px -8px rgba(255, 61, 0, 0.65),
+        0 0 36px -6px rgba(255, 61, 0, 0.45),
+        inset 0 1px 0 rgba(255, 255, 255, 0.32);
+      color: #FFFFFF;
+      font-weight: 700;
+      font-size: 24px;
+      letter-spacing: -0.01em;
+    }
+
+    .ember-cta-arrow {
+      width: 44px;
+      height: 44px;
+      border-radius: 9999px;
+      background: var(--ember);
+      color: #FFFFFF;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      box-shadow: 0 0 22px rgba(255, 61, 0, 0.75);
+    }
+
+    /* Rodapé padrão de todos os slides */
+    .slide-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .sig-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 15px;
+      color: rgba(245, 245, 247, 0.62);
+      letter-spacing: 0.01em;
+    }
+
+    .sig-monogram {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 5px 11px;
+      border-radius: 9999px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: #FFFFFF;
+    }
+
+    .swipe-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 18px;
+      border-radius: 9999px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      font-size: 14px;
+      font-weight: 600;
+      color: #F5F5F7;
+    }
+
+    .swipe-arrow {
+      color: var(--ember);
+      font-weight: 700;
+    }
+
+    /* Modo Isolado / Print Limpo 1080x1350 */
+    body.clean-shot-mode {
+      background: #0A0A0A;
+    }
+
+    body.clean-shot-mode .studio-toolbar,
+    body.clean-shot-mode .slide-meta-bar {
+      display: none !important;
+    }
+
+    body.clean-shot-mode .carousel-stack {
+      padding: 0 !important;
+      gap: 0 !important;
+      align-items: flex-start !important;
+    }
+
+    body.clean-shot-mode .slide-viewport {
+      border-radius: 0 !important;
+      box-shadow: none !important;
+    }
+
+    .exit-clean-btn {
+      display: none;
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 999;
+      padding: 10px 18px;
+      border-radius: 9999px;
+      background: rgba(10, 10, 12, 0.88);
+      color: #FFFFFF;
+      border: 1px solid rgba(255, 61, 0, 0.55);
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      backdrop-filter: blur(12px);
+    }
+
+    body.clean-shot-mode .exit-clean-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      opacity: 0.18;
+      transition: opacity 0.2s ease;
+    }
+
+    body.clean-shot-mode .exit-clean-btn:hover {
+      opacity: 1;
+    }
+
+    @media print {
+      @page {
+        size: 1080px 1350px;
+        margin: 0;
+      }
+      .studio-toolbar,
+      .slide-meta-bar,
+      .exit-clean-btn {
+        display: none !important;
+      }
+      body {
+        background: #0A0A0A;
+      }
+      .carousel-stack {
+        padding: 0 !important;
+        gap: 0 !important;
+      }
+      .slide-stage {
+        page-break-after: always;
+        break-after: page;
+      }
+      .slide-viewport {
+        width: 1080px !important;
+        height: 1350px !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+      }
+      .ig-slide {
+        transform: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- BARRA DE CONTROLE LIMPA PARA PREVIEW, ENCAIXE DE PRINTS E EXPORTAÇÃO -->
+  <header class="studio-toolbar">
+    <div class="max-w-[1320px] mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-3">
+      <div class="flex items-center gap-3">
+        <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-mono tracking-wider uppercase text-white">
+          <span class="w-2 h-2 rounded-full bg-[#FF3D00]"></span>
+          MS Web Designer • Carrossel 4:5
+        </span>
+        <span class="text-xs text-zinc-400 hidden md:inline">
+          6 slides em <strong>1080 × 1350 px</strong> • Clique em qualquer mockup para inserir seu print real
+        </span>
+      </div>
+
+      <div class="flex flex-wrap items-center gap-2">
+        <!-- Filtro de slides -->
+        <div class="flex items-center gap-1 bg-white/[0.03] p-1 rounded-full border border-white/[0.08]" role="group" aria-label="Filtrar slide">
+          <button type="button" class="toolbar-pill active !h-7 !px-3 !text-xs" data-filter="all">Todos (6)</button>
+          <button type="button" class="toolbar-pill !h-7 !px-2.5 !text-xs font-mono" data-filter="1">01</button>
+          <button type="button" class="toolbar-pill !h-7 !px-2.5 !text-xs font-mono" data-filter="2">02</button>
+          <button type="button" class="toolbar-pill !h-7 !px-2.5 !text-xs font-mono" data-filter="3">03</button>
+          <button type="button" class="toolbar-pill !h-7 !px-2.5 !text-xs font-mono" data-filter="4">04</button>
+          <button type="button" class="toolbar-pill !h-7 !px-2.5 !text-xs font-mono" data-filter="5">05</button>
+          <button type="button" class="toolbar-pill !h-7 !px-2.5 !text-xs font-mono" data-filter="6">06</button>
+        </div>
+
+        <!-- Escala -->
+        <button type="button" id="btnFitScale" class="toolbar-pill active" title="Ajusta a visualização para caber confortavelmente na tela">
+          Ajustar à Tela
+        </button>
+        <button type="button" id="btnRealScale" class="toolbar-pill" title="Exibe cada slide no tamanho exato de 1080x1350px para print 1:1">
+          1:1 (1080×1350)
+        </button>
+
+        <!-- Modo Print Limpo -->
+        <button type="button" id="btnCleanShot" class="toolbar-pill !border-[#FF3D00]/50 !text-white hover:!bg-[#FF3D00]/20" title="Oculta barras e margens em 1080x1350 exato para printar (ESC para voltar)">
+          Modo Print Limpo
+        </button>
+
+        <!-- Reset de prints -->
+        <button type="button" id="btnResetSlots" class="toolbar-pill !text-zinc-400" title="Remove imagens inseridas nos placeholders">
+          Limpar Prints
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <button type="button" id="btnExitClean" class="exit-clean-btn">
+    <span>Sair do Modo Print (ESC)</span>
+  </button>
+
+  <input type="file" id="globalSlotInput" accept="image/*" class="hidden" />
+
+  <!-- STACK VERTICAL DOS 6 SLIDES (1080x1350 CADA) -->
+  <main class="carousel-stack" id="carouselStack">
+
+    <!-- ===================================================================== -->
+    <!-- SLIDE 01 — CAPA (GANCHO)                                              -->
+    <!-- ===================================================================== -->
+    <section class="slide-stage" data-slide="1">
+      <div class="slide-meta-bar w-full flex items-center justify-between text-xs font-mono text-zinc-400 px-1">
+        <span>SLIDE 01 • CAPA (GANCHO) — 1080 × 1350 PX</span>
+        <button type="button" class="text-[#FF3D00] hover:underline cursor-pointer" data-isolate="1">Isolar 1:1 p/ Print →</button>
+      </div>
+
+      <div class="slide-viewport">
+        <article class="ig-slide" id="slide-01">
+          <!-- Atmosfera sutil de fundo -->
+          <div class="ambient-orb" style="width: 620px; height: 420px; top: -110px; right: -120px; background: rgba(255, 61, 0, 0.16);"></div>
+          <div class="ambient-orb" style="width: 760px; height: 520px; bottom: 80px; left: 50%; transform: translateX(-50%); background: rgba(185, 22, 16, 0.18);"></div>
+
+          <!-- TOPO -->
+          <div class="slide-layer flex items-center justify-between">
+            <div class="pill-badge">
+              <span class="pill-dot"></span>
+              <span>ESTUDO DE CASO • WEB DESIGN</span>
+            </div>
+            <div class="page-counter"><strong>01</strong>/06</div>
+          </div>
+
+          <!-- HEADLINE + SUBTÍTULO -->
+          <div class="slide-layer mt-8">
+            <h1 class="slide-h2" style="font-size: 68px; max-width: 910px;">
+              Como transformar um Personal Fight em uma <em class="serif-accent" style="font-size: 78px;">marca premium</em> na web.
+            </h1>
+            <p class="mt-6 text-[23px] leading-[1.45] text-zinc-400 font-normal max-w-[820px]">
+              Landing page criada para <strong class="text-zinc-100 font-semibold">Ronny Lopes</strong> — Campeão Mundial de Muay Thai em Brasília.
+            </p>
+          </div>
+
+          <!-- MOCKUP CENTRAL DA HERO SECTION -->
+          <div class="slide-layer my-7 flex-1 flex flex-col min-h-0">
+            <div class="mockup-shell rounded-[26px] flex-1">
+              <div class="browser-bar">
+                <div class="browser-dots">
+                  <span></span><span></span><span></span>
+                </div>
+                <div class="browser-url">ronnylopes.com.br — Hero Section</div>
+                <div class="font-mono text-[11px] uppercase tracking-widest text-zinc-500">DESKTOP 16:10</div>
+              </div>
+
+              <div class="screenshot-slot" data-slot="slide1-hero">
+                <img class="slot-preview" alt="Preview da Hero Section do site Ronny Lopes" />
+                <div class="slot-placeholder-ui px-10 flex flex-col items-center gap-4">
+                  <div class="w-16 h-16 rounded-2xl border border-white/15 bg-white/[0.04] flex items-center justify-center text-[#FF3D00]">
+                    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="3" y="3" width="18" height="18" rx="3"></rect>
+                      <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                      <polyline points="21 15 16 10 5 21"></polyline>
+                    </svg>
+                  </div>
+                  <div>
+                    <p class="font-mono text-xs uppercase tracking-[0.2em] text-[#FF3D00] mb-1.5">PLACEHOLDER • PRINT DA HERO SECTION</p>
+                    <p class="text-lg font-semibold text-zinc-200">Encaixe aqui o print principal da Hero do Ronny Lopes</p>
+                    <p class="text-sm text-zinc-500 mt-1">Clique ou arraste sua imagem para preencher automaticamente (928 × 530 px)</p>
+                  </div>
+                  <span class="slot-hint mt-1 px-4 py-1.5 rounded-full border border-white/10 bg-white/[0.03] font-mono text-xs text-zinc-300 transition">
+                    + Selecionar print da Hero
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- RODAPÉ -->
+          <div class="slide-layer slide-footer">
+            <div class="sig-brand">
+              <span class="sig-monogram">MS</span>
+              <span>MS Web Designer <span class="text-zinc-600 mx-1.5">•</span> @marisabatier</span>
+            </div>
+            <div class="swipe-pill">
+              <span>Arrasta pro lado</span>
+              <span class="swipe-arrow">→</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- SLIDE 02 — O PROBLEMA / O DESAFIO                                     -->
+    <!-- ===================================================================== -->
+    <section class="slide-stage" data-slide="2">
+      <div class="slide-meta-bar w-full flex items-center justify-between text-xs font-mono text-zinc-400 px-1">
+        <span>SLIDE 02 • O PROBLEMA / O DESAFIO — 1080 × 1350 PX</span>
+        <button type="button" class="text-[#FF3D00] hover:underline cursor-pointer" data-isolate="2">Isolar 1:1 p/ Print →</button>
+      </div>
+
+      <div class="slide-viewport">
+        <article class="ig-slide" id="slide-02">
+          <div class="ambient-orb" style="width: 580px; height: 480px; top: 240px; left: -160px; background: rgba(255, 61, 0, 0.13);"></div>
+          <div class="ambient-orb" style="width: 560px; height: 420px; bottom: 60px; right: -120px; background: rgba(165, 20, 18, 0.15);"></div>
+
+          <!-- TOPO -->
+          <div class="slide-layer flex items-center justify-between">
+            <div class="pill-badge">
+              <span class="pill-dot"></span>
+              <span>O CENÁRIO &amp; O DESAFIO</span>
+            </div>
+            <div class="page-counter"><strong>02</strong>/06</div>
+          </div>
+
+          <!-- TÍTULO -->
+          <div class="slide-layer mt-6">
+            <h2 class="slide-h2" style="font-size: 66px; max-width: 900px;">
+              Instagram cheio de treino, mas <em class="serif-accent" style="font-size: 76px;">zero estrutura</em> pra fechar aluno.
+            </h2>
+          </div>
+
+          <!-- 2 BLOCOS VISUAIS DE COPY -->
+          <div class="slide-layer grid grid-cols-2 gap-6 my-6">
+            <!-- Bloco 01 -->
+            <div class="glass-card p-10 flex flex-col justify-between min-h-[410px]">
+              <div class="flex items-center justify-between">
+                <span class="font-mono text-sm tracking-[0.18em] uppercase text-[#FF3D00]">01 • PERCEPÇÃO DE VALOR</span>
+                <span class="w-10 h-10 rounded-full border border-white/10 bg-white/[0.03] flex items-center justify-center text-zinc-300">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                </span>
+              </div>
+
+              <p class="text-[28px] leading-[1.34] font-semibold text-zinc-100 tracking-[-0.02em] my-6">
+                Quem busca aula particular de alto nível quer sentir <span class="text-white underline decoration-[#FF3D00]/70 decoration-2 underline-offset-8">confiança</span> antes de chamar no WhatsApp.
+              </p>
+
+              <div class="pt-5 border-t border-white/[0.08] flex items-center justify-between text-sm text-zinc-400">
+                <span>Ticket premium exige apresentação à altura</span>
+                <span class="text-[#FF3D00] font-mono">✦</span>
+              </div>
+            </div>
+
+            <!-- Bloco 02 -->
+            <div class="glass-card p-10 flex flex-col justify-between min-h-[410px]">
+              <div class="flex items-center justify-between">
+                <span class="font-mono text-sm tracking-[0.18em] uppercase text-zinc-400">02 • GARGALO COMUM</span>
+                <span class="w-10 h-10 rounded-full border border-white/10 bg-white/[0.03] flex items-center justify-center text-[#FF3D00]">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+                </span>
+              </div>
+
+              <div>
+                <p class="text-[32px] leading-[1.24] font-bold text-white tracking-[-0.025em] mb-6">
+                  Link solto na bio não vende autoridade.
+                </p>
+
+                <!-- Comparativo visual minimalista de UI -->
+                <div class="space-y-3">
+                  <div class="px-4 py-3 rounded-xl bg-white/[0.025] border border-white/[0.07] flex items-center justify-between text-sm text-zinc-400">
+                    <span>Link genérico / lista de botões</span>
+                    <span class="font-mono text-xs uppercase text-zinc-500">Sem contexto ✕</span>
+                  </div>
+                  <div class="px-4 py-3 rounded-xl bg-[#FF3D00]/10 border border-[#FF3D00]/35 flex items-center justify-between text-sm text-white font-medium">
+                    <span>Landing page autoral estratégica</span>
+                    <span class="font-mono text-xs uppercase text-[#FF3D00]">Alta conversão ✓</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="pt-5 border-t border-white/[0.08] flex items-center justify-between text-sm text-zinc-400">
+                <span>Posicionamento imediato em segundos</span>
+                <span class="text-[#FF3D00] font-mono">02</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- DESTAQUE VISUAL INFERIOR -->
+          <div class="slide-layer glass-card-ember p-10 mb-4">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="w-2.5 h-2.5 rounded-full bg-[#FF3D00]"></span>
+              <span class="font-mono text-xs tracking-[0.22em] uppercase text-[#FF3D00]">DIREÇÃO DE ARTE &amp; POSICIONAMENTO</span>
+            </div>
+            <p class="text-[35px] leading-[1.2] font-bold tracking-[-0.025em] text-white">
+              “O objetivo: sair do básico e criar uma <em class="serif-light" style="font-size: 42px;">experiência de combate real</em>.”
+            </p>
+          </div>
+
+          <!-- RODAPÉ -->
+          <div class="slide-layer slide-footer">
+            <div class="sig-brand">
+              <span class="sig-monogram">MS</span>
+              <span>MS Web Designer <span class="text-zinc-600 mx-1.5">•</span> @marisabatier</span>
+            </div>
+            <div class="swipe-pill">
+              <span class="text-zinc-400 font-normal">Identidade &amp; UI</span>
+              <span class="swipe-arrow">→</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- SLIDE 03 — IDENTIDADE & UI (BENTO GRID + PRINT NAVBAR/BOTÕES)         -->
+    <!-- ===================================================================== -->
+    <section class="slide-stage" data-slide="3">
+      <div class="slide-meta-bar w-full flex items-center justify-between text-xs font-mono text-zinc-400 px-1">
+        <span>SLIDE 03 • IDENTIDADE &amp; UI — 1080 × 1350 PX</span>
+        <button type="button" class="text-[#FF3D00] hover:underline cursor-pointer" data-isolate="3">Isolar 1:1 p/ Print →</button>
+      </div>
+
+      <div class="slide-viewport">
+        <article class="ig-slide" id="slide-03">
+          <div class="ambient-orb" style="width: 640px; height: 420px; top: 80px; right: -150px; background: rgba(255, 61, 0, 0.15);"></div>
+          <div class="ambient-orb" style="width: 620px; height: 440px; bottom: 90px; left: -120px; background: rgba(160, 18, 18, 0.14);"></div>
+
+          <!-- TOPO -->
+          <div class="slide-layer flex items-center justify-between">
+            <div class="pill-badge">
+              <span class="pill-dot"></span>
+              <span>DIREÇÃO VISUAL &amp; INTERFACE</span>
+            </div>
+            <div class="page-counter"><strong>03</strong>/06</div>
+          </div>
+
+          <!-- TÍTULO -->
+          <div class="slide-layer mt-6">
+            <h2 class="slide-h2" style="font-size: 64px; max-width: 900px;">
+              Estética que <em class="serif-accent" style="font-size: 74px;">impõe respeito</em> nos primeiros 3 segundos.
+            </h2>
+          </div>
+
+          <!-- BENTO GRID: 3 PILARES VISUAIS -->
+          <div class="slide-layer grid grid-cols-3 gap-5 mt-7">
+            <!-- Pilar 1: Paleta -->
+            <div class="glass-card p-7 flex flex-col justify-between h-[332px]">
+              <div>
+                <span class="font-mono text-xs tracking-[0.16em] uppercase text-zinc-400">01 • CORES</span>
+                <h3 class="text-[23px] font-bold text-white tracking-[-0.02em] mt-2 leading-tight">
+                  Paleta Dark + Laranja
+                </h3>
+                <p class="text-[15.5px] text-zinc-400 mt-2 leading-relaxed">
+                  Energia e alto contraste pra guiar o olhar até a ação.
+                </p>
+              </div>
+
+              <!-- Swatches reais -->
+              <div class="grid grid-cols-4 gap-2.5 pt-4 border-t border-white/[0.07]">
+                <div class="flex flex-col gap-1.5">
+                  <div class="h-12 rounded-xl bg-[#0A0A0A] border border-white/15"></div>
+                  <span class="font-mono text-[10px] text-zinc-500">#0A0A0A</span>
+                </div>
+                <div class="flex flex-col gap-1.5">
+                  <div class="h-12 rounded-xl bg-[#16161A] border border-white/10"></div>
+                  <span class="font-mono text-[10px] text-zinc-500">#16161A</span>
+                </div>
+                <div class="flex flex-col gap-1.5">
+                  <div class="h-12 rounded-xl bg-[#FF3D00] shadow-[0_0_18px_rgba(255,61,0,0.55)]"></div>
+                  <span class="font-mono text-[10px] text-[#FF3D00]">#FF3D00</span>
+                </div>
+                <div class="flex flex-col gap-1.5">
+                  <div class="h-12 rounded-xl bg-[#F5F5F7]"></div>
+                  <span class="font-mono text-[10px] text-zinc-400">#F5F5F7</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Pilar 2: Tipografia -->
+            <div class="glass-card p-7 flex flex-col justify-between h-[332px]">
+              <div>
+                <span class="font-mono text-xs tracking-[0.16em] uppercase text-zinc-400">02 • TYPE MIX</span>
+                <h3 class="text-[23px] font-bold text-white tracking-[-0.02em] mt-2 leading-tight">
+                  Tipografia Editorial
+                </h3>
+                <p class="text-[15.5px] text-zinc-400 mt-2 leading-relaxed">
+                  Autoridade clássica combinada com leitura moderna.
+                </p>
+              </div>
+
+              <!-- Specimen visual -->
+              <div class="pt-4 border-t border-white/[0.07] flex items-baseline justify-between">
+                <div>
+                  <span class="serif-accent text-[54px] leading-none">Aa</span>
+                  <span class="font-extrabold text-[44px] leading-none text-white tracking-tight ml-1">Bb</span>
+                </div>
+                <div class="text-right font-mono text-[10.5px] text-zinc-500 leading-snug">
+                  <div>Instrument Serif</div>
+                  <div class="text-zinc-300">Plus Jakarta Sans</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Pilar 3: Glassmorphism & Pill Buttons -->
+            <div class="glass-card p-7 flex flex-col justify-between h-[332px]">
+              <div>
+                <span class="font-mono text-xs tracking-[0.16em] uppercase text-zinc-400">03 • UI SYSTEM</span>
+                <h3 class="text-[23px] font-bold text-white tracking-[-0.02em] mt-2 leading-tight">
+                  Glassmorphism &amp; Pill Buttons
+                </h3>
+                <p class="text-[15.5px] text-zinc-400 mt-2 leading-relaxed">
+                  Interface limpa, translúcida e atual com foco em clique.
+                </p>
+              </div>
+
+              <!-- Mini UI Component Specimen -->
+              <div class="pt-4 border-t border-white/[0.07] flex flex-col gap-2.5">
+                <div class="px-4 py-2.5 rounded-full bg-white/[0.04] border border-white/10 flex items-center justify-between text-xs text-zinc-300">
+                  <span>Menu Translúcido</span>
+                  <span class="w-2 h-2 rounded-full bg-[#FF3D00]"></span>
+                </div>
+                <div class="px-4 py-2.5 rounded-full bg-gradient-to-r from-[#FF3D00]/30 to-[#FF3D00]/10 border border-[#FF3D00]/50 flex items-center justify-between text-xs font-bold text-white shadow-[0_8px_24px_-6px_rgba(255,61,0,0.55)]">
+                  <span>AGENDAR SESSÃO</span>
+                  <span class="text-[#FF3D00]">→</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- PLACEHOLDER DE DETALHE DA NAVBAR E BOTÕES -->
+          <div class="slide-layer my-6 flex-1 flex flex-col min-h-0">
+            <div class="mockup-shell rounded-[24px] flex-1">
+              <div class="browser-bar">
+                <div class="browser-dots">
+                  <span></span><span></span><span></span>
+                </div>
+                <div class="browser-url">Detalhe de UI — Navbar Tubelight &amp; Botões Glow</div>
+                <div class="font-mono text-[11px] uppercase tracking-widest text-zinc-500">UI DETAIL</div>
+              </div>
+
+              <div class="screenshot-slot" data-slot="slide3-ui">
+                <img class="slot-preview" alt="Detalhe da navbar e botões do site Ronny Lopes" />
+                <div class="slot-placeholder-ui px-10 flex flex-col items-center gap-3">
+                  <p class="font-mono text-xs uppercase tracking-[0.2em] text-[#FF3D00]">PLACEHOLDER • DETALHE DE INTERFACE</p>
+                  <p class="text-lg font-semibold text-zinc-200">Encaixe aqui o print aproximado da Navbar flutuante + Botões Pill</p>
+                  <span class="slot-hint mt-1 px-4 py-1.5 rounded-full border border-white/10 bg-white/[0.03] font-mono text-xs text-zinc-300 transition">
+                    + Selecionar print de UI (928 × 280 px)
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- RODAPÉ -->
+          <div class="slide-layer slide-footer">
+            <div class="sig-brand">
+              <span class="sig-monogram">MS</span>
+              <span>MS Web Designer <span class="text-zinc-600 mx-1.5">•</span> @marisabatier</span>
+            </div>
+            <div class="swipe-pill">
+              <span class="text-zinc-400 font-normal">Estratégia &amp; Conversão</span>
+              <span class="swipe-arrow">→</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- SLIDE 04 — ESTRATÉGIA & CONVERSÃO                                     -->
+    <!-- ===================================================================== -->
+    <section class="slide-stage" data-slide="4">
+      <div class="slide-meta-bar w-full flex items-center justify-between text-xs font-mono text-zinc-400 px-1">
+        <span>SLIDE 04 • ESTRATÉGIA &amp; CONVERSÃO — 1080 × 1350 PX</span>
+        <button type="button" class="text-[#FF3D00] hover:underline cursor-pointer" data-isolate="4">Isolar 1:1 p/ Print →</button>
+      </div>
+
+      <div class="slide-viewport">
+        <article class="ig-slide" id="slide-04">
+          <div class="ambient-orb" style="width: 660px; height: 480px; top: 260px; right: -180px; background: rgba(255, 61, 0, 0.14);"></div>
+          <div class="ambient-orb" style="width: 520px; height: 420px; bottom: 80px; left: -140px; background: rgba(155, 18, 18, 0.14);"></div>
+
+          <!-- TOPO -->
+          <div class="slide-layer flex items-center justify-between">
+            <div class="pill-badge">
+              <span class="pill-dot"></span>
+              <span>ARQUITETURA DE CONVERSÃO</span>
+            </div>
+            <div class="page-counter"><strong>04</strong>/06</div>
+          </div>
+
+          <!-- TÍTULO -->
+          <div class="slide-layer mt-6">
+            <h2 class="slide-h2" style="font-size: 66px; max-width: 900px;">
+              Não é só bonito. Foi pensado pra <em class="serif-accent" style="font-size: 76px;">converter</em>.
+            </h2>
+            <p class="mt-4 text-[21px] text-zinc-400 max-w-[780px]">
+              Cada seção conduz o visitante da curiosidade ao agendamento no WhatsApp sem fricção:
+            </p>
+          </div>
+
+          <!-- JORNADA DA PÁGINA EM 4 ETAPAS -->
+          <div class="slide-layer my-6 flex-1 flex flex-col justify-center gap-4">
+            <!-- Etapa 01 -->
+            <div class="glass-card px-8 py-7 flex items-center justify-between gap-6">
+              <div class="flex items-center gap-6">
+                <div class="w-14 h-14 rounded-2xl bg-[#FF3D00]/15 border border-[#FF3D00]/40 flex items-center justify-center font-mono text-lg font-bold text-[#FF3D00] shrink-0">
+                  01
+                </div>
+                <div>
+                  <h3 class="text-[26px] font-bold text-white tracking-[-0.02em]">
+                    Autoridade imediata
+                  </h3>
+                  <p class="text-[18px] text-zinc-400 mt-1">
+                    Título Mundial na Tailândia + Faixa-Preta logo no topo da página.
+                  </p>
+                </div>
+              </div>
+              <span class="px-4 py-2 rounded-full bg-white/[0.04] border border-white/10 font-mono text-xs uppercase tracking-wider text-zinc-300 shrink-0">
+                Credibilidade
+              </span>
+            </div>
+
+            <!-- Etapa 02 -->
+            <div class="glass-card px-8 py-7 flex items-center justify-between gap-6">
+              <div class="flex items-center gap-6">
+                <div class="w-14 h-14 rounded-2xl bg-white/[0.04] border border-white/12 flex items-center justify-center font-mono text-lg font-bold text-white shrink-0">
+                  02
+                </div>
+                <div>
+                  <h3 class="text-[26px] font-bold text-white tracking-[-0.02em]">
+                    4 Modalidades interativas
+                  </h3>
+                  <p class="text-[18px] text-zinc-400 mt-1">
+                    Muay Thai, Boxe, BJJ e MMA apresentados com clareza técnica e dinamismo.
+                  </p>
+                </div>
+              </div>
+              <span class="px-4 py-2 rounded-full bg-white/[0.04] border border-white/10 font-mono text-xs uppercase tracking-wider text-zinc-300 shrink-0">
+                Desejo &amp; Valor
+              </span>
+            </div>
+
+            <!-- Etapa 03 -->
+            <div class="glass-card px-8 py-7 flex items-center justify-between gap-6">
+              <div class="flex items-center gap-6">
+                <div class="w-14 h-14 rounded-2xl bg-white/[0.04] border border-white/12 flex items-center justify-center font-mono text-lg font-bold text-white shrink-0">
+                  03
+                </div>
+                <div>
+                  <h3 class="text-[26px] font-bold text-white tracking-[-0.02em]">
+                    Formatos claros de treino
+                  </h3>
+                  <p class="text-[18px] text-zinc-400 mt-1">
+                    1-on-1, Dupla e Pequeno Grupo organizados pro aluno já saber qual escolher.
+                  </p>
+                </div>
+              </div>
+              <span class="px-4 py-2 rounded-full bg-white/[0.04] border border-white/10 font-mono text-xs uppercase tracking-wider text-zinc-300 shrink-0">
+                Decisão Fácil
+              </span>
+            </div>
+
+            <!-- Etapa 04 -->
+            <div class="glass-card-ember px-8 py-7 flex items-center justify-between gap-6">
+              <div class="flex items-center gap-6">
+                <div class="w-14 h-14 rounded-2xl bg-[#FF3D00] flex items-center justify-center font-mono text-lg font-bold text-white shadow-[0_0_24px_rgba(255,61,0,0.65)] shrink-0">
+                  04
+                </div>
+                <div>
+                  <h3 class="text-[26px] font-bold text-white tracking-[-0.02em]">
+                    FAQ que quebra objeções
+                  </h3>
+                  <p class="text-[18px] text-zinc-300 mt-1">
+                    Responde dúvidas de iniciantes antes do clique direto pro WhatsApp.
+                  </p>
+                </div>
+              </div>
+              <span class="px-4 py-2 rounded-full bg-[#FF3D00]/20 border border-[#FF3D00]/50 font-mono text-xs uppercase tracking-wider text-white shrink-0">
+                Clique Qualificado →
+              </span>
+            </div>
+          </div>
+
+          <!-- FLUXO RESUMO -->
+          <div class="slide-layer mb-5 px-6 py-4 rounded-2xl bg-white/[0.025] border border-white/[0.07] flex items-center justify-between font-mono text-xs uppercase tracking-[0.14em] text-zinc-400">
+            <span>Visita no Perfil</span>
+            <span class="text-[#FF3D00]">→</span>
+            <span>Impacto Visual</span>
+            <span class="text-[#FF3D00]">→</span>
+            <span>Confiança Real</span>
+            <span class="text-[#FF3D00]">→</span>
+            <span class="text-white font-semibold">Aluno no WhatsApp</span>
+          </div>
+
+          <!-- RODAPÉ -->
+          <div class="slide-layer slide-footer">
+            <div class="sig-brand">
+              <span class="sig-monogram">MS</span>
+              <span>MS Web Designer <span class="text-zinc-600 mx-1.5">•</span> @marisabatier</span>
+            </div>
+            <div class="swipe-pill">
+              <span class="text-zinc-400 font-normal">Experiência Mobile</span>
+              <span class="swipe-arrow">→</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- SLIDE 05 — EXPERIÊNCIA MOBILE & PROVA REAL (2 CELULARES + LEGENDA)    -->
+    <!-- ===================================================================== -->
+    <section class="slide-stage" data-slide="5">
+      <div class="slide-meta-bar w-full flex items-center justify-between text-xs font-mono text-zinc-400 px-1">
+        <span>SLIDE 05 • EXPERIÊNCIA MOBILE &amp; PROVA REAL — 1080 × 1350 PX</span>
+        <button type="button" class="text-[#FF3D00] hover:underline cursor-pointer" data-isolate="5">Isolar 1:1 p/ Print →</button>
+      </div>
+
+      <div class="slide-viewport">
+        <article class="ig-slide" id="slide-05">
+          <div class="ambient-orb" style="width: 620px; height: 520px; top: 320px; left: 60px; background: rgba(255, 61, 0, 0.16);"></div>
+          <div class="ambient-orb" style="width: 500px; height: 400px; top: 140px; right: -120px; background: rgba(165, 20, 18, 0.14);"></div>
+
+          <!-- TOPO -->
+          <div class="slide-layer flex items-center justify-between">
+            <div class="pill-badge">
+              <span class="pill-dot"></span>
+              <span>MOBILE-FIRST &amp; PROVA REAL</span>
+            </div>
+            <div class="page-counter"><strong>05</strong>/06</div>
+          </div>
+
+          <!-- TÍTULO -->
+          <div class="slide-layer mt-6">
+            <h2 class="slide-h2" style="font-size: 64px; max-width: 900px;">
+              Feito pra quem chega <em class="serif-accent" style="font-size: 74px;">direto do Instagram</em>.
+            </h2>
+          </div>
+
+          <!-- CONTEÚDO CENTRAL: 2 MOCKUPS DE CELULAR LADO A LADO + LEGENDA LATERAL CURTA -->
+          <div class="slide-layer my-6 flex-1 flex items-center justify-between gap-7 min-h-0">
+            <!-- Par de celulares lado a lado -->
+            <div class="flex items-center gap-5">
+              <!-- Celular 1: Galeria de Lutas -->
+              <div class="phone-frame -translate-y-3">
+                <div class="phone-inner">
+                  <div class="phone-island"></div>
+                  <div class="screenshot-slot pt-8" data-slot="slide5-mobile-1">
+                    <img class="slot-preview" alt="Print mobile da galeria de lutas" />
+                    <div class="slot-placeholder-ui px-5 flex flex-col items-center gap-3">
+                      <span class="w-11 h-11 rounded-2xl border border-white/15 bg-white/[0.04] flex items-center justify-center text-[#FF3D00] font-mono text-sm">01</span>
+                      <p class="font-mono text-[11px] uppercase tracking-[0.18em] text-[#FF3D00]">MOBILE PRINT 01</p>
+                      <p class="text-base font-semibold text-zinc-200 leading-snug">Galeria de Lutas &amp; Vídeos</p>
+                      <p class="text-xs text-zinc-500">Clique p/ encaixar print (9:19.5)</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Celular 2: Depoimentos -->
+              <div class="phone-frame translate-y-4">
+                <div class="phone-inner">
+                  <div class="phone-island"></div>
+                  <div class="screenshot-slot pt-8" data-slot="slide5-mobile-2">
+                    <img class="slot-preview" alt="Print mobile dos depoimentos" />
+                    <div class="slot-placeholder-ui px-5 flex flex-col items-center gap-3">
+                      <span class="w-11 h-11 rounded-2xl border border-white/15 bg-white/[0.04] flex items-center justify-center text-[#FF3D00] font-mono text-sm">02</span>
+                      <p class="font-mono text-[11px] uppercase tracking-[0.18em] text-[#FF3D00]">MOBILE PRINT 02</p>
+                      <p class="text-base font-semibold text-zinc-200 leading-snug">Depoimentos de Alunos</p>
+                      <p class="text-xs text-zinc-500">Clique p/ encaixar print (9:19.5)</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Coluna de Legenda Lateral Curta -->
+            <div class="flex-1 flex flex-col gap-5">
+              <div class="glass-card p-8">
+                <span class="font-mono text-xs uppercase tracking-[0.18em] text-[#FF3D00] block mb-4">
+                  NAVEGAÇÃO NO POLEGAR
+                </span>
+                <p class="text-[24px] leading-[1.38] font-semibold text-white tracking-[-0.015em]">
+                  Carregamento rápido, galeria interativa e botão de agendamento sempre acessível.
+                </p>
+              </div>
+
+              <div class="glass-card px-7 py-6 space-y-3.5">
+                <div class="flex items-center gap-3 text-[15.5px] text-zinc-300">
+                  <span class="w-2 h-2 rounded-full bg-[#FF3D00]"></span>
+                  <span>Mais de 85% dos acessos vêm pelo celular</span>
+                </div>
+                <div class="flex items-center gap-3 text-[15.5px] text-zinc-300">
+                  <span class="w-2 h-2 rounded-full bg-[#FF3D00]"></span>
+                  <span>Fotos e vídeos reais em alta performance</span>
+                </div>
+                <div class="flex items-center gap-3 text-[15.5px] text-zinc-300">
+                  <span class="w-2 h-2 rounded-full bg-[#FF3D00]"></span>
+                  <span>CTA direto pro WhatsApp em toda a rolagem</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- RODAPÉ -->
+          <div class="slide-layer slide-footer">
+            <div class="sig-brand">
+              <span class="sig-monogram">MS</span>
+              <span>MS Web Designer <span class="text-zinc-600 mx-1.5">•</span> @marisabatier</span>
+            </div>
+            <div class="swipe-pill">
+              <span class="text-zinc-400 font-normal">Próximo passo</span>
+              <span class="swipe-arrow">→</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- SLIDE 06 — CTA (FECHAMENTO)                                           -->
+    <!-- ===================================================================== -->
+    <section class="slide-stage" data-slide="6">
+      <div class="slide-meta-bar w-full flex items-center justify-between text-xs font-mono text-zinc-400 px-1">
+        <span>SLIDE 06 • CTA (FECHAMENTO) — 1080 × 1350 PX</span>
+        <button type="button" class="text-[#FF3D00] hover:underline cursor-pointer" data-isolate="6">Isolar 1:1 p/ Print →</button>
+      </div>
+
+      <div class="slide-viewport">
+        <article class="ig-slide" id="slide-06">
+          <!-- Glow central dramático p/ fechamento -->
+          <div class="ambient-orb" style="width: 780px; height: 560px; top: 50%; left: 50%; transform: translate(-50%, -46%); background: rgba(255, 61, 0, 0.20);"></div>
+          <div class="ambient-orb" style="width: 520px; height: 380px; top: -80px; left: -100px; background: rgba(165, 20, 18, 0.14);"></div>
+
+          <!-- TOPO -->
+          <div class="slide-layer flex items-center justify-between">
+            <div class="pill-badge">
+              <span class="pill-dot"></span>
+              <span>AGENDA ABERTA • NOVOS PROJETOS</span>
+            </div>
+            <div class="page-counter"><strong>06</strong>/06</div>
+          </div>
+
+          <!-- BLOCO CENTRAL DE CONVERSÃO -->
+          <div class="slide-layer my-auto py-8 flex flex-col items-start">
+            <div class="inline-flex flex-wrap items-center gap-2.5 mb-8">
+              <span class="px-4 py-1.5 rounded-full bg-white/[0.04] border border-white/10 text-xs font-mono uppercase tracking-widest text-zinc-300">Personal Trainers</span>
+              <span class="px-4 py-1.5 rounded-full bg-white/[0.04] border border-white/10 text-xs font-mono uppercase tracking-widest text-zinc-300">Autônomos &amp; Especialistas</span>
+              <span class="px-4 py-1.5 rounded-full bg-white/[0.04] border border-white/10 text-xs font-mono uppercase tracking-widest text-zinc-300">Criadores</span>
+            </div>
+
+            <h2 class="slide-h2" style="font-size: 74px; max-width: 910px; line-height: 1.03;">
+              Seu trabalho é bom demais pra ter um <em class="serif-accent" style="font-size: 86px;">link genérico</em> na bio.
+            </h2>
+
+            <p class="mt-8 text-[27px] leading-[1.42] text-zinc-300 font-normal max-w-[820px]">
+              Crio landing pages e sites sob medida pra profissionais e marcas que querem se destacar.
+            </p>
+
+            <!-- BOTÃO VISUAL EM DESTAQUE (PILL COM BRILHO LARANJA) -->
+            <div class="mt-14">
+              <div class="ember-cta-pill">
+                <span>Me chama no direct com <strong class="text-[#FF3D00] font-extrabold">‘SITE’</strong></span>
+                <span class="ember-cta-arrow">→</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- RODAPÉ LIMPO COM ASSINATURA MS WEB DESIGNER -->
+          <div class="slide-layer slide-footer">
+            <div class="flex items-center gap-4">
+              <span class="w-11 h-11 rounded-full bg-[#FF3D00]/15 border border-[#FF3D00]/45 flex items-center justify-center font-mono text-sm font-bold text-white">
+                MS
+              </span>
+              <div>
+                <div class="text-lg font-bold text-white tracking-tight leading-none">MS Web Designer</div>
+                <div class="text-sm text-zinc-400 mt-1">@marisabatier • Landing Pages &amp; Sites Sob Medida</div>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-3 text-zinc-400 text-sm font-mono uppercase tracking-wider">
+              <span class="px-4 py-2 rounded-full bg-white/[0.03] border border-white/[0.08] inline-flex items-center gap-2">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FF3D00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+                Salve pra referência
+              </span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    (function () {
+      const root = document.documentElement;
+      const btnFitScale = document.getElementById('btnFitScale');
+      const btnRealScale = document.getElementById('btnRealScale');
+      const btnCleanShot = document.getElementById('btnCleanShot');
+      const btnExitClean = document.getElementById('btnExitClean');
+      const btnResetSlots = document.getElementById('btnResetSlots');
+      const filterButtons = Array.from(document.querySelectorAll('[data-filter]'));
+      const isolateButtons = Array.from(document.querySelectorAll('[data-isolate]'));
+      const stages = Array.from(document.querySelectorAll('.slide-stage'));
+      const slots = Array.from(document.querySelectorAll('.screenshot-slot'));
+      const fileInput = document.getElementById('globalSlotInput');
+
+      let mode = 'fit'; // 'fit' | 'real'
+      let activeSlot = null;
+
+      function computeScale() {
+        if (mode === 'real' || document.body.classList.contains('clean-shot-mode')) {
+          root.style.setProperty('--slide-scale', '1');
+          return;
+        }
+        const availW = Math.max(320, window.innerWidth - 48);
+        const scale = Math.min(1, availW / 1080);
+        root.style.setProperty('--slide-scale', scale.toFixed(4));
+      }
+
+      function setFilter(val) {
+        filterButtons.forEach((b) => b.classList.toggle('active', b.dataset.filter === val));
+        stages.forEach((st) => {
+          st.style.display = (val === 'all' || st.dataset.slide === val) ? 'flex' : 'none';
+        });
+      }
+
+      function enterCleanShot(slideNum) {
+        if (slideNum) setFilter(String(slideNum));
+        mode = 'real';
+        btnRealScale.classList.add('active');
+        btnFitScale.classList.remove('active');
+        document.body.classList.add('clean-shot-mode');
+        computeScale();
+        window.scrollTo(0, 0);
+      }
+
+      function exitCleanShot() {
+        document.body.classList.remove('clean-shot-mode');
+        computeScale();
+      }
+
+      btnFitScale.addEventListener('click', () => {
+        mode = 'fit';
+        btnFitScale.classList.add('active');
+        btnRealScale.classList.remove('active');
+        exitCleanShot();
+      });
+
+      btnRealScale.addEventListener('click', () => {
+        mode = 'real';
+        btnRealScale.classList.add('active');
+        btnFitScale.classList.remove('active');
+        computeScale();
+      });
+
+      btnCleanShot.addEventListener('click', () => enterCleanShot());
+      btnExitClean.addEventListener('click', exitCleanShot);
+
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && document.body.classList.contains('clean-shot-mode')) {
+          exitCleanShot();
+        }
+      });
+
+      filterButtons.forEach((btn) => {
+        btn.addEventListener('click', () => setFilter(btn.dataset.filter));
+      });
+
+      isolateButtons.forEach((btn) => {
+        btn.addEventListener('click', () => enterCleanShot(btn.dataset.isolate));
+      });
+
+      // Upload / Drag-and-drop de prints reais nos placeholders
+      function applyFileToSlot(slot, file) {
+        if (!slot || !file || !file.type.startsWith('image/')) return;
+        const reader = new FileReader();
+        reader.onload = (ev) => {
+          const img = slot.querySelector('img.slot-preview');
+          if (img) {
+            img.src = ev.target.result;
+            slot.classList.add('has-image');
+          }
+        };
+        reader.readAsDataURL(file);
+      }
+
+      slots.forEach((slot) => {
+        slot.addEventListener('click', () => {
+          activeSlot = slot;
+          fileInput.value = '';
+          fileInput.click();
+        });
+
+        slot.addEventListener('dragover', (e) => {
+          e.preventDefault();
+          slot.style.outline = '2px solid rgba(255, 61, 0, 0.7)';
+        });
+
+        slot.addEventListener('dragleave', () => {
+          slot.style.outline = '';
+        });
+
+        slot.addEventListener('drop', (e) => {
+          e.preventDefault();
+          slot.style.outline = '';
+          const file = e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0];
+          applyFileToSlot(slot, file);
+        });
+      });
+
+      fileInput.addEventListener('change', () => {
+        const file = fileInput.files && fileInput.files[0];
+        applyFileToSlot(activeSlot, file);
+      });
+
+      btnResetSlots.addEventListener('click', () => {
+        slots.forEach((slot) => {
+          const img = slot.querySelector('img.slot-preview');
+          if (img) img.removeAttribute('src');
+          slot.classList.remove('has-image');
+        });
+      });
+
+      window.addEventListener('resize', computeScale);
+      computeScale();
+    })();
+  </script>
+</body>
+</html>
