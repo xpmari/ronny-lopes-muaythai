@@ -229,6 +229,9 @@
 
       --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
       --ease-spring: cubic-bezier(0.22, 1, 0.36, 1);
+      --zoom-in-scale-from: 0.92;
+      --zoom-in-duration: 550ms;
+      --zoom-in-ease: cubic-bezier(0.22, 1, 0.36, 1);
       --nav-height: 84px;
     }
 
@@ -3824,6 +3827,56 @@
       }
     }
 
+    /* ================= ZOOM DE ENTRADA (PROGRESSIVE ENHANCEMENT) ================= */
+    [data-zoom-state] {
+      transform-origin: 50% 50%;
+    }
+
+    @media (max-width: 768px) {
+      .programs .spotlight-card[data-zoom-state] {
+        transform-origin: 50% 22%;
+      }
+    }
+
+    [data-zoom-state="pending"],
+    .programs .spotlight-card[data-zoom-state="pending"] {
+      opacity: 0;
+      transform: scale(var(--zoom-in-scale-from, 0.92));
+      transition: none;
+    }
+
+    @media (min-width: 769px) {
+      .spotlight-card[data-zoom-state="pending"] {
+        transform: perspective(1000px) rotateX(0deg) rotateY(0deg) scale(var(--zoom-in-scale-from, 0.92));
+      }
+    }
+
+    [data-zoom-state="pending"]:focus-within,
+    .programs .spotlight-card[data-zoom-state="pending"]:focus-within {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    [data-zoom-state="entering"],
+    .programs .spotlight-card[data-zoom-state="entering"] {
+      opacity: 1;
+      transform: scale(1);
+      transition:
+        opacity var(--zoom-in-duration, 550ms) var(--zoom-in-ease, cubic-bezier(0.22, 1, 0.36, 1)) var(--zoom-delay, 0ms),
+        transform var(--zoom-in-duration, 550ms) var(--zoom-in-ease, cubic-bezier(0.22, 1, 0.36, 1)) var(--zoom-delay, 0ms);
+    }
+
+    @media (min-width: 769px) {
+      .spotlight-card[data-zoom-state="entering"] {
+        transform: perspective(1000px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) scale(1);
+      }
+    }
+
+    [data-zoom-state="done"],
+    .programs .spotlight-card[data-zoom-state="done"] {
+      opacity: 1;
+    }
+
     @media (prefers-reduced-motion: reduce) {
       html {
         scroll-behavior: auto;
@@ -3843,7 +3896,9 @@
       .cut-inner,
       .vcut-char,
       .blur-fade,
-      .reveal {
+      .reveal,
+      [data-zoom-state],
+      .programs .spotlight-card[data-zoom-state] {
         opacity: 1 !important;
         filter: none !important;
         transform: none !important;
@@ -4077,7 +4132,7 @@
       </div>
 
       <div class="programs-grid">
-        <article class="spotlight-card is-featured reveal" data-tilt-card>
+        <article class="spotlight-card is-featured" data-tilt-card data-zoom-in>
           <div class="card-grid-bg" aria-hidden="true"></div>
           <div class="spotlight-glow"></div>
           <div class="spotlight-content">
@@ -4115,7 +4170,7 @@
           </div>
         </article>
 
-        <article class="spotlight-card reveal" data-tilt-card>
+        <article class="spotlight-card" data-tilt-card data-zoom-in>
           <div class="card-grid-bg" aria-hidden="true"></div>
           <div class="spotlight-glow"></div>
           <div class="spotlight-content">
@@ -4152,7 +4207,7 @@
           </div>
         </article>
 
-        <article class="spotlight-card reveal" data-tilt-card>
+        <article class="spotlight-card" data-tilt-card data-zoom-in>
           <div class="card-grid-bg" aria-hidden="true"></div>
           <div class="spotlight-glow"></div>
           <div class="spotlight-content">
@@ -5042,7 +5097,7 @@
   <!-- AGENDAMENTO DIRETO VIA WHATSAPP -->
   <section class="booking-section" id="agendar" aria-labelledby="agendarHeading">
     <div class="container">
-      <div class="booking-card reveal">
+      <div class="booking-card" data-zoom-in>
         <div class="booking-visual">
           <div>
             <span class="eyebrow">SESSÃO EXPERIMENTAL — 60 MIN</span>
@@ -5767,7 +5822,7 @@
       if (!stackCards.length) return;
       stackCards.forEach((c) => { c.style.minHeight = ''; });
       if (window.innerWidth <= 768) {
-        const maxH = Math.max(...stackCards.map((c) => c.getBoundingClientRect().height));
+        const maxH = Math.max(...stackCards.map((c) => c.offsetHeight));
         if (maxH > 0) {
           stackCards.forEach((c) => { c.style.minHeight = `${Math.ceil(maxH)}px`; });
         }
@@ -6316,6 +6371,142 @@
         document.querySelectorAll('.hero .vcut-ready, .hero .cut-reveal, .hero .reveal, .hero .blur-fade').forEach((el) => el.classList.add('visible'));
       });
     });
+
+    // 9b. Zoom de Entrada discreto (scale 0.92 -> 1, opacity 0 -> 1, 550ms, threshold 20%, stagger <= 240ms)
+    function initZoomInReveal({
+      selector = '.programs-grid .spotlight-card, .booking-card',
+      threshold = 0.2,
+      durationMs = 550,
+      staggerStepMs = 90,
+      maxDelayMs = 240
+    } = {}) {
+      const targets = Array.from(document.querySelectorAll(selector));
+      if (!targets.length || !('IntersectionObserver' in window) || reducedMotionMql.matches) {
+        return () => {};
+      }
+
+      const controller = new AbortController();
+      const { signal } = controller;
+      const timers = new Set();
+      const rafs = new Set();
+      let observer = null;
+
+      const settleTarget = (el) => {
+        el.dataset.zoomState = 'done';
+        el.style.removeProperty('--zoom-delay');
+      };
+
+      const triggerZoomIn = (el, delayMs = 0) => {
+        if (signal.aborted) return;
+        const state = el.dataset.zoomState;
+        if (state === 'entering' || state === 'done') return;
+        if (observer) observer.unobserve(el);
+
+        if (delayMs > 0) {
+          el.style.setProperty('--zoom-delay', `${delayMs}ms`);
+        } else {
+          el.style.removeProperty('--zoom-delay');
+        }
+
+        el.dataset.zoomState = 'entering';
+
+        let finished = false;
+        const finish = () => {
+          if (finished) return;
+          finished = true;
+          clearTimeout(fallbackTimer);
+          timers.delete(fallbackTimer);
+          el.removeEventListener('transitionend', onTransitionEnd);
+          settleTarget(el);
+        };
+
+        const onTransitionEnd = (e) => {
+          if (e.target !== el) return;
+          if (e.propertyName !== 'transform' && e.propertyName !== 'opacity') return;
+          finish();
+        };
+
+        el.addEventListener('transitionend', onTransitionEnd, { signal });
+        const fallbackTimer = window.setTimeout(finish, durationMs + delayMs + 80);
+        timers.add(fallbackTimer);
+      };
+
+      targets.forEach((el) => {
+        el.dataset.zoomState = 'pending';
+        el.addEventListener('focusin', () => triggerZoomIn(el, 0), { signal });
+      });
+
+      observer = new IntersectionObserver((entries) => {
+        const vh = window.innerHeight || document.documentElement.clientHeight || 1;
+        const groups = new Map();
+
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const el = entry.target;
+          if (el.dataset.zoomState !== 'pending') return;
+
+          const minRatio = Math.min(
+            threshold,
+            (vh * 0.85) / Math.max(entry.boundingClientRect.height, 1)
+          );
+          if (entry.intersectionRatio < minRatio) return;
+
+          observer.unobserve(el);
+          const groupKey = el.parentElement || document.body;
+          if (!groups.has(groupKey)) groups.set(groupKey, []);
+          groups.get(groupKey).push(el);
+        });
+
+        groups.forEach((group) => {
+          group.sort((a, b) => targets.indexOf(a) - targets.indexOf(b));
+          const count = group.length;
+          const step = count > 1
+            ? Math.min(staggerStepMs, Math.floor(maxDelayMs / (count - 1)))
+            : 0;
+
+          group.forEach((el, idx) => {
+            const delayMs = Math.min(idx * step, maxDelayMs);
+            const rafId = requestAnimationFrame(() => {
+              rafs.delete(rafId);
+              triggerZoomIn(el, delayMs);
+            });
+            rafs.add(rafId);
+          });
+        });
+      }, { threshold: [0.05, threshold] });
+
+      targets.forEach((el) => observer.observe(el));
+
+      reducedMotionMql.addEventListener('change', (e) => {
+        if (!e.matches) return;
+        if (observer) observer.disconnect();
+        rafs.forEach((id) => cancelAnimationFrame(id));
+        rafs.clear();
+        timers.forEach((id) => clearTimeout(id));
+        timers.clear();
+        targets.forEach((el) => settleTarget(el));
+      }, { signal });
+
+      return function destroyZoomInReveal() {
+        controller.abort();
+        if (observer) {
+          observer.disconnect();
+          observer = null;
+        }
+        rafs.forEach((id) => cancelAnimationFrame(id));
+        rafs.clear();
+        timers.forEach((id) => clearTimeout(id));
+        timers.clear();
+        targets.forEach((el) => {
+          if (el.dataset.zoomState !== 'done') {
+            delete el.dataset.zoomState;
+            el.style.removeProperty('--zoom-delay');
+          }
+        });
+      };
+    }
+
+    window.__destroyZoomInReveal = initZoomInReveal();
 
     const statsObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
