@@ -2077,105 +2077,82 @@
       transform: scale(0.985);
     }
 
-    /* ================= LIGHTHOUSE TORCH GALLERY (@dhxwhy / 21st.dev) + LIGHTBOX ================= */
+    /* ================= 3D CIRCULAR GALLERY (@ravikatiyar162 / 21st.dev) ================= */
     .action-gallery {
-      background-color: var(--bg-void);
+      position: relative;
+      background:
+        radial-gradient(ellipse 56% 46% at 50% 54%, rgba(255, 61, 0, 0.09) 0%, rgba(184, 15, 15, 0.04) 44%, transparent 72%),
+        var(--bg-void);
       border-bottom: 1px solid var(--border-hairline);
       padding: clamp(68px, 8.5vw, 112px) 0;
+      overflow: hidden;
     }
 
-    .lighthouse-stage {
+    .circular-gallery-viewport {
       position: relative;
-      display: grid;
-      grid-template-columns: repeat(12, 1fr);
-      grid-auto-rows: 274px;
-      gap: 16px;
-      --gx: 50%;
-      --gy: 50%;
-      --torch-active: 0;
+      width: 100%;
+      max-width: 1480px;
+      margin: 0 auto;
+      height: 476px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      perspective: 2000px;
+      cursor: grab;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: pan-y;
+      --cg-card-w: 292px;
+      --cg-card-h: 392px;
+      --cg-radius: 565px;
+      mask-image: linear-gradient(90deg, transparent 0%, #000 6%, #000 94%, transparent 100%);
+      -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 6%, #000 94%, transparent 100%);
     }
 
-    /* Interactive hand-torch radial beam over the gallery */
-    .lighthouse-stage::after {
-      content: "";
-      position: absolute;
-      inset: -12px;
-      pointer-events: none;
-      z-index: 4;
-      opacity: var(--torch-active);
-      transition: opacity 0.4s ease;
-      background: radial-gradient(
-        420px circle at var(--gx) var(--gy),
-        rgba(255, 90, 36, 0.16) 0%,
-        rgba(255, 255, 255, 0.05) 32%,
-        transparent 68%
-      );
-      mix-blend-mode: screen;
+    .circular-gallery-viewport.is-dragging {
+      cursor: grabbing;
+    }
+
+    .circular-ring {
+      position: relative;
+      width: var(--cg-card-w);
+      height: var(--cg-card-h);
+      transform-style: preserve-3d;
+      will-change: transform;
     }
 
     .gallery-frame {
-      position: relative;
+      position: absolute;
+      inset: 0;
       overflow: hidden;
-      border: 1px solid rgba(255, 255, 255, 0.10);
-      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 14px;
       background-color: #09090C;
-      cursor: zoom-in;
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
-      transition:
-        border-color 0.35s var(--ease-out),
-        transform 0.45s var(--ease-out),
-        box-shadow 0.45s var(--ease-out);
+      cursor: pointer;
+      backface-visibility: visible;
+      transform: rotateY(calc(var(--item-idx, 0) * 36deg)) translateZ(var(--cg-radius));
+      box-shadow:
+        0 26px 58px -20px rgba(0, 0, 0, 0.92),
+        inset 0 1px 0 rgba(255, 255, 255, 0.10);
+      transition: border-color 0.32s ease, box-shadow 0.35s ease;
+      will-change: opacity;
     }
 
-    /* Asymmetric layout tailored to horizontal ring photos + 9:16 vertical training reels */
-    .gallery-frame.tile-wide-top {
-      grid-column: span 6;
-      grid-row: span 1;
-    }
-
-    .gallery-frame.tile-wide-bottom {
-      grid-column: span 6;
-      grid-row: span 1;
-    }
-
-    .gallery-frame.tile-tall-1 {
-      grid-column: span 3;
-      grid-row: span 2;
-    }
-
-    .gallery-frame.tile-tall-2 {
-      grid-column: span 3;
-      grid-row: span 2;
-    }
-
-    .gallery-frame.tile-tall-3,
-    .gallery-frame.tile-tall-4 {
-      grid-column: span 3;
-      grid-row: span 2;
-    }
-
-    .gallery-frame.tile-half {
-      grid-column: span 6;
-      grid-row: span 1;
-    }
-
-    .gallery-frame.tile-mid-5 {
-      grid-column: span 5;
-      grid-row: span 1;
-    }
-
-    .gallery-frame.tile-mid-4 {
-      grid-column: span 4;
-      grid-row: span 1;
+    .gallery-frame.is-front {
+      border-color: rgba(255, 255, 255, 0.26);
+      box-shadow:
+        0 32px 72px -18px rgba(0, 0, 0, 0.96),
+        0 0 32px -12px rgba(255, 61, 0, 0.34),
+        inset 0 1px 0 rgba(255, 255, 255, 0.18);
     }
 
     .gallery-frame:hover,
     .gallery-frame:focus-visible {
-      border-color: rgba(255, 61, 0, 0.55);
-      transform: translateY(-3px);
+      border-color: rgba(255, 61, 0, 0.62);
       box-shadow:
-        0 24px 54px -26px rgba(0, 0, 0, 0.95),
-        0 0 28px -10px rgba(255, 61, 0, 0.42);
+        0 32px 72px -18px rgba(0, 0, 0, 0.96),
+        0 0 34px -8px rgba(255, 61, 0, 0.48),
+        inset 0 1px 0 rgba(255, 255, 255, 0.22);
     }
 
     .gallery-frame img {
@@ -2183,86 +2160,109 @@
       height: 100%;
       object-fit: cover;
       display: block;
-      filter: brightness(0.68) saturate(0.72) contrast(1.08);
-      transition: transform 0.65s var(--ease-out), filter 0.45s ease;
+      pointer-events: none;
+      filter: brightness(0.92) saturate(0.96) contrast(1.06);
+      transition: transform 0.6s var(--ease-out), filter 0.4s ease;
     }
 
-    .gallery-frame.lit-sweep img,
     .gallery-frame:hover img,
-    .gallery-frame:focus-visible img {
-      transform: scale(1.045);
-      filter: brightness(1) saturate(1.02) contrast(1.06);
+    .gallery-frame.is-front img {
+      filter: brightness(1) saturate(1.04) contrast(1.06);
     }
 
-    .gallery-frame.lit-sweep {
-      border-color: rgba(255, 110, 64, 0.38);
+    .gallery-frame:hover img {
+      transform: scale(1.04);
     }
 
     .gallery-frame::after {
       content: "";
       position: absolute;
       inset: 0;
-      background: linear-gradient(180deg, rgba(5, 5, 5, 0.14) 0%, transparent 42%, rgba(5, 5, 5, 0.72) 78%, rgba(5, 5, 5, 0.95) 100%);
+      background: linear-gradient(
+        180deg,
+        rgba(5, 5, 5, 0.04) 0%,
+        transparent 44%,
+        rgba(5, 5, 5, 0.68) 76%,
+        rgba(5, 5, 5, 0.94) 100%
+      );
       pointer-events: none;
-    }
-
-    .gallery-zoom-pill {
-      position: absolute;
-      top: 14px;
-      right: 14px;
-      z-index: 3;
-      padding: 5px 10px;
-      border-radius: 9999px;
-      font-family: var(--font-mono);
-      font-size: 9.5px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.86);
-      background: rgba(8, 8, 12, 0.72);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      opacity: 0;
-      transform: translateY(-4px);
-      transition: opacity 0.25s ease, transform 0.25s ease;
-    }
-
-    .gallery-frame:hover .gallery-zoom-pill,
-    .gallery-frame:focus-visible .gallery-zoom-pill {
-      opacity: 1;
-      transform: translateY(0);
     }
 
     .gallery-meta {
       position: absolute;
-      bottom: 20px;
-      left: 20px;
-      right: 20px;
+      bottom: 18px;
+      left: 18px;
+      right: 18px;
       z-index: 2;
-      transition: transform 0.4s var(--ease-out);
+      pointer-events: none;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
     }
 
-    .gallery-frame:hover .gallery-meta {
-      transform: translateY(-3px);
+    .cg-card-title {
+      font-family: var(--font-sans);
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: #ffffff;
+      line-height: 1.2;
     }
 
-    .gallery-tag {
-      display: block;
+    .cg-card-sub {
+      font-family: var(--font-sans);
+      font-style: italic;
+      font-size: 13px;
+      color: rgba(235, 235, 242, 0.84);
+      line-height: 1.35;
+    }
+
+    .cg-card-meta {
+      margin-top: 5px;
       font-family: var(--font-mono);
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--accent-ember);
-      margin-bottom: 5px;
+      font-size: 10.5px;
+      letter-spacing: 0.06em;
+      color: rgba(180, 180, 192, 0.76);
     }
 
-    .gallery-title {
-      font-family: var(--font-serif);
-      font-size: clamp(22px, 2vw, 28px);
-      font-weight: 400;
+    .circular-controls {
+      margin-top: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+    }
+
+    .cg-spin-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.13);
       color: var(--text-primary);
-      line-height: 1.12;
+      font-size: 15px;
+      transition: border-color 0.22s ease, background-color 0.22s ease, transform 0.2s var(--ease-spring);
+    }
+
+    .cg-spin-btn:hover {
+      border-color: rgba(255, 61, 0, 0.68);
+      background: rgba(255, 61, 0, 0.14);
+      transform: scale(1.06);
+    }
+
+    .cg-spin-btn:active {
+      transform: scale(0.95);
+    }
+
+    .cg-hint {
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
     }
 
     /* ================= CAROUSEL LIGHTBOX DIALOG (21st.dev Upgrade) ================= */
@@ -3482,30 +3482,12 @@
         min-height: auto;
       }
 
-      .lighthouse-stage {
-        grid-template-columns: repeat(2, 1fr);
-        grid-auto-rows: 260px;
-      }
-
-      .gallery-frame.tile-wide-top,
-      .gallery-frame.tile-wide-bottom {
-        grid-column: span 2;
-        grid-row: span 1;
-      }
-
-      .gallery-frame.tile-tall-1,
-      .gallery-frame.tile-tall-2,
-      .gallery-frame.tile-tall-3,
-      .gallery-frame.tile-tall-4 {
-        grid-column: span 1;
-        grid-row: span 2;
-      }
-
-      .gallery-frame.tile-half,
-      .gallery-frame.tile-mid-5,
-      .gallery-frame.tile-mid-4 {
-        grid-column: span 1;
-        grid-row: span 1;
+      .circular-gallery-viewport {
+        height: 416px;
+        perspective: 1650px;
+        --cg-card-w: 246px;
+        --cg-card-h: 336px;
+        --cg-radius: 470px;
       }
 
       .faq-layout {
@@ -3669,28 +3651,12 @@
         padding: 26px 20px;
       }
 
-      .lighthouse-stage {
-        grid-template-columns: 1fr;
-        grid-auto-rows: auto;
-      }
-
-      .gallery-frame.tile-wide-top,
-      .gallery-frame.tile-wide-bottom,
-      .gallery-frame.tile-half,
-      .gallery-frame.tile-mid-5,
-      .gallery-frame.tile-mid-4 {
-        grid-column: span 1;
-        grid-row: span 1;
-        aspect-ratio: 16 / 10;
-      }
-
-      .gallery-frame.tile-tall-1,
-      .gallery-frame.tile-tall-2,
-      .gallery-frame.tile-tall-3,
-      .gallery-frame.tile-tall-4 {
-        grid-column: span 1;
-        grid-row: span 1;
-        aspect-ratio: 4 / 5;
+      .circular-gallery-viewport {
+        height: 372px;
+        perspective: 1450px;
+        --cg-card-w: 218px;
+        --cg-card-h: 300px;
+        --cg-radius: 405px;
       }
 
       .coach-photo {
@@ -3828,6 +3794,33 @@
 
       .review-card {
         width: 300px;
+      }
+
+      .circular-gallery-viewport {
+        height: 344px;
+        perspective: 1250px;
+        --cg-card-w: 196px;
+        --cg-card-h: 274px;
+        --cg-radius: 358px;
+      }
+
+      .gallery-meta {
+        bottom: 14px;
+        left: 14px;
+        right: 14px;
+      }
+
+      .cg-card-title {
+        font-size: 15.5px;
+      }
+
+      .cg-card-sub {
+        font-size: 11.8px;
+      }
+
+      .cg-hint {
+        font-size: 9.5px;
+        letter-spacing: 0.08em;
       }
     }
 
@@ -4208,7 +4201,7 @@
     </div>
   </section>
 
-  <!-- GALERIA LIGHTHOUSE TORCH SPOTLIGHT (@dhxwhy / 21st.dev) + REGISTROS REAIS -->
+  <!-- GALERIA CIRCULAR 3D (@ravikatiyar162 / 21st.dev) + REGISTROS REAIS -->
   <section class="action-gallery" id="em-acao">
     <div class="container">
       <div class="section-header reveal">
@@ -4219,13 +4212,14 @@
           </h2>
         </div>
         <p class="section-header-copy">
-          Registros reais da conquista na Tailândia, octógono de MMA, luta de solo e sessões particulares. Clique para ampliar.
+          Registros reais da conquista na Tailândia, octógono de MMA, luta de solo e sessões particulares. Arraste para girar ou clique para ampliar.
         </p>
       </div>
+    </div>
 
-      <div class="lighthouse-stage" id="lighthouseStage">
-        <div class="gallery-frame tile-wide-top reveal" tabindex="0" role="button" data-full="foto-tailandia-vitoria.jpg" data-caption="01 • Bangkok, Tailândia — Vitória Internacional no Ringue do MBK Fight Night">
-          <span class="gallery-zoom-pill">Ampliar ↗</span>
+    <div class="circular-gallery-viewport reveal" id="circularViewport" aria-label="Galeria circular 3D de fotos em ação">
+      <div class="circular-ring" id="circularRing">
+        <div class="gallery-frame" style="--item-idx: 0;" tabindex="0" role="button" data-full="foto-tailandia-vitoria.jpg" data-caption="01 • Bangkok, Tailândia — Vitória Internacional no Ringue do MBK Fight Night">
           <img
             src="foto-tailandia-vitoria.jpg"
             width="720"
@@ -4235,15 +4229,16 @@
             alt="Ronny Lopes tendo o braço erguido pelo árbitro após vitória em Bangkok, na Tailândia"
             loading="lazy"
             decoding="async"
+            draggable="false"
           />
           <div class="gallery-meta">
-            <span class="gallery-tag">01 • Bangkok, Tailândia</span>
-            <h3 class="gallery-title">Vitória no Berço do Muay Thai</h3>
+            <h3 class="cg-card-title">Vitória no Berço do Muay Thai</h3>
+            <span class="cg-card-sub">Bangkok, Tailândia</span>
+            <span class="cg-card-meta">01 / 10 • Ampliar ↗</span>
           </div>
         </div>
 
-        <div class="gallery-frame tile-tall-1 reveal" tabindex="0" role="button" data-full="foto-paos.webp" data-caption="02 • Aula Particular 1-on-1 — Manopla de Boxe, Paos Vivo &amp; Ajuste de Guarda">
-          <span class="gallery-zoom-pill">Ampliar ↗</span>
+        <div class="gallery-frame" style="--item-idx: 1;" tabindex="0" role="button" data-full="foto-paos.webp" data-caption="02 • Aula Particular 1-on-1 — Manopla de Boxe, Paos Vivo &amp; Ajuste de Guarda">
           <img
             src="foto-paos.webp"
             width="831"
@@ -4252,15 +4247,16 @@
             alt="Ronny Lopes conduzindo treino individual de Boxe e Muay Thai nos aparadores (paos)"
             loading="lazy"
             decoding="async"
+            draggable="false"
           />
           <div class="gallery-meta">
-            <span class="gallery-tag">02 • Particular 1-on-1</span>
-            <h3 class="gallery-title">Boxe &amp; Paos em Ritmo Real</h3>
+            <h3 class="cg-card-title">Boxe &amp; Paos em Ritmo Real</h3>
+            <span class="cg-card-sub">Particular 1-on-1</span>
+            <span class="cg-card-meta">02 / 10 • Ampliar ↗</span>
           </div>
         </div>
 
-        <div class="gallery-frame tile-tall-2 reveal" tabindex="0" role="button" data-full="foto-faixa-preta-jiujitsu.jpg" data-caption="03 • Faixa-Preta &amp; Campeão Brasiliense de Jiu-Jitsu — Didática de Kimono e No-Gi">
-          <span class="gallery-zoom-pill">Ampliar ↗</span>
+        <div class="gallery-frame" style="--item-idx: 2;" tabindex="0" role="button" data-full="foto-faixa-preta-jiujitsu.jpg" data-caption="03 • Faixa-Preta &amp; Campeão Brasiliense de Jiu-Jitsu — Didática de Kimono e No-Gi">
           <img
             src="foto-faixa-preta-jiujitsu.jpg"
             width="520"
@@ -4269,15 +4265,16 @@
             alt="Professor Ronny Lopes de kimono preto exibindo a faixa-preta de Jiu-Jitsu"
             loading="lazy"
             decoding="async"
+            draggable="false"
           />
           <div class="gallery-meta">
-            <span class="gallery-tag">03 • Faixa-Preta BJJ</span>
-            <h3 class="gallery-title">Campeão Brasiliense Jiu-Jitsu</h3>
+            <h3 class="cg-card-title">Campeão Brasiliense Jiu-Jitsu</h3>
+            <span class="cg-card-sub">Faixa-Preta BJJ</span>
+            <span class="cg-card-meta">03 / 10 • Ampliar ↗</span>
           </div>
         </div>
 
-        <div class="gallery-frame tile-wide-bottom reveal" tabindex="0" role="button" data-full="foto-tailandia-chute-alto.jpg" data-caption="04 • Tailândia — Chute Alto &amp; Biomecânica em Competição Internacional em Bangkok">
-          <span class="gallery-zoom-pill">Ampliar ↗</span>
+        <div class="gallery-frame" style="--item-idx: 3;" tabindex="0" role="button" data-full="foto-tailandia-chute-alto.jpg" data-caption="04 • Tailândia — Chute Alto &amp; Biomecânica em Competição Internacional em Bangkok">
           <img
             src="foto-tailandia-chute-alto.jpg"
             width="720"
@@ -4287,15 +4284,16 @@
             alt="Ronny Lopes conectando chute alto na linha de cabeça durante luta oficial em Bangkok, Tailândia"
             loading="lazy"
             decoding="async"
+            draggable="false"
           />
           <div class="gallery-meta">
-            <span class="gallery-tag">04 • Competição na Tailândia</span>
-            <h3 class="gallery-title">Precisão &amp; Chute Alto</h3>
+            <h3 class="cg-card-title">Precisão &amp; Chute Alto</h3>
+            <span class="cg-card-sub">Competição na Tailândia</span>
+            <span class="cg-card-meta">04 / 10 • Ampliar ↗</span>
           </div>
         </div>
 
-        <div class="gallery-frame tile-tall-3 reveal" tabindex="0" role="button" data-full="foto-sparring.webp" data-caption="05 • Tatame Técnico — Bloqueio, Controle de Distância &amp; Tempo de Reação">
-          <span class="gallery-zoom-pill">Ampliar ↗</span>
+        <div class="gallery-frame" style="--item-idx: 4;" tabindex="0" role="button" data-full="foto-sparring.webp" data-caption="05 • Tatame Técnico — Bloqueio, Controle de Distância &amp; Tempo de Reação">
           <img
             src="foto-sparring.webp"
             width="836"
@@ -4304,15 +4302,16 @@
             alt="Ronny Lopes demonstrando defesa técnica e tempo de reação em aula particular"
             loading="lazy"
             decoding="async"
+            draggable="false"
           />
           <div class="gallery-meta">
-            <span class="gallery-tag">05 • Tatame Técnico</span>
-            <h3 class="gallery-title">Defesa &amp; Tempo de Reação</h3>
+            <h3 class="cg-card-title">Defesa &amp; Tempo de Reação</h3>
+            <span class="cg-card-sub">Tatame Técnico</span>
+            <span class="cg-card-meta">05 / 10 • Ampliar ↗</span>
           </div>
         </div>
 
-        <div class="gallery-frame tile-tall-4 reveal" tabindex="0" role="button" data-full="foto-tailandia-camp.jpg" data-caption="06 • Imersão na Tailândia — Seleção Brasileira de Muay Thai &amp; Treinamento Tradicional">
-          <span class="gallery-zoom-pill">Ampliar ↗</span>
+        <div class="gallery-frame" style="--item-idx: 5;" tabindex="0" role="button" data-full="foto-tailandia-camp.jpg" data-caption="06 • Imersão na Tailândia — Seleção Brasileira de Muay Thai &amp; Treinamento Tradicional">
           <img
             src="foto-tailandia-camp.jpg"
             width="768"
@@ -4322,15 +4321,16 @@
             alt="Ronny Lopes na Tailândia com treinadores tailandeses pela seleção brasileira de Muay Thai"
             loading="lazy"
             decoding="async"
+            draggable="false"
           />
           <div class="gallery-meta">
-            <span class="gallery-tag">06 • Camp na Tailândia</span>
-            <h3 class="gallery-title">Escola Tailandesa na Fonte</h3>
+            <h3 class="cg-card-title">Escola Tailandesa na Fonte</h3>
+            <span class="cg-card-sub">Camp na Tailândia</span>
+            <span class="cg-card-meta">06 / 10 • Ampliar ↗</span>
           </div>
         </div>
 
-        <div class="gallery-frame tile-wide-top reveal" tabindex="0" role="button" data-full="foto-mma-cinturao-mfc.jpg" data-caption="07 • Campeão de MMA — Cinturão Master Fight Combat (MFC) no Octógono">
-          <span class="gallery-zoom-pill">Ampliar ↗</span>
+        <div class="gallery-frame" style="--item-idx: 6;" tabindex="0" role="button" data-full="foto-mma-cinturao-mfc.jpg" data-caption="07 • Campeão de MMA — Cinturão Master Fight Combat (MFC) no Octógono">
           <img
             src="foto-mma-cinturao-mfc.jpg"
             width="728"
@@ -4340,15 +4340,16 @@
             alt="Ronny Lopes com o cinturão de campeão de MMA do Master Fight Combat (MFC) no octógono"
             loading="lazy"
             decoding="async"
+            draggable="false"
           />
           <div class="gallery-meta">
-            <span class="gallery-tag">07 • Cinturão de MMA</span>
-            <h3 class="gallery-title">Campeão Master Fight Combat</h3>
+            <h3 class="cg-card-title">Campeão Master Fight Combat</h3>
+            <span class="cg-card-sub">Cinturão de MMA</span>
+            <span class="cg-card-meta">07 / 10 • Ampliar ↗</span>
           </div>
         </div>
 
-        <div class="gallery-frame tile-wide-bottom reveal" tabindex="0" role="button" data-full="foto-mma-vitoria-cage.jpg" data-caption="08 • MMA Profissional — Braço Erguido no Octógono Oficial">
-          <span class="gallery-zoom-pill">Ampliar ↗</span>
+        <div class="gallery-frame" style="--item-idx: 7;" tabindex="0" role="button" data-full="foto-mma-vitoria-cage.jpg" data-caption="08 • MMA Profissional — Braço Erguido no Octógono Oficial">
           <img
             src="foto-mma-vitoria-cage.jpg"
             width="720"
@@ -4358,15 +4359,16 @@
             alt="Ronny Lopes comemorando vitória com o braço erguido pelo árbitro no octógono de MMA"
             loading="lazy"
             decoding="async"
+            draggable="false"
           />
           <div class="gallery-meta">
-            <span class="gallery-tag">08 • MMA Oficial</span>
-            <h3 class="gallery-title">Vitória no Octógono</h3>
+            <h3 class="cg-card-title">Vitória no Octógono</h3>
+            <span class="cg-card-sub">MMA Oficial</span>
+            <span class="cg-card-meta">08 / 10 • Ampliar ↗</span>
           </div>
         </div>
 
-        <div class="gallery-frame tile-half reveal" tabindex="0" role="button" data-full="foto-mma-boxe.jpg" data-caption="09 • Boxe &amp; Trocação no MMA — Golpe Reto de Mão em Tempo de Reação no Octógono">
-          <span class="gallery-zoom-pill">Ampliar ↗</span>
+        <div class="gallery-frame" style="--item-idx: 8;" tabindex="0" role="button" data-full="foto-mma-boxe.jpg" data-caption="09 • Boxe &amp; Trocação no MMA — Golpe Reto de Mão em Tempo de Reação no Octógono">
           <img
             src="foto-mma-boxe.jpg"
             width="720"
@@ -4376,15 +4378,16 @@
             alt="Ronny Lopes conectando golpe reto de mão em combate oficial de MMA no octógono"
             loading="lazy"
             decoding="async"
+            draggable="false"
           />
           <div class="gallery-meta">
-            <span class="gallery-tag">09 • Boxe &amp; Trocação</span>
-            <h3 class="gallery-title">Precisão de Mãos &amp; Distância</h3>
+            <h3 class="cg-card-title">Precisão de Mãos &amp; Distância</h3>
+            <span class="cg-card-sub">Boxe &amp; Trocação</span>
+            <span class="cg-card-meta">09 / 10 • Ampliar ↗</span>
           </div>
         </div>
 
-        <div class="gallery-frame tile-half reveal" tabindex="0" role="button" data-full="foto-jiujitsu-grappling-grade.jpg" data-caption="10 • Jiu-Jitsu Aplicado — Queda, Pressão por Cima &amp; Domínio Técnico na Grade">
-          <span class="gallery-zoom-pill">Ampliar ↗</span>
+        <div class="gallery-frame" style="--item-idx: 9;" tabindex="0" role="button" data-full="foto-jiujitsu-grappling-grade.jpg" data-caption="10 • Jiu-Jitsu Aplicado — Queda, Pressão por Cima &amp; Domínio Técnico na Grade">
           <img
             src="foto-jiujitsu-grappling-grade.jpg"
             width="728"
@@ -4394,12 +4397,22 @@
             alt="Ronny Lopes aplicando pressão de Jiu-Jitsu e domínio na grade durante combate de MMA"
             loading="lazy"
             decoding="async"
+            draggable="false"
           />
           <div class="gallery-meta">
-            <span class="gallery-tag">10 • Jiu-Jitsu Aplicado</span>
-            <h3 class="gallery-title">Quedas, Pressão &amp; Domínio</h3>
+            <h3 class="cg-card-title">Quedas, Pressão &amp; Domínio</h3>
+            <span class="cg-card-sub">Jiu-Jitsu Aplicado</span>
+            <span class="cg-card-meta">10 / 10 • Ampliar ↗</span>
           </div>
         </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="circular-controls">
+        <button type="button" class="cg-spin-btn" id="cgPrevBtn" aria-label="Girar galeria para a esquerda">←</button>
+        <span class="cg-hint">Arraste ou role para girar • Clique para ampliar</span>
+        <button type="button" class="cg-spin-btn" id="cgNextBtn" aria-label="Girar galeria para a direita">→</button>
       </div>
     </div>
   </section>
@@ -5604,9 +5617,13 @@
       });
     });
 
-    // 7. Lighthouse Torch Gallery + Carousel Lightbox Modal (@dhxwhy & 21st.dev Dialog)
-    const lighthouseStage = document.getElementById('lighthouseStage');
-    const galleryFrames = lighthouseStage ? Array.from(lighthouseStage.querySelectorAll('.gallery-frame')) : [];
+    // 7. 3D Circular Gallery (@ravikatiyar162 / 21st.dev) + Carousel Lightbox Modal
+    const gallerySection = document.getElementById('em-acao');
+    const circularViewport = document.getElementById('circularViewport');
+    const circularRing = document.getElementById('circularRing');
+    const galleryFrames = circularRing ? Array.from(circularRing.querySelectorAll('.gallery-frame')) : [];
+    const cgPrevBtn = document.getElementById('cgPrevBtn');
+    const cgNextBtn = document.getElementById('cgNextBtn');
     const lightboxModal = document.getElementById('lightboxModal');
     const lightboxStageWrap = document.getElementById('lightboxStageWrap');
     const lightboxImg = document.getElementById('lightboxImg');
@@ -5615,35 +5632,144 @@
     const lightboxPrev = document.getElementById('lightboxPrev');
     const lightboxNext = document.getElementById('lightboxNext');
     const lightboxClose = document.getElementById('lightboxClose');
-    let sweepIdx = 0;
-    let pointerInGallery = false;
+
+    const cgAngleStep = galleryFrames.length ? 360 / galleryFrames.length : 36;
+    let cgTargetAngle = 0;
+    let cgCurrentAngle = 0;
+    let isGalleryVisible = false;
+    let isHoveringGallery = false;
+    let isDraggingGallery = false;
+    let dragLastX = 0;
+    let dragMovedDist = 0;
+    let lastGalleryScrollY = window.scrollY;
+    let cgRafId = 0;
+
     let lastLightboxTrigger = null;
     let currentLightboxIdx = 0;
     let touchStartX = 0;
     let touchStartY = 0;
 
-    if (lighthouseStage && hasFinePointer) {
-      lighthouseStage.addEventListener('mousemove', (e) => {
-        pointerInGallery = true;
-        const rect = lighthouseStage.getBoundingClientRect();
-        lighthouseStage.style.setProperty('--gx', `${e.clientX - rect.left}px`);
-        lighthouseStage.style.setProperty('--gy', `${e.clientY - rect.top}px`);
-        lighthouseStage.style.setProperty('--torch-active', '1');
-        galleryFrames.forEach((f) => f.classList.remove('lit-sweep'));
+    const applyCircularRingFrame = () => {
+      if (!circularRing || !galleryFrames.length) return;
+      circularRing.style.transform = `translateZ(calc(var(--cg-radius) * -1)) rotateY(${cgCurrentAngle.toFixed(3)}deg)`;
+      for (let i = 0; i < galleryFrames.length; i += 1) {
+        const frame = galleryFrames[i];
+        const rad = ((i * cgAngleStep + cgCurrentAngle) * Math.PI) / 180;
+        const cos = Math.cos(rad);
+        const opacity = cos >= 0 ? (0.42 + 0.58 * cos) : (0.14 + 0.14 * (1 + cos));
+        frame.style.opacity = opacity.toFixed(3);
+        frame.classList.toggle('is-front', cos > 0.94);
+        frame.style.pointerEvents = cos > 0.18 ? 'auto' : 'none';
+      }
+    };
+
+    const tickCircularGallery = () => {
+      if (!isGalleryVisible || document.hidden) {
+        cgRafId = 0;
+        return;
+      }
+      const lightboxOpen = Boolean(lightboxModal && lightboxModal.classList.contains('open'));
+      if (!prefersReducedMotion && !isDraggingGallery && !isHoveringGallery && !lightboxOpen) {
+        cgTargetAngle -= 0.085;
+      }
+      const lerpFactor = prefersReducedMotion ? 1 : (isDraggingGallery ? 0.24 : 0.09);
+      cgCurrentAngle += (cgTargetAngle - cgCurrentAngle) * lerpFactor;
+      applyCircularRingFrame();
+      cgRafId = requestAnimationFrame(tickCircularGallery);
+    };
+
+    const startCircularGalleryLoop = () => {
+      if (!cgRafId && isGalleryVisible && !document.hidden && circularRing) {
+        cgRafId = requestAnimationFrame(tickCircularGallery);
+      }
+    };
+
+    if (circularRing && galleryFrames.length) {
+      applyCircularRingFrame();
+
+      if ('IntersectionObserver' in window && gallerySection) {
+        const cgObserver = new IntersectionObserver((entries) => {
+          isGalleryVisible = Boolean(entries[0]?.isIntersecting);
+          if (isGalleryVisible) {
+            lastGalleryScrollY = window.scrollY;
+            startCircularGalleryLoop();
+          }
+        }, { rootMargin: '160px 0px' });
+        cgObserver.observe(gallerySection);
+      } else {
+        isGalleryVisible = true;
+        startCircularGalleryLoop();
+      }
+
+      document.addEventListener('visibilitychange', () => {
+        if (!document.hidden) startCircularGalleryLoop();
       });
 
-      lighthouseStage.addEventListener('mouseleave', () => {
-        pointerInGallery = false;
-        lighthouseStage.style.setProperty('--torch-active', '0');
+      window.addEventListener('scroll', () => {
+        const y = window.scrollY;
+        const dy = y - lastGalleryScrollY;
+        lastGalleryScrollY = y;
+        if (isGalleryVisible && !isDraggingGallery && !prefersReducedMotion) {
+          cgTargetAngle -= dy * 0.075;
+        }
+      }, { passive: true });
+    }
+
+    if (circularViewport) {
+      if (hasFinePointer) {
+        circularViewport.addEventListener('mouseenter', () => { isHoveringGallery = true; });
+        circularViewport.addEventListener('mouseleave', () => { isHoveringGallery = false; });
+      }
+
+      circularViewport.addEventListener('pointerdown', (e) => {
+        if (e.pointerType === 'mouse' && e.button !== 0) return;
+        isDraggingGallery = true;
+        dragLastX = e.clientX;
+        dragMovedDist = 0;
+        startCircularGalleryLoop();
+      });
+
+      window.addEventListener('pointermove', (e) => {
+        if (!isDraggingGallery) return;
+        const dx = e.clientX - dragLastX;
+        dragLastX = e.clientX;
+        dragMovedDist += Math.abs(dx);
+        if (dragMovedDist > 5) {
+          circularViewport.classList.add('is-dragging');
+        }
+        cgTargetAngle += dx * 0.28;
+      }, { passive: true });
+
+      const endGalleryDrag = () => {
+        if (!isDraggingGallery) return;
+        isDraggingGallery = false;
+        circularViewport.classList.remove('is-dragging');
+      };
+
+      window.addEventListener('pointerup', endGalleryDrag, { passive: true });
+      window.addEventListener('pointercancel', endGalleryDrag, { passive: true });
+
+      circularViewport.addEventListener('wheel', (e) => {
+        if (Math.abs(e.deltaX) > Math.abs(e.deltaY) && Math.abs(e.deltaX) > 2) {
+          e.preventDefault();
+          cgTargetAngle -= e.deltaX * 0.18;
+          startCircularGalleryLoop();
+        }
+      }, { passive: false });
+    }
+
+    if (cgPrevBtn) {
+      cgPrevBtn.addEventListener('click', () => {
+        cgTargetAngle += cgAngleStep;
+        startCircularGalleryLoop();
       });
     }
 
-    if (galleryFrames.length && !prefersReducedMotion) {
-      setInterval(() => {
-        if (pointerInGallery) return;
-        galleryFrames.forEach((f, idx) => f.classList.toggle('lit-sweep', idx === sweepIdx));
-        sweepIdx = (sweepIdx + 1) % galleryFrames.length;
-      }, 2600);
+    if (cgNextBtn) {
+      cgNextBtn.addEventListener('click', () => {
+        cgTargetAngle -= cgAngleStep;
+        startCircularGalleryLoop();
+      });
     }
 
     const renderLightboxSlide = (index, animate = false) => {
@@ -5651,7 +5777,7 @@
       const total = galleryFrames.length;
       currentLightboxIdx = (index + total) % total;
       const frame = galleryFrames[currentLightboxIdx];
-      const src = frame.dataset.full;
+      const src = frame.dataset.full || frame.querySelector('img')?.src;
       const caption = frame.dataset.caption || '';
       const alt = frame.querySelector('img')?.alt || '';
       if (!src) return;
@@ -5676,9 +5802,10 @@
       // Pré-carrega vizinhas para troca instantânea
       [-1, 1].forEach((offset) => {
         const neighbor = galleryFrames[(currentLightboxIdx + offset + total) % total];
-        if (neighbor?.dataset.full) {
+        const nSrc = neighbor?.dataset.full || neighbor?.querySelector('img')?.src;
+        if (nSrc) {
           const pre = new Image();
-          pre.src = neighbor.dataset.full;
+          pre.src = nSrc;
         }
       });
     };
@@ -5708,8 +5835,18 @@
       }
     };
 
-    galleryFrames.forEach((frame) => {
-      frame.addEventListener('click', () => openLightbox(frame));
+    galleryFrames.forEach((frame, idx) => {
+      frame.addEventListener('click', (e) => {
+        if (dragMovedDist > 6) {
+          e.preventDefault();
+          return;
+        }
+        openLightbox(frame);
+      });
+      frame.addEventListener('focus', () => {
+        cgTargetAngle = -idx * cgAngleStep;
+        startCircularGalleryLoop();
+      });
       frame.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
