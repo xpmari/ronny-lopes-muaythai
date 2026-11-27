@@ -3559,7 +3559,7 @@
       pointer-events: none;
       overflow: hidden;
       background:
-        radial-gradient(ellipse 68% 52% at 52% 48%, rgba(255, 61, 0, 0.16) 0%, rgba(184, 15, 15, 0.08) 44%, transparent 76%),
+        radial-gradient(ellipse 68% 52% at 52% 48%, rgba(142, 11, 19, 0.22) 0%, rgba(78, 6, 12, 0.12) 46%, transparent 76%),
         var(--bg-void);
     }
 
@@ -3567,7 +3567,7 @@
       display: block;
       width: 100%;
       height: 100%;
-      opacity: 0.92;
+      opacity: 0.94;
     }
 
     /* Máscara editorial suave no topo e na base para fusão contínua entre seções */
@@ -3589,39 +3589,39 @@
     }
 
     .approach .approach-timeline-col {
-      background: linear-gradient(90deg, rgba(7, 7, 10, 0.58) 0%, rgba(7, 7, 10, 0.24) 100%);
+      background: linear-gradient(90deg, rgba(7, 6, 8, 0.58) 0%, rgba(7, 6, 8, 0.24) 100%);
     }
 
-    /* Atmosfera sutil Auralis nas seções intermediárias para eliminar blocos 100% pretos */
+    /* Atmosfera sutil Auralis em vermelho escuro/bordô nas seções intermediárias */
     .manifesto-content {
       background:
-        radial-gradient(ellipse 78% 62% at 86% 36%, rgba(255, 61, 0, 0.095) 0%, rgba(184, 15, 15, 0.045) 45%, transparent 74%),
-        linear-gradient(180deg, #060608 0%, #090709 52%, #050506 100%);
+        radial-gradient(ellipse 78% 62% at 86% 36%, rgba(138, 10, 18, 0.16) 0%, rgba(74, 6, 11, 0.08) 46%, transparent 75%),
+        linear-gradient(180deg, #060506 0%, #0B0507 52%, #050506 100%);
     }
 
     .reels-section {
       background:
-        radial-gradient(ellipse 72% 54% at 50% 44%, rgba(255, 61, 0, 0.13) 0%, rgba(184, 15, 15, 0.06) 46%, transparent 76%),
-        radial-gradient(ellipse 48% 38% at 15% 82%, rgba(255, 110, 64, 0.06) 0%, transparent 70%),
-        #060608;
+        radial-gradient(ellipse 72% 54% at 50% 44%, rgba(146, 12, 20, 0.19) 0%, rgba(78, 6, 12, 0.09) 46%, transparent 76%),
+        radial-gradient(ellipse 48% 38% at 15% 82%, rgba(112, 8, 16, 0.11) 0%, transparent 70%),
+        #060507;
     }
 
     .coach-quote-col {
       background:
-        radial-gradient(ellipse 76% 60% at 78% 48%, rgba(255, 61, 0, 0.095) 0%, rgba(184, 15, 15, 0.045) 46%, transparent 74%),
-        linear-gradient(180deg, #060608 0%, #0A0709 50%, #050506 100%);
+        radial-gradient(ellipse 76% 60% at 78% 48%, rgba(138, 10, 18, 0.16) 0%, rgba(74, 6, 11, 0.08) 46%, transparent 75%),
+        linear-gradient(180deg, #060506 0%, #0B0507 50%, #050506 100%);
     }
 
     .marquee-section {
       background:
-        radial-gradient(ellipse 68% 54% at 50% 50%, rgba(255, 61, 0, 0.105) 0%, rgba(184, 15, 15, 0.05) 45%, transparent 75%),
+        radial-gradient(ellipse 68% 54% at 50% 50%, rgba(140, 11, 19, 0.16) 0%, rgba(74, 6, 12, 0.08) 46%, transparent 75%),
         var(--bg-obsidian);
     }
 
     .faq-section {
       background:
-        radial-gradient(ellipse 66% 56% at 18% 46%, rgba(255, 61, 0, 0.10) 0%, rgba(184, 15, 15, 0.048) 44%, transparent 74%),
-        radial-gradient(ellipse 52% 44% at 86% 72%, rgba(255, 110, 64, 0.055) 0%, transparent 70%),
+        radial-gradient(ellipse 66% 56% at 18% 46%, rgba(138, 11, 19, 0.16) 0%, rgba(74, 6, 12, 0.08) 45%, transparent 75%),
+        radial-gradient(ellipse 52% 44% at 86% 72%, rgba(108, 8, 15, 0.10) 0%, transparent 70%),
         var(--bg-obsidian);
     }
 
@@ -7581,18 +7581,18 @@
 
           float light = clamp(ribbonA * 0.64 + ribbonB * 0.44 + coreGlow * 0.72 + fbm * 0.18, 0.0, 1.35);
 
-          // Paleta editorial do site (Obsidian -> Vinho Profundo -> Carmesim -> Laranja Ember -> Âmbar Suave)
-          vec3 colBase    = vec3(0.020, 0.019, 0.024);
-          vec3 colWine    = vec3(0.250, 0.028, 0.036);
-          vec3 colCrimson = vec3(0.740, 0.064, 0.048);
-          vec3 colEmber   = vec3(1.000, 0.245, 0.022);
-          vec3 colAmber   = vec3(1.000, 0.585, 0.320);
+          // Paleta em vermelho escuro profundo (Obsidian -> Sangue-de-boi -> Bordô -> Carmesim Escuro -> Rubi)
+          vec3 colBase     = vec3(0.018, 0.015, 0.020);
+          vec3 colOxblood  = vec3(0.185, 0.014, 0.024);
+          vec3 colBurgundy = vec3(0.395, 0.024, 0.038);
+          vec3 colCrimson  = vec3(0.625, 0.040, 0.054);
+          vec3 colGarnet   = vec3(0.785, 0.072, 0.084);
 
           vec3 col = colBase;
-          col = mix(col, colWine,    smoothstep(0.06, 0.40, light));
-          col = mix(col, colCrimson, smoothstep(0.30, 0.70, light) * 0.88);
-          col = mix(col, colEmber,   smoothstep(0.54, 0.96, light) * 0.78);
-          col += colAmber * pow(clamp(light - 0.60, 0.0, 1.0), 2.05) * 0.46;
+          col = mix(col, colOxblood,  smoothstep(0.04, 0.36, light));
+          col = mix(col, colBurgundy, smoothstep(0.24, 0.64, light) * 0.94);
+          col = mix(col, colCrimson,  smoothstep(0.50, 0.94, light) * 0.82);
+          col += colGarnet * pow(clamp(light - 0.66, 0.0, 1.0), 2.30) * 0.30;
 
           // Vinheta suave nas bordas para integração limpa entre as seções
           float vigY = smoothstep(0.0, 0.18, uv.y) * smoothstep(1.0, 0.82, uv.y);
