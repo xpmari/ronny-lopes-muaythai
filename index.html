@@ -192,6 +192,17 @@
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@800&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
 
   <style>
+    /* Substitui apenas o glifo minúsculo "g" (U+0067) da Syne — cujo desenho nativo parece cortado na base — por um "g" geométrico wide completo de mesma espessura */
+    @font-face {
+      font-family: 'SyneFullG';
+      font-style: normal;
+      font-weight: 600 800;
+      font-display: block;
+      size-adjust: 94%;
+      unicode-range: U+0067;
+      src: url('data:font/woff2;base64,d09GMgABAAAAAAW4ABUAAAAACpAAAAVHAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGhQbgQ4cLj9IVkFSRz9NVkFSRgZgP1NUQVSBECcqADwvZBEICoFkgWELCAAwgmABNgIkAwwEIAWGEAcgDAcbHAnIBB7477Q/984knaBNkW6hVEq7qbEQKgcLJg/yxxeMlZT41Nqv3uJRrOoiHirUdPNukS+qDRGJhC7WxJO4pkal8RhOWOQj2mkzfVRDBGCmUIiUx6cYyaEcpbl14kysbaud/Vj7l7kHsaJeVvW+qNfX4RxEY8O4sIoBDRGSgJb/oSyagUoKkSj0cC3r91iOlJqk5JFXPhpJlTaMBwaiuEhhlWIVKA3xKIs3FkpAubpif8WxzMgjgizf8/2V9nrqm4Dq4XiX2zl0VWBVd5e7eYWZUx8scsnzErcNd3Wo8qp4Bh3Ix+TcUjphPodYjEPMdALnJWPky7cPmNwwGb7HRpdyJGCCa6rnRSKIl//7H2SpPA/YUBwDN8NQtECbeOTKrm63cMZJocSTRTnNTGUh3db4hY7fHeQSepEXMxKMUjyDBvn1cYcmrq4lBr0ZjjSeTzMptlSz8gD0AR2WgxzcPNb8T0RRzGvx/2R0ZnQWFRUVUcQyyJVYbcA8QSWL6OEpi42u9hQiX+Bw4DXOTIIk1JewWKxZC4ugvaBBCKEKXYR9Tg8LtSLonEpoEbnKGQQvSI0WxwkTLNEJM3t9gQgEsMhiAUv0JIi0RnfK1KlISTZTVTUyImSJSTWuTDJ6LYSojx4ScSJWmKR361bjY9sni3+2mR7fsfyx7duFb8cO0+Pbini8W680+/Edc7ZvNz62dSvebdtmnPOd98XVtfaci3ZFa8nH0PpYe8NA08f3vT2w4Lm3x3VP3Jj5ef9/vowG58ohizZ5beOYldOmQZ61jZMrl6c+tLQ1YWxiZv7CmdM8xUlLxqyYZp9nX7Bi6pjKabk5k4ocMGpariPZcyqLNxItelgcL/BOPd/jlZixZD9qAYOGlFKRUkot+OfkncEngk8ce0A0fOfTTi75ve5ExomMzAfEyz0+BuLknE+gLCkpMTEpacuWLbtP3bynGAyavBeSpAYZBnmDVIFQ9RsriGNXQhIsV47t+PVbOPLXHez3ldzx39y58/Zt/517Qp36//79D8ueu3jx0tWr127cPOj2ndu3rl2+dOHiTz/tvGpJg4NGiasnNv10f9mmTVu3bto0CQ5syg4zce3adWE4t8l/+/o1KHP9tl+qMnBnY3RqQey5rWdjClrbRuDg5S1U+Eo0Jbih0WCQmnoX0v33xk8ax8XliYmyhluC85o0LTh8VFyetrYG6/GfG+4JWLMntd1vLdEh6HbxEum738sR3/3UHvKRp9l93/klluprmqKcBA8H6p4K020PLkyd5v/Hf1j/g/pigMmlR9hD302/2//P3S/1PwR+1aCtorQwUzGRHsbCmfUpvE0QU9FfJ1HRHMbmh0ysXml7VzyzpoJwsYFKQsQwVSgVlVQlRURTHbP5kepJ4Z3sEErpLSZUzCymOqyMp3qM1I8IktNIaJgpRmoglDSLEe1+BFIT4RhF5ux90Eg/y2ijjxZW4cbJMhoZop/2rPkMOhigZ5tMIu0hDwNMxOlddONm7bHvmEPHGuPWboZxUUlBtpmLNpz0MIw7Etm7PD63HztDOOmigCm0MpFZDLKcITwM0i6zfT7T6aALj9b1ncymAyfjZYcYxMZo7JRRyGiq6KITN6BzvIsFFGKnAjsOyrHzCq2ghNwMXH/LQQVlVNDOIpkV2XrJWNrJNDCZKk372OrnWlETWoZZTQqj7D/bcFCIAwc2ZtJNBzbNRFOx/hC9dNDGYGnAQzionN2FjSzyLV30nN3Ow3LstDHEwBFQJerKLR100gnfSArk9CFPnv0PMkbgDRxlW/hcBB58X30SAAAA') format('woff2');
+    }
+
     @property --glow-deg {
       syntax: '<angle>';
       initial-value: 0deg;
@@ -225,7 +236,7 @@
 
       --font-serif: 'Instrument Serif', Georgia, serif;
       --font-hero-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      --font-display: 'Syne', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-display: 'SyneFullG', 'Syne', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
       --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
       --font-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
 
@@ -4147,8 +4158,8 @@
       display: inline-block;
       overflow: hidden;
       vertical-align: bottom;
-      padding: 0.08em 0.08em 0.18em 0.04em;
-      margin: -0.08em -0.08em -0.18em -0.04em;
+      padding: 0.14em 0.18em 0.38em 0.14em;
+      margin: -0.14em -0.18em -0.38em -0.14em;
     }
 
     split-word {
@@ -4157,7 +4168,7 @@
 
     [data-split-state="pending"] split-word {
       opacity: 0;
-      transform: translateY(100%);
+      transform: translateY(135%);
       transition: none;
     }
 
@@ -4172,6 +4183,10 @@
       transition:
         transform var(--split-duration, 600ms) var(--split-ease, cubic-bezier(0.22, 1, 0.36, 1)) calc(var(--split-i, 0) * var(--split-stagger, 70ms)),
         opacity var(--split-duration, 600ms) var(--split-ease, cubic-bezier(0.22, 1, 0.36, 1)) calc(var(--split-i, 0) * var(--split-stagger, 70ms));
+    }
+
+    [data-split-state="done"] split-mask {
+      overflow: visible;
     }
 
     [data-split-state="done"] split-word {
