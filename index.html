@@ -50,7 +50,7 @@
         "name": "Ronny Lopes — Muay Thai, Boxe, Jiu-Jitsu e MMA Particular em Brasília",
         "description": "Aulas particulares 1-on-1, dupla executiva, refinamento técnico e condicionamento de combate em Muay Thai, Boxe, Jiu-Jitsu e MMA em Brasília — DF, com deslocamento até o local de preferência do aluno.",
         "url": "https://ronny-lopes-muaythai.marianamello0406.workers.dev/",
-        "telephone": "+556181833245",
+        "telephone": "+5561981833245",
         "image": "https://ronny-lopes-muaythai.marianamello0406.workers.dev/foto-mundial-wma-tailandia.jpg",
         "sport": ["Muay Thai", "Boxe", "Jiu-Jitsu Brasileiro", "MMA"],
         "sameAs": [
@@ -1740,11 +1740,27 @@
     }
 
     .section-header-copy {
-      max-width: 390px;
+      max-width: 410px;
       font-size: 14.5px;
       line-height: 1.68;
       color: var(--text-secondary);
       text-wrap: pretty;
+    }
+
+    .programs-heading {
+      font-family: var(--font-sans);
+      font-size: clamp(28px, 3.7vw, 50px);
+      font-weight: 700;
+      line-height: 1.08;
+      letter-spacing: -0.035em;
+      text-transform: uppercase;
+      color: var(--text-primary);
+      max-width: 720px;
+      text-wrap: balance;
+    }
+
+    .programs-heading .accent-ember {
+      color: var(--accent-ember);
     }
 
     @keyframes cardBeamSpin {
@@ -1754,15 +1770,16 @@
 
     .programs-grid {
       display: grid;
-      grid-template-columns: repeat(12, 1fr);
-      gap: 20px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+      align-items: stretch;
       perspective: 1200px;
     }
 
     .spotlight-card {
       position: relative;
       overflow: hidden;
-      padding: clamp(28px, 3.4vw, 42px);
+      padding: clamp(28px, 2.8vw, 38px);
       border: 1px solid rgba(255, 255, 255, 0.09);
       border-radius: 16px;
       background: linear-gradient(180deg, #101015 0%, #09090C 100%);
@@ -1774,41 +1791,21 @@
       transition: border-color 0.35s var(--ease-out), transform 0.22s ease-out, box-shadow 0.35s var(--ease-out);
       display: flex;
       flex-direction: column;
-      min-height: 348px;
+      height: 100%;
       --mx: -400px;
       --my: -400px;
       --spot-opacity: 0;
     }
 
-    .spotlight-card:nth-child(1) {
-      grid-column: span 7;
-      min-height: 376px;
-    }
-
-    .spotlight-card:nth-child(2) {
-      grid-column: span 5;
-      min-height: 376px;
-    }
-
-    .spotlight-card:nth-child(3) {
-      grid-column: span 5;
-      min-height: 350px;
-    }
-
-    .spotlight-card:nth-child(4) {
-      grid-column: span 7;
-      min-height: 350px;
-    }
-
     /* Animated Border Beam (@hyperiux / 21st.dev) on flagship card */
     .spotlight-card.is-featured {
-      border-color: rgba(255, 61, 0, 0.24);
+      border-color: rgba(255, 61, 0, 0.28);
       background:
-        radial-gradient(ellipse 72% 60% at 92% 6%, rgba(255, 61, 0, 0.14) 0%, rgba(184, 15, 15, 0.05) 42%, transparent 72%),
-        linear-gradient(180deg, #131014 0%, #09090C 100%);
+        radial-gradient(ellipse 75% 60% at 90% 6%, rgba(255, 61, 0, 0.16) 0%, rgba(184, 15, 15, 0.06) 44%, transparent 72%),
+        linear-gradient(180deg, #141014 0%, #09090C 100%);
       box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, 0.12),
-        0 28px 64px -32px rgba(255, 61, 0, 0.28);
+        inset 0 1px 0 rgba(255, 255, 255, 0.13),
+        0 28px 64px -30px rgba(255, 61, 0, 0.32);
     }
 
     .spotlight-card.is-featured::after {
@@ -1852,8 +1849,8 @@
     }
 
     .card-icon-box {
-      width: 44px;
-      height: 44px;
+      width: 42px;
+      height: 42px;
       border-radius: 12px;
       display: inline-flex;
       align-items: center;
@@ -1862,24 +1859,6 @@
       border: 1px solid rgba(255, 61, 0, 0.34);
       color: var(--accent-ember-bright);
       box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16), 0 8px 20px -8px rgba(255, 61, 0, 0.45);
-    }
-
-    .card-specs {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 24px;
-    }
-
-    .card-spec-pill {
-      font-family: var(--font-mono);
-      font-size: 10.5px;
-      letter-spacing: 0.06em;
-      color: rgba(245, 245, 247, 0.84);
-      padding: 5px 10px;
-      border-radius: 6px;
-      background: rgba(255, 255, 255, 0.035);
-      border: 1px solid rgba(255, 255, 255, 0.08);
     }
 
     .spotlight-card::before {
@@ -1960,13 +1939,6 @@
       color: var(--accent-ember);
     }
 
-    .program-badges {
-      display: inline-flex;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
     .program-badge-popular {
       display: inline-flex;
       align-items: center;
@@ -1994,89 +1966,115 @@
       flex-shrink: 0;
     }
 
-    .program-tag {
-      font-family: var(--font-mono);
-      font-size: 10.5px;
-      font-weight: 500;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: rgba(245, 245, 245, 0.82);
-      background-color: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.10);
-      border-radius: 9999px;
-      padding: 5px 12px;
-      white-space: nowrap;
-    }
-
     .program-name {
       font-family: var(--font-serif);
-      font-size: clamp(28px, 2.8vw, 40px);
+      font-size: clamp(27px, 2.3vw, 35px);
       font-weight: 400;
-      line-height: 1.08;
+      line-height: 1.12;
       color: var(--text-primary);
       margin-bottom: 12px;
     }
 
-    .spotlight-card:nth-child(1) .program-name,
-    .spotlight-card:nth-child(4) .program-name {
-      font-size: clamp(32px, 3.3vw, 46px);
-    }
-
     .program-desc {
       font-size: 14.5px;
-      line-height: 1.68;
+      line-height: 1.66;
       color: var(--text-secondary);
-      max-width: 540px;
-      margin-bottom: 20px;
+      margin-bottom: 22px;
       text-wrap: pretty;
+    }
+
+    .program-bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding-top: 18px;
+      margin-bottom: 28px;
+      border-top: 1px solid rgba(255, 255, 255, 0.07);
+    }
+
+    .program-bullets li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 13.5px;
+      line-height: 1.45;
+      color: rgba(245, 245, 247, 0.88);
+    }
+
+    .program-bullets li::before {
+      content: "✓";
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--accent-ember);
+      flex-shrink: 0;
+      margin-top: 1px;
     }
 
     .program-footer {
       margin-top: auto;
-      padding-top: 22px;
-      border-top: 1px solid rgba(255, 255, 255, 0.06);
       display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 12px 20px;
+      width: 100%;
     }
 
-    .program-meta {
-      font-size: 12.5px;
-      color: rgba(245, 245, 245, 0.76);
-      letter-spacing: 0.02em;
+    .program-btn-glow {
+      width: 100%;
+      min-height: 48px;
+      padding: 13px 20px;
+      font-size: 11.5px;
+      gap: 10px;
     }
 
-    .program-cta {
+    .btn-card-outline {
+      width: 100%;
+      min-height: 48px;
+      padding: 13px 20px;
+      border-radius: 9999px;
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      min-height: 36px;
-      font-family: var(--font-mono);
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.1em;
+      justify-content: center;
+      gap: 9px;
+      font-family: var(--font-sans);
+      font-size: 11.5px;
+      font-weight: 600;
+      letter-spacing: 0.11em;
       text-transform: uppercase;
-      color: rgba(245, 245, 245, 0.92);
+      color: rgba(245, 245, 247, 0.88);
+      background-color: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.13);
       white-space: nowrap;
-      transition: color 0.24s ease;
+      transition:
+        border-color 0.26s var(--ease-out),
+        background-color 0.26s var(--ease-out),
+        color 0.24s ease,
+        box-shadow 0.28s var(--ease-out),
+        transform 0.22s var(--ease-spring);
     }
 
-    .program-cta .cta-arrow {
+    .btn-card-outline .cta-arrow {
       display: inline-block;
-      color: var(--accent-ember);
-      transition: transform 0.28s var(--ease-out);
+      color: rgba(245, 245, 247, 0.72);
+      transition: transform 0.26s var(--ease-spring), color 0.24s ease;
     }
 
-    .program-cta:hover,
-    .program-cta:focus-visible {
+    .btn-card-outline:hover,
+    .btn-card-outline:focus-visible {
+      border-color: rgba(255, 61, 0, 0.72);
+      background-color: rgba(255, 61, 0, 0.10);
       color: #ffffff;
+      box-shadow: 0 12px 28px -10px rgba(255, 61, 0, 0.48);
+      transform: translateY(-1px);
     }
 
-    .program-cta:hover .cta-arrow,
-    .program-cta:focus-visible .cta-arrow {
+    .btn-card-outline:hover .cta-arrow,
+    .btn-card-outline:focus-visible .cta-arrow {
       transform: translateX(4px);
+      color: var(--accent-ember-bright);
+    }
+
+    .btn-card-outline:active {
+      transform: scale(0.985);
     }
 
     /* ================= LIGHTHOUSE TORCH GALLERY (@dhxwhy / 21st.dev) + LIGHTBOX ================= */
@@ -3475,15 +3473,13 @@
       }
 
       .programs-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: 1fr;
+        max-width: 640px;
+        margin: 0 auto;
       }
 
-      .spotlight-card:nth-child(1),
-      .spotlight-card:nth-child(2),
-      .spotlight-card:nth-child(3),
-      .spotlight-card:nth-child(4) {
-        grid-column: span 1;
-        min-height: 310px;
+      .spotlight-card {
+        min-height: auto;
       }
 
       .lighthouse-stage {
@@ -4086,13 +4082,13 @@
     <div class="container">
       <div class="section-header reveal">
         <div>
-          <p class="eyebrow" style="margin-bottom: 14px;">Formatos de Aula</p>
-          <h2 class="section-title-mix blur-fade">
-            <span class="serif">Estrutura</span> <span class="sans">Sob Medida.</span>
+          <p class="eyebrow" style="margin-bottom: 14px;">FORMATOS DE AULA</p>
+          <h2 class="programs-heading blur-fade">
+            TREINE <span class="accent-ember">SOZINHO, EM DUPLA</span> OU COM SEU GRUPO.
           </h2>
         </div>
         <p class="section-header-copy">
-          Me desloco até o local da sua preferência em Brasília para você treinar Muay Thai, Boxe, Jiu-Jitsu ou MMA com acompanhamento exclusivo.
+          Atendimento em Brasília – DF no local da sua preferência, com horários flexíveis e equipamentos inclusos.
         </p>
       </div>
 
@@ -4109,25 +4105,27 @@
                   </span>
                   <span class="program-index">01 /</span>
                 </div>
-                <div class="program-badges">
-                  <span class="program-badge-popular">Mais procurado</span>
-                  <span class="program-tag">Individual</span>
-                </div>
+                <span class="program-badge-popular">MAIS PROCURADO</span>
               </div>
-              <h3 class="program-name">Particular 1-on-1</h3>
+              <h3 class="program-name">Personal Individual (1-on-1)</h3>
               <p class="program-desc">
-                Atenção exclusiva durante 60 minutos em Muay Thai, Boxe, Jiu-Jitsu ou MMA onde for mais prático para você. Ideal tanto para iniciantes do zero quanto para quem busca evolução acelerada.
+                Atenção 100% voltada para você. Ideal para quem quer evoluir rápido, tem rotina corrida ou prefere privacidade total para aprender do zero ou lapidar a técnica.
               </p>
-              <div class="card-specs">
-                <span class="card-spec-pill">MT • Boxe • BJJ • MMA</span>
-                <span class="card-spec-pill">60 min dedicados</span>
-                <span class="card-spec-pill">Onde você preferir</span>
-              </div>
+              <ul class="program-bullets">
+                <li>Treino montado pro seu objetivo</li>
+                <li>Ritmo e horários totalmente flexíveis</li>
+                <li>Equipamentos levados até você</li>
+              </ul>
             </div>
             <div class="program-footer">
-              <p class="program-meta">No Local da Sua Preferência • Brasília - DF</p>
-              <a href="#agendar" class="program-cta" data-format="Particular 1-on-1">
-                Solicitar este formato <span class="cta-arrow" aria-hidden="true">→</span>
+              <a
+                href="https://wa.me/5561981833245?text=Ol%C3%A1%2C%20Ronny!%20Vim%20pelo%20site%20e%20gostaria%20de%20consultar%20hor%C3%A1rios%20para%20aula%20particular%20individual%20(1-on-1)%20em%20Bras%C3%ADlia."
+                target="_blank"
+                rel="noopener"
+                class="glow-btn glow-btn-hero program-btn-glow"
+              >
+                <span>Consultar horários 1-on-1</span>
+                <span class="glow-btn-arrow" aria-hidden="true">→</span>
               </a>
             </div>
           </div>
@@ -4145,22 +4143,26 @@
                   </span>
                   <span class="program-index">02 /</span>
                 </div>
-                <span class="program-tag">2 Alunos</span>
               </div>
-              <h3 class="program-name">Dupla Executiva</h3>
+              <h3 class="program-name">Treino em Dupla</h3>
               <p class="program-desc">
-                Treino para casais, sócios ou parceiros com nível compatível. Combina manopla de Boxe e paos de Muay Thai ou posições técnicas e drills guiados de Jiu-Jitsu mantendo ritmo dinâmico.
+                Perfeito para treinar com namorado(a), amigo ou familiar. Vocês dividem o investimento e mantêm a motivação lá em cima, sem perder a correção técnica de perto.
               </p>
-              <div class="card-specs">
-                <span class="card-spec-pill">Drills em dupla</span>
-                <span class="card-spec-pill">Trocação ou Solo</span>
-                <span class="card-spec-pill">Agenda flexível</span>
-              </div>
+              <ul class="program-bullets">
+                <li>Melhor custo-benefício por pessoa</li>
+                <li>Dinâmica de treino ainda mais animada</li>
+                <li>Atenção próxima pros dois alunos</li>
+              </ul>
             </div>
             <div class="program-footer">
-              <p class="program-meta">Condomínio, Residência ou Local à Escolha • DF</p>
-              <a href="#agendar" class="program-cta" data-format="Dupla Executiva">
-                Solicitar este formato <span class="cta-arrow" aria-hidden="true">→</span>
+              <a
+                href="https://wa.me/5561981833245?text=Ol%C3%A1%2C%20Ronny!%20Vim%20pelo%20site%20e%20gostaria%20de%20consultar%20hor%C3%A1rios%20e%20valores%20para%20o%20Treino%20em%20Dupla%20em%20Bras%C3%ADlia."
+                target="_blank"
+                rel="noopener"
+                class="btn-card-outline"
+              >
+                <span>Consultar para dupla</span>
+                <span class="cta-arrow" aria-hidden="true">→</span>
               </a>
             </div>
           </div>
@@ -4174,58 +4176,30 @@
               <div class="program-top">
                 <div class="program-top-left">
                   <span class="card-icon-box" aria-hidden="true">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
                   </span>
                   <span class="program-index">03 /</span>
                 </div>
-                <span class="program-tag">Avançado</span>
               </div>
-              <h3 class="program-name">Refinamento &amp; Combate</h3>
+              <h3 class="program-name">Pequeno Grupo (3 a 4 pessoas)</h3>
               <p class="program-desc">
-                Focado em quem já treina e busca visão de Campeão Mundial e Faixa-Preta: ajuste fino de mãos no Boxe, clinche tailandês, detalhes de guarda e passagem no Jiu-Jitsu e transições para o MMA.
+                Monte sua própria turma fechada com amigos ou colegas de trabalho. Treino intenso, organizado e com qualidade de personal — bem longe da bagunça de academia lotada.
               </p>
-              <div class="card-specs">
-                <span class="card-spec-pill">QI de Luta</span>
-                <span class="card-spec-pill">Em Pé, Quedas &amp; Chão</span>
-              </div>
+              <ul class="program-bullets">
+                <li>Turma fechada só com quem você conhece</li>
+                <li>Treino dinâmico e puxado</li>
+                <li>Local e horário combinados pelo grupo</li>
+              </ul>
             </div>
             <div class="program-footer">
-              <p class="program-meta">Estratégia &amp; Leitura de Luta • Sob demanda</p>
-              <a href="#agendar" class="program-cta" data-format="Refinamento Técnico">
-                Solicitar este formato <span class="cta-arrow" aria-hidden="true">→</span>
-              </a>
-            </div>
-          </div>
-        </article>
-
-        <article class="spotlight-card reveal" data-tilt-card>
-          <div class="card-grid-bg" aria-hidden="true"></div>
-          <div class="spotlight-glow"></div>
-          <div class="spotlight-content">
-            <div>
-              <div class="program-top">
-                <div class="program-top-left">
-                  <span class="card-icon-box" aria-hidden="true">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-                  </span>
-                  <span class="program-index">04 /</span>
-                </div>
-                <span class="program-tag">Performance</span>
-              </div>
-              <h3 class="program-name">Condicionamento de Combate</h3>
-              <p class="program-desc">
-                Programa voltado para queima calórica severa, alívio de estresse da rotina executiva, coordenação motora e mobilidade articular utilizando a mecânica autêntica do Boxe, Muay Thai e lutas.
-              </p>
-              <div class="card-specs">
-                <span class="card-spec-pill">Alto gasto calórico</span>
-                <span class="card-spec-pill">Zero impacto desnecessário</span>
-                <span class="card-spec-pill">Progressão mensal</span>
-              </div>
-            </div>
-            <div class="program-footer">
-              <p class="program-meta">Rotina Executiva • Brasília - DF</p>
-              <a href="#agendar" class="program-cta" data-format="Condicionamento de Combate">
-                Solicitar este formato <span class="cta-arrow" aria-hidden="true">→</span>
+              <a
+                href="https://wa.me/5561981833245?text=Ol%C3%A1%2C%20Ronny!%20Vim%20pelo%20site%20e%20gostaria%20de%20consultar%20hor%C3%A1rios%20e%20valores%20para%20Pequeno%20Grupo%20(3%20a%204%20pessoas)%20em%20Bras%C3%ADlia."
+                target="_blank"
+                rel="noopener"
+                class="btn-card-outline"
+              >
+                <span>Consultar para grupo</span>
+                <span class="cta-arrow" aria-hidden="true">→</span>
               </a>
             </div>
           </div>
@@ -4772,7 +4746,7 @@
             <span>Atendimento móvel: Seg a Sáb • Onde você preferir no DF</span>
             <span>Eventual valor de deslocamento conforme a distância é tratado diretamente comigo</span>
             <div style="display: flex; flex-wrap: wrap; gap: 14px; margin-top: 2px;">
-              <a href="https://wa.me/556181833245?text=Ol%C3%A1%2C%20Ronny!%20Vim%20pelo%20site%20e%20gostaria%20de%20saber%20mais%20sobre%20as%20aulas%20particulares." target="_blank" rel="noopener" style="color: var(--accent-ember); font-weight: 500;">WhatsApp: (61) 98183-3245 ↗</a>
+              <a href="https://wa.me/5561981833245?text=Ol%C3%A1%2C%20Ronny!%20Vim%20pelo%20site%20e%20gostaria%20de%20saber%20mais%20sobre%20as%20aulas%20particulares." target="_blank" rel="noopener" style="color: var(--accent-ember); font-weight: 500;">WhatsApp: (61) 98183-3245 ↗</a>
               <a href="https://www.instagram.com/ronnnylopesthai/" target="_blank" rel="noopener" style="color: rgba(245,245,245,0.88); font-weight: 500;">Instagram: @ronnnylopesthai ↗</a>
             </div>
           </div>
@@ -4862,7 +4836,7 @@
       <span>© 2026 Ronny Lopes • Muay Thai, Boxe, Jiu-Jitsu &amp; MMA — Brasília, DF.</span>
       <div class="footer-links">
         <a href="https://www.instagram.com/ronnnylopesthai/" target="_blank" rel="noopener">@ronnnylopesthai</a>
-        <a href="https://wa.me/556181833245?text=Ol%C3%A1%2C%20Ronny!%20Vim%20pelo%20site%20e%20gostaria%20de%20saber%20mais%20sobre%20as%20aulas%20particulares." target="_blank" rel="noopener">WhatsApp</a>
+        <a href="https://wa.me/5561981833245?text=Ol%C3%A1%2C%20Ronny!%20Vim%20pelo%20site%20e%20gostaria%20de%20saber%20mais%20sobre%20as%20aulas%20particulares." target="_blank" rel="noopener">WhatsApp</a>
         <a href="#abordagem">Modalidades</a>
       </div>
     </div>
@@ -4875,7 +4849,7 @@
       <span>1-on-1 • Brasília DF</span>
     </span>
     <a
-      href="https://wa.me/556181833245?text=Ol%C3%A1%2C%20Ronny!%20Vim%20pelo%20site%20e%20gostaria%20de%20saber%20mais%20sobre%20as%20aulas%20particulares."
+      href="https://wa.me/5561981833245?text=Ol%C3%A1%2C%20Ronny!%20Vim%20pelo%20site%20e%20gostaria%20de%20saber%20mais%20sobre%20as%20aulas%20particulares."
       target="_blank"
       rel="noopener"
       class="dock-wa-btn"
@@ -5982,7 +5956,7 @@
       const periodo = document.getElementById('periodo').value;
 
       // WhatsApp direto do Ronny Lopes (DDI 55 + DDD 61 + Número)
-      const whatsappNumber = '556181833245';
+      const whatsappNumber = '5561981833245';
 
       const texto = `Olá, Ronny! Meu nome é ${nome}. Gostaria de agendar uma aula experimental em Brasília.\n• Modalidade: ${modalidade}\n• Formato: ${formato}\n• Experiência: ${nivel}\n• Local/Bairro de preferência: ${bairro}\n• Período de preferência: ${periodo}`;
       window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(texto)}`, '_blank', 'noopener');
