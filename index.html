@@ -1319,109 +1319,157 @@
       text-wrap: pretty;
     }
 
-    /* ================= COMO FUNCIONA (3 PASSOS) + CICLO ORBITAL DAS 4 MODALIDADES ================= */
+    /* ================= SCROLL ANIMATED TIMELINE (@ibrandify / 21st.dev) + RADAR ORBIT ================= */
     .approach {
-      display: flex;
-      flex-direction: column;
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
       border-bottom: 1px solid var(--border-hairline);
       background-color: var(--bg-void);
     }
 
-    .approach-steps-block {
+    .approach-timeline-col {
       background:
-        radial-gradient(ellipse 68% 52% at 50% 0%, rgba(255, 61, 0, 0.07) 0%, transparent 72%),
+        radial-gradient(ellipse 70% 50% at 0% 25%, rgba(255, 61, 0, 0.07) 0%, transparent 70%),
         #08080B;
-      border-bottom: 1px solid var(--border-hairline);
-      padding: clamp(64px, 8vw, 108px) 0;
+      border-right: 1px solid var(--border-hairline);
+      padding: clamp(56px, 7vw, 96px) clamp(24px, 4.5vw, 64px);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
 
     .timeline-head {
-      margin-bottom: clamp(36px, 4.5vw, 56px);
-      max-width: 780px;
+      margin-bottom: 40px;
     }
 
     .timeline-head-title {
-      margin-top: 16px;
-      font-size: clamp(28px, 3.8vw, 48px);
+      margin-top: 14px;
+      font-size: clamp(28px, 3.2vw, 42px);
       font-weight: 700;
       letter-spacing: -0.035em;
-      line-height: 1.08;
-      text-transform: uppercase;
+      line-height: 1.05;
       color: var(--text-primary);
-      text-wrap: balance;
     }
 
     .timeline-head-title span {
-      color: var(--accent-ember);
+      font-family: var(--font-serif);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--accent-ember-bright);
     }
 
-    .steps-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: clamp(18px, 2.2vw, 28px);
-    }
-
-    .step-card {
+    .beam-timeline {
       position: relative;
-      padding: clamp(28px, 3.2vw, 40px) clamp(24px, 2.6vw, 34px);
-      border-radius: 16px;
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.028) 0%, rgba(255, 255, 255, 0.01) 100%);
-      border: 1px solid var(--border-hairline);
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      transition:
-        border-color 0.32s var(--ease-out),
-        background-color 0.32s var(--ease-out),
-        transform 0.32s var(--ease-out);
+      list-style: none;
+      padding-left: 38px;
     }
 
-    .step-card:hover {
-      border-color: rgba(255, 61, 0, 0.34);
-      background-color: rgba(255, 61, 0, 0.025);
-      transform: translateY(-3px);
+    /* Track rail */
+    .beam-timeline::before {
+      content: "";
+      position: absolute;
+      left: 11px;
+      top: 6px;
+      bottom: 12px;
+      width: 2px;
+      background: rgba(255, 255, 255, 0.09);
+      border-radius: 999px;
     }
 
-    .step-num-row {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      margin-bottom: 6px;
+    /* Scroll-driven luminous vertical beam */
+    .beam-timeline-progress {
+      position: absolute;
+      left: 11px;
+      top: 6px;
+      width: 2px;
+      height: var(--beam-progress, 24%);
+      max-height: calc(100% - 18px);
+      background: linear-gradient(180deg, rgba(184, 15, 15, 0.5) 0%, var(--accent-ember) 78%, #ffffff 100%);
+      box-shadow:
+        0 0 14px rgba(255, 61, 0, 0.85),
+        0 0 28px rgba(255, 61, 0, 0.45);
+      border-radius: 999px;
+      transition: height 0.18s ease-out;
+      pointer-events: none;
     }
 
-    .step-num {
+    .beam-step {
+      position: relative;
+      padding: 14px 18px 16px;
+      margin-bottom: 14px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      transition: border-color 0.35s ease, background-color 0.35s ease, transform 0.35s var(--ease-out);
+    }
+
+    .beam-step:last-child {
+      margin-bottom: 0;
+    }
+
+    .beam-step-dot {
+      position: absolute;
+      left: -33px;
+      top: 20px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: #0B0B0F;
+      border: 2px solid rgba(255, 255, 255, 0.24);
+      transition: border-color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+    }
+
+    .beam-step.active {
+      background: linear-gradient(90deg, rgba(255, 61, 0, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
+      border-color: rgba(255, 61, 0, 0.32);
+      transform: translateX(4px);
+    }
+
+    .beam-step.active .beam-step-dot {
+      background: var(--accent-ember);
+      border-color: #ffffff;
+      box-shadow: 0 0 14px rgba(255, 61, 0, 0.95);
+      transform: scale(1.12);
+    }
+
+    .approach-step-meta {
       font-family: var(--font-mono);
-      font-size: clamp(34px, 3.2vw, 44px);
-      font-weight: 600;
-      line-height: 1;
-      letter-spacing: -0.04em;
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
       color: var(--accent-ember);
-    }
-
-    .step-num-line {
-      flex: 1;
-      height: 1px;
-      background: linear-gradient(90deg, rgba(255, 61, 0, 0.32) 0%, rgba(255, 255, 255, 0.05) 100%);
+      margin-bottom: 4px;
+      display: block;
     }
 
     .approach-step-title {
-      font-size: clamp(19px, 1.5vw, 22px);
-      font-weight: 600;
-      letter-spacing: -0.02em;
-      line-height: 1.25;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
       color: var(--text-primary);
+      margin-bottom: 5px;
     }
 
     .approach-step-desc {
-      font-size: 15px;
-      line-height: 1.7;
+      font-size: 13.5px;
+      line-height: 1.58;
       color: var(--text-secondary);
       text-wrap: pretty;
     }
 
+    .approach-note {
+      margin-top: 32px;
+      padding-top: 18px;
+      border-top: 1px solid var(--border-hairline);
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+      letter-spacing: 0.04em;
+      color: var(--text-muted);
+    }
+
     .approach-diagram {
       background:
-        radial-gradient(ellipse 65% 65% at 50% 54%, rgba(184, 15, 15, 0.14) 0%, rgba(5, 5, 5, 0) 70%),
+        radial-gradient(ellipse 75% 65% at 50% 54%, rgba(184, 15, 15, 0.14) 0%, rgba(5, 5, 5, 0) 70%),
         var(--bg-void);
       padding: clamp(56px, 7vw, 96px) clamp(24px, 5vw, 72px);
       display: flex;
@@ -3390,18 +3438,15 @@
       }
 
       .manifesto-grid,
-      .steps-grid,
+      .approach,
       .coach-section,
       .faq-layout,
       .booking-card {
         grid-template-columns: 1fr;
       }
 
-      .steps-grid {
-        gap: 18px;
-      }
-
       .manifesto-media,
+      .approach-timeline-col,
       .coach-photo,
       .booking-visual {
         border-right: none;
@@ -3948,52 +3993,54 @@
     </div>
   </section>
 
-  <!-- ABORDAGEM: COMO FUNCIONA EM 3 PASSOS + CICLO ORBITAL DAS 4 MODALIDADES -->
+  <!-- ABORDAGEM: SCROLL ANIMATED TIMELINE (@ibrandify) + CICLO ORBITAL DAS 4 MODALIDADES -->
   <section class="approach" id="abordagem">
-    <div class="approach-steps-block">
-      <div class="container">
-        <div class="timeline-head reveal">
-          <p class="eyebrow">COMO FUNCIONA</p>
-          <h2 class="timeline-head-title blur-fade">
-            DO PRIMEIRO TREINO À <span>EVOLUÇÃO CONSTANTE</span>.
-          </h2>
+    <div class="approach-timeline-col reveal" id="timelineSection">
+      <div>
+        <div class="timeline-head">
+          <p class="eyebrow">Nossa Abordagem</p>
+          <h2 class="timeline-head-title">Progressão em <span>5 Estágios.</span></h2>
         </div>
 
-        <div class="steps-grid">
-          <article class="step-card reveal">
-            <div class="step-num-row" aria-hidden="true">
-              <span class="step-num">01</span>
-              <span class="step-num-line"></span>
-            </div>
-            <h3 class="approach-step-title">Avaliação na prática</h3>
-            <p class="approach-step-desc">
-              Na primeira aula, a gente entende seu objetivo, seu nível atual e sua rotina. Se você nunca lutou antes, começa do zero sem pressão; se já treina, ajustamos o que precisa melhorar.
-            </p>
-          </article>
+        <ul class="beam-timeline" id="beamTimeline">
+          <div class="beam-timeline-progress" id="beamProgress" aria-hidden="true"></div>
 
-          <article class="step-card reveal">
-            <div class="step-num-row" aria-hidden="true">
-              <span class="step-num">02</span>
-              <span class="step-num-line"></span>
-            </div>
-            <h3 class="approach-step-title">Treino sob medida</h3>
-            <p class="approach-step-desc">
-              Cada aula é montada pra você — Muay Thai, Boxe, Jiu-Jitsu ou um mix. Eu levo os equipamentos e corrijo sua técnica em tempo real, no seu ritmo.
-            </p>
-          </article>
-
-          <article class="step-card reveal">
-            <div class="step-num-row" aria-hidden="true">
-              <span class="step-num">03</span>
-              <span class="step-num-line"></span>
-            </div>
-            <h3 class="approach-step-title">Evolução de verdade</h3>
-            <p class="approach-step-desc">
-              Com constância e ajuste fino toda semana, você ganha condicionamento, coordenação e técnica limpa — sem cair na mesmice de treino genérico.
-            </p>
-          </article>
-        </div>
+          <li class="beam-step active">
+            <span class="beam-step-dot" aria-hidden="true"></span>
+            <span class="approach-step-meta">Fase 01 • Fundamento</span>
+            <h3 class="approach-step-title">Diagnóstico &amp; Escolha de Foco</h3>
+            <p class="approach-step-desc">Avaliação de mobilidade, base e definição do seu foco: Muay Thai, Boxe, Jiu-Jitsu ou integração no MMA.</p>
+          </li>
+          <li class="beam-step">
+            <span class="beam-step-dot" aria-hidden="true"></span>
+            <span class="approach-step-meta">Fase 02 • Trocação</span>
+            <h3 class="approach-step-title">Boxe &amp; Armas do Muay Thai</h3>
+            <p class="approach-step-desc">Construção limpa de jabs, diretos, pêndulo, esquivas, chutes, joelhos e cotovelos com transferência real de peso.</p>
+          </li>
+          <li class="beam-step">
+            <span class="beam-step-dot" aria-hidden="true"></span>
+            <span class="approach-step-meta">Fase 03 • Reação</span>
+            <h3 class="approach-step-title">Manopla, Paos &amp; Timing Vivo</h3>
+            <p class="approach-step-desc">Leitura visual, combinações em velocidade, entradas angulares e contra-ataques em ritmo real no aparador.</p>
+          </li>
+          <li class="beam-step">
+            <span class="beam-step-dot" aria-hidden="true"></span>
+            <span class="approach-step-meta">Fase 04 • Curta Distância &amp; Solo</span>
+            <h3 class="approach-step-title">Clinche, Quedas &amp; Jiu-Jitsu</h3>
+            <p class="approach-step-desc">Domínio de alavancas, entradas de queda, controle posicional, guarda, passagens e finalizações de faixa-preta.</p>
+          </li>
+          <li class="beam-step">
+            <span class="beam-step-dot" aria-hidden="true"></span>
+            <span class="approach-step-meta">Fase 05 • Gás de Luta</span>
+            <h3 class="approach-step-title">Lastro Físico &amp; Mental</h3>
+            <p class="approach-step-desc">Condicionamento metabólico específico de combate sem sobrecarga desnecessária nas articulações.</p>
+          </li>
+        </ul>
       </div>
+
+      <p class="approach-note">
+        // Vou até o local da sua preferência em Brasília - DF • Eventual deslocamento tratado diretamente conforme a distância.
+      </p>
     </div>
 
     <div class="approach-diagram reveal">
