@@ -4,9 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- SEO Primário (Title <= 60 chars | Description <= 155 chars) -->
-  <title>Muay Thai, Boxe, Jiu-Jitsu e MMA em Brasília | Ronny Lopes</title>
-  <meta name="description" content="Aulas particulares 1-on-1 de Muay Thai, Boxe, Jiu-Jitsu e MMA em Brasília com Ronny Lopes: Campeão Mundial W.M.A na Tailândia e Faixa-Preta de Jiu-Jitsu." />
+  <!-- SEO Primário (Title <= 65 chars | Description <= 160 chars) -->
+  <title>Personal de Muay Thai, Boxe e Jiu-Jitsu em Brasília | Ronny Lopes</title>
+  <meta name="description" content="Aulas particulares de Muay Thai, Boxe, Jiu-Jitsu e MMA em Brasília (DF) com Ronny Lopes, Campeão Mundial na Tailândia e Faixa-Preta BJJ. Agende sua avaliação." />
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
   <meta name="author" content="Ronny Lopes" />
   <meta name="geo.region" content="BR-DF" />
@@ -21,8 +21,8 @@
   <meta property="og:locale" content="pt_BR" />
   <meta property="og:site_name" content="Ronny Lopes • Personal Fight Brasília" />
   <meta property="og:url" content="https://ronny-lopes-muaythai.marianamello0406.workers.dev/" />
-  <meta property="og:title" content="Muay Thai, Boxe, Jiu-Jitsu e MMA em Brasília | Ronny Lopes" />
-  <meta property="og:description" content="Treino particular 1-on-1 e em dupla em Brasília - DF com Ronny Lopes: Campeão Mundial W.M.A 2010 na Tailândia, Bicampeão Sul-Americano e Faixa-Preta de Jiu-Jitsu." />
+  <meta property="og:title" content="Personal de Muay Thai, Boxe e Jiu-Jitsu em Brasília | Ronny Lopes" />
+  <meta property="og:description" content="Aulas particulares de Muay Thai, Boxe, Jiu-Jitsu e MMA em Brasília (DF) com Ronny Lopes, Campeão Mundial na Tailândia e Faixa-Preta BJJ. Agende sua avaliação." />
   <!-- SUBSTITUA og-image.jpg (1200x630px recomendado) ou aponte para foto-mundial-wma-tailandia.jpg no domínio final -->
   <meta property="og:image" content="https://ronny-lopes-muaythai.marianamello0406.workers.dev/foto-mundial-wma-tailandia.jpg" />
   <meta property="og:image:width" content="960" />
@@ -31,8 +31,8 @@
 
   <!-- Twitter Cards -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Muay Thai, Boxe, Jiu-Jitsu e MMA em Brasília | Ronny Lopes" />
-  <meta name="twitter:description" content="Treino particular 1-on-1 e em dupla em Brasília - DF com Ronny Lopes: Campeão Mundial W.M.A 2010 na Tailândia, Bicampeão Sul-Americano e Faixa-Preta de Jiu-Jitsu." />
+  <meta name="twitter:title" content="Personal de Muay Thai, Boxe e Jiu-Jitsu em Brasília | Ronny Lopes" />
+  <meta name="twitter:description" content="Aulas particulares de Muay Thai, Boxe, Jiu-Jitsu e MMA em Brasília (DF) com Ronny Lopes, Campeão Mundial na Tailândia e Faixa-Preta BJJ. Agende sua avaliação." />
   <meta name="twitter:image" content="https://ronny-lopes-muaythai.marianamello0406.workers.dev/foto-mundial-wma-tailandia.jpg" />
   <meta name="twitter:image:alt" content="Ronny Lopes — Campeão Mundial W.M.A na Tailândia e Faixa-Preta de Jiu-Jitsu | Personal Fight em Brasília - DF" />
 
@@ -476,22 +476,86 @@
       background: var(--accent-ember);
     }
 
+    /* Botão da Navbar: mantém o glow laranja, porém mais contido para não competir com o CTA da Hero */
     .glow-btn-sm {
       min-height: 42px;
       padding: 10px 20px;
       font-size: 11px;
       gap: 8px;
+      box-shadow:
+        0 0 0 1px rgba(255, 255, 255, 0.11),
+        0 8px 22px -10px rgba(255, 61, 0, 0.36),
+        inset 0 1px 0 rgba(255, 255, 255, 0.16);
     }
 
+    .glow-btn-sm::before {
+      opacity: 0.72;
+    }
+
+    .glow-btn-sm::after {
+      opacity: 0.36;
+      filter: blur(10px);
+    }
+
+    .glow-btn-sm:hover {
+      box-shadow:
+        0 0 0 1px rgba(255, 110, 64, 0.28),
+        0 12px 30px -8px rgba(255, 61, 0, 0.52),
+        inset 0 1px 0 rgba(255, 255, 255, 0.28);
+    }
+
+    .glow-btn-sm:hover::after {
+      opacity: 0.62;
+      filter: blur(12px);
+    }
+
+    /* Botão principal da Hero: preenchimento em gradiente laranja translúcido + brilho mais presente */
+    .glow-btn-hero {
+      background:
+        linear-gradient(135deg, rgba(255, 61, 0, 0.22) 0%, rgba(255, 110, 64, 0.14) 48%, rgba(20, 11, 10, 0.90) 100%),
+        radial-gradient(125% 150% at 50% 0%, rgba(255, 61, 0, 0.26) 0%, #09090b 74%);
+      box-shadow:
+        0 0 0 1px rgba(255, 110, 64, 0.30),
+        0 16px 46px -8px rgba(255, 61, 0, 0.72),
+        0 0 28px -6px rgba(255, 61, 0, 0.44),
+        inset 0 1px 0 rgba(255, 255, 255, 0.30);
+    }
+
+    .glow-btn-hero::after {
+      opacity: 0.88;
+      filter: blur(14px);
+    }
+
+    .glow-btn-hero .glow-btn-arrow {
+      background: rgba(255, 61, 0, 0.34);
+      border-color: rgba(255, 128, 64, 0.62);
+    }
+
+    .glow-btn-hero:hover {
+      background:
+        linear-gradient(135deg, rgba(255, 61, 0, 0.30) 0%, rgba(255, 110, 64, 0.18) 52%, rgba(24, 12, 10, 0.92) 100%),
+        radial-gradient(125% 150% at 50% 0%, rgba(255, 61, 0, 0.34) 0%, #09090b 76%);
+      box-shadow:
+        0 0 0 1px rgba(255, 128, 64, 0.50),
+        0 22px 56px -6px rgba(255, 61, 0, 0.92),
+        0 0 36px -4px rgba(255, 61, 0, 0.58),
+        inset 0 1px 0 rgba(255, 255, 255, 0.42);
+    }
+
+    .glow-btn-hero:hover::after {
+      opacity: 1;
+      filter: blur(17px);
+    }
+
+    /* Botão secundário da Hero: discreto, fundo transparente e borda fina neutra sem glow */
     .btn-hero-ghost {
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      background-color: rgba(255, 255, 255, 0.03);
-      color: rgba(245, 245, 247, 0.88);
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
+      background-color: transparent;
+      color: rgba(245, 245, 247, 0.74);
+      border: 1px solid rgba(255, 255, 255, 0.13);
+      box-shadow: none;
       min-height: 54px;
       font-size: 12px;
       font-weight: 500;
@@ -505,9 +569,9 @@
     }
 
     .btn-hero-ghost:hover {
-      color: #ffffff;
-      border-color: rgba(255, 255, 255, 0.38);
-      background-color: rgba(255, 255, 255, 0.07);
+      color: var(--text-primary);
+      border-color: rgba(255, 255, 255, 0.28);
+      background-color: rgba(255, 255, 255, 0.04);
       transform: translateY(-1px);
     }
 
@@ -519,9 +583,9 @@
     .vcut-word {
       display: inline-flex;
       flex-wrap: nowrap;
-      overflow: hidden;
-      padding: 0.05em 0.04em 0.11em 0;
-      margin-bottom: -0.09em;
+      overflow: visible;
+      padding: 0.05em 0.12em 0.16em 0;
+      margin-bottom: -0.14em;
       vertical-align: bottom;
     }
 
@@ -529,11 +593,13 @@
       display: inline-block;
       overflow: hidden;
       vertical-align: bottom;
+      padding: 0.04em 0.08em 0.22em 0.04em;
+      margin: -0.04em -0.08em -0.22em -0.04em;
     }
 
     .vcut-char {
       display: inline-block;
-      transform: translate3d(0, 118%, 0) rotateX(-38deg);
+      transform: translate3d(0, 132%, 0) rotateX(-38deg);
       opacity: 0;
       filter: blur(8px);
       transform-origin: 50% 100%;
@@ -884,9 +950,14 @@
       font-style: italic;
       font-weight: 400;
       font-size: clamp(64px, 8.2vw, 132px);
-      line-height: 1.02;
+      line-height: 1.15;
       letter-spacing: -0.02em;
       color: var(--text-primary);
+      padding-bottom: 0.16em;
+      padding-right: 0.10em;
+      margin-bottom: -0.27em;
+      position: relative;
+      z-index: 2;
     }
 
     .hero-title .sans-line {
@@ -917,11 +988,11 @@
     }
 
     .hero-sub {
-      font-size: 15px;
-      line-height: 1.7;
+      font-size: 15.5px;
+      line-height: 1.65;
       color: var(--text-secondary);
-      max-width: 530px;
-      margin-bottom: 34px;
+      max-width: 520px;
+      margin-bottom: 30px;
       text-wrap: pretty;
     }
 
@@ -930,6 +1001,36 @@
       flex-wrap: wrap;
       gap: 16px;
       align-items: center;
+    }
+
+    .hero-micro-proof {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px 12px;
+      margin-top: 18px;
+      font-size: 12.5px;
+      line-height: 1.45;
+      color: rgba(180, 180, 190, 0.86);
+      letter-spacing: -0.005em;
+    }
+
+    .micro-proof-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+    }
+
+    .micro-check {
+      font-style: normal;
+      font-size: 11.5px;
+      color: rgba(245, 245, 247, 0.68);
+    }
+
+    .micro-sep {
+      color: rgba(255, 255, 255, 0.24);
+      font-size: 11px;
     }
 
     /* Interactive 3D HUD Stage Card in Hero */
@@ -998,8 +1099,8 @@
       position: absolute;
       inset: 0;
       background:
-        linear-gradient(180deg, rgba(5, 5, 5, 0.36) 0%, transparent 28%, rgba(5, 5, 5, 0.22) 62%, rgba(5, 5, 5, 0.94) 100%),
-        radial-gradient(circle at 80% 18%, rgba(255, 61, 0, 0.20), transparent 48%);
+        linear-gradient(180deg, rgba(5, 5, 5, 0.08) 0%, transparent 52%, rgba(5, 5, 5, 0.62) 78%, rgba(5, 5, 5, 0.94) 100%),
+        radial-gradient(circle at 80% 18%, rgba(255, 61, 0, 0.16), transparent 48%);
       pointer-events: none;
     }
 
@@ -1026,90 +1127,40 @@
       animation: scanLaser 5.4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
     }
 
-    .hud-top-bar {
-      position: absolute;
-      top: 16px;
-      left: 16px;
-      right: 16px;
-      z-index: 4;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 8px;
-      font-family: var(--font-mono);
-      font-size: 10px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.82);
-    }
-
-    .hud-chip {
-      padding: 5px 10px;
-      border-radius: 9999px;
-      white-space: nowrap;
-      background: rgba(8, 8, 10, 0.72);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.14);
-    }
-
-    .hud-chip-ember {
-      color: #ffcab8;
-      border-color: rgba(255, 61, 0, 0.42);
-      background: rgba(34, 10, 6, 0.78);
-    }
-
     .hud-bottom-panel {
       position: absolute;
-      bottom: 16px;
-      left: 16px;
-      right: 16px;
+      bottom: 0;
+      left: 0;
+      right: 0;
       z-index: 4;
-      padding: 16px 18px;
-      border-radius: 14px;
-      background: rgba(10, 10, 14, 0.78);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      border: 1px solid rgba(255, 255, 255, 0.12);
+      padding: 28px 22px 18px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 14px;
+      gap: 12px;
     }
 
     .hud-fighter-name {
       font-family: var(--font-mono);
-      font-size: 10.5px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--accent-ember);
-      margin-bottom: 3px;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.10em;
+      color: rgba(245, 245, 247, 0.90);
+      transition: color 0.22s ease;
     }
 
-    .hud-fighter-stat {
-      font-size: 14px;
-      font-weight: 600;
-      color: #ffffff;
-      letter-spacing: -0.01em;
+    .hud-fighter-name:hover {
+      color: var(--accent-ember-bright);
     }
 
-    .hud-badge-2x {
-      font-family: var(--font-serif);
-      font-size: 32px;
-      line-height: 1;
-      color: #ffffff;
-      padding-left: 14px;
-      border-left: 1px solid rgba(255, 255, 255, 0.14);
-    }
-
-    .hud-badge-2x small {
-      display: block;
+    .hud-minimal-tag {
       font-family: var(--font-mono);
-      font-size: 9px;
+      font-size: 10.5px;
+      font-weight: 500;
       letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: var(--text-secondary);
-      margin-top: 3px;
+      color: rgba(245, 245, 247, 0.68);
+      white-space: nowrap;
     }
 
     /* Kinetic Infinite Ticker Strip at Hero Base */
@@ -2201,7 +2252,7 @@
       line-height: 1.12;
     }
 
-    /* Lightbox Modal */
+    /* ================= CAROUSEL LIGHTBOX DIALOG (21st.dev Upgrade) ================= */
     .lightbox-modal {
       position: fixed;
       inset: 0;
@@ -2209,10 +2260,10 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 24px;
-      background: rgba(4, 4, 6, 0.90);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
+      padding: clamp(14px, 3vw, 28px);
+      background: rgba(4, 4, 6, 0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       opacity: 0;
       pointer-events: none;
       transition: opacity 0.28s ease;
@@ -2225,8 +2276,8 @@
 
     .lightbox-dialog {
       position: relative;
-      max-width: min(980px, 94vw);
-      max-height: 88vh;
+      width: min(1040px, 96vw);
+      max-height: 92vh;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -2239,27 +2290,123 @@
       transform: scale(1);
     }
 
+    .lightbox-top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      gap: 12px;
+    }
+
+    .lightbox-counter {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 13px;
+      border-radius: 9999px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      color: var(--text-primary);
+    }
+
+    .lightbox-counter::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent-ember);
+      box-shadow: 0 0 8px var(--accent-ember);
+    }
+
+    .lightbox-stage-wrap {
+      position: relative;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      touch-action: pan-y;
+      user-select: none;
+    }
+
     .lightbox-dialog img {
       max-width: 100%;
-      max-height: 78vh;
+      max-height: 74vh;
       width: auto;
       height: auto;
       border-radius: 14px;
       border: 1px solid rgba(255, 255, 255, 0.16);
       box-shadow: 0 32px 80px rgba(0, 0, 0, 0.95);
+      transition: opacity 0.18s ease, transform 0.22s var(--ease-out);
+    }
+
+    .lightbox-dialog img.is-switching {
+      opacity: 0.35;
+      transform: scale(0.985);
+    }
+
+    .lightbox-nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 3;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(10, 10, 14, 0.78);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      color: #ffffff;
+      font-size: 18px;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.65);
+      transition: background-color 0.22s ease, border-color 0.22s ease, transform 0.22s var(--ease-spring);
+    }
+
+    .lightbox-nav-btn.prev {
+      left: 12px;
+    }
+
+    .lightbox-nav-btn.next {
+      right: 12px;
+    }
+
+    .lightbox-nav-btn:hover {
+      background: rgba(255, 61, 0, 0.22);
+      border-color: var(--accent-ember);
+      transform: translateY(-50%) scale(1.06);
+    }
+
+    .lightbox-nav-btn:active {
+      transform: translateY(-50%) scale(0.95);
     }
 
     .lightbox-caption-bar {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 20px;
+      gap: 16px;
       width: 100%;
       font-family: var(--font-mono);
       font-size: 11.5px;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
       color: var(--text-secondary);
+      text-align: left;
+    }
+
+    .lightbox-swipe-hint {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      color: var(--text-muted);
+      white-space: nowrap;
+      flex-shrink: 0;
     }
 
     .lightbox-close {
@@ -2272,6 +2419,7 @@
       font-size: 11px;
       letter-spacing: 0.12em;
       text-transform: uppercase;
+      transition: border-color 0.22s ease, background-color 0.22s ease;
     }
 
     .lightbox-close:hover {
@@ -2840,6 +2988,237 @@
         0 0 24px -6px rgba(255, 61, 0, 0.42);
     }
 
+    /* ================= INTERACTIVE PILL / CHIP SELECTOR (21st.dev) ================= */
+    .chip-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 2px;
+      border-radius: 10px;
+      transition: box-shadow 0.3s ease;
+    }
+
+    .chip-group.field-highlight {
+      box-shadow:
+        0 0 0 3px rgba(255, 61, 0, 0.22),
+        0 0 26px -4px rgba(255, 61, 0, 0.45);
+    }
+
+    .chip-option {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      min-height: 40px;
+      padding: 8px 14px;
+      border-radius: 9999px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.11);
+      color: rgba(245, 245, 247, 0.78);
+      font-family: var(--font-sans);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: -0.005em;
+      line-height: 1.2;
+      transition:
+        background-color 0.22s var(--ease-out),
+        border-color 0.22s var(--ease-out),
+        color 0.22s ease,
+        box-shadow 0.25s var(--ease-out),
+        transform 0.18s var(--ease-spring);
+    }
+
+    .chip-option::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.22);
+      transition: background-color 0.22s ease, box-shadow 0.22s ease, transform 0.22s ease;
+    }
+
+    .chip-option:hover {
+      background: rgba(255, 255, 255, 0.065);
+      border-color: rgba(255, 255, 255, 0.24);
+      color: #ffffff;
+    }
+
+    .chip-option:active {
+      transform: scale(0.97);
+    }
+
+    .chip-option[aria-checked="true"] {
+      background: linear-gradient(180deg, rgba(255, 61, 0, 0.18) 0%, rgba(184, 15, 15, 0.12) 100%);
+      border-color: rgba(255, 61, 0, 0.75);
+      color: #ffffff;
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.16),
+        0 8px 22px -8px rgba(255, 61, 0, 0.55);
+    }
+
+    .chip-option[aria-checked="true"]::before {
+      background: var(--accent-ember);
+      box-shadow: 0 0 9px var(--accent-ember);
+      transform: scale(1.15);
+    }
+
+    /* ================= FLOATING ACTION DOCK (21st.dev @themeocean style) ================= */
+    .floating-dock {
+      position: fixed;
+      left: 50%;
+      bottom: max(18px, env(safe-area-inset-bottom, 18px));
+      z-index: 94;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 8px 6px 14px;
+      border-radius: 9999px;
+      background: rgba(10, 10, 14, 0.84);
+      backdrop-filter: blur(18px) saturate(150%);
+      -webkit-backdrop-filter: blur(18px) saturate(150%);
+      border: 1px solid rgba(255, 255, 255, 0.13);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.12),
+        0 20px 48px -12px rgba(0, 0, 0, 0.92),
+        0 0 0 1px rgba(255, 61, 0, 0.12);
+      opacity: 0;
+      pointer-events: none;
+      transform: translate3d(-50%, 24px, 0) scale(0.96);
+      transition:
+        opacity 0.32s var(--ease-out),
+        transform 0.38s var(--ease-spring);
+      max-width: calc(100vw - 24px);
+    }
+
+    .floating-dock.visible {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translate3d(-50%, 0, 0) scale(1);
+    }
+
+    .dock-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding-right: 6px;
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      color: rgba(245, 245, 247, 0.86);
+      white-space: nowrap;
+    }
+
+    .dock-status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #22c55e;
+      box-shadow: 0 0 10px rgba(34, 197, 94, 0.85);
+      animation: pulseDot 2.2s ease-in-out infinite;
+      flex-shrink: 0;
+    }
+
+    .dock-wa-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      min-height: 38px;
+      padding: 0 14px;
+      border-radius: 9999px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      color: var(--text-primary);
+      font-size: 12px;
+      font-weight: 500;
+      white-space: nowrap;
+      transition: background-color 0.22s ease, border-color 0.22s ease, transform 0.2s ease;
+    }
+
+    .dock-wa-btn:hover {
+      background: rgba(34, 197, 94, 0.14);
+      border-color: rgba(34, 197, 94, 0.55);
+      color: #ffffff;
+    }
+
+    .dock-cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      min-height: 38px;
+      padding: 0 16px;
+      border-radius: 9999px;
+      background: linear-gradient(135deg, var(--accent-ember) 0%, #c81e00 100%);
+      color: #ffffff;
+      font-size: 11.5px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      box-shadow: 0 8px 22px -6px rgba(255, 61, 0, 0.65);
+      transition: transform 0.22s var(--ease-spring), box-shadow 0.22s ease, filter 0.22s ease;
+    }
+
+    .dock-cta-btn:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.08);
+      box-shadow: 0 12px 26px -5px rgba(255, 61, 0, 0.85);
+    }
+
+    .skip-link {
+      position: fixed;
+      top: -120px;
+      left: 16px;
+      z-index: 1000;
+      padding: 10px 18px;
+      border-radius: 9999px;
+      background: var(--accent-ember);
+      color: #ffffff;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: top 0.2s ease;
+    }
+
+    .skip-link:focus-visible {
+      top: 16px;
+      outline: 2px solid #ffffff;
+      outline-offset: 2px;
+    }
+
+    @media (max-width: 580px) {
+      .dock-status {
+        display: none;
+      }
+
+      .floating-dock {
+        padding: 6px;
+        gap: 6px;
+      }
+
+      .lightbox-nav-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+      }
+
+      .lightbox-nav-btn.prev {
+        left: 8px;
+      }
+
+      .lightbox-nav-btn.next {
+        right: 8px;
+      }
+
+      .chip-option {
+        font-size: 12.5px;
+        padding: 8px 12px;
+        min-height: 38px;
+      }
+    }
+
     .submit-btn {
       position: relative;
       overflow: hidden;
@@ -3391,16 +3770,20 @@
         padding: 6px 12px;
       }
 
-      .hud-top-bar {
-        top: 12px;
-        left: 12px;
-        right: 12px;
-        font-size: 8.8px;
-        letter-spacing: 0.09em;
+      .hud-bottom-panel {
+        padding: 22px 16px 14px;
       }
 
-      .hud-chip {
-        padding: 4px 8px;
+      .hud-fighter-name,
+      .hud-minimal-tag {
+        font-size: 9.8px;
+        letter-spacing: 0.08em;
+      }
+
+      .hero-micro-proof {
+        font-size: 11.5px;
+        gap: 6px 8px;
+        margin-top: 16px;
       }
 
       .hero-actions {
@@ -3463,6 +3846,7 @@
   </style>
 </head>
 <body>
+  <a href="#conteudo-principal" class="skip-link">Pular para o conteúdo</a>
   <div class="film-grain" aria-hidden="true"></div>
 
   <!-- NAVBAR FLUTUANTE TUBELIGHT (21st.dev) -->
@@ -3507,22 +3891,22 @@
           <span>Campeão Mundial W.M.A (Tailândia) • Faixa-Preta BJJ</span>
         </div>
 
-        <h1 class="hero-title" aria-label="Ronny Lopes — Muay Thai, Boxe, Jiu-Jitsu e MMA Particular em Brasília">
+        <div class="hero-title" aria-label="Ronny Lopes">
           <span class="serif-line vcut-word" data-vcut="center" data-base-delay="60">Ronny</span>
           <span class="sans-line">
             <span class="vcut-word" data-vcut="center" data-base-delay="220">LOPES</span><span class="ember-dot">.</span>
           </span>
-        </h1>
+        </div>
 
-        <p class="hero-lead blur-fade blur-delay-2">
-          Muay Thai, Boxe, Jiu-Jitsu e MMA com técnica de campeão mundial aplicada ao seu objetivo.
-        </p>
+        <h1 class="hero-lead blur-fade blur-delay-2">
+          Personal Fight de Muay Thai, Boxe, Jiu-Jitsu e MMA em Brasília.
+        </h1>
         <p class="hero-sub blur-fade blur-delay-3">
-          Treinamento particular 1-on-1 e em dupla em Brasília — DF. Sem turmas lotadas e sem coreografia fitness: aprenda trocação afiada, boxe técnico, luta de solo e defesa pessoal com quem foi Campeão Mundial na Tailândia (W.M.A 2010), Bicampeão Sul-Americano e Campeão Brasiliense de Jiu-Jitsu.
+          Aulas particulares (1-on-1 ou em dupla) no local da sua preferência em Brasília – DF. Técnica real, do zero ao avançado — sem turmas lotadas.
         </p>
 
         <div class="hero-actions blur-fade blur-delay-4">
-          <a href="#agendar" class="glow-btn">
+          <a href="#agendar" class="glow-btn glow-btn-hero">
             <span>Agendar Avaliação</span>
             <span class="glow-btn-arrow" aria-hidden="true">→</span>
           </a>
@@ -3530,33 +3914,32 @@
             <span>Ver Modalidades</span>
           </a>
         </div>
+
+        <div class="hero-micro-proof blur-fade blur-delay-4">
+          <span class="micro-proof-item"><i class="micro-check" aria-hidden="true">✓</i> Atendimento em todo o DF</span>
+          <span class="micro-sep" aria-hidden="true">•</span>
+          <span class="micro-proof-item"><i class="micro-check" aria-hidden="true">✓</i> Do iniciante ao avançado</span>
+          <span class="micro-sep" aria-hidden="true">•</span>
+          <span class="micro-proof-item"><i class="micro-check" aria-hidden="true">✓</i> Levamos os equipamentos</span>
+        </div>
       </div>
 
       <div class="hero-stage blur-fade blur-delay-2">
         <div class="hero-photo-spotlight" aria-hidden="true"></div>
         <div class="hero-hud-card" id="heroHudCard">
           <div class="hero-laser-line" aria-hidden="true"></div>
-          <div class="hud-top-bar">
-            <span class="hud-chip">MT • Boxe • BJJ • MMA</span>
-            <span class="hud-chip hud-chip-ember">1-on-1 • Brasília</span>
-          </div>
           <img
-            src="foto-fairtex.PNG"
-            onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1711476326446-bc0b6fffdab3?auto=format&fit=crop&w=1400&q=80';"
-            alt="Ronny Lopes conectando direto de direita preciso em luta oficial no ringue"
+            src="foto-fairtex.webp"
+            width="1170"
+            height="1042"
+            alt="Ronny Lopes, personal de Muay Thai em Brasília, aplicando golpe em luta oficial no ringue"
             loading="eager"
             fetchpriority="high"
             decoding="async"
           />
           <div class="hud-bottom-panel">
-            <div>
-              <a href="https://www.instagram.com/ronnnylopesthai/" target="_blank" rel="noopener" class="hud-fighter-name" style="display: inline-block;">@ronnnylopesthai ↗</a>
-              <p class="hud-fighter-stat">Campeão Mundial • Faixa-Preta BJJ</p>
-            </div>
-            <div class="hud-badge-2x">
-              WMA
-              <small>Tailândia '10</small>
-            </div>
+            <a href="https://www.instagram.com/ronnnylopesthai/" target="_blank" rel="noopener" class="hud-fighter-name">@ronnnylopesthai ↗</a>
+            <span class="hud-minimal-tag">WMA TAILÂNDIA '10</span>
           </div>
         </div>
       </div>
@@ -3585,10 +3968,12 @@
     <div class="manifesto-grid">
       <div class="manifesto-media">
         <img
-          src="foto-mma-boxe.jpg"
-          style="object-position: 46% 24%;"
-          onerror="this.onerror=null;this.src='foto-df-ringue.PNG';"
-          alt="Ronny Lopes aplicando golpe reto de mão com esquiva em combate oficial de MMA no octógono"
+          src="foto-mma-solo-octogono.webp"
+          width="674"
+          height="429"
+          style="object-position: 54% 34%;"
+          onerror="this.onerror=null;this.src='foto-df-ringue.webp';"
+          alt="Ronny Lopes aplicando domínio por cima e transição de Jiu-Jitsu e MMA em combate oficial no octógono"
           loading="lazy"
           decoding="async"
         />
@@ -3860,8 +4245,10 @@
           <span class="gallery-zoom-pill">Ampliar ↗</span>
           <img
             src="foto-tailandia-vitoria.jpg"
+            width="720"
+            height="482"
             style="object-position: 42% 8%;"
-            onerror="this.onerror=null;this.src='foto-chute.PNG';"
+            onerror="this.onerror=null;this.src='foto-chute.webp';"
             alt="Ronny Lopes tendo o braço erguido pelo árbitro após vitória em Bangkok, na Tailândia"
             loading="lazy"
             decoding="async"
@@ -3872,12 +4259,13 @@
           </div>
         </div>
 
-        <div class="gallery-frame tile-tall-1 reveal" tabindex="0" role="button" data-full="foto-paos.PNG" data-caption="02 • Aula Particular 1-on-1 — Manopla de Boxe, Paos Vivo &amp; Ajuste de Guarda">
+        <div class="gallery-frame tile-tall-1 reveal" tabindex="0" role="button" data-full="foto-paos.webp" data-caption="02 • Aula Particular 1-on-1 — Manopla de Boxe, Paos Vivo &amp; Ajuste de Guarda">
           <span class="gallery-zoom-pill">Ampliar ↗</span>
           <img
-            src="foto-paos.PNG"
+            src="foto-paos.webp"
+            width="831"
+            height="1600"
             style="object-position: 52% 28%;"
-            onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1688141402330-f4ed03f6bbf9?auto=format&fit=crop&w=1200&q=80';"
             alt="Ronny Lopes conduzindo treino individual de Boxe e Muay Thai nos aparadores (paos)"
             loading="lazy"
             decoding="async"
@@ -3892,6 +4280,8 @@
           <span class="gallery-zoom-pill">Ampliar ↗</span>
           <img
             src="foto-faixa-preta-jiujitsu.jpg"
+            width="520"
+            height="700"
             style="object-position: 50% 18%;"
             alt="Professor Ronny Lopes de kimono preto exibindo a faixa-preta de Jiu-Jitsu"
             loading="lazy"
@@ -3907,8 +4297,10 @@
           <span class="gallery-zoom-pill">Ampliar ↗</span>
           <img
             src="foto-tailandia-chute-alto.jpg"
+            width="720"
+            height="482"
             style="object-position: 46% 20%;"
-            onerror="this.onerror=null;this.src='foto-df-ringue.PNG';"
+            onerror="this.onerror=null;this.src='foto-df-ringue.webp';"
             alt="Ronny Lopes conectando chute alto na linha de cabeça durante luta oficial em Bangkok, Tailândia"
             loading="lazy"
             decoding="async"
@@ -3919,10 +4311,12 @@
           </div>
         </div>
 
-        <div class="gallery-frame tile-tall-3 reveal" tabindex="0" role="button" data-full="foto-sparring.PNG" data-caption="05 • Tatame Técnico — Bloqueio, Controle de Distância &amp; Tempo de Reação">
+        <div class="gallery-frame tile-tall-3 reveal" tabindex="0" role="button" data-full="foto-sparring.webp" data-caption="05 • Tatame Técnico — Bloqueio, Controle de Distância &amp; Tempo de Reação">
           <span class="gallery-zoom-pill">Ampliar ↗</span>
           <img
-            src="foto-sparring.PNG"
+            src="foto-sparring.webp"
+            width="836"
+            height="1600"
             style="object-position: 54% 22%;"
             alt="Ronny Lopes demonstrando defesa técnica e tempo de reação em aula particular"
             loading="lazy"
@@ -3938,8 +4332,10 @@
           <span class="gallery-zoom-pill">Ampliar ↗</span>
           <img
             src="foto-tailandia-camp.jpg"
+            width="768"
+            height="1024"
             style="object-position: 48% 36%;"
-            onerror="this.onerror=null;this.src='foto-paos.PNG';"
+            onerror="this.onerror=null;this.src='foto-paos.webp';"
             alt="Ronny Lopes na Tailândia com treinadores tailandeses pela seleção brasileira de Muay Thai"
             loading="lazy"
             decoding="async"
@@ -3954,8 +4350,10 @@
           <span class="gallery-zoom-pill">Ampliar ↗</span>
           <img
             src="foto-mma-cinturao-mfc.jpg"
+            width="728"
+            height="484"
             style="object-position: 50% 14%;"
-            onerror="this.onerror=null;this.src='foto-fairtex.PNG';"
+            onerror="this.onerror=null;this.src='foto-fairtex.webp';"
             alt="Ronny Lopes com o cinturão de campeão de MMA do Master Fight Combat (MFC) no octógono"
             loading="lazy"
             decoding="async"
@@ -3970,8 +4368,10 @@
           <span class="gallery-zoom-pill">Ampliar ↗</span>
           <img
             src="foto-mma-vitoria-cage.jpg"
+            width="720"
+            height="480"
             style="object-position: 54% 10%;"
-            onerror="this.onerror=null;this.src='foto-fairtex.PNG';"
+            onerror="this.onerror=null;this.src='foto-fairtex.webp';"
             alt="Ronny Lopes comemorando vitória com o braço erguido pelo árbitro no octógono de MMA"
             loading="lazy"
             decoding="async"
@@ -3982,19 +4382,21 @@
           </div>
         </div>
 
-        <div class="gallery-frame tile-half reveal" tabindex="0" role="button" data-full="foto-jiujitsu-guarda-mma.jpg" data-caption="09 • Jiu-Jitsu &amp; Solo — Faixa-Preta Aplicando Guarda Ativa e Controle sob Pressão">
+        <div class="gallery-frame tile-half reveal" tabindex="0" role="button" data-full="foto-mma-boxe.jpg" data-caption="09 • Boxe &amp; Trocação no MMA — Golpe Reto de Mão em Tempo de Reação no Octógono">
           <span class="gallery-zoom-pill">Ampliar ↗</span>
           <img
-            src="foto-jiujitsu-guarda-mma.jpg"
-            style="object-position: 56% 24%;"
-            onerror="this.onerror=null;this.src='foto-chute.PNG';"
-            alt="Luta de solo e trabalho de guarda técnica em combate oficial no octógono"
+            src="foto-mma-boxe.jpg"
+            width="720"
+            height="480"
+            style="object-position: 50% 24%;"
+            onerror="this.onerror=null;this.src='foto-chute.webp';"
+            alt="Ronny Lopes conectando golpe reto de mão em combate oficial de MMA no octógono"
             loading="lazy"
             decoding="async"
           />
           <div class="gallery-meta">
-            <span class="gallery-tag">09 • Jiu-Jitsu &amp; Solo</span>
-            <h3 class="gallery-title">Guarda Ativa &amp; Leitura de Chão</h3>
+            <span class="gallery-tag">09 • Boxe &amp; Trocação</span>
+            <h3 class="gallery-title">Precisão de Mãos &amp; Distância</h3>
           </div>
         </div>
 
@@ -4002,8 +4404,10 @@
           <span class="gallery-zoom-pill">Ampliar ↗</span>
           <img
             src="foto-jiujitsu-grappling-grade.jpg"
+            width="728"
+            height="484"
             style="object-position: 48% 28%;"
-            onerror="this.onerror=null;this.src='foto-df-ringue.PNG';"
+            onerror="this.onerror=null;this.src='foto-df-ringue.webp';"
             alt="Ronny Lopes aplicando pressão de Jiu-Jitsu e domínio na grade durante combate de MMA"
             loading="lazy"
             decoding="async"
@@ -4017,13 +4421,21 @@
     </div>
   </section>
 
-  <!-- LIGHTBOX MODAL DA GALERIA -->
-  <div class="lightbox-modal" id="lightboxModal" data-lenis-prevent aria-hidden="true" role="dialog" aria-label="Visualização ampliada da foto">
+  <!-- CAROUSEL LIGHTBOX MODAL DA GALERIA (21st.dev Upgrade) -->
+  <div class="lightbox-modal" id="lightboxModal" data-lenis-prevent aria-hidden="true" role="dialog" aria-modal="true" aria-label="Visualização ampliada das fotos">
     <div class="lightbox-dialog">
-      <img id="lightboxImg" src="" alt="" loading="lazy" decoding="async" />
+      <div class="lightbox-top-bar">
+        <span class="lightbox-counter" id="lightboxCounter" aria-live="polite">01 / 10</span>
+        <button type="button" class="lightbox-close" id="lightboxClose">Fechar [ESC]</button>
+      </div>
+      <div class="lightbox-stage-wrap" id="lightboxStageWrap">
+        <button type="button" class="lightbox-nav-btn prev" id="lightboxPrev" aria-label="Foto anterior">←</button>
+        <img id="lightboxImg" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" alt="" decoding="async" />
+        <button type="button" class="lightbox-nav-btn next" id="lightboxNext" aria-label="Próxima foto">→</button>
+      </div>
       <div class="lightbox-caption-bar">
         <span id="lightboxCaption"></span>
-        <button type="button" class="lightbox-close" id="lightboxClose">Fechar [ESC]</button>
+        <span class="lightbox-swipe-hint" aria-hidden="true">← / → ou deslize</span>
       </div>
     </div>
   </div>
@@ -4034,7 +4446,9 @@
     <div class="coach-photo">
       <img
         src="foto-mundial-wma-tailandia.jpg"
-        onerror="this.onerror=null;this.src='foto-fairtex.PNG';"
+        width="960"
+        height="720"
+        onerror="this.onerror=null;this.src='foto-fairtex.webp';"
         alt="Ronny Lopes com o cinturão de Campeão Mundial de Muay Thai pela W.M.A na Tailândia em 2010"
         loading="lazy"
         decoding="async"
@@ -4349,53 +4763,68 @@
             <span>Atendimento móvel: Seg a Sáb • Onde você preferir no DF</span>
             <span>Eventual valor de deslocamento conforme a distância é tratado diretamente comigo</span>
             <div style="display: flex; flex-wrap: wrap; gap: 14px; margin-top: 2px;">
-              <a href="https://wa.me/556181833245?text=Ol%C3%A1%2C%20Ronny!%20Vim%20pelo%20site%20e%20gostaria%20de%20saber%20mais%20sobre%20as%20aulas%20particulares." target="_blank" rel="noopener" style="color: var(--accent-ember); font-weight: 500;">WhatsApp: (61) 8183-3245 ↗</a>
+              <a href="https://wa.me/556181833245?text=Ol%C3%A1%2C%20Ronny!%20Vim%20pelo%20site%20e%20gostaria%20de%20saber%20mais%20sobre%20as%20aulas%20particulares." target="_blank" rel="noopener" style="color: var(--accent-ember); font-weight: 500;">WhatsApp: (61) 98183-3245 ↗</a>
               <a href="https://www.instagram.com/ronnnylopesthai/" target="_blank" rel="noopener" style="color: rgba(245,245,245,0.88); font-weight: 500;">Instagram: @ronnnylopesthai ↗</a>
             </div>
           </div>
         </div>
 
         <form class="booking-form" id="bookingForm">
-          <div class="field-group">
-            <label for="nome">Nome Completo</label>
-            <input type="text" id="nome" name="nome" placeholder="Como prefere ser chamado" autocomplete="name" required />
+          <div class="field-row">
+            <div class="field-group">
+              <label for="nome">Nome Completo</label>
+              <input type="text" id="nome" name="nome" placeholder="Como prefere ser chamado" autocomplete="name" required />
+            </div>
+
+            <div class="field-group">
+              <label for="bairro">Local / Bairro de Preferência no DF</label>
+              <input type="text" id="bairro" name="bairro" placeholder="Ex.: Sudoeste, Asa Sul, Lago Sul..." autocomplete="address-level2" required />
+            </div>
           </div>
 
           <div class="field-group">
-            <label for="bairro">Local / Bairro de Preferência no DF</label>
-            <input type="text" id="bairro" name="bairro" placeholder="Ex.: Condomínio no Sudoeste, Asa Sul, Lago Sul..." autocomplete="address-level2" required />
+            <label id="labelModalidade">Modalidade de Interesse</label>
+            <input type="hidden" id="modalidade" name="modalidade" value="Muay Thai" />
+            <div class="chip-group" data-chip-group="modalidade" role="radiogroup" aria-labelledby="labelModalidade">
+              <button type="button" class="chip-option" role="radio" aria-checked="true" tabindex="0" data-value="Muay Thai">Muay Thai</button>
+              <button type="button" class="chip-option" role="radio" aria-checked="false" tabindex="-1" data-value="Boxe">Boxe</button>
+              <button type="button" class="chip-option" role="radio" aria-checked="false" tabindex="-1" data-value="Jiu-Jitsu">Jiu-Jitsu</button>
+              <button type="button" class="chip-option" role="radio" aria-checked="false" tabindex="-1" data-value="MMA (Completo)">MMA</button>
+              <button type="button" class="chip-option" role="radio" aria-checked="false" tabindex="-1" data-value="Combinar Modalidades">Combinar</button>
+            </div>
+          </div>
+
+          <div class="field-group">
+            <label id="labelFormato">Formato de Aula</label>
+            <input type="hidden" id="formato" name="formato" value="Particular 1-on-1" />
+            <div class="chip-group" data-chip-group="formato" role="radiogroup" aria-labelledby="labelFormato">
+              <button type="button" class="chip-option" role="radio" aria-checked="true" tabindex="0" data-value="Particular 1-on-1">Particular 1-on-1</button>
+              <button type="button" class="chip-option" role="radio" aria-checked="false" tabindex="-1" data-value="Dupla Executiva">Dupla Executiva</button>
+              <button type="button" class="chip-option" role="radio" aria-checked="false" tabindex="-1" data-value="Refinamento Técnico">Refinamento</button>
+              <button type="button" class="chip-option" role="radio" aria-checked="false" tabindex="-1" data-value="Condicionamento de Combate">Condicionamento</button>
+            </div>
           </div>
 
           <div class="field-row">
             <div class="field-group">
-              <label for="modalidade">Modalidade de Interesse</label>
-              <select id="modalidade" name="modalidade">
-                <option value="Muay Thai">Muay Thai</option>
-                <option value="Boxe">Boxe</option>
-                <option value="Jiu-Jitsu">Jiu-Jitsu</option>
-                <option value="MMA (Completo)">MMA (Completo)</option>
-                <option value="Combinar Modalidades">Combinar Modalidades</option>
-              </select>
+              <label id="labelNivel">Experiência Atual</label>
+              <input type="hidden" id="nivel" name="nivel" value="Iniciante (do zero)" />
+              <div class="chip-group" data-chip-group="nivel" role="radiogroup" aria-labelledby="labelNivel">
+                <button type="button" class="chip-option" role="radio" aria-checked="true" tabindex="0" data-value="Iniciante (do zero)">Do Zero</button>
+                <button type="button" class="chip-option" role="radio" aria-checked="false" tabindex="-1" data-value="Já treinei / Intermediário">Já Treino</button>
+                <button type="button" class="chip-option" role="radio" aria-checked="false" tabindex="-1" data-value="Avançado / Competidor">Avançado</button>
+              </div>
             </div>
 
             <div class="field-group">
-              <label for="formato">Formato de Aula</label>
-              <select id="formato" name="formato">
-                <option value="Particular 1-on-1">Particular 1-on-1</option>
-                <option value="Dupla Executiva">Dupla Executiva</option>
-                <option value="Refinamento Técnico">Refinamento / Avançado</option>
-                <option value="Condicionamento de Combate">Condicionamento</option>
-              </select>
+              <label id="labelPeriodo">Melhor Período</label>
+              <input type="hidden" id="periodo" name="periodo" value="Manhã (06h30 - 11h)" />
+              <div class="chip-group" data-chip-group="periodo" role="radiogroup" aria-labelledby="labelPeriodo">
+                <button type="button" class="chip-option" role="radio" aria-checked="true" tabindex="0" data-value="Manhã (06h30 - 11h)">Manhã</button>
+                <button type="button" class="chip-option" role="radio" aria-checked="false" tabindex="-1" data-value="Almoço / Tarde (12h - 17h)">Tarde</button>
+                <button type="button" class="chip-option" role="radio" aria-checked="false" tabindex="-1" data-value="Noite (18h - 21h)">Noite</button>
+              </div>
             </div>
-          </div>
-
-          <div class="field-group">
-            <label for="periodo">Melhor Período</label>
-            <select id="periodo" name="periodo">
-              <option value="Manhã (06h30 - 11h)">Manhã (06h30 às 11h)</option>
-              <option value="Almoço / Tarde (12h - 17h)">Almoço / Tarde (12h às 17h)</option>
-              <option value="Noite (18h - 21h)">Noite (18h às 21h)</option>
-            </select>
           </div>
 
           <button type="submit" class="submit-btn">
@@ -4429,6 +4858,30 @@
       </div>
     </div>
   </footer>
+
+  <!-- FLOATING ACTION DOCK (21st.dev @themeocean style) -->
+  <aside class="floating-dock" id="floatingDock" aria-label="Atalho rápido de agendamento">
+    <span class="dock-status">
+      <i class="dock-status-dot" aria-hidden="true"></i>
+      <span>1-on-1 • Brasília DF</span>
+    </span>
+    <a
+      href="https://wa.me/556181833245?text=Ol%C3%A1%2C%20Ronny!%20Vim%20pelo%20site%20e%20gostaria%20de%20saber%20mais%20sobre%20as%20aulas%20particulares."
+      target="_blank"
+      rel="noopener"
+      class="dock-wa-btn"
+      aria-label="Chamar Ronny Lopes direto no WhatsApp"
+    >
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+      </svg>
+      <span>WhatsApp</span>
+    </a>
+    <a href="#agendar" class="dock-cta-btn">
+      <span>Agendar Aula</span>
+      <span aria-hidden="true">→</span>
+    </a>
+  </aside>
 
   <!-- Lenis Smooth Scroll (bundle local 22KB, zero dependência de build) -->
   <script src="lenis.min.js"></script>
@@ -4552,15 +5005,41 @@
 
       const start = performance.now();
       const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      let heroVisible = true;
+      let shaderRafId = 0;
+
       const render = (now) => {
+        shaderRafId = 0;
         mouse.x += (mouse.tx - mouse.x) * 0.04;
         mouse.y += (mouse.ty - mouse.y) * 0.04;
         gl.uniform1f(uTime, prefersReducedMotion ? 12.0 : (now - start) / 1000);
         gl.uniform2f(uRes, canvas.width, canvas.height);
         gl.uniform2f(uMouse, mouse.x, mouse.y);
         gl.drawArrays(gl.TRIANGLES, 0, 6);
-        if (!prefersReducedMotion) requestAnimationFrame(render);
+        if (!prefersReducedMotion && heroVisible && !document.hidden) {
+          shaderRafId = requestAnimationFrame(render);
+        }
       };
+
+      const scheduleShader = () => {
+        if (!prefersReducedMotion && heroVisible && !document.hidden && !shaderRafId) {
+          shaderRafId = requestAnimationFrame(render);
+        }
+      };
+
+      const heroEl = canvas.closest('.hero');
+      if (heroEl && 'IntersectionObserver' in window) {
+        const shaderObserver = new IntersectionObserver((entries) => {
+          heroVisible = Boolean(entries[0]?.isIntersecting);
+          if (heroVisible) scheduleShader();
+        }, { threshold: 0 });
+        shaderObserver.observe(heroEl);
+      }
+
+      document.addEventListener('visibilitychange', () => {
+        if (!document.hidden) scheduleShader();
+      });
+
       if (prefersReducedMotion) {
         window.addEventListener('resize', () => render(start));
       }
@@ -4929,6 +5408,7 @@
       } else {
         smoothScroll.resume('mobile-menu');
       }
+      if (typeof updateFloatingDock === 'function') updateFloatingDock();
     };
     window.__closeMobileMenu = () => toggleMenu(true);
 
@@ -5074,45 +5554,90 @@
       document.fonts.ready.then(syncMobileCardStackHeights);
     }
 
-    // 6b. UX Inteligente: pré-seleção do formato no formulário de agendamento
-    const formatoSelect = document.getElementById('formato');
+    // 6b. Interactive Pill / Chip Groups + Pré-seleção Inteligente (21st.dev)
     const bookingSection = document.getElementById('agendar');
-    let highlightTimer = null;
+    const highlightTimers = new Map();
+
+    const setChipGroupValue = (groupName, value, { highlight = false } = {}) => {
+      const hiddenInput = document.getElementById(groupName);
+      const groupEl = document.querySelector(`[data-chip-group="${groupName}"]`);
+      if (!groupEl) return;
+
+      const chips = Array.from(groupEl.querySelectorAll('.chip-option'));
+      const targetChip = chips.find((c) => c.dataset.value === value);
+      if (!targetChip) return;
+
+      chips.forEach((chip) => {
+        const active = chip === targetChip;
+        chip.setAttribute('aria-checked', String(active));
+        chip.tabIndex = active ? 0 : -1;
+      });
+
+      if (hiddenInput) {
+        hiddenInput.value = value;
+      }
+
+      if (highlight) {
+        groupEl.classList.add('field-highlight');
+        if (highlightTimers.has(groupName)) clearTimeout(highlightTimers.get(groupName));
+        highlightTimers.set(groupName, setTimeout(() => {
+          groupEl.classList.remove('field-highlight');
+        }, 1500));
+      }
+    };
+
+    document.querySelectorAll('[data-chip-group]').forEach((groupEl) => {
+      const groupName = groupEl.dataset.chipGroup;
+      const chips = Array.from(groupEl.querySelectorAll('.chip-option'));
+
+      chips.forEach((chip, idx) => {
+        chip.addEventListener('click', () => {
+          setChipGroupValue(groupName, chip.dataset.value);
+        });
+
+        chip.addEventListener('keydown', (e) => {
+          if (!['ArrowRight', 'ArrowDown', 'ArrowLeft', 'ArrowUp'].includes(e.key)) return;
+          e.preventDefault();
+          const dir = (e.key === 'ArrowRight' || e.key === 'ArrowDown') ? 1 : -1;
+          const nextChip = chips[(idx + dir + chips.length) % chips.length];
+          if (nextChip) {
+            setChipGroupValue(groupName, nextChip.dataset.value);
+            nextChip.focus();
+          }
+        });
+      });
+    });
 
     document.querySelectorAll('.program-cta[data-format]').forEach((link) => {
       link.addEventListener('click', (e) => {
         e.preventDefault();
         const targetFormat = link.dataset.format;
-
-        if (formatoSelect && targetFormat) {
-          const matchingOption = Array.from(formatoSelect.options).find((opt) => opt.value === targetFormat);
-          if (matchingOption) {
-            formatoSelect.value = targetFormat;
-            formatoSelect.dispatchEvent(new Event('change', { bubbles: true }));
-            formatoSelect.classList.add('field-highlight');
-            if (highlightTimer) clearTimeout(highlightTimer);
-            highlightTimer = setTimeout(() => {
-              formatoSelect.classList.remove('field-highlight');
-            }, 1500);
-          }
+        if (targetFormat) {
+          setChipGroupValue('formato', targetFormat, { highlight: true });
         }
-
         if (bookingSection) {
           smoothScroll.scrollTo(bookingSection, { moveFocus: true });
         }
       });
     });
 
-    // 7. Lighthouse Torch Gallery + Lightbox Modal (@dhxwhy / 21st.dev)
+    // 7. Lighthouse Torch Gallery + Carousel Lightbox Modal (@dhxwhy & 21st.dev Dialog)
     const lighthouseStage = document.getElementById('lighthouseStage');
     const galleryFrames = lighthouseStage ? Array.from(lighthouseStage.querySelectorAll('.gallery-frame')) : [];
     const lightboxModal = document.getElementById('lightboxModal');
+    const lightboxStageWrap = document.getElementById('lightboxStageWrap');
     const lightboxImg = document.getElementById('lightboxImg');
     const lightboxCaption = document.getElementById('lightboxCaption');
+    const lightboxCounter = document.getElementById('lightboxCounter');
+    const lightboxPrev = document.getElementById('lightboxPrev');
+    const lightboxNext = document.getElementById('lightboxNext');
     const lightboxClose = document.getElementById('lightboxClose');
     let sweepIdx = 0;
     let pointerInGallery = false;
     let lastLightboxTrigger = null;
+    let currentLightboxIdx = 0;
+    let touchStartX = 0;
+    let touchStartY = 0;
 
     if (lighthouseStage && hasFinePointer) {
       lighthouseStage.addEventListener('mousemove', (e) => {
@@ -5138,19 +5663,53 @@
       }, 2600);
     }
 
-    const openLightbox = (frame) => {
-      if (!lightboxModal || !lightboxImg) return;
+    const renderLightboxSlide = (index, animate = false) => {
+      if (!galleryFrames.length || !lightboxImg) return;
+      const total = galleryFrames.length;
+      currentLightboxIdx = (index + total) % total;
+      const frame = galleryFrames[currentLightboxIdx];
       const src = frame.dataset.full;
       const caption = frame.dataset.caption || '';
       const alt = frame.querySelector('img')?.alt || '';
       if (!src) return;
+
+      const applySlide = () => {
+        lightboxImg.src = src;
+        lightboxImg.alt = alt;
+        if (lightboxCaption) lightboxCaption.textContent = caption;
+        if (lightboxCounter) {
+          lightboxCounter.textContent = `${String(currentLightboxIdx + 1).padStart(2, '0')} / ${String(total).padStart(2, '0')}`;
+        }
+        requestAnimationFrame(() => lightboxImg.classList.remove('is-switching'));
+      };
+
+      if (animate && !prefersReducedMotion) {
+        lightboxImg.classList.add('is-switching');
+        setTimeout(applySlide, 110);
+      } else {
+        applySlide();
+      }
+
+      // Pré-carrega vizinhas para troca instantânea
+      [-1, 1].forEach((offset) => {
+        const neighbor = galleryFrames[(currentLightboxIdx + offset + total) % total];
+        if (neighbor?.dataset.full) {
+          const pre = new Image();
+          pre.src = neighbor.dataset.full;
+        }
+      });
+    };
+
+    const openLightbox = (frame) => {
+      if (!lightboxModal || !lightboxImg) return;
+      const idx = galleryFrames.indexOf(frame);
+      if (idx === -1) return;
       lastLightboxTrigger = frame;
-      lightboxImg.src = src;
-      lightboxImg.alt = alt;
-      if (lightboxCaption) lightboxCaption.textContent = caption;
+      renderLightboxSlide(idx, false);
       lightboxModal.classList.add('open');
       lightboxModal.setAttribute('aria-hidden', 'false');
       smoothScroll.pause('lightbox');
+      updateFloatingDock();
       if (lightboxClose) lightboxClose.focus({ preventScroll: true });
     };
 
@@ -5159,6 +5718,7 @@
       lightboxModal.classList.remove('open');
       lightboxModal.setAttribute('aria-hidden', 'true');
       smoothScroll.resume('lightbox');
+      updateFloatingDock();
       if (lastLightboxTrigger instanceof HTMLElement) {
         lastLightboxTrigger.focus({ preventScroll: true });
         lastLightboxTrigger = null;
@@ -5175,14 +5735,55 @@
       });
     });
 
+    if (lightboxPrev) lightboxPrev.addEventListener('click', () => renderLightboxSlide(currentLightboxIdx - 1, true));
+    if (lightboxNext) lightboxNext.addEventListener('click', () => renderLightboxSlide(currentLightboxIdx + 1, true));
     if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
     if (lightboxModal) {
       lightboxModal.addEventListener('click', (e) => {
-        if (e.target === lightboxModal) closeLightbox();
+        if (e.target === lightboxModal || e.target === lightboxStageWrap) closeLightbox();
       });
     }
+
+    if (lightboxStageWrap) {
+      lightboxStageWrap.addEventListener('touchstart', (e) => {
+        if (e.touches.length !== 1) return;
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+      }, { passive: true });
+
+      lightboxStageWrap.addEventListener('touchend', (e) => {
+        if (!e.changedTouches.length) return;
+        const dx = e.changedTouches[0].clientX - touchStartX;
+        const dy = e.changedTouches[0].clientY - touchStartY;
+        if (Math.abs(dx) > 42 && Math.abs(dx) > Math.abs(dy) * 1.25) {
+          renderLightboxSlide(currentLightboxIdx + (dx < 0 ? 1 : -1), true);
+        }
+      }, { passive: true });
+    }
+
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeLightbox();
+      if (!lightboxModal || !lightboxModal.classList.contains('open')) return;
+      if (e.key === 'Escape') {
+        closeLightbox();
+      } else if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        renderLightboxSlide(currentLightboxIdx - 1, true);
+      } else if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        renderLightboxSlide(currentLightboxIdx + 1, true);
+      } else if (e.key === 'Tab') {
+        const focusables = [lightboxClose, lightboxPrev, lightboxNext].filter(Boolean);
+        if (!focusables.length) return;
+        const first = focusables[0];
+        const last = focusables[focusables.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
     });
 
     // 8. Ciclo Orbital Interativo das 4 Modalidades
@@ -5217,7 +5818,6 @@
     const orbitCenter = document.getElementById('orbitCenter');
     const orbitTitle = document.getElementById('orbitTitle');
     const orbitDesc = document.getElementById('orbitDesc');
-    const modalidadeSelect = document.getElementById('modalidade');
     let orbitTimer = null;
     let orbitRaf = null;
 
@@ -5238,8 +5838,8 @@
           orbitBox.style.setProperty('--orbit-angle', data.angle);
         }
 
-        if (modalidadeSelect && data.formValue) {
-          modalidadeSelect.value = data.formValue;
+        if (data.formValue) {
+          setChipGroupValue('modalidade', data.formValue);
         }
 
         if (orbitTimer) clearTimeout(orbitTimer);
@@ -5266,6 +5866,29 @@
         }, 160);
       });
     });
+
+    // 8b. Floating Action Dock (21st.dev): aparece no scroll e recolhe ao chegar em #agendar
+    const floatingDock = document.getElementById('floatingDock');
+    let bookingInView = false;
+
+    function updateFloatingDock() {
+      if (!floatingDock) return;
+      const scrolledEnough = window.scrollY > window.innerHeight * 0.38;
+      const modalOpen = Boolean(lightboxModal?.classList.contains('open')) || Boolean(navLinks?.classList.contains('mobile-open'));
+      floatingDock.classList.toggle('visible', scrolledEnough && !bookingInView && !modalOpen);
+    }
+
+    if (bookingSection && 'IntersectionObserver' in window) {
+      const bookingObserver = new IntersectionObserver((entries) => {
+        bookingInView = Boolean(entries[0]?.isIntersecting);
+        updateFloatingDock();
+      }, { threshold: 0.12 });
+      bookingObserver.observe(bookingSection);
+    }
+
+    window.addEventListener('scroll', updateFloatingDock, { passive: true });
+    smoothScroll.onScroll(updateFloatingDock);
+    requestAnimationFrame(updateFloatingDock);
 
     // 9. Scroll Reveal + Blur-Fade + Vertical Cut Reveal + Count-Up
     const revealObserver = new IntersectionObserver((entries) => {
@@ -5339,12 +5962,13 @@
       const bairro = document.getElementById('bairro').value.trim();
       const modalidade = document.getElementById('modalidade').value;
       const formato = document.getElementById('formato').value;
+      const nivel = document.getElementById('nivel').value;
       const periodo = document.getElementById('periodo').value;
 
       // WhatsApp direto do Ronny Lopes (DDI 55 + DDD 61 + Número)
       const whatsappNumber = '556181833245';
 
-      const texto = `Olá, Ronny! Meu nome é ${nome}. Gostaria de agendar uma aula experimental em Brasília.\n• Modalidade: ${modalidade}\n• Formato: ${formato}\n• Local/Bairro de preferência: ${bairro}\n• Período de preferência: ${periodo}`;
+      const texto = `Olá, Ronny! Meu nome é ${nome}. Gostaria de agendar uma aula experimental em Brasília.\n• Modalidade: ${modalidade}\n• Formato: ${formato}\n• Experiência: ${nivel}\n• Local/Bairro de preferência: ${bairro}\n• Período de preferência: ${periodo}`;
       window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(texto)}`, '_blank', 'noopener');
     });
   </script>
