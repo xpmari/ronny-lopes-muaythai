@@ -2440,23 +2440,47 @@
       background: rgba(255, 61, 0, 0.2);
     }
 
-    /* ================= DEPOIMENTOS REAIS (GRID 3 COLUNAS) ================= */
+    /* ================= DEPOIMENTOS REAIS EM MOVIMENTO (MARQUEE) ================= */
     .marquee-section {
       background-color: var(--bg-obsidian);
       border-bottom: 1px solid var(--border-hairline);
       padding: clamp(64px, 8vw, 104px) 0;
+      overflow: hidden;
     }
 
-    .testimonials-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 22px;
+    .marquee-rows {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      mask-image: linear-gradient(90deg, transparent 0%, #000 10%, #000 90%, transparent 100%);
+      -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 10%, #000 90%, transparent 100%);
+    }
+
+    .marquee-row {
+      display: flex;
+      width: max-content;
       align-items: stretch;
     }
 
+    .marquee-row.row-left {
+      animation: marqueeScrollLeft 38s linear infinite;
+    }
+
+    .marquee-rows:hover .marquee-row {
+      animation-play-state: paused;
+    }
+
+    .marquee-group {
+      display: flex;
+      align-items: stretch;
+      gap: 20px;
+      padding-right: 20px;
+      flex-shrink: 0;
+    }
+
     .review-card {
-      width: 100%;
-      height: 100%;
+      width: 396px;
+      flex-shrink: 0;
       padding: 28px 26px;
       border-radius: 14px;
       background: linear-gradient(180deg, rgba(22, 22, 28, 0.88) 0%, rgba(11, 11, 15, 0.96) 100%);
@@ -3494,8 +3518,7 @@
         min-height: 420px;
       }
 
-      .programs-grid,
-      .testimonials-grid {
+      .programs-grid {
         grid-template-columns: 1fr;
         max-width: 640px;
         margin: 0 auto;
@@ -3816,6 +3839,7 @@
       }
 
       .review-card {
+        width: 308px;
         padding: 24px 20px;
       }
 
@@ -4509,7 +4533,7 @@
     </div>
   </section>
 
-  <!-- DEPOIMENTOS REAIS DO INSTAGRAM (GRID 3 COLUNAS) -->
+  <!-- DEPOIMENTOS REAIS DO INSTAGRAM EM MOVIMENTO (MARQUEE) -->
   <section class="marquee-section" id="depoimentos" aria-labelledby="depoimentosHeading">
     <div class="container">
       <div class="section-header reveal" style="margin-bottom: 44px;">
@@ -4523,85 +4547,326 @@
           Comentários reais de alunos que acompanham o trabalho do Ronny no tatame.
         </p>
       </div>
+    </div>
 
-      <div class="testimonials-grid">
-        <article class="review-card reveal">
-          <div class="review-card-body">
-            <div class="review-card-top">
-              <div class="review-stars" aria-label="Avaliação 5 estrelas">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.92 6.26L22 9.27l-5.12 4.73L18.18 21 12 17.52 5.82 21l1.3-7-5.12-4.73 7.08-1.01L12 2z"/></svg>
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.92 6.26L22 9.27l-5.12 4.73L18.18 21 12 17.52 5.82 21l1.3-7-5.12-4.73 7.08-1.01L12 2z"/></svg>
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.92 6.26L22 9.27l-5.12 4.73L18.18 21 12 17.52 5.82 21l1.3-7-5.12-4.73 7.08-1.01L12 2z"/></svg>
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.92 6.26L22 9.27l-5.12 4.73L18.18 21 12 17.52 5.82 21l1.3-7-5.12-4.73 7.08-1.01L12 2z"/></svg>
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.92 6.26L22 9.27l-5.12 4.73L18.18 21 12 17.52 5.82 21l1.3-7-5.12-4.73 7.08-1.01L12 2z"/></svg>
+    <div class="marquee-rows reveal">
+      <div class="marquee-row row-left">
+        <div class="marquee-group">
+          <article class="review-card">
+            <div class="review-card-body">
+              <div class="review-card-top">
+                <div class="review-stars" aria-label="Avaliação 5 estrelas">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.92 6.26L22 9.27l-5.12 4.73L18.18 21 12 17.52 5.82 21l1.3-7-5.12-4.73 7.08-1.01L12 2z"/></svg>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.92 6.26L22 9.27l-5.12 4.73L18.18 21 12 17.52 5.82 21l1.3-7-5.12-4.73 7.08-1.01L12 2z"/></svg>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.92 6.26L22 9.27l-5.12 4.73L18.18 21 12 17.52 5.82 21l1.3-7-5.12-4.73 7.08-1.01L12 2z"/></svg>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.92 6.26L22 9.27l-5.12 4.73L18.18 21 12 17.52 5.82 21l1.3-7-5.12-4.73 7.08-1.01L12 2z"/></svg>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.92 6.26L22 9.27l-5.12 4.73L18.18 21 12 17.52 5.82 21l1.3-7-5.12-4.73 7.08-1.01L12 2z"/></svg>
+                </div>
+                <span class="review-ig-badge">
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                  <span>Via Instagram</span>
+                </span>
               </div>
-              <span class="review-ig-badge">
-                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-                <span>Via Instagram</span>
-              </span>
+              <p class="review-quote">“Grande professor e amigo, que realiza um excelente trabalho com muita dedicação e compromisso. Juntos há quase 10 anos.”</p>
             </div>
-            <p class="review-quote">“Grande professor e amigo, que realiza um excelente trabalho com muita dedicação e compromisso. Juntos há quase 10 anos.”</p>
-          </div>
-          <div class="review-author">
-            <span class="review-avatar" aria-hidden="true">LG</span>
-            <div>
-              <span class="review-name">@lgcoronel</span>
-              <span class="review-role">Aluno há quase 10 anos • Via Instagram</span>
+            <div class="review-author">
+              <span class="review-avatar" aria-hidden="true">LG</span>
+              <div>
+                <span class="review-name">@lgcoronel</span>
+                <span class="review-role">Aluno há quase 10 anos • Via Instagram</span>
+              </div>
             </div>
-          </div>
-        </article>
+          </article>
 
-        <article class="review-card reveal">
-          <div class="review-card-body">
-            <div class="review-card-top">
-              <div class="review-stars" aria-label="Avaliação 5 estrelas">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.92 6.26L22 9.27l-5.12 4.73L18.18 21 12 17.52 5.82 21l1.3-7-5.12-4.73 7.08-1.01L12 2z"/></svg>
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.92 6.26L22 9.27l-5.12 4.73L18.18 21 12 17.52 5.82 21l1.3-7-5.12-4.73 7.08-1.01L12 2z"/></svg>
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.92 6.26L22 9.27l-5.12 4.73L18.18 21 12 17.52 5.82 21l1.3-7-5.12-4.73 7.08-1.01L12 2z"/></svg>
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.92 6.26L22 9.27l-5.12 4.73L18.18 21 12 17.52 5.82 21l1.3-7-5.12-4.73 7.08-1.01L12 2z"/></svg>
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.92 6.26L22 9.27l-5.12 4.73L18.18 21 12 17.52 5.82 21l1.3-7-5.12-4.73 7.08-1.01L12 2z"/></svg>
+          <article class="review-card">
+            <div class="review-card-body">
+              <div class="review-card-top">
+                <div class="review-stars" aria-label="Avaliação 5 estrelas">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.92 6.26L22 9.27l-5.12 4.73L18.18 21 12 17.52 5.82 21l1.3-7-5.12-4.73 7.08-1.01L12 2z"/></svg>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.92 6.26L22 9.27l-5.12 4.73L18.18 21 12 17.52 5.82 21l1.3-7-5.12-4.73 7.08-1.01L12 2z"/></svg>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.92 6.26L22 9.27l-5.12 4.73L18.18 21 12 17.52 5.82 21l1.3-7-5.12-4.73 7.08-1.01L12 2z"/></svg>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.92 6.26L22 9.27l-5.12 4.73L18.18 21 12 17.52 5.82 21l1.3-7-5.12-4.73 7.08-1.01L12 2z"/></svg>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.92 6.26L22 9.27l-5.12 4.73L18.18 21 12 17.52 5.82 21l1.3-7-5.12-4.73 7.08-1.01L12 2z"/></svg>
+                </div>
+                <span class="review-ig-badge">
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                  <span>Via Instagram</span>
+                </span>
               </div>
-              <span class="review-ig-badge">
-                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-                <span>Via Instagram</span>
-              </span>
+              <p class="review-quote">“Sempre foi e segue sendo referência. Orgulho em ter sido um dos seus primeiros alunos. Abraço, irmão.”</p>
             </div>
-            <p class="review-quote">“Sempre foi e segue sendo referência. Orgulho em ter sido um dos seus primeiros alunos. Abraço, irmão.”</p>
-          </div>
-          <div class="review-author">
-            <span class="review-avatar" aria-hidden="true">JB</span>
-            <div>
-              <span class="review-name">@jassananf_bjj</span>
-              <span class="review-role">Aluno • Via Instagram</span>
+            <div class="review-author">
+              <span class="review-avatar" aria-hidden="true">JB</span>
+              <div>
+                <span class="review-name">@jassananf_bjj</span>
+                <span class="review-role">Aluno • Via Instagram</span>
+              </div>
             </div>
-          </div>
-        </article>
+          </article>
 
-        <article class="review-card reveal">
-          <div class="review-card-body">
-            <div class="review-card-top">
-              <div class="review-stars" aria-label="Avaliação 5 estrelas">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.92 6.26L22 9.27l-5.12 4.73L18.18 21 12 17.52 5.82 21l1.3-7-5.12-4.73 7.08-1.01L12 2z"/></svg>
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.92 6.26L22 9.27l-5.12 4.73L18.18 21 12 17.52 5.82 21l1.3-7-5.12-4.73 7.08-1.01L12 2z"/></svg>
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.92 6.26L22 9.27l-5.12 4.73L18.18 21 12 17.52 5.82 21l1.3-7-5.12-4.73 7.08-1.01L12 2z"/></svg>
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.92 6.26L22 9.27l-5.12 4.73L18.18 21 12 17.52 5.82 21l1.3-7-5.12-4.73 7.08-1.01L12 2z"/></svg>
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.92 6.26L22 9.27l-5.12 4.73L18.18 21 12 17.52 5.82 21l1.3-7-5.12-4.73 7.08-1.01L12 2z"/></svg>
+          <article class="review-card">
+            <div class="review-card-body">
+              <div class="review-card-top">
+                <div class="review-stars" aria-label="Avaliação 5 estrelas">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.92 6.26L22 9.27l-5.12 4.73L18.18 21 12 17.52 5.82 21l1.3-7-5.12-4.73 7.08-1.01L12 2z"/></svg>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.92 6.26L22 9.27l-5.12 4.73L18.18 21 12 17.52 5.82 21l1.3-7-5.12-4.73 7.08-1.01L12 2z"/></svg>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.92 6.26L22 9.27l-5.12 4.73L18.18 21 12 17.52 5.82 21l1.3-7-5.12-4.73 7.08-1.01L12 2z"/></svg>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.92 6.26L22 9.27l-5.12 4.73L18.18 21 12 17.52 5.82 21l1.3-7-5.12-4.73 7.08-1.01L12 2z"/></svg>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.92 6.26L22 9.27l-5.12 4.73L18.18 21 12 17.52 5.82 21l1.3-7-5.12-4.73 7.08-1.01L12 2z"/></svg>
+                </div>
+                <span class="review-ig-badge">
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                  <span>Via Instagram</span>
+                </span>
               </div>
-              <span class="review-ig-badge">
-                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-                <span>Via Instagram</span>
-              </span>
+              <p class="review-quote">“Admiro como professor e como pessoa. Cara bacana demais. Forte abraço, meu querido amigo.”</p>
             </div>
-            <p class="review-quote">“Admiro como professor e como pessoa. Cara bacana demais. Forte abraço, meu querido amigo.”</p>
-          </div>
-          <div class="review-author">
-            <span class="review-avatar" aria-hidden="true">MS</span>
-            <div>
-              <span class="review-name">@miltonschelb</span>
-              <span class="review-role">Aluno • Via Instagram</span>
+            <div class="review-author">
+              <span class="review-avatar" aria-hidden="true">MS</span>
+              <div>
+                <span class="review-name">@miltonschelb</span>
+                <span class="review-role">Aluno • Via Instagram</span>
+              </div>
             </div>
-          </div>
-        </article>
+          </article>
+
+          <article class="review-card" aria-hidden="true">
+            <div class="review-card-body">
+              <div class="review-card-top">
+                <div class="review-stars">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.92 6.26L22 9.27l-5.12 4.73L18.18 21 12 17.52 5.82 21l1.3-7-5.12-4.73 7.08-1.01L12 2z"/></svg>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.92 6.26L22 9.27l-5.12 4.73L18.18 21 12 17.52 5.82 21l1.3-7-5.12-4.73 7.08-1.01L12 2z"/></svg>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.92 6.26L22 9.27l-5.12 4.73L18.18 21 12 17.52 5.82 21l1.3-7-5.12-4.73 7.08-1.01L12 2z"/></svg>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.92 6.26L22 9.27l-5.12 4.73L18.18 21 12 17.52 5.82 21l1.3-7-5.12-4.73 7.08-1.01L12 2z"/></svg>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.92 6.26L22 9.27l-5.12 4.73L18.18 21 12 17.52 5.82 21l1.3-7-5.12-4.73 7.08-1.01L12 2z"/></svg>
+                </div>
+                <span class="review-ig-badge">
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                  <span>Via Instagram</span>
+                </span>
+              </div>
+              <p class="review-quote">“Grande professor e amigo, que realiza um excelente trabalho com muita dedicação e compromisso. Juntos há quase 10 anos.”</p>
+            </div>
+            <div class="review-author">
+              <span class="review-avatar">LG</span>
+              <div>
+                <span class="review-name">@lgcoronel</span>
+                <span class="review-role">Aluno há quase 10 anos • Via Instagram</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="review-card" aria-hidden="true">
+            <div class="review-card-body">
+              <div class="review-card-top">
+                <div class="review-stars">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.92 6.26L22 9.27l-5.12 4.73L18.18 21 12 17.52 5.82 21l1.3-7-5.12-4.73 7.08-1.01L12 2z"/></svg>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.92 6.26L22 9.27l-5.12 4.73L18.18 21 12 17.52 5.82 21l1.3-7-5.12-4.73 7.08-1.01L12 2z"/></svg>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.92 6.26L22 9.27l-5.12 4.73L18.18 21 12 17.52 5.82 21l1.3-7-5.12-4.73 7.08-1.01L12 2z"/></svg>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.92 6.26L22 9.27l-5.12 4.73L18.18 21 12 17.52 5.82 21l1.3-7-5.12-4.73 7.08-1.01L12 2z"/></svg>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.92 6.26L22 9.27l-5.12 4.73L18.18 21 12 17.52 5.82 21l1.3-7-5.12-4.73 7.08-1.01L12 2z"/></svg>
+                </div>
+                <span class="review-ig-badge">
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                  <span>Via Instagram</span>
+                </span>
+              </div>
+              <p class="review-quote">“Sempre foi e segue sendo referência. Orgulho em ter sido um dos seus primeiros alunos. Abraço, irmão.”</p>
+            </div>
+            <div class="review-author">
+              <span class="review-avatar">JB</span>
+              <div>
+                <span class="review-name">@jassananf_bjj</span>
+                <span class="review-role">Aluno • Via Instagram</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="review-card" aria-hidden="true">
+            <div class="review-card-body">
+              <div class="review-card-top">
+                <div class="review-stars">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.92 6.26L22 9.27l-5.12 4.73L18.18 21 12 17.52 5.82 21l1.3-7-5.12-4.73 7.08-1.01L12 2z"/></svg>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.92 6.26L22 9.27l-5.12 4.73L18.18 21 12 17.52 5.82 21l1.3-7-5.12-4.73 7.08-1.01L12 2z"/></svg>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.92 6.26L22 9.27l-5.12 4.73L18.18 21 12 17.52 5.82 21l1.3-7-5.12-4.73 7.08-1.01L12 2z"/></svg>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.92 6.26L22 9.27l-5.12 4.73L18.18 21 12 17.52 5.82 21l1.3-7-5.12-4.73 7.08-1.01L12 2z"/></svg>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.92 6.26L22 9.27l-5.12 4.73L18.18 21 12 17.52 5.82 21l1.3-7-5.12-4.73 7.08-1.01L12 2z"/></svg>
+                </div>
+                <span class="review-ig-badge">
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                  <span>Via Instagram</span>
+                </span>
+              </div>
+              <p class="review-quote">“Admiro como professor e como pessoa. Cara bacana demais. Forte abraço, meu querido amigo.”</p>
+            </div>
+            <div class="review-author">
+              <span class="review-avatar">MS</span>
+              <div>
+                <span class="review-name">@miltonschelb</span>
+                <span class="review-role">Aluno • Via Instagram</span>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- Segunda metade idêntica para loop infinito contínuo (-50%) -->
+        <div class="marquee-group" aria-hidden="true">
+          <article class="review-card">
+            <div class="review-card-body">
+              <div class="review-card-top">
+                <div class="review-stars">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.92 6.26L22 9.27l-5.12 4.73L18.18 21 12 17.52 5.82 21l1.3-7-5.12-4.73 7.08-1.01L12 2z"/></svg>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.92 6.26L22 9.27l-5.12 4.73L18.18 21 12 17.52 5.82 21l1.3-7-5.12-4.73 7.08-1.01L12 2z"/></svg>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.92 6.26L22 9.27l-5.12 4.73L18.18 21 12 17.52 5.82 21l1.3-7-5.12-4.73 7.08-1.01L12 2z"/></svg>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.92 6.26L22 9.27l-5.12 4.73L18.18 21 12 17.52 5.82 21l1.3-7-5.12-4.73 7.08-1.01L12 2z"/></svg>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.92 6.26L22 9.27l-5.12 4.73L18.18 21 12 17.52 5.82 21l1.3-7-5.12-4.73 7.08-1.01L12 2z"/></svg>
+                </div>
+                <span class="review-ig-badge">
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                  <span>Via Instagram</span>
+                </span>
+              </div>
+              <p class="review-quote">“Grande professor e amigo, que realiza um excelente trabalho com muita dedicação e compromisso. Juntos há quase 10 anos.”</p>
+            </div>
+            <div class="review-author">
+              <span class="review-avatar">LG</span>
+              <div>
+                <span class="review-name">@lgcoronel</span>
+                <span class="review-role">Aluno há quase 10 anos • Via Instagram</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="review-card">
+            <div class="review-card-body">
+              <div class="review-card-top">
+                <div class="review-stars">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.92 6.26L22 9.27l-5.12 4.73L18.18 21 12 17.52 5.82 21l1.3-7-5.12-4.73 7.08-1.01L12 2z"/></svg>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.92 6.26L22 9.27l-5.12 4.73L18.18 21 12 17.52 5.82 21l1.3-7-5.12-4.73 7.08-1.01L12 2z"/></svg>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.92 6.26L22 9.27l-5.12 4.73L18.18 21 12 17.52 5.82 21l1.3-7-5.12-4.73 7.08-1.01L12 2z"/></svg>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.92 6.26L22 9.27l-5.12 4.73L18.18 21 12 17.52 5.82 21l1.3-7-5.12-4.73 7.08-1.01L12 2z"/></svg>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.92 6.26L22 9.27l-5.12 4.73L18.18 21 12 17.52 5.82 21l1.3-7-5.12-4.73 7.08-1.01L12 2z"/></svg>
+                </div>
+                <span class="review-ig-badge">
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                  <span>Via Instagram</span>
+                </span>
+              </div>
+              <p class="review-quote">“Sempre foi e segue sendo referência. Orgulho em ter sido um dos seus primeiros alunos. Abraço, irmão.”</p>
+            </div>
+            <div class="review-author">
+              <span class="review-avatar">JB</span>
+              <div>
+                <span class="review-name">@jassananf_bjj</span>
+                <span class="review-role">Aluno • Via Instagram</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="review-card">
+            <div class="review-card-body">
+              <div class="review-card-top">
+                <div class="review-stars">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.92 6.26L22 9.27l-5.12 4.73L18.18 21 12 17.52 5.82 21l1.3-7-5.12-4.73 7.08-1.01L12 2z"/></svg>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.92 6.26L22 9.27l-5.12 4.73L18.18 21 12 17.52 5.82 21l1.3-7-5.12-4.73 7.08-1.01L12 2z"/></svg>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.92 6.26L22 9.27l-5.12 4.73L18.18 21 12 17.52 5.82 21l1.3-7-5.12-4.73 7.08-1.01L12 2z"/></svg>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.92 6.26L22 9.27l-5.12 4.73L18.18 21 12 17.52 5.82 21l1.3-7-5.12-4.73 7.08-1.01L12 2z"/></svg>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.92 6.26L22 9.27l-5.12 4.73L18.18 21 12 17.52 5.82 21l1.3-7-5.12-4.73 7.08-1.01L12 2z"/></svg>
+                </div>
+                <span class="review-ig-badge">
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                  <span>Via Instagram</span>
+                </span>
+              </div>
+              <p class="review-quote">“Admiro como professor e como pessoa. Cara bacana demais. Forte abraço, meu querido amigo.”</p>
+            </div>
+            <div class="review-author">
+              <span class="review-avatar">MS</span>
+              <div>
+                <span class="review-name">@miltonschelb</span>
+                <span class="review-role">Aluno • Via Instagram</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="review-card">
+            <div class="review-card-body">
+              <div class="review-card-top">
+                <div class="review-stars">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.92 6.26L22 9.27l-5.12 4.73L18.18 21 12 17.52 5.82 21l1.3-7-5.12-4.73 7.08-1.01L12 2z"/></svg>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.92 6.26L22 9.27l-5.12 4.73L18.18 21 12 17.52 5.82 21l1.3-7-5.12-4.73 7.08-1.01L12 2z"/></svg>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.92 6.26L22 9.27l-5.12 4.73L18.18 21 12 17.52 5.82 21l1.3-7-5.12-4.73 7.08-1.01L12 2z"/></svg>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.92 6.26L22 9.27l-5.12 4.73L18.18 21 12 17.52 5.82 21l1.3-7-5.12-4.73 7.08-1.01L12 2z"/></svg>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.92 6.26L22 9.27l-5.12 4.73L18.18 21 12 17.52 5.82 21l1.3-7-5.12-4.73 7.08-1.01L12 2z"/></svg>
+                </div>
+                <span class="review-ig-badge">
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                  <span>Via Instagram</span>
+                </span>
+              </div>
+              <p class="review-quote">“Grande professor e amigo, que realiza um excelente trabalho com muita dedicação e compromisso. Juntos há quase 10 anos.”</p>
+            </div>
+            <div class="review-author">
+              <span class="review-avatar">LG</span>
+              <div>
+                <span class="review-name">@lgcoronel</span>
+                <span class="review-role">Aluno há quase 10 anos • Via Instagram</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="review-card">
+            <div class="review-card-body">
+              <div class="review-card-top">
+                <div class="review-stars">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.92 6.26L22 9.27l-5.12 4.73L18.18 21 12 17.52 5.82 21l1.3-7-5.12-4.73 7.08-1.01L12 2z"/></svg>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.92 6.26L22 9.27l-5.12 4.73L18.18 21 12 17.52 5.82 21l1.3-7-5.12-4.73 7.08-1.01L12 2z"/></svg>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.92 6.26L22 9.27l-5.12 4.73L18.18 21 12 17.52 5.82 21l1.3-7-5.12-4.73 7.08-1.01L12 2z"/></svg>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.92 6.26L22 9.27l-5.12 4.73L18.18 21 12 17.52 5.82 21l1.3-7-5.12-4.73 7.08-1.01L12 2z"/></svg>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.92 6.26L22 9.27l-5.12 4.73L18.18 21 12 17.52 5.82 21l1.3-7-5.12-4.73 7.08-1.01L12 2z"/></svg>
+                </div>
+                <span class="review-ig-badge">
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                  <span>Via Instagram</span>
+                </span>
+              </div>
+              <p class="review-quote">“Sempre foi e segue sendo referência. Orgulho em ter sido um dos seus primeiros alunos. Abraço, irmão.”</p>
+            </div>
+            <div class="review-author">
+              <span class="review-avatar">JB</span>
+              <div>
+                <span class="review-name">@jassananf_bjj</span>
+                <span class="review-role">Aluno • Via Instagram</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="review-card">
+            <div class="review-card-body">
+              <div class="review-card-top">
+                <div class="review-stars">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.92 6.26L22 9.27l-5.12 4.73L18.18 21 12 17.52 5.82 21l1.3-7-5.12-4.73 7.08-1.01L12 2z"/></svg>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.92 6.26L22 9.27l-5.12 4.73L18.18 21 12 17.52 5.82 21l1.3-7-5.12-4.73 7.08-1.01L12 2z"/></svg>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.92 6.26L22 9.27l-5.12 4.73L18.18 21 12 17.52 5.82 21l1.3-7-5.12-4.73 7.08-1.01L12 2z"/></svg>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.92 6.26L22 9.27l-5.12 4.73L18.18 21 12 17.52 5.82 21l1.3-7-5.12-4.73 7.08-1.01L12 2z"/></svg>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.92 6.26L22 9.27l-5.12 4.73L18.18 21 12 17.52 5.82 21l1.3-7-5.12-4.73 7.08-1.01L12 2z"/></svg>
+                </div>
+                <span class="review-ig-badge">
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                  <span>Via Instagram</span>
+                </span>
+              </div>
+              <p class="review-quote">“Admiro como professor e como pessoa. Cara bacana demais. Forte abraço, meu querido amigo.”</p>
+            </div>
+            <div class="review-author">
+              <span class="review-avatar">MS</span>
+              <div>
+                <span class="review-name">@miltonschelb</span>
+                <span class="review-role">Aluno • Via Instagram</span>
+              </div>
+            </div>
+          </article>
+        </div>
       </div>
     </div>
   </section>
