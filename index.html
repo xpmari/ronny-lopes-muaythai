@@ -3411,109 +3411,6 @@
       text-wrap: pretty;
     }
 
-    /* ================= FLOATING ACTION DOCK (21st.dev @themeocean style) ================= */
-    .floating-dock {
-      position: fixed;
-      left: 50%;
-      bottom: max(18px, env(safe-area-inset-bottom, 18px));
-      z-index: 94;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 6px 8px 6px 14px;
-      border-radius: 9999px;
-      background: rgba(10, 10, 14, 0.84);
-      backdrop-filter: blur(18px) saturate(150%);
-      -webkit-backdrop-filter: blur(18px) saturate(150%);
-      border: 1px solid rgba(255, 255, 255, 0.13);
-      box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, 0.12),
-        0 20px 48px -12px rgba(0, 0, 0, 0.92),
-        0 0 0 1px rgba(255, 61, 0, 0.12);
-      opacity: 0;
-      pointer-events: none;
-      transform: translate3d(-50%, 24px, 0) scale(0.96);
-      transition:
-        opacity 0.32s var(--ease-out),
-        transform 0.38s var(--ease-spring);
-      max-width: calc(100vw - 24px);
-    }
-
-    .floating-dock.visible {
-      opacity: 1;
-      pointer-events: auto;
-      transform: translate3d(-50%, 0, 0) scale(1);
-    }
-
-    .dock-status {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding-right: 6px;
-      font-family: var(--font-mono);
-      font-size: 10.5px;
-      letter-spacing: 0.10em;
-      text-transform: uppercase;
-      color: rgba(245, 245, 247, 0.86);
-      white-space: nowrap;
-    }
-
-    .dock-status-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: #22c55e;
-      box-shadow: 0 0 10px rgba(34, 197, 94, 0.85);
-      animation: pulseDot 2.2s ease-in-out infinite;
-      flex-shrink: 0;
-    }
-
-    .dock-wa-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      min-height: 38px;
-      padding: 0 14px;
-      border-radius: 9999px;
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      color: var(--text-primary);
-      font-size: 12px;
-      font-weight: 500;
-      white-space: nowrap;
-      transition: background-color 0.22s ease, border-color 0.22s ease, transform 0.2s ease;
-    }
-
-    .dock-wa-btn:hover {
-      background: rgba(34, 197, 94, 0.14);
-      border-color: rgba(34, 197, 94, 0.55);
-      color: #ffffff;
-    }
-
-    .dock-cta-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      min-height: 38px;
-      padding: 0 16px;
-      border-radius: 9999px;
-      background: linear-gradient(135deg, var(--accent-ember) 0%, #c81e00 100%);
-      color: #ffffff;
-      font-size: 11.5px;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      white-space: nowrap;
-      box-shadow: 0 8px 22px -6px rgba(255, 61, 0, 0.65);
-      transition: transform 0.22s var(--ease-spring), box-shadow 0.22s ease, filter 0.22s ease;
-    }
-
-    .dock-cta-btn:hover {
-      transform: translateY(-1px);
-      filter: brightness(1.08);
-      box-shadow: 0 12px 26px -5px rgba(255, 61, 0, 0.85);
-    }
-
     .skip-link {
       position: fixed;
       top: -120px;
@@ -3538,15 +3435,6 @@
     }
 
     @media (max-width: 580px) {
-      .dock-status {
-        display: none;
-      }
-
-      .floating-dock {
-        padding: 6px;
-        gap: 6px;
-      }
-
       .lightbox-nav-btn {
         width: 40px;
         height: 40px;
@@ -5346,30 +5234,6 @@
     </div>
   </footer>
 
-  <!-- FLOATING ACTION DOCK (21st.dev @themeocean style) -->
-  <aside class="floating-dock" id="floatingDock" aria-label="Atalho rápido de agendamento">
-    <span class="dock-status">
-      <i class="dock-status-dot" aria-hidden="true"></i>
-      <span>1-on-1 • Brasília DF</span>
-    </span>
-    <a
-      href="https://wa.me/5561981833245?text=Ol%C3%A1%2C%20Ronny!%20Vim%20pelo%20site%20e%20gostaria%20de%20saber%20mais%20sobre%20as%20aulas%20particulares."
-      target="_blank"
-      rel="noopener"
-      class="dock-wa-btn"
-      aria-label="Chamar Ronny Lopes direto no WhatsApp"
-    >
-      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
-      </svg>
-      <span>WhatsApp</span>
-    </a>
-    <a href="#agendar" class="dock-cta-btn">
-      <span>Agendar Aula</span>
-      <span aria-hidden="true">→</span>
-    </a>
-  </aside>
-
   <!-- Lenis Smooth Scroll (bundle local 22KB, zero dependência de build) -->
   <script src="lenis.min.js"></script>
   <script>
@@ -5895,7 +5759,6 @@
       } else {
         smoothScroll.resume('mobile-menu');
       }
-      if (typeof updateFloatingDock === 'function') updateFloatingDock();
     };
     window.__closeMobileMenu = () => toggleMenu(true);
 
@@ -6391,7 +6254,6 @@
       lightboxModal.classList.add('open');
       lightboxModal.setAttribute('aria-hidden', 'false');
       smoothScroll.pause('lightbox');
-      updateFloatingDock();
       if (lightboxClose) lightboxClose.focus({ preventScroll: true });
     };
 
@@ -6400,7 +6262,6 @@
       lightboxModal.classList.remove('open');
       lightboxModal.setAttribute('aria-hidden', 'true');
       smoothScroll.resume('lightbox');
-      updateFloatingDock();
       if (lastLightboxTrigger instanceof HTMLElement) {
         lastLightboxTrigger.focus({ preventScroll: true });
         lastLightboxTrigger = null;
@@ -6561,29 +6422,6 @@
         }, 160);
       });
     });
-
-    // 8b. Floating Action Dock (21st.dev): aparece no scroll e recolhe ao chegar em #agendar
-    const floatingDock = document.getElementById('floatingDock');
-    let bookingInView = false;
-
-    function updateFloatingDock() {
-      if (!floatingDock) return;
-      const scrolledEnough = window.scrollY > window.innerHeight * 0.38;
-      const modalOpen = Boolean(lightboxModal?.classList.contains('open')) || Boolean(navLinks?.classList.contains('mobile-open'));
-      floatingDock.classList.toggle('visible', scrolledEnough && !bookingInView && !modalOpen);
-    }
-
-    if (bookingSection && 'IntersectionObserver' in window) {
-      const bookingObserver = new IntersectionObserver((entries) => {
-        bookingInView = Boolean(entries[0]?.isIntersecting);
-        updateFloatingDock();
-      }, { threshold: 0.12 });
-      bookingObserver.observe(bookingSection);
-    }
-
-    window.addEventListener('scroll', updateFloatingDock, { passive: true });
-    smoothScroll.onScroll(updateFloatingDock);
-    requestAnimationFrame(updateFloatingDock);
 
     // 9. Scroll Reveal + Blur-Fade + Vertical Cut Reveal + Count-Up
     const revealObserver = new IntersectionObserver((entries) => {
