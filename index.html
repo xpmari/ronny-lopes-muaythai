@@ -2077,6 +2077,304 @@
       transform: scale(0.985);
     }
 
+    /* ================= VÍDEOS REAIS EM MOVIMENTO (REELS SHOWCASE) ================= */
+    .reels-section {
+      position: relative;
+      background:
+        radial-gradient(ellipse 62% 44% at 50% 48%, rgba(255, 61, 0, 0.08) 0%, rgba(184, 15, 15, 0.035) 45%, transparent 74%),
+        var(--bg-void);
+      border-bottom: 1px solid var(--border-hairline);
+      padding: clamp(68px, 8.5vw, 112px) 0;
+      overflow: hidden;
+    }
+
+    .reels-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 20px;
+      align-items: stretch;
+    }
+
+    .reel-card {
+      position: relative;
+      aspect-ratio: 9 / 16;
+      border-radius: 16px;
+      overflow: hidden;
+      background-color: #09090C;
+      border: 1px solid rgba(255, 255, 255, 0.13);
+      box-shadow:
+        0 26px 58px -24px rgba(0, 0, 0, 0.94),
+        inset 0 1px 0 rgba(255, 255, 255, 0.10);
+      cursor: pointer;
+      isolation: isolate;
+      transition:
+        border-color 0.32s ease,
+        transform 0.38s var(--ease-out),
+        box-shadow 0.35s ease;
+    }
+
+    .reel-card:hover,
+    .reel-card:focus-visible,
+    .reel-card.is-sound-on {
+      border-color: rgba(255, 61, 0, 0.62);
+      transform: translateY(-4px);
+      box-shadow:
+        0 32px 68px -22px rgba(0, 0, 0, 0.96),
+        0 0 34px -10px rgba(255, 61, 0, 0.44),
+        inset 0 1px 0 rgba(255, 255, 255, 0.20);
+    }
+
+    .reel-video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      pointer-events: none;
+      filter: contrast(1.04) saturate(0.98);
+      transition: transform 0.65s var(--ease-out), filter 0.35s ease;
+    }
+
+    .reel-card:hover .reel-video {
+      transform: scale(1.025);
+      filter: contrast(1.05) saturate(1.04);
+    }
+
+    .reel-shade {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      background: linear-gradient(
+        180deg,
+        rgba(5, 5, 5, 0.56) 0%,
+        transparent 23%,
+        transparent 53%,
+        rgba(5, 5, 5, 0.78) 81%,
+        rgba(5, 5, 5, 0.95) 100%
+      );
+    }
+
+    .reel-top {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      right: 14px;
+      z-index: 3;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      pointer-events: none;
+    }
+
+    .reel-tag-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 6px 11px;
+      border-radius: 9999px;
+      background: rgba(8, 8, 12, 0.70);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: rgba(245, 245, 247, 0.92);
+      white-space: nowrap;
+    }
+
+    .reel-live-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent-ember);
+      box-shadow: 0 0 8px var(--accent-ember);
+      animation: pulseDot 2.2s ease-in-out infinite;
+      flex-shrink: 0;
+    }
+
+    .reel-card.is-paused .reel-live-dot {
+      background: rgba(255, 255, 255, 0.36);
+      box-shadow: none;
+      animation: none;
+    }
+
+    .reel-sound-btn {
+      pointer-events: auto;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(8, 8, 12, 0.72);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      color: #ffffff;
+      flex-shrink: 0;
+      transition: background-color 0.22s ease, border-color 0.22s ease, transform 0.2s var(--ease-spring), box-shadow 0.25s ease;
+    }
+
+    .reel-sound-btn:hover {
+      border-color: rgba(255, 61, 0, 0.72);
+      background: rgba(255, 61, 0, 0.22);
+      transform: scale(1.06);
+    }
+
+    .reel-card.is-sound-on .reel-sound-btn {
+      background: var(--accent-ember);
+      border-color: rgba(255, 160, 122, 0.92);
+      color: #ffffff;
+      box-shadow: 0 0 18px rgba(255, 61, 0, 0.58);
+    }
+
+    .reel-sound-btn .icon-unmuted {
+      display: none;
+    }
+
+    .reel-card.is-sound-on .reel-sound-btn .icon-muted {
+      display: none;
+    }
+
+    .reel-card.is-sound-on .reel-sound-btn .icon-unmuted {
+      display: block;
+    }
+
+    .reel-play-badge {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      z-index: 3;
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      transform: translate(-50%, -50%) scale(0.9);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(8, 8, 12, 0.78);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 61, 0, 0.65);
+      color: #ffffff;
+      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.75);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.24s ease, transform 0.28s var(--ease-spring);
+    }
+
+    .reel-card.is-paused .reel-play-badge {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .reel-meta {
+      position: absolute;
+      bottom: 18px;
+      left: 16px;
+      right: 16px;
+      z-index: 2;
+      pointer-events: none;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .reel-title {
+      font-family: var(--font-sans);
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      color: #ffffff;
+    }
+
+    .reel-desc {
+      font-size: 12.5px;
+      line-height: 1.44;
+      color: rgba(235, 235, 242, 0.82);
+      text-wrap: pretty;
+    }
+
+    .reel-progress {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 2.5px;
+      background: rgba(255, 255, 255, 0.10);
+      z-index: 3;
+      pointer-events: none;
+    }
+
+    .reel-progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--accent-ember) 0%, #ff8a50 100%);
+      box-shadow: 0 0 10px rgba(255, 61, 0, 0.65);
+      transition: width 0.18s linear;
+    }
+
+    .reels-mobile-hint {
+      display: none;
+      margin-top: 16px;
+      text-align: center;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    @media (max-width: 1080px) {
+      .reels-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        max-width: 680px;
+        margin: 0 auto;
+        gap: 18px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .reels-section {
+        padding: 54px 0;
+      }
+
+      .reels-grid {
+        grid-template-columns: none;
+        grid-auto-flow: column;
+        grid-auto-columns: 78%;
+        max-width: none;
+        margin: 0 -20px;
+        padding: 4px 20px 8px;
+        gap: 14px;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .reels-grid::-webkit-scrollbar {
+        display: none;
+      }
+
+      .reel-card {
+        scroll-snap-align: center;
+      }
+
+      .reel-card:hover {
+        transform: none;
+      }
+
+      .reels-mobile-hint {
+        display: block;
+      }
+    }
+
     /* ================= 3D CIRCULAR GALLERY (@ravikatiyar162 / 21st.dev) ================= */
     .action-gallery {
       position: relative;
@@ -4053,6 +4351,151 @@
     </div>
   </section>
 
+  <!-- VÍDEOS REAIS EM MOVIMENTO (REELS SHOWCASE 9:16) -->
+  <section class="reels-section" id="videos" aria-labelledby="videosHeading">
+    <div class="container">
+      <div class="section-header reveal">
+        <div>
+          <p class="eyebrow" style="margin-bottom: 14px;">AULAS NA PRÁTICA</p>
+          <h2 id="videosHeading" class="programs-heading blur-fade">
+            TREINO REAL, <span class="accent-ember">EM MOVIMENTO</span>.
+          </h2>
+        </div>
+        <p class="section-header-copy">
+          Veja na prática a dinâmica de manopla, paos, esquiva e correção técnica em diferentes espaços de Brasília. Toque no som para ouvir o ritmo.
+        </p>
+      </div>
+
+      <div class="reels-grid reveal">
+        <article class="reel-card is-paused" tabindex="0" role="button" aria-label="Reproduzir ou pausar vídeo: Esquiva, Reflexo e Boxe">
+          <video
+            class="reel-video"
+            src="video-1-ronny.mp4"
+            poster="video-1-poster.webp"
+            muted
+            loop
+            playsinline
+            preload="metadata"
+          ></video>
+          <div class="reel-shade" aria-hidden="true"></div>
+          <div class="reel-top">
+            <span class="reel-tag-pill">
+              <i class="reel-live-dot" aria-hidden="true"></i>
+              <span>01 • Ao Ar Livre</span>
+            </span>
+            <button type="button" class="reel-sound-btn" aria-label="Ativar som do vídeo 01">
+              <svg class="icon-muted" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+              <svg class="icon-unmuted" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+            </button>
+          </div>
+          <span class="reel-play-badge" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="7 4 20 12 7 20 7 4"/></svg>
+          </span>
+          <div class="reel-meta">
+            <h3 class="reel-title">Esquiva, Reflexo &amp; Boxe</h3>
+            <p class="reel-desc">Bastões de foco, movimentação e tempo de reação no local da sua preferência.</p>
+          </div>
+          <div class="reel-progress" aria-hidden="true"><div class="reel-progress-fill"></div></div>
+        </article>
+
+        <article class="reel-card is-paused" tabindex="0" role="button" aria-label="Reproduzir ou pausar vídeo: Ritmo, Potência e Paos">
+          <video
+            class="reel-video"
+            src="video-2-ronny.mp4"
+            poster="video-2-poster.webp"
+            muted
+            loop
+            playsinline
+            preload="metadata"
+          ></video>
+          <div class="reel-shade" aria-hidden="true"></div>
+          <div class="reel-top">
+            <span class="reel-tag-pill">
+              <i class="reel-live-dot" aria-hidden="true"></i>
+              <span>02 • Muay Thai</span>
+            </span>
+            <button type="button" class="reel-sound-btn" aria-label="Ativar som do vídeo 02">
+              <svg class="icon-muted" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+              <svg class="icon-unmuted" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+            </button>
+          </div>
+          <span class="reel-play-badge" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="7 4 20 12 7 20 7 4"/></svg>
+          </span>
+          <div class="reel-meta">
+            <h3 class="reel-title">Ritmo, Potência &amp; Paos</h3>
+            <p class="reel-desc">Sequências reais de punhos e chutes nos aparadores com ajuste técnico.</p>
+          </div>
+          <div class="reel-progress" aria-hidden="true"><div class="reel-progress-fill"></div></div>
+        </article>
+
+        <article class="reel-card is-paused" tabindex="0" role="button" aria-label="Reproduzir ou pausar vídeo: Personal Onde Você Preferir">
+          <video
+            class="reel-video"
+            src="video-3-ronny.mp4"
+            poster="video-3-poster.webp"
+            muted
+            loop
+            playsinline
+            preload="metadata"
+          ></video>
+          <div class="reel-shade" aria-hidden="true"></div>
+          <div class="reel-top">
+            <span class="reel-tag-pill">
+              <i class="reel-live-dot" aria-hidden="true"></i>
+              <span>03 • No Seu Espaço</span>
+            </span>
+            <button type="button" class="reel-sound-btn" aria-label="Ativar som do vídeo 03">
+              <svg class="icon-muted" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+              <svg class="icon-unmuted" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+            </button>
+          </div>
+          <span class="reel-play-badge" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="7 4 20 12 7 20 7 4"/></svg>
+          </span>
+          <div class="reel-meta">
+            <h3 class="reel-title">Personal Onde Você Preferir</h3>
+            <p class="reel-desc">Equipamentos inclusos levados até você em Brasília com atenção individual.</p>
+          </div>
+          <div class="reel-progress" aria-hidden="true"><div class="reel-progress-fill"></div></div>
+        </article>
+
+        <article class="reel-card is-paused" tabindex="0" role="button" aria-label="Reproduzir ou pausar vídeo: Técnica Limpa em Cada Golpe">
+          <video
+            class="reel-video"
+            src="video-4-ronny.mp4"
+            poster="video-4-poster.webp"
+            muted
+            loop
+            playsinline
+            preload="metadata"
+          ></video>
+          <div class="reel-shade" aria-hidden="true"></div>
+          <div class="reel-top">
+            <span class="reel-tag-pill">
+              <i class="reel-live-dot" aria-hidden="true"></i>
+              <span>04 • Ringue &amp; Clinch</span>
+            </span>
+            <button type="button" class="reel-sound-btn" aria-label="Ativar som do vídeo 04">
+              <svg class="icon-muted" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+              <svg class="icon-unmuted" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+            </button>
+          </div>
+          <span class="reel-play-badge" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="7 4 20 12 7 20 7 4"/></svg>
+          </span>
+          <div class="reel-meta">
+            <h3 class="reel-title">Técnica Limpa em Cada Golpe</h3>
+            <p class="reel-desc">Combinações de chutes, cotovelos e joelhos no padrão tailandês.</p>
+          </div>
+          <div class="reel-progress" aria-hidden="true"><div class="reel-progress-fill"></div></div>
+        </article>
+      </div>
+
+      <p class="reels-mobile-hint" aria-hidden="true">← Deslize para ver os 4 treinos • Toque no som 🔊 →</p>
+    </div>
+  </section>
+
   <!-- GALERIA CIRCULAR 3D (@ravikatiyar162 / 21st.dev) + REGISTROS REAIS -->
   <section class="action-gallery" id="em-acao">
     <div class="container">
@@ -5527,6 +5970,106 @@
     }
 
     const bookingSection = document.getElementById('agendar');
+
+    // 6b. Vídeos Reais em Movimento (Reels Showcase com autoplay inteligente e controle exclusivo de som)
+    const reelCards = Array.from(document.querySelectorAll('.reel-card'));
+
+    const muteAllOtherReels = (activeCard) => {
+      reelCards.forEach((c, idx) => {
+        if (c === activeCard) return;
+        const v = c.querySelector('.reel-video');
+        const btn = c.querySelector('.reel-sound-btn');
+        if (v) v.muted = true;
+        c.classList.remove('is-sound-on');
+        if (btn) btn.setAttribute('aria-label', `Ativar som do vídeo 0${idx + 1}`);
+      });
+    };
+
+    reelCards.forEach((card, idx) => {
+      const video = card.querySelector('.reel-video');
+      const soundBtn = card.querySelector('.reel-sound-btn');
+      const progressFill = card.querySelector('.reel-progress-fill');
+      if (!video) return;
+
+      video.addEventListener('play', () => card.classList.remove('is-paused'));
+      video.addEventListener('pause', () => card.classList.add('is-paused'));
+      video.addEventListener('timeupdate', () => {
+        if (!progressFill || !video.duration) return;
+        progressFill.style.width = `${Math.min(100, (video.currentTime / video.duration) * 100).toFixed(1)}%`;
+      });
+
+      const toggleCardPlayback = () => {
+        if (video.paused) {
+          card.dataset.userPaused = 'false';
+          video.play().catch(() => {});
+        } else {
+          card.dataset.userPaused = 'true';
+          video.pause();
+        }
+      };
+
+      card.addEventListener('click', (e) => {
+        if (soundBtn && soundBtn.contains(e.target)) return;
+        toggleCardPlayback();
+      });
+
+      card.addEventListener('keydown', (e) => {
+        if (e.target !== card) return;
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          toggleCardPlayback();
+        }
+      });
+
+      if (soundBtn) {
+        soundBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const willUnmute = video.muted;
+          if (willUnmute) {
+            muteAllOtherReels(card);
+            video.muted = false;
+            card.classList.add('is-sound-on');
+            soundBtn.setAttribute('aria-label', `Silenciar vídeo 0${idx + 1}`);
+            card.dataset.userPaused = 'false';
+            video.play().catch(() => {});
+          } else {
+            video.muted = true;
+            card.classList.remove('is-sound-on');
+            soundBtn.setAttribute('aria-label', `Ativar som do vídeo 0${idx + 1}`);
+          }
+        });
+      }
+    });
+
+    if (reelCards.length && 'IntersectionObserver' in window) {
+      const reelObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          const card = entry.target;
+          const video = card.querySelector('.reel-video');
+          if (!video) return;
+          card.dataset.inView = entry.isIntersecting ? 'true' : 'false';
+          if (entry.isIntersecting && !prefersReducedMotion && card.dataset.userPaused !== 'true') {
+            video.play().catch(() => {});
+          } else if (!entry.isIntersecting) {
+            video.pause();
+          }
+        });
+      }, { threshold: 0.38 });
+
+      reelCards.forEach((card) => reelObserver.observe(card));
+
+      document.addEventListener('visibilitychange', () => {
+        reelCards.forEach((card) => {
+          const video = card.querySelector('.reel-video');
+          if (!video) return;
+          if (document.hidden) {
+            video.pause();
+          } else if (card.dataset.inView === 'true' && !prefersReducedMotion && card.dataset.userPaused !== 'true') {
+            video.play().catch(() => {});
+          }
+        });
+      });
+    }
 
     // 7. 3D Circular Gallery (@ravikatiyar162 / 21st.dev) + Carousel Lightbox Modal
     const gallerySection = document.getElementById('em-acao');
