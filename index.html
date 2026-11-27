@@ -6,40 +6,44 @@
 
   <!-- SEO Primário (Title <= 65 chars | Description <= 160 chars) -->
   <title>Personal de Muay Thai, Boxe e Jiu-Jitsu em Brasília | Ronny Lopes</title>
-  <meta name="description" content="Aulas particulares de Muay Thai, Boxe, Jiu-Jitsu e MMA em Brasília (DF) com Ronny Lopes, Campeão Mundial na Tailândia e Faixa-Preta BJJ. Agende sua avaliação." />
+  <meta name="description" content="Aulas particulares de Muay Thai, Boxe, Jiu-Jitsu e MMA em Brasília (DF) com Ronny Lopes, Campeão Mundial na Tailândia e Faixa-Preta BJJ. Agende pelo WhatsApp." />
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-  <meta name="author" content="Ronny Lopes" />
+  <meta name="author" content="Ronny Lopes — Personal Fight" />
   <meta name="geo.region" content="BR-DF" />
   <meta name="geo.placename" content="Brasília" />
   <meta name="theme-color" content="#050505" />
 
-  <!-- SUBSTITUA https://ronny-lopes-muaythai.marianamello0406.workers.dev pelo domínio oficial antes do deploy -->
+  <!-- Preload da imagem principal da Hero para melhorar LCP (Core Web Vitals) -->
+  <link rel="preload" as="image" href="foto-fairtex.webp" fetchpriority="high" />
+
+  <!-- Canonical URL: ao publicar no domínio próprio final, descomente/substitua [INSERIR-DOMINIO-FINAL] abaixo -->
+  <!-- <link rel="canonical" href="https://[INSERIR-DOMINIO-FINAL]/" /> -->
   <link rel="canonical" href="https://ronny-lopes-muaythai.marianamello0406.workers.dev/" />
 
   <!-- Open Graph / WhatsApp / Facebook / Instagram -->
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="pt_BR" />
-  <meta property="og:site_name" content="Ronny Lopes • Personal Fight Brasília" />
+  <meta property="og:site_name" content="Ronny Lopes — Personal Fight" />
+  <!-- No deploy final, substitua pela URL oficial: https://[INSERIR-DOMINIO-FINAL]/ -->
   <meta property="og:url" content="https://ronny-lopes-muaythai.marianamello0406.workers.dev/" />
   <meta property="og:title" content="Personal de Muay Thai, Boxe e Jiu-Jitsu em Brasília | Ronny Lopes" />
-  <meta property="og:description" content="Aulas particulares de Muay Thai, Boxe, Jiu-Jitsu e MMA em Brasília (DF) com Ronny Lopes, Campeão Mundial na Tailândia e Faixa-Preta BJJ. Agende sua avaliação." />
-  <!-- SUBSTITUA og-image.jpg (1200x630px recomendado) ou aponte para foto-mundial-wma-tailandia.jpg no domínio final -->
+  <meta property="og:description" content="Aulas particulares de Muay Thai, Boxe, Jiu-Jitsu e MMA em Brasília (DF) com Ronny Lopes, Campeão Mundial na Tailândia e Faixa-Preta BJJ. Agende pelo WhatsApp." />
   <meta property="og:image" content="https://ronny-lopes-muaythai.marianamello0406.workers.dev/foto-mundial-wma-tailandia.jpg" />
   <meta property="og:image:width" content="960" />
   <meta property="og:image:height" content="720" />
-  <meta property="og:image:alt" content="Ronny Lopes — Campeão Mundial W.M.A na Tailândia e Faixa-Preta de Jiu-Jitsu | Personal Fight em Brasília - DF" />
+  <meta property="og:image:alt" content="Ronny Lopes — Personal Fight de Muay Thai, Boxe, Jiu-Jitsu e MMA em Brasília - DF" />
 
   <!-- Twitter Cards -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Personal de Muay Thai, Boxe e Jiu-Jitsu em Brasília | Ronny Lopes" />
-  <meta name="twitter:description" content="Aulas particulares de Muay Thai, Boxe, Jiu-Jitsu e MMA em Brasília (DF) com Ronny Lopes, Campeão Mundial na Tailândia e Faixa-Preta BJJ. Agende sua avaliação." />
+  <meta name="twitter:description" content="Aulas particulares de Muay Thai, Boxe, Jiu-Jitsu e MMA em Brasília (DF) com Ronny Lopes, Campeão Mundial na Tailândia e Faixa-Preta BJJ. Agende pelo WhatsApp." />
   <meta name="twitter:image" content="https://ronny-lopes-muaythai.marianamello0406.workers.dev/foto-mundial-wma-tailandia.jpg" />
-  <meta name="twitter:image:alt" content="Ronny Lopes — Campeão Mundial W.M.A na Tailândia e Faixa-Preta de Jiu-Jitsu | Personal Fight em Brasília - DF" />
+  <meta name="twitter:image:alt" content="Ronny Lopes — Personal Fight de Muay Thai, Boxe, Jiu-Jitsu e MMA em Brasília - DF" />
 
   <!-- Favicon SVG inline (RL.) -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='4' fill='%23050505'/%3E%3Ctext x='11' y='42' fill='%23F5F5F5' font-family='Georgia, serif' font-size='28' letter-spacing='-1'%3ERL%3C/text%3E%3Ccircle cx='51' cy='40' r='3.5' fill='%23FF3D00'/%3E%3C/svg%3E" />
 
-  <!-- Dados Estruturados JSON-LD: SportsActivityLocation + Person + FAQPage -->
+  <!-- Schema Markup JSON-LD: SportsActivityLocation (LocalBusiness) + Person + FAQPage -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -47,10 +51,10 @@
       {
         "@type": "SportsActivityLocation",
         "@id": "https://ronny-lopes-muaythai.marianamello0406.workers.dev/#business",
-        "name": "Ronny Lopes — Muay Thai, Boxe, Jiu-Jitsu e MMA Particular em Brasília",
-        "description": "Aulas particulares 1-on-1, dupla executiva, refinamento técnico e condicionamento de combate em Muay Thai, Boxe, Jiu-Jitsu e MMA em Brasília — DF, com deslocamento até o local de preferência do aluno.",
+        "name": "Ronny Lopes — Personal Fight",
+        "description": "Aulas particulares de Muay Thai, Boxe, Jiu-Jitsu e MMA em Brasília – DF com Ronny Lopes, Campeão Mundial W.M.A na Tailândia e Faixa-Preta de Jiu-Jitsu.",
         "url": "https://ronny-lopes-muaythai.marianamello0406.workers.dev/",
-        "telephone": "+5561981833245",
+        "telephone": "+55 61 98183-3245",
         "image": "https://ronny-lopes-muaythai.marianamello0406.workers.dev/foto-mundial-wma-tailandia.jpg",
         "sport": ["Muay Thai", "Boxe", "Jiu-Jitsu Brasileiro", "MMA"],
         "sameAs": [
@@ -62,16 +66,7 @@
           "addressRegion": "DF",
           "addressCountry": "BR"
         },
-        "areaServed": [
-          { "@type": "City", "name": "Brasília" },
-          { "@type": "Place", "name": "Asa Sul, Brasília - DF" },
-          { "@type": "Place", "name": "Asa Norte, Brasília - DF" },
-          { "@type": "Place", "name": "Sudoeste, Brasília - DF" },
-          { "@type": "Place", "name": "Lago Sul, Brasília - DF" },
-          { "@type": "Place", "name": "Lago Norte, Brasília - DF" },
-          { "@type": "Place", "name": "Noroeste, Brasília - DF" },
-          { "@type": "Place", "name": "Águas Claras, Brasília - DF" }
-        ],
+        "areaServed": "Brasília, DF, Brasil",
         "openingHoursSpecification": [
           {
             "@type": "OpeningHoursSpecification",
@@ -92,38 +87,30 @@
         },
         "hasOfferCatalog": {
           "@type": "OfferCatalog",
-          "name": "Formatos de Aula Particular — Muay Thai, Boxe, Jiu-Jitsu e MMA",
+          "name": "Formatos de Aula Particular — Muay Thai, Boxe, Jiu-Jitsu e MMA em Brasília",
           "itemListElement": [
             {
               "@type": "Offer",
               "itemOffered": {
                 "@type": "Service",
-                "name": "Particular 1-on-1",
-                "description": "Atenção exclusiva durante 60 minutos em Muay Thai, Boxe, Jiu-Jitsu ou MMA no local de preferência do aluno em Brasília - DF."
+                "name": "Personal Individual (1-on-1)",
+                "description": "Atenção 100% voltada para o aluno com horários flexíveis e equipamentos levados até o local de preferência em Brasília – DF."
               }
             },
             {
               "@type": "Offer",
               "itemOffered": {
                 "@type": "Service",
-                "name": "Dupla Executiva",
-                "description": "Treino personalizado para casais, sócios ou parceiros em trocação (Boxe e Muay Thai) ou luta de solo (Jiu-Jitsu) no condomínio, residência ou espaço de preferência."
+                "name": "Treino em Dupla",
+                "description": "Treino particular para duas pessoas em Brasília – DF com atenção próxima, dinâmica animada e melhor custo-benefício por aluno."
               }
             },
             {
               "@type": "Offer",
               "itemOffered": {
                 "@type": "Service",
-                "name": "Refinamento & Combate",
-                "description": "Ajuste fino em Boxe, clinche tailandês, Jiu-Jitsu e transições de MMA para praticantes intermediários, avançados e competidores."
-              }
-            },
-            {
-              "@type": "Offer",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "Condicionamento de Combate",
-                "description": "Queima calórica intensa, alívio de estresse e mobilidade articular utilizando a mecânica real do Boxe, Muay Thai e artes marciais."
+                "name": "Pequeno Grupo (3 a 4 pessoas)",
+                "description": "Turma fechada com amigos ou colegas de trabalho em Brasília – DF com local e horário combinados pelo grupo."
               }
             }
           ]
@@ -133,12 +120,12 @@
         "@type": "Person",
         "@id": "https://ronny-lopes-muaythai.marianamello0406.workers.dev/#person",
         "name": "Ronny Lopes",
-        "jobTitle": "Treinador Particular de Muay Thai, Boxe, Jiu-Jitsu e MMA",
+        "jobTitle": "Personal Fight de Muay Thai, Boxe, Jiu-Jitsu e MMA",
         "award": [
           "Campeão Mundial de Muay Thai na Tailândia — W.M.A (2010)",
           "Bicampeão Sul-Americano de Muay Thai",
           "Faixa-Preta e Campeão Brasiliense de Jiu-Jitsu",
-          "Campeão de MMA — Master Fight Combat (MFC)"
+          "Campeão Profissional de MMA — Master Fight Combat (MFC)"
         ],
         "url": "https://ronny-lopes-muaythai.marianamello0406.workers.dev/",
         "image": "https://ronny-lopes-muaythai.marianamello0406.workers.dev/foto-mundial-wma-tailandia.jpg",
@@ -148,35 +135,33 @@
         "knowsAbout": [
           "Muay Thai",
           "Boxe",
-          "Jiu-Jitsu Brasileiro (Faixa-Preta)",
-          "MMA — Artes Marciais Mistas",
-          "Personal Fight 1-on-1",
-          "Trabalho de Paos e Manopla de Foco",
-          "Defesa Pessoal e Condicionamento de Combate"
+          "Jiu-Jitsu Brasileiro",
+          "MMA",
+          "Personal Fight em Brasília"
         ],
         "workLocation": {
           "@type": "Place",
-          "name": "Brasília — DF"
+          "name": "Brasília, DF, Brasil"
         }
       },
       {
         "@type": "FAQPage",
-        "@id": "https://ronny-lopes-muaythai.marianamello0406.workers.dev/#faq",
+        "@id": "https://ronny-lopes-muaythai.marianamello0406.workers.dev/#duvidas",
         "mainEntity": [
           {
             "@type": "Question",
-            "name": "Nunca pratiquei artes marciais. Posso começar do zero em qualquer modalidade?",
+            "name": "Nunca pratiquei lutas. Posso começar do zero em qualquer modalidade?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Sim. Grande parte dos alunos inicia sem nenhuma bagagem prévia. Na aula particular, você aprende postura, base, movimentação de Boxe/Muay Thai ou fundamentos de Jiu-Jitsu desde o primeiro dia, no seu ritmo."
+              "text": "Sim. Grande parte dos alunos inicia sem nenhuma experiência prévia. Na aula particular, você constrói base, coordenação, guarda de Boxe/Muay Thai ou fundamentos de Jiu-Jitsu desde o primeiro dia sem a pressão de acompanhar uma turma avançada."
             }
           },
           {
             "@type": "Question",
-            "name": "Posso treinar apenas uma modalidade ou combinar Muay Thai, Boxe, Jiu-Jitsu e MMA?",
+            "name": "Posso focar em só uma luta ou combinar Muay Thai, Boxe, Jiu-Jitsu e MMA?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Você escolhe. Podemos dedicar 100% das sessões a uma única arte — como Boxe puro, Muay Thai ou Jiu-Jitsu — ou montar um planejamento integrado combinando trocação, quedas e chão no estilo MMA."
+              "text": "Você escolhe. Podemos dedicar 100% do treino a uma única arte — como Boxe puro na manopla, Muay Thai tradicional ou Jiu-Jitsu técnico (com ou sem kimono) — ou integrar trocação, quedas e solo no formato MMA."
             }
           },
           {
@@ -184,15 +169,15 @@
             "name": "Onde acontecem as aulas e como funciona o deslocamento?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Me desloco até o local da sua preferência em Brasília — DF: condomínio, residência, academia do prédio, área aberta ou outro espaço da sua escolha. Dependendo da distância, pode haver um valor adicional de deslocamento tratado diretamente comigo pelo WhatsApp."
+              "text": "Me desloco até o local da sua preferência em Brasília — DF: condomínio, residência, academia do prédio, área aberta ou outro espaço da sua escolha. Dependendo da distância, pode haver um valor adicional de deslocamento, tratado diretamente comigo pelo WhatsApp."
             }
           },
           {
             "@type": "Question",
-            "name": "Preciso levar contato físico pesado ou comprar equipamentos antes da primeira aula?",
+            "name": "Preciso levar contato pesado ou comprar luvas/kimono antes da avaliação?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "De forma alguma. Não há sparring obrigatório — o treino prioriza técnica, manopla, paos e drills seguros. Na avaliação inicial levamos luvas e aparadores higienizados para você experimentar."
+              "text": "De forma alguma. Não existe sparring pesado obrigatório — o foco é técnica limpa, manopla, paos, posições e condicionamento seguro. Na primeira sessão levamos luvas e aparadores higienizados para o seu treino."
             }
           }
         ]
@@ -3888,12 +3873,12 @@
 
     <nav class="nav-links" id="navLinks" data-lenis-prevent aria-label="Navegação principal">
       <div class="nav-tubelight" id="navTubelight" aria-hidden="true"></div>
-      <a href="#manifesto">Filosofia</a>
-      <a href="#abordagem">Método</a>
-      <a href="#programas">Sessões</a>
-      <a href="#em-acao">Na Prática</a>
-      <a href="#sobre">Trajetória</a>
-      <a href="#faq">Dúvidas</a>
+      <a href="#filosofia">Filosofia</a>
+      <a href="#metodo">Método</a>
+      <a href="#formatos">Sessões</a>
+      <a href="#galeria">Na Prática</a>
+      <a href="#trajetoria">Trajetória</a>
+      <a href="#duvidas">Dúvidas</a>
     </nav>
 
     <div class="nav-cta-wrap">
@@ -3919,8 +3904,7 @@
         src="foto-fairtex.webp"
         width="1170"
         height="1042"
-        alt="Ronny Lopes, personal de Muay Thai em Brasília, aplicando golpe em luta oficial no ringue"
-        loading="eager"
+        alt="Ronny Lopes, personal de Muay Thai em Brasília, aplicando golpe de direita em luta oficial no ringue"
         fetchpriority="high"
         decoding="async"
       />
@@ -3953,7 +3937,7 @@
             <span>Agendar Avaliação</span>
             <span class="glow-btn-arrow" aria-hidden="true">→</span>
           </a>
-          <a href="#abordagem" class="btn-hero-ghost">
+          <a href="#modalidades" class="btn-hero-ghost">
             <span>Ver Modalidades</span>
           </a>
         </div>
@@ -3986,8 +3970,8 @@
     </div>
   </section>
 
-  <!-- MANIFESTO COM SCROLL WORD-REVEAL -->
-  <section class="manifesto" id="manifesto">
+  <!-- FILOSOFIA / MANIFESTO COM SCROLL WORD-REVEAL -->
+  <section class="manifesto" id="filosofia">
     <div class="manifesto-grid">
       <div class="manifesto-media">
         <img
@@ -3996,7 +3980,7 @@
           height="429"
           style="object-position: 54% 34%;"
           onerror="this.onerror=null;this.src='foto-df-ringue.webp';"
-          alt="Ronny Lopes aplicando domínio por cima e transição de Jiu-Jitsu e MMA em combate oficial no octógono"
+          alt="Ronny Lopes aplicando transição técnica de solo em combate oficial de MMA no octógono"
           loading="lazy"
           decoding="async"
         />
@@ -4020,8 +4004,8 @@
     </div>
   </section>
 
-  <!-- ABORDAGEM: SCROLL ANIMATED TIMELINE (@ibrandify) + CICLO ORBITAL DAS 4 MODALIDADES -->
-  <section class="approach" id="abordagem">
+  <!-- MÉTODO & MODALIDADES: SCROLL ANIMATED TIMELINE + CICLO ORBITAL DAS 4 ARTES -->
+  <section class="approach" id="metodo">
     <div class="approach-timeline-col reveal" id="timelineSection">
       <div>
         <div class="timeline-head">
@@ -4054,7 +4038,7 @@
       </div>
     </div>
 
-    <div class="approach-diagram reveal">
+    <div class="approach-diagram reveal" id="modalidades">
       <div class="diagram-header">
         <span class="eyebrow">Interaja com as 4 modalidades</span>
         <h2 class="diagram-title blur-fade">4 Artes, 1 Método</h2>
@@ -4077,8 +4061,8 @@
     </div>
   </section>
 
-  <!-- PROGRAMAS: DARK GRID + ANIMATED BORDER BEAM + 3D TILT (@lyanchouss / @hyperiux) -->
-  <section class="programs" id="programas">
+  <!-- FORMATOS DE AULA: DARK GRID + ANIMATED BORDER BEAM + 3D TILT -->
+  <section class="programs" id="formatos">
     <div class="container">
       <div class="section-header reveal">
         <div>
@@ -4363,7 +4347,7 @@
   </section>
 
   <!-- GALERIA CIRCULAR 3D (@ravikatiyar162 / 21st.dev) + REGISTROS REAIS -->
-  <section class="action-gallery" id="em-acao">
+  <section class="action-gallery" id="galeria">
     <div class="container">
       <div class="section-header reveal">
         <div>
@@ -4387,7 +4371,7 @@
             height="482"
             style="object-position: 42% 8%;"
             onerror="this.onerror=null;this.src='foto-chute.webp';"
-            alt="Ronny Lopes tendo o braço erguido pelo árbitro após vitória em Bangkok, na Tailândia"
+            alt="Ronny Lopes tendo o braço erguido pelo árbitro após vitória internacional de Muay Thai em Bangkok, Tailândia"
             loading="lazy"
             decoding="async"
             draggable="false"
@@ -4405,7 +4389,7 @@
             width="831"
             height="1600"
             style="object-position: 52% 28%;"
-            alt="Ronny Lopes conduzindo treino individual de Boxe e Muay Thai nos aparadores (paos)"
+            alt="Aula particular de Boxe e Muay Thai em Brasília conduzida por Ronny Lopes nos aparadores"
             loading="lazy"
             decoding="async"
             draggable="false"
@@ -4423,7 +4407,7 @@
             width="520"
             height="700"
             style="object-position: 50% 18%;"
-            alt="Professor Ronny Lopes de kimono preto exibindo a faixa-preta de Jiu-Jitsu"
+            alt="Ronny Lopes de kimono preto, faixa-preta e professor de aula particular de Jiu-Jitsu no DF"
             loading="lazy"
             decoding="async"
             draggable="false"
@@ -4442,7 +4426,7 @@
             height="482"
             style="object-position: 46% 20%;"
             onerror="this.onerror=null;this.src='foto-df-ringue.webp';"
-            alt="Ronny Lopes conectando chute alto na linha de cabeça durante luta oficial em Bangkok, Tailândia"
+            alt="Ronny Lopes conectando chute alto na linha da cabeça em luta oficial de Muay Thai em Bangkok"
             loading="lazy"
             decoding="async"
             draggable="false"
@@ -4460,7 +4444,7 @@
             width="836"
             height="1600"
             style="object-position: 54% 22%;"
-            alt="Ronny Lopes demonstrando defesa técnica e tempo de reação em aula particular"
+            alt="Treino particular de luta em Brasília com ajuste de bloqueio, distância e tempo de reação no tatame"
             loading="lazy"
             decoding="async"
             draggable="false"
@@ -4479,7 +4463,7 @@
             height="1024"
             style="object-position: 48% 36%;"
             onerror="this.onerror=null;this.src='foto-paos.webp';"
-            alt="Ronny Lopes na Tailândia com treinadores tailandeses pela seleção brasileira de Muay Thai"
+            alt="Ronny Lopes em camp na Tailândia com treinadores tailandeses pela seleção brasileira de Muay Thai"
             loading="lazy"
             decoding="async"
             draggable="false"
@@ -4498,7 +4482,7 @@
             height="484"
             style="object-position: 50% 14%;"
             onerror="this.onerror=null;this.src='foto-fairtex.webp';"
-            alt="Ronny Lopes com o cinturão de campeão de MMA do Master Fight Combat (MFC) no octógono"
+            alt="Ronny Lopes, campeão e personal de MMA em Brasília, segurando o cinturão do Master Fight Combat no octógono"
             loading="lazy"
             decoding="async"
             draggable="false"
@@ -4517,7 +4501,7 @@
             height="480"
             style="object-position: 54% 10%;"
             onerror="this.onerror=null;this.src='foto-fairtex.webp';"
-            alt="Ronny Lopes comemorando vitória com o braço erguido pelo árbitro no octógono de MMA"
+            alt="Ronny Lopes comemorando vitória profissional com o braço erguido pelo árbitro no octógono de MMA"
             loading="lazy"
             decoding="async"
             draggable="false"
@@ -4536,7 +4520,7 @@
             height="480"
             style="object-position: 50% 24%;"
             onerror="this.onerror=null;this.src='foto-chute.webp';"
-            alt="Ronny Lopes conectando golpe reto de mão em combate oficial de MMA no octógono"
+            alt="Ronny Lopes conectando direto de mão com controle de distância em combate oficial no octógono"
             loading="lazy"
             decoding="async"
             draggable="false"
@@ -4555,7 +4539,7 @@
             height="484"
             style="object-position: 48% 28%;"
             onerror="this.onerror=null;this.src='foto-df-ringue.webp';"
-            alt="Ronny Lopes aplicando pressão de Jiu-Jitsu e domínio na grade durante combate de MMA"
+            alt="Ronny Lopes aplicando queda e domínio de Jiu-Jitsu na grade durante combate profissional"
             loading="lazy"
             decoding="async"
             draggable="false"
@@ -4587,7 +4571,7 @@
       </div>
       <div class="lightbox-stage-wrap" id="lightboxStageWrap">
         <button type="button" class="lightbox-nav-btn prev" id="lightboxPrev" aria-label="Foto anterior">←</button>
-        <img id="lightboxImg" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" alt="" decoding="async" />
+        <img id="lightboxImg" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" alt="Visualização ampliada do registro de treino e luta de Ronny Lopes" loading="lazy" decoding="async" />
         <button type="button" class="lightbox-nav-btn next" id="lightboxNext" aria-label="Próxima foto">→</button>
       </div>
       <div class="lightbox-caption-bar">
@@ -4597,9 +4581,9 @@
     </div>
   </div>
 
-  <!-- SOBRE & COUNT-UP STATS (FOTO CAMPEÃO MUNDIAL W.M.A NA TAILÂNDIA) -->
-  <section class="coach-section" id="sobre" aria-labelledby="sobreHeading">
-    <h2 id="sobreHeading" class="sr-only">Trajetória de Ronny Lopes — Campeão Mundial W.M.A na Tailândia e Faixa-Preta de Jiu-Jitsu em Brasília</h2>
+  <!-- TRAJETÓRIA & COUNT-UP STATS (FOTO CAMPEÃO MUNDIAL W.M.A NA TAILÂNDIA) -->
+  <section class="coach-section" id="trajetoria" aria-labelledby="trajetoriaHeading">
+    <h2 id="trajetoriaHeading" class="sr-only">Trajetória de Ronny Lopes — Personal Fight de Muay Thai, Boxe, Jiu-Jitsu e MMA em Brasília</h2>
     <div class="coach-photo">
       <img
         src="foto-mundial-wma-tailandia.jpg"
@@ -4985,12 +4969,12 @@
     </div>
   </section>
 
-  <!-- FAQ -->
-  <section class="faq-section" id="faq">
+  <!-- DÚVIDAS DIRETAS (FAQ) -->
+  <section class="faq-section" id="duvidas" aria-labelledby="duvidasHeading">
     <div class="container faq-layout">
       <div class="reveal">
         <p class="eyebrow" style="margin-bottom: 14px;">Antes da Primeira Sessão</p>
-        <h2 class="section-title-mix blur-fade">
+        <h2 id="duvidasHeading" class="section-title-mix blur-fade">
           <span class="serif">Dúvidas</span> <span class="sans">Diretas.</span>
         </h2>
       </div>
@@ -5131,11 +5115,11 @@
   <!-- FOOTER -->
   <footer>
     <div class="container footer-inner">
-      <span>© 2026 Ronny Lopes • Muay Thai, Boxe, Jiu-Jitsu &amp; MMA — Brasília, DF.</span>
+      <span>© 2026 Ronny Lopes — Personal Fight • Muay Thai, Boxe, Jiu-Jitsu &amp; MMA — Brasília, DF.</span>
       <div class="footer-links">
         <a href="https://instagram.com/ronnylopesthai" target="_blank" rel="noopener">@ronnylopesthai</a>
-        <a href="https://wa.me/5561981833245?text=Ol%C3%A1%2C%20Ronny!%20Vim%20pelo%20site%20e%20gostaria%20de%20saber%20mais%20sobre%20as%20aulas%20particulares." target="_blank" rel="noopener">WhatsApp</a>
-        <a href="#abordagem">Modalidades</a>
+        <a href="https://wa.me/5561981833245?text=Ol%C3%A1%20Ronny!%20Vi%20seu%20site%20e%20gostaria%20de%20saber%20mais%20sobre%20as%20aulas%20particulares." target="_blank" rel="noopener">WhatsApp</a>
+        <a href="#modalidades">Modalidades</a>
       </div>
     </div>
   </footer>
@@ -5632,7 +5616,7 @@
       let current = trackedSections[0]?.anchor || null;
 
       trackedSections.forEach(({ anchor, section }) => {
-        if (section.offsetTop <= probeY) {
+        if ((section.getBoundingClientRect().top + window.scrollY) <= probeY) {
           current = anchor;
         }
       });
@@ -5945,7 +5929,7 @@
     });
 
     // 7. 3D Circular Gallery (@ravikatiyar162 / 21st.dev) + Carousel Lightbox Modal
-    const gallerySection = document.getElementById('em-acao');
+    const gallerySection = document.getElementById('galeria');
     const circularViewport = document.getElementById('circularViewport');
     const circularRing = document.getElementById('circularRing');
     const galleryFrames = circularRing ? Array.from(circularRing.querySelectorAll('.gallery-frame')) : [];

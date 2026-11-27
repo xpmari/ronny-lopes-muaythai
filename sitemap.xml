@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- SUBSTITUA https://ronny-lopes-muaythai.marianamello0406.workers.dev pelo domínio final antes do deploy -->
+<!-- No deploy com domínio próprio final, substitua https://ronny-lopes-muaythai.marianamello0406.workers.dev por https://[INSERIR-DOMINIO-FINAL] -->
 <urlset
   xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+  xmlns:video="http://www.google.com/schemas/sitemap-video/1.1"
 >
   <url>
     <loc>https://ronny-lopes-muaythai.marianamello0406.workers.dev/</loc>
@@ -10,56 +11,84 @@
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
     <image:image>
+      <image:loc>https://ronny-lopes-muaythai.marianamello0406.workers.dev/foto-fairtex.webp</image:loc>
+      <image:title>Ronny Lopes — Personal de Muay Thai, Boxe, Jiu-Jitsu e MMA em Brasília</image:title>
+    </image:image>
+    <image:image>
       <image:loc>https://ronny-lopes-muaythai.marianamello0406.workers.dev/foto-mundial-wma-tailandia.jpg</image:loc>
       <image:title>Ronny Lopes — Campeão Mundial de Muay Thai pela W.M.A na Tailândia em 2010</image:title>
     </image:image>
     <image:image>
       <image:loc>https://ronny-lopes-muaythai.marianamello0406.workers.dev/foto-faixa-preta-jiujitsu.jpg</image:loc>
-      <image:title>Professor Ronny Lopes — Faixa-Preta e Campeão Brasiliense de Jiu-Jitsu em Brasília</image:title>
-    </image:image>
-    <image:image>
-      <image:loc>https://ronny-lopes-muaythai.marianamello0406.workers.dev/foto-fairtex.webp</image:loc>
-      <image:title>Ronny Lopes — Muay Thai, Boxe, Jiu-Jitsu e MMA Particular em Brasília</image:title>
+      <image:title>Ronny Lopes — Faixa-Preta e Aula Particular de Jiu-Jitsu no DF</image:title>
     </image:image>
     <image:image>
       <image:loc>https://ronny-lopes-muaythai.marianamello0406.workers.dev/foto-mma-solo-octogono.webp</image:loc>
-      <image:title>Ronny Lopes — Domínio em pé e no solo em combate oficial de MMA e Jiu-Jitsu</image:title>
+      <image:title>Ronny Lopes — Transição técnica de solo em combate oficial de MMA</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://ronny-lopes-muaythai.marianamello0406.workers.dev/foto-paos.webp</image:loc>
+      <image:title>Aula particular de Boxe e Muay Thai em Brasília nos aparadores</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://ronny-lopes-muaythai.marianamello0406.workers.dev/foto-sparring.webp</image:loc>
+      <image:title>Treino particular de luta em Brasília no tatame com Ronny Lopes</image:title>
     </image:image>
     <image:image>
       <image:loc>https://ronny-lopes-muaythai.marianamello0406.workers.dev/foto-tailandia-vitoria.jpg</image:loc>
-      <image:title>Vitória internacional de Ronny Lopes em Bangkok, Tailândia</image:title>
+      <image:title>Vitória internacional de Muay Thai em Bangkok, Tailândia — Ronny Lopes</image:title>
     </image:image>
     <image:image>
       <image:loc>https://ronny-lopes-muaythai.marianamello0406.workers.dev/foto-tailandia-chute-alto.jpg</image:loc>
-      <image:title>Chute alto de Muay Thai na Tailândia — Ronny Lopes</image:title>
+      <image:title>Chute alto de Muay Thai em competição oficial em Bangkok — Ronny Lopes</image:title>
     </image:image>
     <image:image>
       <image:loc>https://ronny-lopes-muaythai.marianamello0406.workers.dev/foto-tailandia-camp.jpg</image:loc>
-      <image:title>Camp na Tailândia com treinadores tailandeses — Ronny Lopes</image:title>
+      <image:title>Camp na Tailândia pela seleção brasileira de Muay Thai — Ronny Lopes</image:title>
     </image:image>
     <image:image>
       <image:loc>https://ronny-lopes-muaythai.marianamello0406.workers.dev/foto-mma-cinturao-mfc.jpg</image:loc>
-      <image:title>Ronny Lopes — Campeão de MMA no Master Fight Combat (MFC)</image:title>
-    </image:image>
-    <image:image>
-      <image:loc>https://ronny-lopes-muaythai.marianamello0406.workers.dev/foto-mma-boxe.jpg</image:loc>
-      <image:title>Ronny Lopes — Boxe e trocação aplicados em combate oficial de MMA</image:title>
-    </image:image>
-    <image:image>
-      <image:loc>https://ronny-lopes-muaythai.marianamello0406.workers.dev/foto-jiujitsu-grappling-grade.jpg</image:loc>
-      <image:title>Queda, pressão e Jiu-Jitsu aplicado — Ronny Lopes</image:title>
+      <image:title>Ronny Lopes — Campeão e Personal de MMA em Brasília (Master Fight Combat)</image:title>
     </image:image>
     <image:image>
       <image:loc>https://ronny-lopes-muaythai.marianamello0406.workers.dev/foto-mma-vitoria-cage.jpg</image:loc>
       <image:title>Vitória profissional no octógono de MMA — Ronny Lopes</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://ronny-lopes-muaythai.marianamello0406.workers.dev/foto-paos.webp</image:loc>
-      <image:title>Aula particular 1-on-1 de Boxe e Muay Thai nos paos em Brasília</image:title>
+      <image:loc>https://ronny-lopes-muaythai.marianamello0406.workers.dev/foto-mma-boxe.jpg</image:loc>
+      <image:title>Precisão de mãos e distância no octógono — Ronny Lopes</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://ronny-lopes-muaythai.marianamello0406.workers.dev/foto-sparring.webp</image:loc>
-      <image:title>Treino técnico particular no tatame com Ronny Lopes</image:title>
+      <image:loc>https://ronny-lopes-muaythai.marianamello0406.workers.dev/foto-jiujitsu-grappling-grade.jpg</image:loc>
+      <image:title>Queda e domínio técnico de Jiu-Jitsu na grade — Ronny Lopes</image:title>
     </image:image>
+    <video:video>
+      <video:thumbnail_loc>https://ronny-lopes-muaythai.marianamello0406.workers.dev/video-1-poster.webp</video:thumbnail_loc>
+      <video:title>Esquiva, Reflexo e Boxe Particular ao Ar Livre em Brasília — Ronny Lopes</video:title>
+      <video:description>Aula particular de Boxe e reflexo com bastões de foco em Brasília conduzida por Ronny Lopes.</video:description>
+      <video:content_loc>https://ronny-lopes-muaythai.marianamello0406.workers.dev/video-1-ronny.mp4</video:content_loc>
+      <video:duration>28</video:duration>
+    </video:video>
+    <video:video>
+      <video:thumbnail_loc>https://ronny-lopes-muaythai.marianamello0406.workers.dev/video-2-poster.webp</video:thumbnail_loc>
+      <video:title>Ritmo, Potência e Paos de Muay Thai em Brasília — Ronny Lopes</video:title>
+      <video:description>Sequências técnicas de punhos e chutes nos aparadores em treino particular de Muay Thai.</video:description>
+      <video:content_loc>https://ronny-lopes-muaythai.marianamello0406.workers.dev/video-2-ronny.mp4</video:content_loc>
+      <video:duration>16</video:duration>
+    </video:video>
+    <video:video>
+      <video:thumbnail_loc>https://ronny-lopes-muaythai.marianamello0406.workers.dev/video-3-poster.webp</video:thumbnail_loc>
+      <video:title>Personal Fight Onde Você Preferir em Brasília — Ronny Lopes</video:title>
+      <video:description>Treino particular de Muay Thai e Boxe no espaço de preferência do aluno no Distrito Federal.</video:description>
+      <video:content_loc>https://ronny-lopes-muaythai.marianamello0406.workers.dev/video-3-ronny.mp4</video:content_loc>
+      <video:duration>16</video:duration>
+    </video:video>
+    <video:video>
+      <video:thumbnail_loc>https://ronny-lopes-muaythai.marianamello0406.workers.dev/video-4-poster.webp</video:thumbnail_loc>
+      <video:title>Técnica Limpa de Muay Thai no Ringue e Clinch — Ronny Lopes</video:title>
+      <video:description>Combinações completas de chutes, cotovelos e joelhos nos aparadores no padrão tailandês.</video:description>
+      <video:content_loc>https://ronny-lopes-muaythai.marianamello0406.workers.dev/video-4-ronny.mp4</video:content_loc>
+      <video:duration>59</video:duration>
+    </video:video>
   </url>
 </urlset>
