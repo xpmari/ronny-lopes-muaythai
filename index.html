@@ -893,20 +893,52 @@
         linear-gradient(180deg, rgba(5, 5, 5, 0.58) 0%, rgba(5, 5, 5, 0.20) 40%, rgba(5, 5, 5, 0.92) 92%, #050505 100%);
     }
 
+    .hero-bg-media {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: min(72%, 1160px);
+      z-index: 1;
+      pointer-events: none;
+      overflow: hidden;
+      mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.22) 15%, rgba(0, 0, 0, 0.78) 36%, #000 56%, #000 100%);
+      -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.22) 15%, rgba(0, 0, 0, 0.78) 36%, #000 56%, #000 100%);
+    }
+
+    .hero-bg-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 60% 16%;
+      display: block;
+      filter: contrast(1.12) saturate(0.92) brightness(0.88);
+      transform: scale(1.02);
+    }
+
+    .hero-editorial-gradient {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      background:
+        linear-gradient(90deg, #050505 0%, rgba(5, 5, 5, 0.95) 31%, rgba(5, 5, 5, 0.66) 46%, rgba(5, 5, 5, 0.14) 68%, rgba(5, 5, 5, 0.34) 100%),
+        linear-gradient(180deg, rgba(5, 5, 5, 0.68) 0%, transparent 22%, transparent 74%, rgba(5, 5, 5, 0.94) 95%, #050505 100%),
+        radial-gradient(ellipse 46% 56% at 74% 44%, rgba(255, 61, 0, 0.16) 0%, rgba(184, 15, 15, 0.08) 46%, transparent 74%);
+    }
+
     .hero-inner {
       position: relative;
       z-index: 2;
       flex: 1;
-      display: grid;
-      grid-template-columns: 1.12fr 0.88fr;
-      gap: clamp(28px, 4.2vw, 64px);
+      display: flex;
       align-items: center;
-      padding-top: clamp(20px, 3vw, 44px);
+      padding-top: clamp(24px, 3.5vw, 48px);
       padding-bottom: clamp(32px, 4.5vw, 56px);
     }
 
     .hero-copy {
-      max-width: 680px;
+      max-width: 650px;
     }
 
     .hero-status-pill {
@@ -916,14 +948,16 @@
       padding: 7px 14px;
       margin-bottom: 24px;
       border-radius: 9999px;
-      background: rgba(255, 61, 0, 0.08);
-      border: 1px solid rgba(255, 61, 0, 0.28);
+      background: rgba(10, 10, 14, 0.62);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 61, 0, 0.32);
       box-shadow: 0 0 28px -8px rgba(255, 61, 0, 0.45);
       font-family: var(--font-mono);
       font-size: 11px;
       letter-spacing: 0.10em;
       text-transform: uppercase;
-      color: rgba(255, 236, 230, 0.95);
+      color: rgba(255, 236, 230, 0.96);
     }
 
     .status-live-dot {
@@ -943,6 +977,7 @@
       letter-spacing: -0.04em;
       margin-bottom: 24px;
       perspective: 800px;
+      text-shadow: 0 14px 36px rgba(0, 0, 0, 0.72);
     }
 
     .hero-title .serif-line {
@@ -985,12 +1020,13 @@
       max-width: 560px;
       margin-bottom: 14px;
       text-wrap: balance;
+      text-shadow: 0 8px 24px rgba(0, 0, 0, 0.75);
     }
 
     .hero-sub {
       font-size: 15.5px;
       line-height: 1.65;
-      color: var(--text-secondary);
+      color: rgba(230, 230, 238, 0.86);
       max-width: 520px;
       margin-bottom: 30px;
       text-wrap: pretty;
@@ -1011,7 +1047,7 @@
       margin-top: 18px;
       font-size: 12.5px;
       line-height: 1.45;
-      color: rgba(180, 180, 190, 0.86);
+      color: rgba(196, 196, 206, 0.88);
       letter-spacing: -0.005em;
     }
 
@@ -1025,142 +1061,12 @@
     .micro-check {
       font-style: normal;
       font-size: 11.5px;
-      color: rgba(245, 245, 247, 0.68);
+      color: rgba(245, 245, 247, 0.72);
     }
 
     .micro-sep {
       color: rgba(255, 255, 255, 0.24);
       font-size: 11px;
-    }
-
-    /* Interactive 3D HUD Stage Card in Hero */
-    .hero-stage {
-      position: relative;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      perspective: 1100px;
-    }
-
-    .hero-photo-spotlight {
-      position: absolute;
-      inset: -14%;
-      z-index: 0;
-      background: radial-gradient(
-        circle at 52% 45%,
-        rgba(255, 61, 0, 0.34) 0%,
-        rgba(184, 15, 15, 0.22) 38%,
-        transparent 72%
-      );
-      filter: blur(48px);
-      pointer-events: none;
-    }
-
-    .hero-hud-card {
-      position: relative;
-      z-index: 2;
-      width: 100%;
-      max-width: 520px;
-      aspect-ratio: 4 / 4.55;
-      border-radius: 20px;
-      overflow: hidden;
-      background: #09090c;
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      box-shadow:
-        0 30px 80px -24px rgba(0, 0, 0, 0.95),
-        0 0 0 1px rgba(255, 61, 0, 0.16),
-        inset 0 1px 0 rgba(255, 255, 255, 0.18);
-      transform-style: preserve-3d;
-      transition: transform 0.35s var(--ease-out), border-color 0.35s ease;
-    }
-
-    .hero-hud-card:hover {
-      border-color: rgba(255, 61, 0, 0.45);
-    }
-
-    .hero-hud-card img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: 56% 18%;
-      display: block;
-      filter: contrast(1.12) saturate(0.88) brightness(0.92);
-      transform: scale(1.04);
-      transition: transform 1.1s var(--ease-out), filter 0.5s ease;
-    }
-
-    .hero-hud-card:hover img {
-      transform: scale(1.07);
-      filter: contrast(1.14) saturate(1.02) brightness(0.98);
-    }
-
-    .hero-hud-card::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(180deg, rgba(5, 5, 5, 0.08) 0%, transparent 52%, rgba(5, 5, 5, 0.62) 78%, rgba(5, 5, 5, 0.94) 100%),
-        radial-gradient(circle at 80% 18%, rgba(255, 61, 0, 0.16), transparent 48%);
-      pointer-events: none;
-    }
-
-    /* Crimson/Ember Scanning Laser Beam (@larsen66 Futuristic Hero cue) */
-    .hero-laser-line {
-      position: absolute;
-      inset: 0;
-      z-index: 3;
-      pointer-events: none;
-      overflow: hidden;
-    }
-
-    .hero-laser-line::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 0;
-      height: 2px;
-      background: linear-gradient(90deg, transparent 0%, rgba(255, 61, 0, 0.95) 25%, #ffffff 50%, rgba(255, 61, 0, 0.95) 75%, transparent 100%);
-      box-shadow:
-        0 0 16px 2px rgba(255, 61, 0, 0.85),
-        0 12px 32px 4px rgba(184, 15, 15, 0.55);
-      animation: scanLaser 5.4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-    }
-
-    .hud-bottom-panel {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      z-index: 4;
-      padding: 28px 22px 18px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-    }
-
-    .hud-fighter-name {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.10em;
-      color: rgba(245, 245, 247, 0.90);
-      transition: color 0.22s ease;
-    }
-
-    .hud-fighter-name:hover {
-      color: var(--accent-ember-bright);
-    }
-
-    .hud-minimal-tag {
-      font-family: var(--font-mono);
-      font-size: 10.5px;
-      font-weight: 500;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: rgba(245, 245, 247, 0.68);
-      white-space: nowrap;
     }
 
     /* Kinetic Infinite Ticker Strip at Hero Base */
@@ -3531,22 +3437,35 @@
 
     /* ================= RESPONSIVIDADE ================= */
     @media (max-width: 1024px) {
+      .hero-bg-media {
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: auto;
+        width: 100%;
+        height: clamp(360px, 58svh, 520px);
+        mask-image: linear-gradient(180deg, #000 0%, #000 54%, rgba(0, 0, 0, 0.45) 78%, transparent 100%);
+        -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 54%, rgba(0, 0, 0, 0.45) 78%, transparent 100%);
+      }
+
+      .hero-bg-media img {
+        object-position: 62% 14%;
+      }
+
+      .hero-editorial-gradient {
+        background:
+          linear-gradient(180deg, rgba(5, 5, 5, 0.52) 0%, rgba(5, 5, 5, 0.12) 24%, rgba(5, 5, 5, 0.72) 45%, rgba(5, 5, 5, 0.96) 58%, #050505 70%),
+          radial-gradient(ellipse 80% 40% at 62% 24%, rgba(255, 61, 0, 0.16) 0%, transparent 70%);
+      }
+
       .hero-inner {
-        grid-template-columns: 1fr;
-        align-items: start;
-        gap: 36px;
-        padding-top: 16px;
-        padding-bottom: 44px;
+        align-items: flex-end;
+        padding-top: clamp(210px, 42vw, 290px);
+        padding-bottom: 42px;
       }
 
       .hero-copy {
         max-width: 640px;
-      }
-
-      .hero-hud-card {
-        max-width: 520px;
-        margin: 0 auto;
-        aspect-ratio: 16 / 13;
       }
 
       .manifesto-grid,
@@ -3663,10 +3582,6 @@
 
       .hero-title .sans-line {
         font-size: clamp(46px, 13vw, 68px);
-      }
-
-      .hero-hud-card {
-        aspect-ratio: 4 / 4.2;
       }
 
       .manifesto-media {
@@ -3851,20 +3766,19 @@
     }
 
     @media (max-width: 540px) {
+      .hero-bg-media {
+        height: clamp(320px, 54svh, 430px);
+      }
+
+      .hero-inner {
+        padding-top: clamp(195px, 52vw, 245px);
+        padding-bottom: 34px;
+      }
+
       .hero-status-pill {
         font-size: 9.8px;
         letter-spacing: 0.06em;
         padding: 6px 12px;
-      }
-
-      .hud-bottom-panel {
-        padding: 22px 16px 14px;
-      }
-
-      .hud-fighter-name,
-      .hud-minimal-tag {
-        font-size: 9.8px;
-        letter-spacing: 0.08em;
       }
 
       .hero-micro-proof {
@@ -3936,7 +3850,6 @@
       .spotlight-card.is-featured::after,
       .glow-btn::before,
       .glow-btn::after,
-      .hero-laser-line::before,
       .ticker-track,
       .marquee-row {
         animation: none !important;
@@ -4001,6 +3914,19 @@
     </div>
     <div class="hero-depth-grid" aria-hidden="true"></div>
 
+    <div class="hero-bg-media">
+      <img
+        src="foto-fairtex.webp"
+        width="1170"
+        height="1042"
+        alt="Ronny Lopes, personal de Muay Thai em Brasília, aplicando golpe em luta oficial no ringue"
+        loading="eager"
+        fetchpriority="high"
+        decoding="async"
+      />
+    </div>
+    <div class="hero-editorial-gradient" aria-hidden="true"></div>
+
     <div class="container hero-inner">
       <div class="hero-copy">
         <div class="hero-status-pill blur-fade blur-delay-1">
@@ -4038,26 +3964,6 @@
           <span class="micro-proof-item"><i class="micro-check" aria-hidden="true">✓</i> Do iniciante ao avançado</span>
           <span class="micro-sep" aria-hidden="true">•</span>
           <span class="micro-proof-item"><i class="micro-check" aria-hidden="true">✓</i> Levamos os equipamentos</span>
-        </div>
-      </div>
-
-      <div class="hero-stage blur-fade blur-delay-2">
-        <div class="hero-photo-spotlight" aria-hidden="true"></div>
-        <div class="hero-hud-card" id="heroHudCard">
-          <div class="hero-laser-line" aria-hidden="true"></div>
-          <img
-            src="foto-fairtex.webp"
-            width="1170"
-            height="1042"
-            alt="Ronny Lopes, personal de Muay Thai em Brasília, aplicando golpe em luta oficial no ringue"
-            loading="eager"
-            fetchpriority="high"
-            decoding="async"
-          />
-          <div class="hud-bottom-panel">
-            <a href="https://instagram.com/ronnylopesthai" target="_blank" rel="noopener" class="hud-fighter-name">@ronnylopesthai ↗</a>
-            <span class="hud-minimal-tag">WMA TAILÂNDIA '10</span>
-          </div>
         </div>
       </div>
     </div>
@@ -5770,20 +5676,6 @@
         toggleMenu(true);
       }
     });
-
-    // 4. Hero HUD 3D Card Parallax (@larsen66 depth feel)
-    const heroHudCard = document.getElementById('heroHudCard');
-    if (heroHudCard && hasFinePointer && !prefersReducedMotion) {
-      heroHudCard.addEventListener('mousemove', (e) => {
-        const rect = heroHudCard.getBoundingClientRect();
-        const nx = (e.clientX - rect.left) / rect.width - 0.5;
-        const ny = (e.clientY - rect.top) / rect.height - 0.5;
-        heroHudCard.style.transform = `rotateY(${(nx * 8).toFixed(2)}deg) rotateX(${(-ny * 8).toFixed(2)}deg)`;
-      });
-      heroHudCard.addEventListener('mouseleave', () => {
-        heroHudCard.style.transform = 'rotateY(0deg) rotateX(0deg)';
-      });
-    }
 
     // 5. Manifesto Scroll Word-Reveal + Scroll-Animated Beam Timeline (@ibrandify)
     const manifestoHeadline = document.getElementById('manifestoHeadline');
