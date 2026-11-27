@@ -2319,23 +2319,71 @@
       transition: width 0.18s linear;
     }
 
-    .reels-mobile-hint {
+    .reels-nav {
       display: none;
-      margin-top: 16px;
-      text-align: center;
-      font-family: var(--font-mono);
-      font-size: 10px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--text-muted);
+      margin-top: 20px;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+    }
+
+    .reels-dots {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .reel-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 9999px;
+      background: rgba(255, 255, 255, 0.20);
+      transition: width 0.28s var(--ease-spring), background-color 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .reel-dot.is-active {
+      width: 24px;
+      background: var(--accent-ember);
+      box-shadow: 0 0 10px rgba(255, 61, 0, 0.6);
     }
 
     @media (max-width: 1080px) {
+      .reels-section {
+        overflow-x: clip;
+      }
+
       .reels-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        max-width: 680px;
-        margin: 0 auto;
-        gap: 18px;
+        display: flex;
+        flex-wrap: nowrap;
+        max-width: none;
+        margin: 0 calc(clamp(20px, 4vw, 56px) * -1);
+        padding: 4px clamp(20px, 4vw, 56px) 10px;
+        gap: 16px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        scroll-snap-type: x mandatory;
+        scroll-behavior: smooth;
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+        touch-action: pan-x pan-y;
+      }
+
+      .reels-grid::-webkit-scrollbar {
+        display: none;
+      }
+
+      .reel-card {
+        flex: 0 0 clamp(224px, 38vw, 272px);
+        scroll-snap-align: start;
+        scroll-margin-left: clamp(20px, 4vw, 56px);
+      }
+
+      .reel-card:hover {
+        transform: none;
+      }
+
+      .reels-nav {
+        display: flex;
       }
     }
 
@@ -2345,33 +2393,48 @@
       }
 
       .reels-grid {
-        grid-template-columns: none;
-        grid-auto-flow: column;
-        grid-auto-columns: 78%;
-        max-width: none;
         margin: 0 -20px;
-        padding: 4px 20px 8px;
-        gap: 14px;
-        overflow-x: auto;
-        scroll-snap-type: x mandatory;
-        scrollbar-width: none;
-        -webkit-overflow-scrolling: touch;
-      }
-
-      .reels-grid::-webkit-scrollbar {
-        display: none;
+        padding: 4px 20px 10px;
+        gap: 12px;
       }
 
       .reel-card {
-        scroll-snap-align: center;
+        flex: 0 0 clamp(198px, 58vw, 238px);
+        scroll-margin-left: 20px;
+        border-radius: 14px;
       }
 
-      .reel-card:hover {
-        transform: none;
+      .reel-top {
+        top: 10px;
+        left: 10px;
+        right: 10px;
       }
 
-      .reels-mobile-hint {
-        display: block;
+      .reel-tag-pill {
+        padding: 5px 9px;
+        font-size: 9px;
+        letter-spacing: 0.06em;
+      }
+
+      .reel-sound-btn {
+        width: 34px;
+        height: 34px;
+      }
+
+      .reel-meta {
+        bottom: 14px;
+        left: 12px;
+        right: 12px;
+        gap: 3px;
+      }
+
+      .reel-title {
+        font-size: 15px;
+      }
+
+      .reel-desc {
+        font-size: 11.5px;
+        line-height: 1.38;
       }
     }
 
@@ -4366,7 +4429,7 @@
         </p>
       </div>
 
-      <div class="reels-grid reveal">
+      <div class="reels-grid reveal" id="reelsTrack">
         <article class="reel-card is-paused" tabindex="0" role="button" aria-label="Reproduzir ou pausar vídeo: Esquiva, Reflexo e Boxe">
           <video
             class="reel-video"
@@ -4492,7 +4555,16 @@
         </article>
       </div>
 
-      <p class="reels-mobile-hint" aria-hidden="true">← Deslize para ver os 4 treinos • Toque no som 🔊 →</p>
+      <div class="reels-nav" aria-label="Navegação horizontal dos vídeos">
+        <button type="button" class="cg-spin-btn" id="reelsPrevBtn" aria-label="Vídeo anterior">←</button>
+        <div class="reels-dots" id="reelsDots">
+          <button type="button" class="reel-dot is-active" data-reel-idx="0" aria-label="Ir para o vídeo 01"></button>
+          <button type="button" class="reel-dot" data-reel-idx="1" aria-label="Ir para o vídeo 02"></button>
+          <button type="button" class="reel-dot" data-reel-idx="2" aria-label="Ir para o vídeo 03"></button>
+          <button type="button" class="reel-dot" data-reel-idx="3" aria-label="Ir para o vídeo 04"></button>
+        </div>
+        <button type="button" class="cg-spin-btn" id="reelsNextBtn" aria-label="Próximo vídeo">→</button>
+      </div>
     </div>
   </section>
 
@@ -6070,6 +6142,52 @@
         });
       });
     }
+
+    const reelsTrack = document.getElementById('reelsTrack');
+    const reelsPrevBtn = document.getElementById('reelsPrevBtn');
+    const reelsNextBtn = document.getElementById('reelsNextBtn');
+    const reelDots = Array.from(document.querySelectorAll('#reelsDots .reel-dot'));
+    let activeReelIdx = 0;
+
+    const syncActiveReelDot = () => {
+      if (!reelsTrack || !reelCards.length || !reelDots.length) return;
+      const trackRect = reelsTrack.getBoundingClientRect();
+      let closestIdx = 0;
+      let closestDist = Infinity;
+      reelCards.forEach((card, idx) => {
+        const rect = card.getBoundingClientRect();
+        const dist = Math.abs(rect.left - trackRect.left - 20);
+        if (dist < closestDist) {
+          closestDist = dist;
+          closestIdx = idx;
+        }
+      });
+      activeReelIdx = closestIdx;
+      reelDots.forEach((dot, idx) => dot.classList.toggle('is-active', idx === activeReelIdx));
+    };
+
+    const scrollToReelIndex = (targetIdx) => {
+      if (!reelsTrack || !reelCards.length) return;
+      const total = reelCards.length;
+      const nextIdx = (targetIdx + total) % total;
+      const targetCard = reelCards[nextIdx];
+      if (!targetCard) return;
+      const padLeft = parseFloat(getComputedStyle(reelsTrack).paddingLeft) || 20;
+      reelsTrack.scrollTo({
+        left: Math.max(0, targetCard.offsetLeft - padLeft),
+        behavior: prefersReducedMotion ? 'auto' : 'smooth'
+      });
+    };
+
+    if (reelsTrack) {
+      reelsTrack.addEventListener('scroll', syncActiveReelDot, { passive: true });
+      window.addEventListener('resize', syncActiveReelDot, { passive: true });
+    }
+    if (reelsPrevBtn) reelsPrevBtn.addEventListener('click', () => scrollToReelIndex(activeReelIdx - 1));
+    if (reelsNextBtn) reelsNextBtn.addEventListener('click', () => scrollToReelIndex(activeReelIdx + 1));
+    reelDots.forEach((dot) => {
+      dot.addEventListener('click', () => scrollToReelIndex(Number(dot.dataset.reelIdx || 0)));
+    });
 
     // 7. 3D Circular Gallery (@ravikatiyar162 / 21st.dev) + Carousel Lightbox Modal
     const gallerySection = document.getElementById('em-acao');
