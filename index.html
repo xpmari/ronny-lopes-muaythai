@@ -2609,38 +2609,48 @@
     }
 
     .coach-quote-col {
-      padding: clamp(48px, 7vw, 96px) clamp(24px, 5vw, 72px);
+      padding: clamp(48px, 7vw, 96px) clamp(24px, 5vw, 76px);
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      justify-content: center;
+      align-items: flex-start;
     }
 
-    .quote-mark {
-      font-family: var(--font-serif);
-      font-size: 88px;
-      line-height: 0.6;
-      color: var(--accent-ember);
-      margin-bottom: 24px;
-      user-select: none;
+    .coach-story {
+      width: 100%;
+      max-width: 580px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
     }
 
-    .quote-text {
+    .coach-eyebrow {
+      margin-bottom: 18px;
+    }
+
+    .coach-story-title {
       font-family: var(--font-serif);
-      font-size: clamp(27px, 3.1vw, 42px);
-      line-height: 1.2;
+      font-weight: 400;
+      font-size: clamp(32px, 3.5vw, 48px);
+      line-height: 1.08;
       letter-spacing: -0.015em;
       color: var(--text-primary);
-      margin-bottom: 28px;
+      margin-bottom: 26px;
       text-wrap: balance;
     }
 
-    .quote-author {
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--accent-ember);
-      margin-bottom: 18px;
+    .coach-story-body {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      margin-bottom: 32px;
+    }
+
+    .coach-story-body p {
+      font-size: clamp(15.5px, 1.15vw, 17px);
+      line-height: 1.74;
+      color: rgba(240, 240, 245, 0.84);
+      text-wrap: pretty;
     }
 
     .ig-pill {
@@ -2655,7 +2665,6 @@
       border: 1px solid var(--border-strong);
       border-radius: 2px;
       padding: 10px 18px;
-      margin-bottom: 36px;
       transition: border-color 0.22s ease, background-color 0.22s ease, transform 0.2s ease, box-shadow 0.25s ease;
     }
 
@@ -2667,20 +2676,6 @@
 
     .ig-pill:active {
       transform: scale(0.98);
-    }
-
-    .coach-bio {
-      padding-top: 28px;
-      border-top: 1px solid var(--border-hairline);
-      font-size: 14.5px;
-      line-height: 1.72;
-      color: var(--text-secondary);
-      text-wrap: pretty;
-    }
-
-    .coach-bio strong {
-      color: var(--text-primary);
-      font-weight: 600;
     }
 
     /* ================= FAQ ================= */
@@ -4466,20 +4461,23 @@
     </div>
 
     <div class="coach-quote-col reveal">
-      <div>
-        <div class="quote-mark" aria-hidden="true">“</div>
-        <blockquote class="quote-text blur-fade">
-          A técnica verdadeira não depende de força bruta. Em pé ou no chão, quando o corpo entende o ângulo, a alavanca e o tempo certo, o golpe acontece com naturalidade.
-        </blockquote>
-        <p class="quote-author">— Ronny Lopes • Campeão Mundial W.M.A (2010) &amp; Faixa-Preta BJJ</p>
+      <div class="coach-story">
+        <p class="eyebrow coach-eyebrow">QUEM É RONNY LOPES</p>
+        <h3 class="coach-story-title blur-fade">
+          Dos ringues da Tailândia para o seu treino em Brasília.
+        </h3>
+        <div class="coach-story-body">
+          <p>
+            A trajetória do Ronny começou dentro dos tatames e ringues, passando por campeonatos de alto nível até conquistar o título Mundial de Muay Thai (W.M.A) na Tailândia em 2010, além do Bicampeonato Sul-Americano, cinturão profissional de MMA e a faixa-preta de Jiu-Jitsu.
+          </p>
+          <p>
+            Hoje, toda essa vivência de combate real vira didática nas aulas particulares em Brasília — com treinos pensados para quem busca técnica limpa, condicionamento e evolução real, do iniciante absoluto ao avançado.
+          </p>
+        </div>
         <a href="https://www.instagram.com/ronnnylopesthai/" target="_blank" rel="noopener" class="ig-pill">
           Instagram • @ronnnylopesthai ↗
         </a>
       </div>
-
-      <p class="coach-bio">
-        <strong>Vivência real nos ringues da Tailândia, nos tatames e no octógono.</strong> Campeão Mundial na Tailândia pela W.M.A em 2010, Bicampeão Sul-Americano, Faixa-Preta e Campeão Brasiliense de Jiu-Jitsu — além de campeão profissional de MMA —, Ronny Lopes reúne o melhor do Muay Thai, Boxe, Jiu-Jitsu e MMA em aulas particulares sob medida em Brasília — DF.
-      </p>
     </div>
   </section>
 
